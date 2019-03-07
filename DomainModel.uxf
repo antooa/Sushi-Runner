@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>190</y>
+      <x>200</x>
+      <y>560</y>
       <w>210</w>
       <h>140</h>
     </coordinates>
@@ -23,10 +23,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>580</x>
-      <y>290</y>
+      <x>640</x>
+      <y>260</y>
       <w>210</w>
-      <h>140</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>Order
 --
@@ -35,6 +35,8 @@
 -string: PaymentType
 -string: Address
 -DateTime: PlacedAt
+-Courier: Courier
+-DateTime: DeliveredAt
 --
 +int: CalculatePrice()</panel_attributes>
     <additional_attributes/>
@@ -42,8 +44,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
-      <y>440</y>
+      <x>170</x>
+      <y>810</y>
       <w>210</w>
       <h>80</h>
     </coordinates>
@@ -57,8 +59,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>530</y>
+      <x>650</x>
+      <y>550</y>
       <w>210</w>
       <h>90</h>
     </coordinates>
@@ -73,23 +75,60 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
+      <x>730</x>
       <y>420</y>
-      <w>60</w>
-      <h>130</h>
+      <w>50</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;30.0;130.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>310</x>
-      <y>320</y>
+      <x>270</x>
+      <y>690</y>
       <w>60</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>40.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>350</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Сourier
+--
+-string: Name
+-List&lt;Order&gt;: Orders
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>340</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>580</y>
+      <w>270</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;10.0;10.0;40.0</additional_attributes>
   </element>
 </diagram>
