@@ -1,307 +1,375 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>9</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>0</x>
-      <y>387</y>
-      <w>72</w>
-      <h>99</h>
-    </coordinates>
-    <panel_attributes>Customer</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>153</x>
-      <y>171</y>
-      <w>702</w>
-      <h>693</h>
-    </coordinates>
-    <panel_attributes>Sushi-Runner</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>270</x>
-      <y>342</y>
-      <w>171</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>Add meal to order</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>63</x>
-      <y>360</y>
-      <w>225</w>
-      <h>81</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;70.0;230.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>270</x>
-      <y>441</y>
-      <w>171</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>Place order</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>63</x>
-      <y>414</y>
-      <w>225</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;230.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>270</x>
-      <y>243</y>
-      <w>171</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>Search meal</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>63</x>
-      <y>279</y>
-      <w>225</w>
-      <h>162</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;160.0;230.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>270</x>
-      <y>531</y>
-      <w>171</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>Pay for order
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>63</x>
-      <y>414</y>
-      <w>225</w>
-      <h>171</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;230.0;170.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>540</x>
-      <y>243</y>
-      <w>171</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>Notify chef
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>432</x>
-      <y>270</y>
-      <w>135</w>
-      <h>306</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;include&gt;&gt;</panel_attributes>
-    <additional_attributes>120.0;10.0;10.0;320.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLActor</id>
-    <coordinates>
-      <x>1080</x>
-      <y>387</y>
-      <w>54</w>
-      <h>99</h>
+      <x>896</x>
+      <y>544</y>
+      <w>48</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>Chef</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
+    <id>UMLUseCase</id>
     <coordinates>
-      <x>702</x>
-      <y>261</y>
-      <w>396</w>
-      <h>171</h>
+      <x>616</x>
+      <y>472</y>
+      <w>128</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>420.0;170.0;10.0;10.0</additional_attributes>
+    <panel_attributes>View order
+details</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>540</x>
-      <y>351</y>
-      <w>171</w>
-      <h>63</h>
+      <x>616</x>
+      <y>528</y>
+      <w>128</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes>Notify courier
-bg=blue</panel_attributes>
+    <panel_attributes>Accept/Reject
+order</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
+    <id>UMLUseCase</id>
     <coordinates>
-      <x>702</x>
-      <y>369</y>
-      <w>387</w>
-      <h>81</h>
+      <x>616</x>
+      <y>640</y>
+      <w>128</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;410.0;70.0</additional_attributes>
+    <panel_attributes>Finish order</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>616</x>
+      <y>584</y>
+      <w>128</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Сhange meal
+availability</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>1053</x>
-      <y>666</y>
+      <x>896</x>
+      <y>328</y>
       <w>72</w>
-      <h>99</h>
+      <h>88</h>
     </coordinates>
-    <panel_attributes>Courier</panel_attributes>
+    <panel_attributes>Moderator</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
+    <id>UMLClass</id>
     <coordinates>
-      <x>702</x>
-      <y>369</y>
-      <w>378</w>
-      <h>342</h>
+      <x>296</x>
+      <y>160</y>
+      <w>512</w>
+      <h>544</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>400.0;360.0;10.0;10.0</additional_attributes>
+    <panel_attributes>Sushi Ordering</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>540</x>
-      <y>459</y>
-      <w>171</w>
-      <h>63</h>
+      <x>576</x>
+      <y>416</y>
+      <w>120</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>Accept delivery
-bg=blue</panel_attributes>
+    <panel_attributes>Submit delivered
+orders</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>702</x>
-      <y>486</y>
-      <w>378</w>
-      <h>243</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;400.0;250.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>540</x>
-      <y>567</y>
-      <w>171</w>
-      <h>63</h>
+      <x>576</x>
+      <y>256</y>
+      <w>120</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>Submit delivery
-bg=blue</panel_attributes>
+    <panel_attributes>Verify Orders</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>576</x>
+      <y>320</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Edit Orders</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>702</x>
-      <y>585</y>
-      <w>378</w>
-      <h>144</h>
+      <x>624</x>
+      <y>288</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>576</x>
+      <y>200</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>See Order statuses</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>176</x>
+      <y>288</y>
+      <w>216</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;400.0;140.0</additional_attributes>
+    <additional_attributes>10.0;200.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>208</y>
+      <w>240</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>280.0;190.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>576</x>
+      <y>368</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Notify Chef</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>459</x>
-      <y>909</y>
-      <w>54</w>
-      <h>99</h>
+      <x>128</x>
+      <y>416</y>
+      <w>64</w>
+      <h>88</h>
     </coordinates>
-    <panel_attributes>Admin</panel_attributes>
+    <panel_attributes>Customer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>531</x>
-      <y>711</y>
-      <w>171</w>
-      <h>63</h>
+      <x>376</x>
+      <y>272</y>
+      <w>136</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes>Monitor orders</panel_attributes>
+    <panel_attributes>View available
+meals</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>279</x>
-      <y>711</y>
-      <w>171</w>
-      <h>63</h>
+      <x>376</x>
+      <y>336</y>
+      <w>136</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes>Add meals</panel_attributes>
+    <panel_attributes>Add meal to basket</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>376</x>
+      <y>400</y>
+      <w>136</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Remove meal from
+basket</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>376</x>
+      <y>528</y>
+      <w>136</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Check order status</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>376</x>
+      <y>464</y>
+      <w>136</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Order meals
+in basket</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>477</x>
-      <y>765</y>
-      <w>162</w>
-      <h>162</h>
+      <x>176</x>
+      <y>352</y>
+      <w>216</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;160.0;160.0;10.0</additional_attributes>
+    <additional_attributes>10.0;120.0;250.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>765</y>
-      <w>144</w>
-      <h>162</h>
+      <x>176</x>
+      <y>416</y>
+      <w>216</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>140.0;160.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>176</x>
+      <y>440</y>
+      <w>216</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;250.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>176</x>
+      <y>440</y>
+      <w>216</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;250.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>264</y>
+      <w>240</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>280.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>328</y>
+      <w>240</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>280.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>352</y>
+      <w>240</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>280.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>352</y>
+      <w>240</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>280.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>488</y>
+      <w>184</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>210.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>544</y>
+      <w>184</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>210.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>568</y>
+      <w>184</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>210.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>568</y>
+      <w>184</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>210.0;10.0;10.0;120.0</additional_attributes>
   </element>
 </diagram>
