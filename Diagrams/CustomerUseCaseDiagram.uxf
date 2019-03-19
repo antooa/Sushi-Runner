@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>14</zoom_level>
+  <zoom_level>17</zoom_level>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>252</x>
-      <y>420</y>
-      <w>112</w>
-      <h>154</h>
+      <x>255</x>
+      <y>459</y>
+      <w>136</w>
+      <h>187</h>
     </coordinates>
     <panel_attributes>Customer</panel_attributes>
     <additional_attributes/>
@@ -15,10 +15,10 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>616</x>
-      <y>210</y>
-      <w>238</w>
-      <h>84</h>
+      <x>697</x>
+      <y>204</y>
+      <w>289</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>View available
 meals</panel_attributes>
@@ -27,10 +27,10 @@ meals</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>616</x>
-      <y>308</y>
-      <w>238</w>
-      <h>84</h>
+      <x>697</x>
+      <y>323</y>
+      <w>289</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>Add meal to basket</panel_attributes>
     <additional_attributes/>
@@ -38,10 +38,10 @@ meals</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>616</x>
-      <y>406</y>
-      <w>238</w>
-      <h>84</h>
+      <x>697</x>
+      <y>442</y>
+      <w>289</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>Remove meal from
 basket</panel_attributes>
@@ -50,22 +50,22 @@ basket</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>448</x>
-      <y>112</y>
-      <w>546</w>
-      <h>644</h>
+      <x>493</x>
+      <y>85</y>
+      <w>663</w>
+      <h>782</h>
     </coordinates>
-    <panel_attributes>Sushi Store
+    <panel_attributes>Sushi-Ordering
 halign=center</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>616</x>
-      <y>602</y>
-      <w>252</w>
-      <h>84</h>
+      <x>697</x>
+      <y>680</y>
+      <w>306</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>Check order status</panel_attributes>
     <additional_attributes/>
@@ -73,10 +73,10 @@ halign=center</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>616</x>
-      <y>504</y>
-      <w>252</w>
-      <h>84</h>
+      <x>697</x>
+      <y>561</y>
+      <w>306</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>Order meals
 in basket</panel_attributes>
@@ -85,10 +85,10 @@ in basket</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
+      <x>374</x>
       <y>238</y>
-      <w>294</w>
-      <h>252</h>
+      <w>357</w>
+      <h>306</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;160.0;190.0;10.0</additional_attributes>
@@ -96,10 +96,10 @@ in basket</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
-      <y>336</y>
-      <w>294</w>
-      <h>154</h>
+      <x>374</x>
+      <y>357</y>
+      <w>357</w>
+      <h>187</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;90.0;190.0;10.0</additional_attributes>
@@ -107,10 +107,10 @@ in basket</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
-      <y>420</y>
-      <w>294</w>
-      <h>70</h>
+      <x>374</x>
+      <y>459</y>
+      <w>357</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;30.0;190.0;20.0</additional_attributes>
@@ -118,10 +118,10 @@ in basket</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
-      <y>448</y>
-      <w>294</w>
-      <h>126</h>
+      <x>374</x>
+      <y>493</y>
+      <w>357</w>
+      <h>153</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;190.0;70.0</additional_attributes>
@@ -129,10 +129,10 @@ in basket</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
-      <y>448</y>
-      <w>294</w>
-      <h>224</h>
+      <x>374</x>
+      <y>493</y>
+      <w>357</w>
+      <h>272</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;190.0;140.0</additional_attributes>
