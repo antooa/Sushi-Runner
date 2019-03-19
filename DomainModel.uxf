@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>200</x>
-      <y>560</y>
-      <w>210</w>
-      <h>140</h>
+      <x>117</x>
+      <y>369</y>
+      <w>189</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Meal
 --
@@ -23,10 +23,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
-      <y>260</y>
-      <w>210</w>
-      <h>170</h>
+      <x>513</x>
+      <y>99</y>
+      <w>189</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>Order
 --
@@ -34,6 +34,7 @@
 -string: CustomerName
 -string: PaymentType
 -string: Address
+-OrderStatus: status
 -DateTime: PlacedAt
 -Courier: Courier
 -DateTime: DeliveredAt
@@ -44,10 +45,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>810</y>
-      <w>210</w>
-      <h>80</h>
+      <x>90</x>
+      <y>594</y>
+      <w>189</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>MealGroup
 --
@@ -59,10 +60,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>550</y>
-      <w>210</w>
-      <h>90</h>
+      <x>522</x>
+      <y>360</y>
+      <w>189</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>OrderItem
 --
@@ -75,21 +76,21 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>420</y>
-      <w>50</w>
-      <h>150</h>
+      <x>594</x>
+      <y>261</y>
+      <w>45</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;30.0;130.0</additional_attributes>
+    <additional_attributes>10.0;10.0;30.0;110.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
-      <y>690</y>
-      <w>60</w>
-      <h>140</h>
+      <x>180</x>
+      <y>486</y>
+      <w>54</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>40.0;10.0;10.0;120.0</additional_attributes>
@@ -97,10 +98,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
-      <y>350</y>
-      <w>210</w>
-      <h>80</h>
+      <x>216</x>
+      <y>180</y>
+      <w>189</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>Сourier
 --
@@ -112,10 +113,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>340</y>
-      <w>150</w>
-      <h>70</h>
+      <x>396</x>
+      <y>171</y>
+      <w>135</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>130.0;10.0;10.0;50.0</additional_attributes>
@@ -123,12 +124,40 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>580</y>
-      <w>270</w>
-      <h>60</h>
+      <x>297</x>
+      <y>387</y>
+      <w>243</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>250.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>819</x>
+      <y>234</y>
+      <w>153</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enum&gt;&gt;
+OrderStatus
+--
+WaitingForResponse
+Cooking
+Delivering
+Completed</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>693</x>
+      <y>171</y>
+      <w>225</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;70.0</additional_attributes>
   </element>
 </diagram>
