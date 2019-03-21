@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sushi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link href="css/sidebar.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="navbar">
+    <div class="dropleft">
+        <ul>
+            <li class="sidebar-nav"><a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">Toggle Menu</a></li>
+        </ul>
+    </div>
+    <div class="navbar-collapse collapse justify-content-center order-1" id="collapsingNavbar">
+
+        <ul class="navbar-nav text-center">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Main</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Delivery</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+            </li>
+            <li>
+                <strong>
+                <ul>(093)170-15-70</ul>
+
+                <ul>(093)170-15-70</ul>
+                </strong>
+            </li>
+        </ul>
+    </div>
+    <div id="user" class="order-3">
+        <a class="align-self-end text-dark " href="#"><strong>User</strong></a>
+    </div>
+
+
+    <div id="cart" class="order-4">
+        <a class="align-self-center text-white" href="#"><strong>Cart</strong></a>
+    </div>
+    <div id="CartTotal" class="order-5">
+        <p class="text-white  align-middle"><strong>$0</strong></p>
+    </div>
+</nav>
+
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Start Bootstrap
+                </a>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Shortcuts</a>
+            </li>
+            <li>
+                <a href="#">Overview</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <div class="col-sm-3 text-center">
+                    <div class="card" style="width: 18rem;">
+
+                        <div class="card-body">
+                            <img class="card-img-top" src="img/sushi.jpg">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-dark ">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <div class="card" style="width: 18rem;">
+
+                        <div class="card-body">
+                            <img class="card-img-top" src="img/sushi.jpg">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-dark ">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Menu Toggle Script -->
+<script>
+    $(".menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+
+</body>
+</html>
