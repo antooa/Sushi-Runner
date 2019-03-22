@@ -1,0 +1,25 @@
+#navbar {
+    height: 80px;
+}
+
+#user {
+    background-color: silver;
+    height: 80px;
+    width: 5%;
+    text-align: center;
+}
+
+#cart {
+    background-color: black;
+    height: 80px;
+    width: 5%;
+    text-align: center;
+    vertical-align: text-bottom;
+}
+
+#CartTotal {
+    background-color: red;
+    height: 80px;
+    width: 5%;
+    text-align: center;
+}
