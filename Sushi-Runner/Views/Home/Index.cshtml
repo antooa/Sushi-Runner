@@ -1,5 +1,8 @@
-﻿@{
+﻿@model Sushi_Runner.Models.ViewModels.HomeModel
+
+@{
     ViewData["Title"] = "Sushi-Runner";
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -8,13 +11,11 @@
     <title>Sushi</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home/index.css">
     <link rel="stylesheet" href="/css/sidebar.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
             </li>
         </ul>
     </div>
-    <div class="navbar-collapse collapse justify-content-center order-1" id="collapsingNavbar">
 
+    <div class="navbar-collapse collapse justify-content-center order-1" id="collapsingNavbar">
         <ul class="navbar-nav text-center">
             <li class="nav-item active">
                 <a class="nav-link" href="#">Main</a>
@@ -42,26 +43,25 @@
                 <a class="nav-link" href="#">Blog</a>
             </li>
             <li>
-                <strong>
-                    <ul>(093)170-15-70</ul>
-
-                    <ul>(093)170-15-70</ul>
-                </strong>
+                <ul>(093)170-15-70</ul>
+                <ul>(093)170-15-70</ul>
+                <ul>(093)170-15-70</ul>
             </li>
         </ul>
     </div>
+
     <div id="user" class="order-3">
         <a class="align-self-end text-dark " href="#">
             <strong>User</strong>
         </a>
     </div>
 
-
-    <div id="cart" class="order-4">
+    <div id="basket" class="order-4">
         <a class="align-self-center text-white" href="#">
             <strong>Cart</strong>
         </a>
     </div>
+
     <div id="CartTotal" class="order-5">
         <p class="text-white  align-middle">
             <strong>$0</strong>
@@ -69,9 +69,7 @@
     </div>
 </nav>
 
-
 <div id="wrapper">
-
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -103,56 +101,27 @@
             </li>
         </ul>
     </div>
-    <!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
-
-
-                <div class="col-sm-3 text-center">
-                    <div class="card" style="width: 18rem;">
-
-                        <div class="card-body">
-                            <img class="card-img-top" src="img/sushi.jpg">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up the bulk
-                                of the card's content.
-                            </p>
-                            <a href="#" class="btn btn-dark ">Go somewhere</a>
+                @foreach (var meal in Model.Meals)
+                {
+                    <div class="col-sm-3 text-center">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <img class="card-img-top" src="@meal.ImagePath">
+                                <h5 class="card-title">@meal.Name</h5>
+                            <p class="card-text">@meal.Description</p>
+                                <a href="#" class="btn btn-dark">Go somewhere</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-3 text-center">
-                    <div class="card" style="width: 18rem;">
-
-                        <div class="card-body">
-                            <img class="card-img-top" src="img/sushi.jpg">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up the bulk
-                                of the card's content.
-                            </p>
-                            <a href="#" class="btn btn-dark ">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>
-    <!-- /#page-content-wrapper -->
-
 </div>
-<!-- /#wrapper -->
-
-<!-- Menu Toggle Script -->
-<script>
-    $(".menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>
+<script src="/js/home/index.js"></script>
 </body>
 </html>
