@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Sushi_Runner.Controllers
+namespace SushiRunner.Controllers
 {
     public class HomeController : Controller
     {
