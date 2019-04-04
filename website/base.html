@@ -13,50 +13,51 @@
     <link href="css/sidebar.css" rel="stylesheet">
 </head>
 <body>
+<div class="row">
+    <div class="col-9" id="menu">
+        <nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="navbar">
+            <div class="dropleft">
+                <ul>
+                    <li class="sidebar-nav"><a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">Toggle
+                        Menu</a></li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse justify-content-center order-1" id="collapsingNavbar">
 
-<nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="navbar">
-    <div class="dropleft">
-        <ul>
-            <li class="sidebar-nav"><a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">Toggle Menu</a></li>
-        </ul>
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Delivery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li>
+                        <strong>
+                            <ul>(093)170-15-70</ul>
+
+                            <ul>(093)170-15-70</ul>
+                        </strong>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
-    <div class="navbar-collapse collapse justify-content-center order-1" id="collapsingNavbar">
-
-        <ul class="navbar-nav text-center">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Main</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Delivery</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
-            </li>
-            <li>
-                <strong>
-                <ul>(093)170-15-70</ul>
-
-                <ul>(093)170-15-70</ul>
-                </strong>
-            </li>
-        </ul>
-    </div>
-    <div id="user" class="order-3">
+    <div id="user" class="col-1">
         <a class="align-self-end text-dark " href="#"><strong>User</strong></a>
     </div>
-
-
-    <div id="cart" class="order-4">
+    <div id="cart" class="col-1">
         <a class="align-self-center text-white" href="#"><strong>Cart</strong></a>
     </div>
-    <div id="CartTotal" class="order-5">
+    <div id="CartTotal" class="col-1">
         <p class="text-white  align-middle"><strong>$0</strong></p>
     </div>
-</nav>
-
+</div>
 
 <div id="wrapper">
 
