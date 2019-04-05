@@ -14,16 +14,5 @@ namespace SushiRunner.Models
         public DateTime PlacedAt { get; set; }
         public Courier Courier { get; set; }
         public DateTime DeliveredAt { get; set; }
-
-        public int CalculatePrice()
-        {
-            var price = 0;
-            foreach (var item in Items)
-            {
-                price += item.CalculatePrice();
-            }
-
-            return price;
-        }
     }
 }

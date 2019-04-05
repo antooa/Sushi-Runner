@@ -10,10 +10,5 @@ namespace SushiRunner.Models
         public long Id { get; set; }
         public Meal Meal { get; set; }
         public int Amount { get; set; }
-
-        public int CalculatePrice()
-        {
-            return Meal.Price * Amount;
-        }
     }
 }
