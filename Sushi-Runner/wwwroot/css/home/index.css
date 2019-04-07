@@ -1,6 +1,9 @@
 #navbar {
     height: 80px;
 }
+#menu {
+	padding-right: 0%;
+}
 
 #user {
     background-color: silver;
@@ -23,3 +26,32 @@
     width: 5%;
     text-align: center;
 }
+#price {
+	color:red;
+	font-size:x-large;
+	margin:0;
+}
+
+.weight-1 {
+	position: relative;
+	text-align: center
+}
+
+	.weight-1:before {
+		content: "";
+		display: block;
+		border-top: solid 2px #dee2e6;
+		width: 100%;
+		height: 2px;
+		position: absolute;
+		top: 50%;
+		z-index: 0;
+	}
+
+	.weight-1 span {
+		background: #fff;
+		padding: 0 10px;
+		position: relative;
+		z-index: 1;
+		color: #71706c;
+	}

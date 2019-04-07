@@ -19,55 +19,56 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="navbar">
-    <div class="dropleft">
-        <ul>
-            <li class="sidebar-nav">
-                <a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">Toggle Menu</a>
-            </li>
-        </ul>
-    </div>
+	<div class="row">
+		<div class="col-9" id="menu">
+			<nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="navbar">
+				<div class="dropleft">
+					<ul>
+						<li class="sidebar-nav">
+							<a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">
+								Toggle
+								Menu
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="navbar-collapse collapse justify-content-center " id="collapsingNavbar">
 
-    <div class="navbar-collapse collapse justify-content-center order-1" id="collapsingNavbar">
-        <ul class="navbar-nav text-center">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Main</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Delivery</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
-            </li>
-            <li>
-                <ul>(093)170-15-70</ul>
-                <ul>(093)170-15-70</ul>
-                <ul>(093)170-15-70</ul>
-            </li>
-        </ul>
-    </div>
+					<ul class="navbar-nav text-center">
+						<li class="nav-item active">
+							<a class="nav-link" href="#">Main</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">About us</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Delivery</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Blog</a>
+						</li>
+						<li>
+							<strong>
+								<ul>(093)170-15-70</ul>
 
-    <div id="user" class="order-3">
-        <a class="align-self-end text-dark " href="#">
-            <strong>User</strong>
-        </a>
-    </div>
-
-    <div id="basket" class="order-4">
-        <a class="align-self-center text-white" href="#">
-            <strong>Cart</strong>
-        </a>
-    </div>
-
-    <div id="CartTotal" class="order-5">
-        <p class="text-white  align-middle">
-            <strong>$0</strong>
-        </p>
-    </div>
-</nav>
+								<ul>(093)170-15-70</ul>
+							</strong>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div id="user" class="col-1">
+			
+			<a class="align-self-end text-dark " href="#"><strong>User</strong></a>
+		</div>
+		<div id="basket" class="col-1">
+			<a class="align-self-center text-white" href="#"><strong>Cart</strong></a>
+		</div>
+		<div id="CartTotal" class="col-1">
+			<p class="text-white  align-middle"><strong>$0</strong></p>
+		</div>
+	</div>
 
 <div id="wrapper">
     <!-- Sidebar -->
@@ -108,12 +109,23 @@
                 @foreach (var meal in Model.Meals)
                 {
                     <div class="col-sm-3 text-center">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
+                        <div class="card" style="width:80%;">
+                            <div class="card-body" style="padding:0">
                                 <img class="card-img-top" src="@meal.ImagePath">
-                                <h5 class="card-title">@meal.Name</h5>
-                            <p class="card-text">@meal.Description</p>
-                                <a href="#" class="btn btn-dark">Go somewhere</a>
+                                <h5 class="card-title border-top">@meal.Name</h5>
+								
+                            <p class="card-text" style="padding:2%">@meal.Description</p>
+                                <h5 class="weight-1"><span>100 гр.</span></h5>
+							<div class="card-footer">
+								<div class="row">
+									<div class="col-6">
+										<p id="price"><strong>100 грн.</strong></p>
+									</div>
+									
+									<a href="#" class="col-6 btn btn-outline-dark align-content-center" id="addToCart"><strong>+</strong> Add to cart</a>
+								</div>
+								
+							</div>
                             </div>
                         </div>
                     </div>
