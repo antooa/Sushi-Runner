@@ -14,12 +14,21 @@ namespace SushiRunner.Models
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var userManager = (UserManager<User>) scope.ServiceProvider.GetService(typeof(UserManager<User>));
+                var roleManager =
+                    (RoleManager<IdentityRole>) scope.ServiceProvider.GetService(typeof(RoleManager<IdentityRole>));
+
+                var role = await roleManager.FindByNameAsync(UserRoles.Moderator);
+                if (role == null)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Moderator));
+                }
+
                 var user = await userManager.FindByIdAsync(DefaultUsername);
                 if (user == null)
                 {
-                    user = new User();
-                    user.UserName = DefaultUsername;
+                    user = new User {UserName = DefaultUsername};
                     await userManager.CreateAsync(user, DefaultPassword);
+                    await userManager.AddToRoleAsync(user, UserRoles.Moderator);
                 }
             }
         }

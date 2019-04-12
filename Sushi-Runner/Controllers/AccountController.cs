@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Models;
@@ -33,10 +32,13 @@ namespace SushiRunner.Controllers
                 if (user != null)
                 {
                     await _signInManager.SignOutAsync();
-                    if ((await _signInManager
-                        .PasswordSignInAsync(user, model.Password, false, false)).Succeeded)
+                    var signInResult = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                    if (signInResult.Succeeded)
                     {
-                        return RedirectToAction("Index", "Moderator");
+                        if (await _userManager.IsInRoleAsync(user, UserRoles.Moderator))
+                        {
+                            return RedirectToAction("Index", "Moderator");
+                        }
                     }
                 }
             }

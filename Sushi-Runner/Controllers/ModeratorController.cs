@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SushiRunner.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "MODERATOR")]
     public class ModeratorController : Controller
     {
         public IActionResult Index()
