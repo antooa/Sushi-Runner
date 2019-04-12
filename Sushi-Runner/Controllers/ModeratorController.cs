@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SushiRunner.Controllers
 {
+    [Authorize]
     public class ModeratorController : Controller
     {
-        [Authorize]
         public IActionResult Index()
         {
             return View();

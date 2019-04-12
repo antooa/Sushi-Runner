@@ -32,12 +32,16 @@ namespace SushiRunner
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User, UserRole>()
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"))
+            );
+
+            services
+                .AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/SignIn");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,13 +62,13 @@ namespace SushiRunner
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            app.UseAuthentication();
             SeedData.EnsurePopulated(app);
         }
     }
