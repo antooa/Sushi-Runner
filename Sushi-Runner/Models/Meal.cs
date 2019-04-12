@@ -11,7 +11,7 @@ namespace SushiRunner.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public double Weight { get; set; }
-        public string Image { get; set; }
+        public string ImagePath { get; set; }
         public int Price { get; set; }
         public MealGroup MealGroup { get; set; }
     }
