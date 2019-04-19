@@ -1,5 +1,8 @@
-﻿namespace SushiRunner.Data.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SushiRunner.Data.Entities
 {
+    [Table("MealGroup")]
     public class MealGroup
     {
         public long Id { get; set; }

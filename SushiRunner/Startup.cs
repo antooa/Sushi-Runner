@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SushiRunner.Data;
 using SushiRunner.Data.Entities;
+using SushiRunner.Data.Repositories;
+using SushiRunner.Services;
+using SushiRunner.Services.Interfaces;
 
 namespace SushiRunner
 {
@@ -33,13 +36,21 @@ namespace SushiRunner
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"))
+                Configuration.GetConnectionString("DefaultConnection"))
             );
 
             services
                 .AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services
+                .AddScoped<IRepository<Meal, long>, MealRepository>()
+                .AddScoped<IRepository<MealGroup, long>, MealGroupRepository>()
+                .AddScoped<IRepository<Order, long>, OrderRepository>()
+                .AddScoped<ICrudService<Meal, long>, MealService>()
+                .AddScoped<ICrudService<MealGroup, long>, MealGroupService>()
+                .AddScoped<ICrudService<Order, long>, OrderService>();
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/SignIn");
         }

@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SushiRunner.Data\SushiRunner.Data.csproj" />
+      <ProjectReference Include="..\SushiRunner.Services\SushiRunner.Services.csproj" />
     </ItemGroup>
 
 </Project>

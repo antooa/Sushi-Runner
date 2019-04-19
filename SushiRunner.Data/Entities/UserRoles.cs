@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Identity;
-
 namespace SushiRunner.Data.Entities
 {
-    public class UserRoles : IdentityRole
+    public class UserRoles
     {
         public const string Moderator = "MODERATOR";
     }

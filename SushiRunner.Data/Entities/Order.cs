@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SushiRunner.Data.Entities
 {
+    [Table("Order")]
     public class Order
     {
         public long Id { get; set; }

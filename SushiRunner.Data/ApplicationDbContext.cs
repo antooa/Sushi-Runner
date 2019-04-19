@@ -11,8 +11,8 @@ namespace SushiRunner.Data
             Database.EnsureCreated();
         }
 
-        public virtual DbSet<Meal> Meals { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<MealGroup> MealGroups { get; set; }
+        public DbSet<Meal> Meals { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<MealGroup> MealGroups { get; set; }
     }
 }

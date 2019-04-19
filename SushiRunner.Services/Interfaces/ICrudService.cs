@@ -1,20 +1,18 @@
 using System;
 using System.Collections.Generic;
 
-namespace SushiRunner.Data.Repositories
+namespace SushiRunner.Services.Interfaces
 {
-    public interface IRepository<T, K> : IDisposable where T : class
+    public interface ICrudService<T, K> : IDisposable where T : class
     {
         void Create(T entity);
 
-        T Get(K id);
-
         IEnumerable<T> GetList();
+
+        T Get(K id);
 
         void Update(T entity);
 
         void Delete(K id);
-
-        void Save();
     }
 }

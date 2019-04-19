@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner", "SushiRunner\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.Data", "SushiRunner.Data\SushiRunner.Data.csproj", "{49B1F913-2714-4A13-B80B-33304DA5EF94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.Services", "SushiRunner.Services\SushiRunner.Services.csproj", "{ADB0DF30-DF8B-4FE4-8EAF-B60D4B55FA25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{49B1F913-2714-4A13-B80B-33304DA5EF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49B1F913-2714-4A13-B80B-33304DA5EF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49B1F913-2714-4A13-B80B-33304DA5EF94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB0DF30-DF8B-4FE4-8EAF-B60D4B55FA25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB0DF30-DF8B-4FE4-8EAF-B60D4B55FA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB0DF30-DF8B-4FE4-8EAF-B60D4B55FA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB0DF30-DF8B-4FE4-8EAF-B60D4B55FA25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
