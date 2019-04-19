@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SushiRunner.Models;
-using Sushi_Runner.Data;
+using SushiRunner.Data;
 
 namespace SushiRunner
 {

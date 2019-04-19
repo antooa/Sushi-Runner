@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-        <RootNamespace>Sushi_Runner</RootNamespace>
+        <RootNamespace>SushiRunner</RootNamespace>
     </PropertyGroup>
 
 

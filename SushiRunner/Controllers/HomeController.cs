@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Microsoft.AspNetCore.Mvc;
-using Sushi_Runner.Models.ViewModels;
+using SushiRunner.Models.ViewModels;
 
 namespace SushiRunner.Controllers
 {

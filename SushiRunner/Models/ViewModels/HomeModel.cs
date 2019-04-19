@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace Sushi_Runner.Models.ViewModels
+namespace SushiRunner.Models.ViewModels
 {
     public class HomeModel
     {

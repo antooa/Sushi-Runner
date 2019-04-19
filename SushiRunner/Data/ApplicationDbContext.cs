@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SushiRunner.Models;
 
-namespace Sushi_Runner.Data
+namespace SushiRunner.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {

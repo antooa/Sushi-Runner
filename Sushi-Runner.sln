@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sushi-Runner", "Sushi-Runner\Sushi-Runner.csproj", "{F5722EBF-2F9E-48CC-A2A4-E25BAA59F888}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner", "SushiRunner\SushiRunner.csproj", "{F5722EBF-2F9E-48CC-A2A4-E25BAA59F888}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
