@@ -1,4 +1,4 @@
-﻿namespace SushiRunner.Models
+﻿namespace SushiRunner.Data.Entities
 {
     public class Meal
     {

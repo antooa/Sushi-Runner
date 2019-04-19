@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace SushiRunner.Models
+namespace SushiRunner.Data.Entities
 {
     public class User : IdentityUser
     {

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SushiRunner.Models
+namespace SushiRunner.Data.Entities
 {
     public static class SeedData
     {

@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SushiRunner.Models;
 using SushiRunner.Data;
+using SushiRunner.Data.Entities;
 
 namespace SushiRunner
 {

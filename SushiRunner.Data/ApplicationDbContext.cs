@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SushiRunner.Models;
+using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Data
 {
@@ -10,5 +10,9 @@ namespace SushiRunner.Data
         {
             Database.EnsureCreated();
         }
+
+        public virtual DbSet<Meal> Meals { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<MealGroup> MealGroups { get; set; }
     }
 }

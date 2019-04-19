@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner", "SushiRunner\SushiRunner.csproj", "{F5722EBF-2F9E-48CC-A2A4-E25BAA59F888}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.Data", "SushiRunner.Data\SushiRunner.Data.csproj", "{49B1F913-2714-4A13-B80B-33304DA5EF94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{F5722EBF-2F9E-48CC-A2A4-E25BAA59F888}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5722EBF-2F9E-48CC-A2A4-E25BAA59F888}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5722EBF-2F9E-48CC-A2A4-E25BAA59F888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49B1F913-2714-4A13-B80B-33304DA5EF94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49B1F913-2714-4A13-B80B-33304DA5EF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49B1F913-2714-4A13-B80B-33304DA5EF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49B1F913-2714-4A13-B80B-33304DA5EF94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

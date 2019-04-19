@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SushiRunner.Models
+namespace SushiRunner.Data.Entities
 {
     public class Order
     {
