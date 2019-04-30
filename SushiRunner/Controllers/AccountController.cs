@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
-using SushiRunner.Models.ViewModels;
+using SushiRunner.ViewModels;
 
 namespace SushiRunner.Controllers
 {
