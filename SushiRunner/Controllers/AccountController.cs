@@ -4,19 +4,22 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
 using SushiRunner.Services;
+using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
 
 namespace SushiRunner.Controllers
 {
     public class AccountController : Controller
     {
+        private IEmailService _emailService;
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(IEmailService emailService, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -57,6 +60,7 @@ namespace SushiRunner.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpModel model)
         {
+            
             if (ModelState.IsValid)
             {
                 User user = new User {Email = model.Email, UserName = model.Email};
@@ -69,15 +73,12 @@ namespace SushiRunner.Controllers
                         "ConfirmEmail",
                         "Account",
                         new {userId = user.Id, code = code},
-                        protocol: HttpContext.Request.Scheme);
-                    EmailService emailService = new EmailService();
-                    await emailService.SendEmailAsync(model.Email, "Confirm your account",
+                        protocol: HttpContext.Request.Scheme);               
+                    await _emailService.SendEmailAsync(model.Email, "Confirm your account",
                         $"Confirm the registration by clicking on the link: <a href='{callbackUrl}'>confirmation link</a>");
 
                     return Content(
                         "To complete the registration, check the email and click on the link indicated in the mail.");
-                    // await _signInManager.SignInAsync(user, false);
-                    //return RedirectToAction("Index", "Home");
                 }
                 else
                 {

@@ -12,7 +12,7 @@ namespace SushiRunner.Services
         {
             var emailMessage = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress(subject = "Sushi Runner Administration",
+            emailMessage.From.Add(new MailboxAddress(subject,
                 "help.sushi.runner@gmail.com"));
             emailMessage.To.Add(new MailboxAddress("", email));
             emailMessage.Subject = subject;

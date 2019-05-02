@@ -50,8 +50,9 @@ namespace SushiRunner
                 .AddScoped<IRepository<Order, long>, OrderRepository>()
                 .AddScoped<ICrudService<Meal, long>, MealService>()
                 .AddScoped<ICrudService<MealGroup, long>, MealGroupService>()
-                .AddScoped<ICrudService<Order, long>, OrderService>();
-
+                .AddScoped<ICrudService<Order, long>, OrderService>()
+                .AddScoped<IEmailService, EmailService>();
+                    
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/SignIn");
         }
 
