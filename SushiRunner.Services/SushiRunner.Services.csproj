@@ -8,4 +8,8 @@
       <ProjectReference Include="..\SushiRunner.Data\SushiRunner.Data.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MailKit" Version="2.1.4" />
+    </ItemGroup>
+
 </Project>
