@@ -1,3 +1,7 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .login-form {
     position: absolute;
     margin: auto;
@@ -8,3 +12,5 @@
     width: 400px;
     border-radius: 3px;
 }
+
+
