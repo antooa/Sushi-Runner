@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using SushiRunner.Data.Entities;
 using SushiRunner.Services.Dto;
 
 namespace SushiRunner.Services.Interfaces
@@ -9,6 +11,7 @@ namespace SushiRunner.Services.Interfaces
 
         void SignOutAsync(string username);
 
-        void SignUpCustomerAsync(string username, string password);
+        Task<SignUpResult> SignUpAsync(string username, string email, string password,
+            Func<User, string, string> generateEmailConfirmationLink);
     }
 }

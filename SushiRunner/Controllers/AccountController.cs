@@ -71,29 +71,27 @@ namespace SushiRunner.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User {Email = model.Email, UserName = model.Email};
-
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Action(
+                var signUpResult = await _accountService.SignUpAsync(
+                    model.Email,
+                    model.Email,
+                    model.Password,
+                    (user, code) => Url.Action(
                         "ConfirmEmail",
                         "Account",
-                        new {userId = user.Id, code = code},
-                        protocol: HttpContext.Request.Scheme);
-                    await _emailService.SendEmailAsync(model.Email, "Confirm your account",
-                        $"Confirm the registration by clicking on the link: <a href='{callbackUrl}'>confirmation link</a>");
+                        new {userId = user.Id, code},
+                        HttpContext.Request.Scheme
+                    )
+                );
 
+                if (signUpResult.IsSuccessful)
+                {
                     return Content(
                         "To complete the registration, check the email and click on the link indicated in the mail.");
                 }
-                else
+
+                foreach (var error in signUpResult.Errors)
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 

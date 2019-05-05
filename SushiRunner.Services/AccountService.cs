@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using SushiRunner.Data.Entities;
+using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SignInResult = SushiRunner.Services.Dto.SignInResult;
 
@@ -52,9 +53,36 @@ namespace SushiRunner.Services
             throw new NotImplementedException();
         }
 
-        public void SignUpCustomerAsync(string username, string password)
+        public async Task<SignUpResult> SignUpAsync(string username, string email, string password,
+            Func<User, string, string> generateEmailConfirmationLink)
         {
-            throw new NotImplementedException();
+            var user = new User
+            {
+                Email = email,
+                UserName = username
+            };
+
+            var result = await _userManager.CreateAsync(user, password);
+            if (result.Succeeded)
+            {
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var confirmationLink = generateEmailConfirmationLink(user, code);
+
+                await _emailService.SendEmailAsync(email, "Confirm your account",
+                    $"Confirm the registration by clicking on the link: <a href='{confirmationLink}'>confirmation link</a>");
+
+                return new SignUpResult
+                {
+                    IsSuccessful = true,
+                    User = user
+                };
+            }
+
+            return new SignUpResult
+            {
+                IsSuccessful = false,
+                Errors = result.Errors
+            };
         }
     }
 }
