@@ -15,7 +15,8 @@ namespace SushiRunner.Controllers
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
 
-        public AccountController(IEmailService emailService, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(IEmailService emailService, UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -60,7 +61,6 @@ namespace SushiRunner.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpModel model)
         {
-            
             if (ModelState.IsValid)
             {
                 User user = new User {Email = model.Email, UserName = model.Email};
@@ -73,7 +73,7 @@ namespace SushiRunner.Controllers
                         "ConfirmEmail",
                         "Account",
                         new {userId = user.Id, code = code},
-                        protocol: HttpContext.Request.Scheme);               
+                        protocol: HttpContext.Request.Scheme);
                     await _emailService.SendEmailAsync(model.Email, "Confirm your account",
                         $"Confirm the registration by clicking on the link: <a href='{callbackUrl}'>confirmation link</a>");
 
