@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
-using SushiRunner.Services;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
 
@@ -15,12 +14,15 @@ namespace SushiRunner.Controllers
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
 
+        private IAccountService _accountService;
+
         public AccountController(IEmailService emailService, UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager, IAccountService accountService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailService = emailService;
+            _accountService = accountService;
         }
 
         [HttpGet]
@@ -34,22 +36,28 @@ namespace SushiRunner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.Username);
-                if (user != null)
+                var signInResult = await _accountService.SignInAsync(model.Username, model.Password);
+                if (signInResult.IsSuccessful)
                 {
-                    await _signInManager.SignOutAsync();
-                    var signInResult = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
-                    if (signInResult.Succeeded)
+                    if (signInResult.Roles.Contains(UserRoles.Moderator))
                     {
-                        if (await _userManager.IsInRoleAsync(user, UserRoles.Moderator))
-                        {
-                            return RedirectToAction("Index", "Moderator");
-                        }
+                        return RedirectToAction("Index", "Moderator");
                     }
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                if (signInResult.UserExists)
+                {
+                    ModelState.AddModelError("Password", "Incorrect password, try again");
+                }
+                else
+                {
+                    ModelState.AddModelError("Username", "Couldn't find user with such email");
                 }
             }
 
-            return View();
+            return View(model);
         }
 
         [HttpGet]
