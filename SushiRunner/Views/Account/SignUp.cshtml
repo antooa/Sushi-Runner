@@ -4,23 +4,23 @@
     Layout = "_AccountLayout";
 }
 
-<<div class="login-form">
+<div class="login-form">
     <form asp-action="SignUp" asp-controller="Account" method="post">
         <h2 class="text-center">Sign up</h2>
         <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" name="email" placeholder="Email" asp-for="Email" required="required">
+                <input type="email" class="form-control" name="email" placeholder="Email" asp-for="Email" required="required">
             </div>
         </div>
         <div class="form-row">
             <div class="col form-group">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="password" placeholder="Password" asp-for="Password" required="required">
+                    <input type="password" class="form-control" name="password" placeholder="Password" asp-for="Password" required="required">
                 </div>
             </div>
             <div class="col form-group">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="ConfirmPassword" asp-for="ConfirmPassword" placeholder="Confirm Password"
+                    <input type="password" class="form-control" name="ConfirmPassword" asp-for="ConfirmPassword" placeholder="Confirm Password"
                            required="required">
                 </div>
             </div>

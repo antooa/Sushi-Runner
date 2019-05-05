@@ -18,6 +18,7 @@
       <_ContentIncludedByDefault Remove="Views\Shared\_CookieConsentPartial.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Basket\Index.cshtml" />
     </ItemGroup>
 
 
