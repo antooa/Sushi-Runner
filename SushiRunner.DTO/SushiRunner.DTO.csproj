@@ -2,11 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
+        <RootNamespace>DTO</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\SushiRunner.Data\SushiRunner.Data.csproj" />
-      <ProjectReference Include="..\SushiRunner.DTO\SushiRunner.DTO.csproj" />
     </ItemGroup>
 
     <ItemGroup>

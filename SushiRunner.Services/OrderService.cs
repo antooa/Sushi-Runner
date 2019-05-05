@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using AutoMapper;
+using DTO.Models;
+using Microsoft.Extensions.Logging;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
 using SushiRunner.Services.Interfaces;
@@ -8,34 +11,69 @@ namespace SushiRunner.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly IRepository<Order, long> _repository;
-
+        private readonly OrderRepository _repository;
+        private readonly IMapper _mapper;
+        
         private bool _disposed;
 
-        public OrderService(IRepository<Order, long> repository)
+        public OrderService(OrderRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public void Create(Order order)
+        public void Create(OrderDTO orderDto)
         {
+            orderDto.PlacedAt = DateTime.Now;
+            orderDto.OrderStatus = OrderStatus.WaitingForResponse;
+            var order = _mapper.Map<OrderDTO, Order>(orderDto);
             _repository.Create(order);
             _repository.Save();
         }
 
-        public IEnumerable<Order> GetList()
+        public IEnumerable<OrderDTO> GetList()
         {
-            return _repository.GetList();
+            var orders = _repository.GetList();
+            var dtos = new List<OrderDTO>();
+            foreach (var order in orders)
+            {
+                try
+                {
+                    var dto = _mapper.Map<Order, OrderDTO>(order);
+                    dtos.Add(dto);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                
+            }
+
+            return dtos;
         }
 
-        public Order Get(long id)
+        public OrderDTO Get(long id)
         {
-            return _repository.Get(id);
+            var order = _repository.Get(id);
+            OrderDTO dto;
+            try
+            {
+                dto = _mapper.Map<Order, OrderDTO>(order);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return dto;
         }
 
-        public void Update(Order order)
+        public void Update(OrderDTO orderDto)
         {
-            _repository.Update(order);
+            var order = _mapper.Map<OrderDTO, Order>(orderDto);
+            _repository.Update(order);  
             _repository.Save();
         }
 
