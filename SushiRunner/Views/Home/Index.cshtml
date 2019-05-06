@@ -33,13 +33,14 @@
     </nav>
     <div id="account">
         <div id="user">
-            <a href="#">
-                <strong>User</strong>
-            </a>
+            <div id="user">
+                <a href="#"><strong><i class="fas fa-user"></i></strong></a>
+            </div>
         </div>
         <div id="basket">
             <a asp-controller="Cart">
-                <span class="fa fa-shopping-basket shopping-basket-icon"></span>
+                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+                <span id="itemCount"></span>
             </a>
         </div>
         <div id="totalPrice">
@@ -82,33 +83,36 @@
         </ul>
     </div>
     <div class="container-fluid">
-        <div class="row">
-            @foreach (var meal in Model.Meals)
-            {
-                <div class="col-12 col-lg-4 col-sm-6 col-md-3 col-xl-2 card h-75">
-                    <div class="card-body">
-                        <img class="card-img-top" src="@meal.ImagePath">
-                        <div class="card-title border-top">
-                            <span>@meal.Name</span>
-                        </div>
-                        <div class="card-description">
-                            <span>@meal.Description</span>
-                        </div>
+        @foreach (var meal in Model.Meals)
+        {
+            <div class="item-card">
+                
+                    <div class="item-img">
+                        <img src="@meal.ImagePath">
+                    </div>
+                    <div class="item-title">
+                        <h3>@meal.Name</h3>
+                    </div>
+                    <div class="item-description">
+                        <span>@meal.Description</span>
+                    </div>
+                    <div class="item-weight">
                         <h5 class="weight-1">
                             <span>@meal.Weight гр.</span>
                         </h5>
-                        <div class="card-footer">
-                            <span id="price">
-                                <strong>@meal.Price грн.</strong>
-                            </span>
-                            <a href="#" class="btn btn-success"
-                               id="addToCart">
-                                <strong>+</strong>
+                    </div>
+                    <div class="item-footer">
+                        <div class="item-price">
+                            <strong>@meal.Price</strong>
+                        </div>
+                        <div class="add-to-cart">
+                            <a href="#" class="add-to-card-btn">
+                                <i class="fas fa-plus-circle"></i>
                             </a>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
+                
+            </div>
+        }
     </div>
 </div>
