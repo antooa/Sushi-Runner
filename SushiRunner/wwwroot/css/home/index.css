@@ -154,7 +154,7 @@ body {
 .card-footer {
     display: flex;
     background: none;
-    border-top: none;
+    border: none;
     justify-content: space-between;
     align-items: center;
 }
@@ -163,4 +163,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 18px;
+    color: #6c757d;
+    padding: 10px 0 10px 0;
+}
+
+#addToCart{
+    border-radius: 10px;
 }

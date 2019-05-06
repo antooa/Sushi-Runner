@@ -38,7 +38,7 @@
             </a>
         </div>
         <div id="basket">
-            <a href="#">
+            <a asp-controller="Cart">
                 <span class="fa fa-shopping-basket shopping-basket-icon"></span>
             </a>
         </div>
@@ -95,15 +95,15 @@
                             <span>@meal.Description</span>
                         </div>
                         <h5 class="weight-1">
-                            <span>100 гр.</span>
+                            <span>@meal.Weight гр.</span>
                         </h5>
                         <div class="card-footer">
                             <span id="price">
-                                <strong>100 грн.</strong>
+                                <strong>@meal.Price грн.</strong>
                             </span>
                             <a href="#" class="btn btn-success"
                                id="addToCart">
-                                <strong>+</strong> Add to cart
+                                <strong>+</strong>
                             </a>
                         </div>
                     </div>

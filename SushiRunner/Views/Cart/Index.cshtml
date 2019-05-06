@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/cart/cart.css">
+</head>
+<body>
+<h1 class="text-center">Your cart:</h1>
+<div class="container">
+    <div class="table-head">
+        <div class="description"><span>Description</span></div>
+        <div class="price"><span>Price</span></div>
+        <div class="quantity"><span>Quantity</span></div>
+        <div class="sum"><span>Sum</span></div>
+    </div>
+    <div class="table-rows">
+        <div class="table-row">
+            <div class="description">
+                <a  href="#" class="image-block">
+                    <img src="img/sushi.jpg">
+                </a>
+                <div class="product-description">
+                    <a href="#" class="productName">Title</a>
+                    <span class="productWeight">220 g</span>
+                </div>
+            </div>
+            <div class="price"><span id="item-price">20$</span></div>
+            <div class="quantity" ><input id="item-qty" type="number" class="text-center " min="1" max="99" name="quantity"></div>
+            <div class="sum" id="item-sum">20$</div>
+        </div>
+    </div>
+    <div class="total-sum">
+        <span id="total-sum"><strong>Total sum:</strong> 0 $</span>
+    </div>
+    <div class="pre-order">
+        <button class="btn btn-outline-success">Pre order</button>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('#item-qty').on('click', function () {
+            var qty = $(this).val();
+            var price =$('#item-price').html();
+            var itemSum = $('#item-sum');
+            itemSum.html(parseFloat(price).toFixed(2) * parseFloat(qty).toFixed(2) + '$');
+        })
+    })
+</script>
+</body>
+</html>

@@ -18,13 +18,22 @@ namespace SushiRunner.Controllers
 
         public IActionResult Index()
         {
-            var meals = _mealService.GetList();
+          //  var meals = _mealService.GetList();
             var mealModels = new Collection<MealModel>();
-
-            foreach (var meal in meals)
+            mealModels.Add(new MealModel
             {
-                mealModels.Add(new MealModel(meal.Name, meal.Description, meal.ImagePath));
-            }
+                Id = 1,
+                Name = "Sushi",
+                Description = "Tasty shushi",
+                ImagePath = "/img/sushi.jpg",
+                Price = 100,
+                Weight = 120
+            });
+
+            //foreach (var meal in meals)
+            //{
+            //    mealModels.Add(new MealModel(meal.Name, meal.Description, meal.ImagePath));
+            //}
 
             return View(
                 new HomeModel
