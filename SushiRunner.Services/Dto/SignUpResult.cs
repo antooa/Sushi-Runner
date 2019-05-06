@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
 using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Services.Dto
@@ -8,6 +7,6 @@ namespace SushiRunner.Services.Dto
     {
         public bool IsSuccessful { get; set; }
         public User User { get; set; }
-        public IEnumerable<IdentityError> Errors { get; set; }
+        public List<AccountError> Errors { get; set; }
     }
 }

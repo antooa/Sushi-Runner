@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,18 +11,10 @@ namespace SushiRunner.Controllers
 {
     public class AccountController : Controller
     {
-        private IEmailService _emailService;
-        private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
+        private readonly IAccountService _accountService;
 
-        private IAccountService _accountService;
-
-        public AccountController(IEmailService emailService, UserManager<User> userManager,
-            SignInManager<User> signInManager, IAccountService accountService)
+        public AccountController(IAccountService accountService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _emailService = emailService;
             _accountService = accountService;
         }
 
@@ -47,13 +40,9 @@ namespace SushiRunner.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                if (signInResult.UserExists)
+                foreach (var error in signInResult.Errors)
                 {
-                    ModelState.AddModelError("Password", "Incorrect password, try again");
-                }
-                else
-                {
-                    ModelState.AddModelError("Username", "Couldn't find user with such email");
+                    ModelState.AddModelError(string.Empty, error.Message);
                 }
             }
 
@@ -91,7 +80,7 @@ namespace SushiRunner.Controllers
 
                 foreach (var error in signUpResult.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    ModelState.AddModelError(string.Empty, error.Message);
                 }
             }
 
@@ -100,28 +89,20 @@ namespace SushiRunner.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        public async Task<IActionResult> ConfirmEmail([Required] string userId, [Required] string code)
         {
-            if (userId == null || code == null)
-            {
-                return Redirect("/Home/Error");
-            }
-
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return Redirect("/Home/Error");
-            }
-
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            if (result.Succeeded)
+            var emailConfirmationResult = await _accountService.ConfirmEmailAsync(userId, code);
+            if (emailConfirmationResult.IsSuccessful)
             {
                 return RedirectToAction("Index", "Home");
             }
-            else
+
+            foreach (var error in emailConfirmationResult.Errors)
             {
-                return Redirect("/Home/Error");
+                ModelState.AddModelError(string.Empty, error.Message);
             }
+
+            return Redirect("/Home/Error");
         }
     }
 }

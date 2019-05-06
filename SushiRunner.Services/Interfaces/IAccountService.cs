@@ -9,9 +9,9 @@ namespace SushiRunner.Services.Interfaces
     {
         Task<SignInResult> SignInAsync(string username, string password);
 
-        void SignOutAsync(string username);
-
         Task<SignUpResult> SignUpAsync(string username, string email, string password,
             Func<User, string, string> generateEmailConfirmationLink);
+
+        Task<EmailConfirmationResult> ConfirmEmailAsync(string userId, string code);
     }
 }
