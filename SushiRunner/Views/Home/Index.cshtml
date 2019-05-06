@@ -2,22 +2,9 @@
 
 @{
     ViewData["Title"] = "Sushi-Runner";
-    Layout = null;
+    Layout = "_HomeLayout";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/home/index.css">
-    <link rel="stylesheet" href="/css/sidebar.css">
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
-    <script src="/lib/jquery/dist/jquery.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-</head>
-<body>
 <div id="menu">
     <div id="toggle">
         <a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">
@@ -52,7 +39,7 @@
         </div>
         <div id="basket">
             <a href="#">
-                <strong>Cart</strong>
+                <span class="fa fa-shopping-basket shopping-basket-icon"></span>
             </a>
         </div>
         <div id="totalPrice">
@@ -125,6 +112,3 @@
         </div>
     </div>
 </div>
-<script src="/js/home/index.js"></script>
-</body>
-</html>
