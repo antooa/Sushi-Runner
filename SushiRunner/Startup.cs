@@ -12,6 +12,7 @@ using SushiRunner.Data;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
 using SushiRunner.Services;
+using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 
 namespace SushiRunner
@@ -54,6 +55,9 @@ namespace SushiRunner
                 .AddScoped<ICrudService<Meal, long>, MealService>()
                 .AddScoped<ICrudService<MealGroup, long>, MealGroupService>()
                 .AddScoped<ICrudService<OrderDTO, long>, OrderService>();
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddSingleton<IEmailService, EmailService>();
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/SignIn");
         }

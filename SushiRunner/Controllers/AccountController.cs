@@ -1,20 +1,26 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
-using SushiRunner.Models.ViewModels;
+using SushiRunner.Services;
+using SushiRunner.Services.Interfaces;
+using SushiRunner.ViewModels;
 
 namespace SushiRunner.Controllers
 {
     public class AccountController : Controller
     {
+        private IEmailService _emailService;
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(IEmailService emailService, UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -44,6 +50,72 @@ namespace SushiRunner.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp(SignUpModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User {Email = model.Email, UserName = model.Email};
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Action(
+                        "ConfirmEmail",
+                        "Account",
+                        new {userId = user.Id, code = code},
+                        protocol: HttpContext.Request.Scheme);
+                    await _emailService.SendEmailAsync(model.Email, "Confirm your account",
+                        $"Confirm the registration by clicking on the link: <a href='{callbackUrl}'>confirmation link</a>");
+
+                    return Content(
+                        "To complete the registration, check the email and click on the link indicated in the mail.");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return Redirect("/Home/Error");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return Redirect("/Home/Error");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return Redirect("/Home/Error");
+            }
         }
     }
 }

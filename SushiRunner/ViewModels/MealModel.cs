@@ -1,4 +1,4 @@
-namespace SushiRunner.Models.ViewModels
+namespace SushiRunner.ViewModels
 {
     public class MealModel
     {
