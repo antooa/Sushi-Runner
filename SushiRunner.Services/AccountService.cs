@@ -67,7 +67,7 @@ namespace SushiRunner.Services
                 }
                 else
                 {
-                    errorMessage = "Unknown authentication error";
+                    errorMessage = "Wrong password for this user";
                 }
 
                 signInResult.Errors = new List<AccountError> {new AccountError {Message = errorMessage}};
