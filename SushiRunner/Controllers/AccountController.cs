@@ -1,9 +1,9 @@
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
-using SushiRunner.Services;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
 
@@ -11,16 +11,11 @@ namespace SushiRunner.Controllers
 {
     public class AccountController : Controller
     {
-        private IEmailService _emailService;
-        private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
+        private readonly IAccountService _accountService;
 
-        public AccountController(IEmailService emailService, UserManager<User> userManager,
-            SignInManager<User> signInManager)
+        public AccountController(IAccountService accountService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _emailService = emailService;
+            _accountService = accountService;
         }
 
         [HttpGet]
@@ -34,22 +29,24 @@ namespace SushiRunner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.Username);
-                if (user != null)
+                var signInResult = await _accountService.SignInAsync(model.Username, model.Password);
+                if (signInResult.IsSuccessful)
                 {
-                    await _signInManager.SignOutAsync();
-                    var signInResult = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
-                    if (signInResult.Succeeded)
+                    if (signInResult.Roles.Contains(UserRoles.Moderator))
                     {
-                        if (await _userManager.IsInRoleAsync(user, UserRoles.Moderator))
-                        {
-                            return RedirectToAction("Index", "Moderator");
-                        }
+                        return RedirectToAction("Index", "Moderator");
                     }
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                foreach (var error in signInResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Message);
                 }
             }
 
-            return View();
+            return View(model);
         }
 
         [HttpGet]
@@ -63,29 +60,27 @@ namespace SushiRunner.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User {Email = model.Email, UserName = model.Email};
-
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Action(
+                var signUpResult = await _accountService.SignUpAsync(
+                    model.Email,
+                    model.Email,
+                    model.Password,
+                    (user, code) => Url.Action(
                         "ConfirmEmail",
                         "Account",
-                        new {userId = user.Id, code = code},
-                        protocol: HttpContext.Request.Scheme);
-                    await _emailService.SendEmailAsync(model.Email, "Confirm your account",
-                        $"Confirm the registration by clicking on the link: <a href='{callbackUrl}'>confirmation link</a>");
+                        new {userId = user.Id, code},
+                        HttpContext.Request.Scheme
+                    )
+                );
 
+                if (signUpResult.IsSuccessful)
+                {
                     return Content(
                         "To complete the registration, check the email and click on the link indicated in the mail.");
                 }
-                else
+
+                foreach (var error in signUpResult.Errors)
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                    ModelState.AddModelError(string.Empty, error.Message);
                 }
             }
 
@@ -94,28 +89,20 @@ namespace SushiRunner.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        public async Task<IActionResult> ConfirmEmail([Required] string userId, [Required] string code)
         {
-            if (userId == null || code == null)
-            {
-                return Redirect("/Home/Error");
-            }
-
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return Redirect("/Home/Error");
-            }
-
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            if (result.Succeeded)
+            var emailConfirmationResult = await _accountService.ConfirmEmailAsync(userId, code);
+            if (emailConfirmationResult.IsSuccessful)
             {
                 return RedirectToAction("Index", "Home");
             }
-            else
+
+            foreach (var error in emailConfirmationResult.Errors)
             {
-                return Redirect("/Home/Error");
+                ModelState.AddModelError(string.Empty, error.Message);
             }
+
+            return Redirect("/Home/Error");
         }
     }
 }

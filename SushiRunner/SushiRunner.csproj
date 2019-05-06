@@ -27,4 +27,9 @@
       <ProjectReference Include="..\SushiRunner.Services\SushiRunner.Services.csproj" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <Folder Include="Views\Shared" />
+    </ItemGroup>
+
 </Project>
