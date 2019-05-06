@@ -11,12 +11,12 @@ namespace SushiRunner.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly OrderRepository _repository;
+        private readonly IRepository<Order, long> _repository;
         private readonly IMapper _mapper;
         
         private bool _disposed;
 
-        public OrderService(OrderRepository repository, IMapper mapper)
+        public OrderService(IRepository<Order, long> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

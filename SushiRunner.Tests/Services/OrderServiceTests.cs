@@ -68,14 +68,10 @@ namespace SushiRunner.Tests.Services
         public void CreateTest()
         {
             // Arrange
-            var repository = new Mock<OrderRepository>(null);
+            var repository = new Mock<IRepository<Order, long>>();
 
-            var mapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Order, OrderDTO>();
-            });
-            var mapper = mapperConfig.CreateMapper();
-            var svc = new OrderService(repository.Object, mapper);
+            var mapper = new Mock<IMapper>();
+            var svc = new OrderService(repository.Object, mapper.Object);
             var expected = new OrderDTO
             {
                 Id = 4,
@@ -103,7 +99,64 @@ namespace SushiRunner.Tests.Services
             svc.Create(expected);
 
             // Assert
+            mapper.Verify(m => m.Map<OrderDTO, Order>(It.IsAny<OrderDTO>()), Times.Once());
             repository.Verify(r => r.Create(It.IsAny<Order>()), Times.Once());
+            repository.Verify(r => r.Save(), Times.Once());
+        }
+        
+        [Fact]
+        public void UpdateTest()
+        {
+            // Arrange
+            var expected = new OrderDTO()
+            {
+                Id = 1,
+                CustomerName = "Ivanko"
+            };
+            var repository = new Mock<IRepository<Order, long>>();
+            repository.Setup(r => r.Get(expected.Id)).Returns(new Order
+            {
+                Id = 1,
+                CustomerName = "Ivanko"
+            });
+            var mapper = new Mock<IMapper>();
+            mapper.Setup(m => m.Map<Order, OrderDTO>(It.IsAny<Order>())).Returns(expected);
+            var svc = new OrderService(repository.Object, mapper.Object);
+
+
+            // Act
+            svc.Update(expected);
+
+            // Assert
+            mapper.Verify(m => m.Map<OrderDTO, Order>(It.IsAny<OrderDTO>()), Times.Once());
+            repository.Verify(r => r.Update(It.IsAny<Order>()), Times.Once());
+            repository.Verify(r => r.Save(), Times.Once());
+        }
+        
+        [Fact]
+        public void DeleteTest()
+        {
+            // Arrange
+            var expected = new OrderDTO
+            {
+                Id = 1,
+                CustomerName = "Ivanko"
+            };
+            var repository = new Mock<IRepository<Order, long>>();
+            repository.Setup(r => r.Get(expected.Id)).Returns(new Order
+            {
+                Id = 1,
+                CustomerName = "Ivanko"
+            });
+            var mapper = new Mock<IMapper>();
+            mapper.Setup(m => m.Map<Order, OrderDTO>(It.IsAny<Order>())).Returns(expected);
+            var svc = new OrderService(repository.Object, mapper.Object);
+
+            // Act
+            svc.Delete(expected.Id);
+
+            // Assert
+            repository.Verify(r => r.Delete(It.IsAny<long>()), Times.Once());
             repository.Verify(r => r.Save(), Times.Once());
         }
         
