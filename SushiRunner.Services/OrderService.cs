@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using DTO.Models;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
 using SushiRunner.Services.Interfaces;
@@ -12,42 +9,33 @@ namespace SushiRunner.Services
     public class OrderService : IOrderService
     {
         private readonly IRepository<Order, long> _repository;
-        private readonly IMapper _mapper;
-        
+
         private bool _disposed;
 
-        public OrderService(IRepository<Order, long> repository, IMapper mapper)
+        public OrderService(IRepository<Order, long> repository)
         {
             _repository = repository;
-            _mapper = mapper;
         }
 
-        public void Create(OrderDTO orderDto)
+        public void Create(Order order)
         {
-            orderDto.PlacedAt = DateTime.Now;
-            orderDto.OrderStatus = OrderStatus.WaitingForResponse;
-            var order = _mapper.Map<OrderDTO, Order>(orderDto);
             _repository.Create(order);
             _repository.Save();
         }
 
-        public IEnumerable<OrderDTO> GetList()
+        public IEnumerable<Order> GetList()
         {
-            var orders = _repository.GetList();
-            return orders.Select(order => _mapper.Map<Order, OrderDTO>(order)).ToList();
+            return _repository.GetList();
         }
 
-        public OrderDTO Get(long id)
+        public Order Get(long id)
         {
-            var order = _repository.Get(id);
-            var dto = _mapper.Map<Order, OrderDTO>(order);
-            return dto;
+            return _repository.Get(id);
         }
 
-        public void Update(OrderDTO orderDto)
+        public void Update(Order order)
         {
-            var order = _mapper.Map<OrderDTO, Order>(orderDto);
-            _repository.Update(order);  
+            _repository.Update(order);
             _repository.Save();
         }
 

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using DTO.Models;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -36,7 +34,6 @@ namespace SushiRunner
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddAutoMapper(typeof(Startup));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
@@ -54,13 +51,11 @@ namespace SushiRunner
                 .AddScoped<IRepository<Order, long>, OrderRepository>()
                 .AddScoped<ICrudService<Meal, long>, MealService>()
                 .AddScoped<ICrudService<MealGroup, long>, MealGroupService>()
-
-                .AddScoped<ICrudService<OrderDTO, long>, OrderService>();
+                .AddScoped<ICrudService<Order, long>, OrderService>()
                 .AddScoped<IAccountService, AccountService>();
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.AddSingleton<IEmailService, EmailService>();
-
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/SignIn");
         }

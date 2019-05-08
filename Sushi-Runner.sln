@@ -6,10 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.Data", "SushiRu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.Services", "SushiRunner.Services\SushiRunner.Services.csproj", "{ADB0DF30-DF8B-4FE4-8EAF-B60D4B55FA25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.DTO", "SushiRunner.DTO\SushiRunner.DTO.csproj", "{B906AC4A-C148-4E39-A979-C21526FF50CA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.Tests", "SushiRunner.Tests\SushiRunner.Tests.csproj", "{D54D9A19-B4C3-4803-B4AA-859A45780BBB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,13 +24,5 @@ Global
 		{ADB0DF30-DF8B-4FE4-8EAF-B60D4B55FA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADB0DF30-DF8B-4FE4-8EAF-B60D4B55FA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADB0DF30-DF8B-4FE4-8EAF-B60D4B55FA25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B906AC4A-C148-4E39-A979-C21526FF50CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B906AC4A-C148-4E39-A979-C21526FF50CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B906AC4A-C148-4E39-A979-C21526FF50CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B906AC4A-C148-4E39-A979-C21526FF50CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D54D9A19-B4C3-4803-B4AA-859A45780BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D54D9A19-B4C3-4803-B4AA-859A45780BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D54D9A19-B4C3-4803-B4AA-859A45780BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D54D9A19-B4C3-4803-B4AA-859A45780BBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
