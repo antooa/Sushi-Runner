@@ -20,6 +20,7 @@
       <_ContentIncludedByDefault Remove="Views\Shared\_CookieConsentPartial.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Basket\Index.cshtml" />
     </ItemGroup>
 
 
@@ -27,6 +28,11 @@
       <ProjectReference Include="..\SushiRunner.Data\SushiRunner.Data.csproj" />
       <ProjectReference Include="..\SushiRunner.DTO\SushiRunner.DTO.csproj" />
       <ProjectReference Include="..\SushiRunner.Services\SushiRunner.Services.csproj" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Folder Include="Views\Shared" />
     </ItemGroup>
 
 </Project>

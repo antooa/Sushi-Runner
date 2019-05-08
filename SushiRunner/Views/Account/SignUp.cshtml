@@ -1,0 +1,33 @@
+@model SushiRunner.ViewModels.SignUpModel
+
+@{
+    Layout = "_AccountLayout";
+}
+
+<div class="login-form">
+    <form asp-action="SignUp" asp-controller="Account" method="post">
+        <h2 class="text-center">Sign up</h2>
+        <div asp-validation-summary="All" class="error-box text-danger"></div>
+        <div class="form-group">
+            <div class="input-group">
+                <input asp-for="Email" type="email" class="form-control" placeholder="Email" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col form-group">
+                <div class="input-group">
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="col form-group">
+                <div class="input-group">
+                    <input asp-for="ConfirmPassword" type="password" class="form-control"
+                           placeholder="Confirm Password" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-dark login-btn btn-block">Sign up</button>
+        </div>
+    </form>
+</div>

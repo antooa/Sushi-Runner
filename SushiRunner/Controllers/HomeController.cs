@@ -1,11 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
 using SushiRunner.Models.ViewModels;
 using SushiRunner.Services;
+
 using SushiRunner.Services.Interfaces;
+using SushiRunner.ViewModels;
 
 namespace SushiRunner.Controllers
 {
@@ -33,6 +35,15 @@ namespace SushiRunner.Controllers
                 new HomeModel
                 {
                     Meals = mealModels
+                });
+        }
+
+        public IActionResult Error()
+        {
+            return View(
+                new ErrorModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
                 });
         }
     }

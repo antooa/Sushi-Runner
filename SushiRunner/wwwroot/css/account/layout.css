@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-form {
+    position: absolute;
+    margin: auto;
+    top: 20%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 485px;
+    border-radius: 3px;
+}
+
+.error-box {
+    background: #f5c6cb;
+    border-radius: 3px;
+    margin: 5px 0 8px 0;
+}
+
+.error-box > ul,ol {
+    margin: 0;
+}
+
+.error-box li {
+    padding: 5px;
+}

@@ -1,4 +1,4 @@
-﻿@model SushiRunner.Models.ViewModels.HomeModel
+﻿@model SushiRunner.ViewModels.HomeModel
 
 @{
     ViewData["Title"] = "Sushi-Runner";
@@ -15,60 +15,53 @@
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
     <script src="/lib/jquery/dist/jquery.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
-
-	<div class="row">
-		<div class="col-9" id="menu">
-			<nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="navbar">
-				<div class="dropleft">
-					<ul>
-						<li class="sidebar-nav">
-							<a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">
-								Toggle
-								Menu
-							</a>
-						</li>
-					</ul>
-				</div>
-				<div class="navbar-collapse collapse justify-content-center " id="collapsingNavbar">
-
-					<ul class="navbar-nav text-center">
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Main</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">About us</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Delivery</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Blog</a>
-						</li>
-						<li>
-							<strong>
-								<ul>(093)170-15-70</ul>
-
-								<ul>(093)170-15-70</ul>
-							</strong>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-		<div id="user" class="col-1">
-			
-			<a class="align-self-end text-dark " href="#"><strong>User</strong></a>
-		</div>
-		<div id="basket" class="col-1">
-			<a class="align-self-center text-white" href="#"><strong>Cart</strong></a>
-		</div>
-		<div id="CartTotal" class="col-1">
-			<p class="text-white  align-middle"><strong>$0</strong></p>
-		</div>
-	</div>
-
+<div id="menu">
+    <div id="toggle">
+        <a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">
+            Toggle Menu
+        </a>
+    </div>
+    <nav class="navbar_items">
+        <div class="navbar_link">
+            <a href="#">Main</a>
+        </div>
+        <div class="navbar_link">
+            <a href="#">About us</a>
+        </div>
+        <div class="navbar_link">
+            <a href="#">Delivery</a>
+        </div>
+        <div class="navbar_link">
+            <a href="#">Blog</a>
+        </div>
+        <div class="navbar_link">
+            <div id="phones">
+                <span>(093)170-15-70</span>
+                <span>(093)170-15-70</span>
+            </div>
+        </div>
+    </nav>
+    <div id="account">
+        <div id="user">
+            <a href="#">
+                <strong>User</strong>
+            </a>
+        </div>
+        <div id="basket">
+            <a href="#">
+                <strong>Cart</strong>
+            </a>
+        </div>
+        <div id="totalPrice">
+            <span>
+                <strong>0$</strong>
+            </span>
+        </div>
+    </div>
+</div>
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
@@ -101,35 +94,34 @@
             </li>
         </ul>
     </div>
-
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                @foreach (var meal in Model.Meals)
-                {
-                    <div class="col-sm-3 text-center">
-                        <div class="card" style="width:80%;">
-                            <div class="card-body" style="padding:0">
-                                <img class="card-img-top" src="@meal.ImagePath">
-                                <h5 class="card-title border-top">@meal.Name</h5>
-								
-                            <p class="card-text" style="padding:2%">@meal.Description</p>
-                                <h5 class="weight-1"><span>100 гр.</span></h5>
-							<div class="card-footer">
-								<div class="row">
-									<div class="col-6">
-										<p id="price"><strong>100 грн.</strong></p>
-									</div>
-									
-									<a href="#" class="col-6 btn btn-outline-dark align-content-center" id="addToCart"><strong>+</strong> Add to cart</a>
-								</div>
-								
-							</div>
-                            </div>
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var meal in Model.Meals)
+            {
+                <div class="col-12 col-lg-4 col-sm-6 col-md-3 col-xl-2 card h-75">
+                    <div class="card-body">
+                        <img class="card-img-top" src="@meal.ImagePath">
+                        <div class="card-title border-top">
+                            <span>@meal.Name</span>
+                        </div>
+                        <div class="card-description">
+                            <span>@meal.Description</span>
+                        </div>
+                        <h5 class="weight-1">
+                            <span>100 гр.</span>
+                        </h5>
+                        <div class="card-footer">
+                            <span id="price">
+                                <strong>100 грн.</strong>
+                            </span>
+                            <a href="#" class="btn btn-success"
+                               id="addToCart">
+                                <strong>+</strong> Add to cart
+                            </a>
                         </div>
                     </div>
-                }
-            </div>
+                </div>
+            }
         </div>
     </div>
 </div>
