@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DTO.Models;
-using Microsoft.Extensions.Logging;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
 using SushiRunner.Services.Interfaces;
@@ -34,39 +34,13 @@ namespace SushiRunner.Services
         public IEnumerable<OrderDTO> GetList()
         {
             var orders = _repository.GetList();
-            var dtos = new List<OrderDTO>();
-            foreach (var order in orders)
-            {
-                try
-                {
-                    var dto = _mapper.Map<Order, OrderDTO>(order);
-                    dtos.Add(dto);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-                
-            }
-
-            return dtos;
+            return orders.Select(order => _mapper.Map<Order, OrderDTO>(order)).ToList();
         }
 
         public OrderDTO Get(long id)
         {
             var order = _repository.Get(id);
-            OrderDTO dto;
-            try
-            {
-                dto = _mapper.Map<Order, OrderDTO>(order);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
+            var dto = _mapper.Map<Order, OrderDTO>(order);
             return dto;
         }
 
