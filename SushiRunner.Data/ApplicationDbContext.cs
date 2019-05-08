@@ -6,13 +6,17 @@ namespace SushiRunner.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {
+        public ApplicationDbContext()
+        {
+
+        }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
 
-        public DbSet<Meal> Meals { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<MealGroup> MealGroups { get; set; }
+        public virtual DbSet<Meal> Meals { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<MealGroup> MealGroups { get; set; }
     }
 }
