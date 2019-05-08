@@ -1,19 +1,18 @@
-﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using SushiRunner.Data.Entities;
+using System;
 
-namespace SushiRunner.Data.Entities
+namespace DTO.Models
 {
-    [Table("Order")]
-    public class Order
+    public class OrderDTO
     {
         public long Id { get; set; }
-        public ICollection<OrderItem> Items { get; set; }
         public string CustomerName { get; set; }
         public string PaymentType { get; set; }
         public string Address { get; set; }
-        public OrderStatus OrderStatus { get; set; }
         public DateTime PlacedAt { get; set; }
+        public ICollection<OrderItem> Items { get; set; }
+        public OrderStatus OrderStatus { get; set; }
         public Courier Courier { get; set; }
         public DateTime DeliveredAt { get; set; }
     }
