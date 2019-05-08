@@ -55,7 +55,7 @@ namespace SushiRunner
                 .AddScoped<ICrudService<Meal, long>, MealService>()
                 .AddScoped<ICrudService<MealGroup, long>, MealGroupService>()
 
-                .AddScoped<ICrudService<OrderDTO, long>, OrderService>();
+                .AddScoped<ICrudService<OrderDTO, long>, OrderService>()
                 .AddScoped<IAccountService, AccountService>();
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
