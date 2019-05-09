@@ -25,7 +25,7 @@ namespace SushiRunner.Services
         public void Create(OrderDTO orderDto)
         {
             orderDto.PlacedAt = DateTime.Now;
-            orderDto.OrderStatus = OrderStatus.WaitingForResponse;
+            orderDto.OrderStatus = OrderStatus.New;
             var order = _mapper.Map<OrderDTO, Order>(orderDto);
             _repository.Create(order);
             _repository.Save();
@@ -37,12 +37,19 @@ namespace SushiRunner.Services
             return orders.Select(order => _mapper.Map<Order, OrderDTO>(order)).ToList();
         }
 
+        public IEnumerable<OrderDTO> GetByStatus(OrderStatus status)
+        {
+            var orders = _repository.Search(o => o.OrderStatus.Equals(status));
+            return orders.Select(order => _mapper.Map<Order, OrderDTO>(order)).ToList();
+        }
+        
         public OrderDTO Get(long id)
         {
             var order = _repository.Get(id);
             var dto = _mapper.Map<Order, OrderDTO>(order);
             return dto;
         }
+        
 
         public void Update(OrderDTO orderDto)
         {
