@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using SushiRunner.Data.Entities;
 
@@ -19,6 +20,11 @@ namespace SushiRunner.Data.Repositories
         public IEnumerable<MealGroup> GetList()
         {
             return _context.MealGroups;
+        }
+
+        public IEnumerable<MealGroup> Search(Expression<Func<MealGroup, bool>> predicate)
+        {
+            return _context.MealGroups.Where(predicate).ToList();
         }
 
         public MealGroup Get(long id)

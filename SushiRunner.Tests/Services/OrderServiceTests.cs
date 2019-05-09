@@ -218,7 +218,7 @@ namespace SushiRunner.Tests.Services
                             }
                         }
                     },
-                    OrderStatus = OrderStatus.Cooking
+                    OrderStatus = OrderStatus.InProgress
                 },
                 
                 new OrderDTO()
@@ -249,7 +249,7 @@ namespace SushiRunner.Tests.Services
                             }
                         }
                     },
-                    OrderStatus = OrderStatus.Cooking
+                    OrderStatus = OrderStatus.InProgress
                 },
                 
                 new OrderDTO()
@@ -320,7 +320,7 @@ namespace SushiRunner.Tests.Services
                             }
                         }
                     },
-                    OrderStatus = OrderStatus.Cooking
+                    OrderStatus = OrderStatus.InProgress
                 },
                 new Order()
                 {
@@ -350,7 +350,7 @@ namespace SushiRunner.Tests.Services
                             }
                         }
                     },
-                    OrderStatus = OrderStatus.Cooking
+                    OrderStatus = OrderStatus.InProgress
                 },
                 new Order()
                 {
