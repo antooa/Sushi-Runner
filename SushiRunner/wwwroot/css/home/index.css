@@ -39,7 +39,7 @@ body {
     background-color: #212121;
     width: 100px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 100px;
 }
@@ -187,7 +187,11 @@ body {
     color: #27ae60;
     font-size: 32px;
 }
-
+.fa-check-circle{
+    color: #e74c3c;
+    font-size: 32px;
+    display: none;
+}
 .fa-user {
     font-size: 51px;
 }
@@ -220,3 +224,11 @@ body {
     font-size: 26px;
     font-weight: 800;
 }
+#basket a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+}
+

@@ -96,6 +96,7 @@
 .pre-order {
     display: flex;
     justify-content: flex-end;
+    margin-top: 15px;
 }
 .total-sum {
     display: flex;
@@ -122,3 +123,14 @@ input[type=number]::-webkit-inner-spin-button {
     opacity: 1;
 }
 
+.content{
+    margin-top: 50px;
+}
+.content h1{
+    font-size: 32px;
+    font-weight: 800;
+}
+.table-head span{
+    font-size: 24px;
+    font-weight: 800;
+}
