@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using SushiRunner.Data.Entities;
 
-namespace SushiRunner.Models.ViewModels
+namespace SushiRunner.ViewModels
 {
     public class OrderModel
     {

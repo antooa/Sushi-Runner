@@ -1,13 +1,11 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AutoMapper;
 using DTO.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
-using SushiRunner.Models.ViewModels;
-using SushiRunner.Services;
 using SushiRunner.Services.Interfaces;
+using SushiRunner.ViewModels;
 
 namespace SushiRunner.Controllers
 {
