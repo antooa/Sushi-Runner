@@ -223,8 +223,14 @@ body {
     margin-left: 30px;
 }
 
-.add-to-card {
+.add-to-cart-icon {
     line-height: 0;
+}
+
+.add-to-cart-button {
+    border: 0;
+    padding: 0;
+    background: 0;
     margin-right: 10px;
 }
 

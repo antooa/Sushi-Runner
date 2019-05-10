@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
@@ -48,6 +49,14 @@ namespace SushiRunner.Controllers
                 {
                     RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
                 });
+        }
+
+        public IActionResult AddToCart(long id)
+        {
+            Console.WriteLine(">>>>>>>   <<<<<<<<");
+            Console.WriteLine($"Add product with Id={id} to basket");
+            Console.WriteLine(">>>>>>>   <<<<<<<<");
+            return RedirectToAction("Index");
         }
     }
 }
