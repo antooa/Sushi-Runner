@@ -7,42 +7,42 @@ using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Data.Repositories
 {
-    public class CardRepository : IRepository<Card, long>
+    public class CartRepository : IRepository<Cart, long>
     {
         private readonly ApplicationDbContext _context;
 
-        public CardRepository(ApplicationDbContext context)
+        public CartRepository(ApplicationDbContext context)
         {
             _context = context;
             _disposed = false;
         }
 
-        public IEnumerable<Card> Search(Expression<Func<Card, bool>> predicate)
+        public IEnumerable<Cart> Search(Expression<Func<Cart, bool>> predicate)
         {
             return _context.Cards.Where(predicate).ToList();
         }
 
-        public IEnumerable<Card> GetList()
+        public IEnumerable<Cart> GetList()
         {
             return _context.Cards;
         }
 
-        public Card Get(long id)
+        public Cart Get(long id)
         {
             return _context.Cards
                 .AsNoTracking()
                 .FirstOrDefault(entity => entity.Id == id);
         }
 
-        public void Create(Card entity)
+        public void Create(Cart entity)
         {
             _context.Cards.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Update(Card cardItem)
+        public void Update(Cart cartItem)
         {
-            _context.Cards.Update(cardItem);
+            _context.Cards.Update(cartItem);
             _context.SaveChanges();
         }
 

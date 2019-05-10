@@ -5,27 +5,27 @@ using SushiRunner.Services.Interfaces;
 
 namespace SushiRunner.Services
 {
-    public class CardService : ICardService
+    public class CartService : ICartService
     {
-        private readonly CardRepository _cardRepository;
+        private readonly CartRepository _cartRepository;
         private readonly CardItemRepository _cardItemRepository;
 
-        public CardService(CardRepository cardRepository, CardItemRepository cardItemRepository)
+        public CartService(CartRepository cartRepository, CardItemRepository cardItemRepository)
         {
-            _cardRepository = cardRepository;
+            _cartRepository = cartRepository;
             _cardItemRepository = cardItemRepository;
         }
 
-        public Card GetByUserOrCreateNew(User user)
+        public Cart GetByUserOrCreateNew(User user)
         {
-            var card = _cardRepository.Search(c => c.User.Equals(user)).FirstOrDefault();
+            var card = _cartRepository.Search(c => c.User.Equals(user)).FirstOrDefault();
             if (card == null)
             {
-                card = new Card
+                card = new Cart
                 {
                     User = user
                 };
-                _cardRepository.Create(card);
+                _cartRepository.Create(card);
             }
 
             return card;
@@ -34,19 +34,19 @@ namespace SushiRunner.Services
         public void AddItem(User user, Meal meal, int amount)
         {
             var card = GetByUserOrCreateNew(user);
-            card.Items.Add(new CardItem
+            card.Items.Add(new CartItem
             {
                 Meal = meal,
                 Amount = amount
             });
-            _cardRepository.Update(card);
+            _cartRepository.Update(card);
         }
 
         public void Clear(User user)
         {
             var card = GetByUserOrCreateNew(user);
             card.Items.Clear();
-            _cardRepository.Update(card);
+            _cartRepository.Update(card);
         }
     }
 }

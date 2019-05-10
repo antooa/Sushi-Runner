@@ -7,7 +7,7 @@ using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Data.Repositories
 {
-    public class CardItemRepository : IRepository<CardItem, long>
+    public class CardItemRepository : IRepository<CartItem, long>
     {
         private readonly ApplicationDbContext _context;
 
@@ -17,32 +17,32 @@ namespace SushiRunner.Data.Repositories
             _disposed = false;
         }
 
-        public IEnumerable<CardItem> Search(Expression<Func<CardItem, bool>> predicate)
+        public IEnumerable<CartItem> Search(Expression<Func<CartItem, bool>> predicate)
         {
             return _context.CardItems.Where(predicate).ToList();
         }
 
-        public IEnumerable<CardItem> GetList()
+        public IEnumerable<CartItem> GetList()
         {
             return _context.CardItems;
         }
 
-        public CardItem Get(long id)
+        public CartItem Get(long id)
         {
             return _context.CardItems
                 .AsNoTracking()
                 .FirstOrDefault(entity => entity.Id == id);
         }
 
-        public void Create(CardItem entity)
+        public void Create(CartItem entity)
         {
             _context.CardItems.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Update(CardItem cardItem)
+        public void Update(CartItem cartItem)
         {
-            _context.CardItems.Update(cardItem);
+            _context.CardItems.Update(cartItem);
             _context.SaveChanges();
         }
 

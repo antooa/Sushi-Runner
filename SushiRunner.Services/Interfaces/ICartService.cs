@@ -2,9 +2,9 @@ using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Services.Interfaces
 {
-    public interface ICardService
+    public interface ICartService
     {
-        Card GetByUserOrCreateNew(User user);
+        Cart GetByUserOrCreateNew(User user);
 
         void AddItem(User user, Meal meal, int amount);
 
