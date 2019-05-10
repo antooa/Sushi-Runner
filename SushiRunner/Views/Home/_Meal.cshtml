@@ -1,0 +1,28 @@
+@model MealModel
+
+<div class="item-card">
+    <div class="item-img">
+        <img src="@Model.ImagePath" alt="@Model.Name">
+    </div>
+    <div class="item-title">
+        <h3>@Model.Name</h3>
+    </div>
+    <div class="item-description">
+        <span>@Model.Description</span>
+    </div>
+    <div class="item-weight">
+        <h5 class="weight-1">
+            <span>@Model.Weight гр.</span>
+        </h5>
+    </div>
+    <div class="item-footer">
+        <div class="item-price">
+            <strong>@Model.Price грн.</strong>
+        </div>
+        <div class="add-to-cart">
+            <a href="#" class="add-to-card-btn">
+                <i class="fas fa-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+</div>

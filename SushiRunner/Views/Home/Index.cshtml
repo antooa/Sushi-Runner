@@ -5,53 +5,7 @@
     Layout = "_HomeLayout";
 }
 
-<div id="menu">
-    <div id="toggle">
-        <a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">
-            Toggle Menu
-        </a>
-    </div>
-    <nav class="navbar_items">
-        <div class="navbar_link">
-            <a href="#">Main</a>
-        </div>
-        <div class="navbar_link">
-            <a href="#">About us</a>
-        </div>
-        <div class="navbar_link">
-            <a href="#">Delivery</a>
-        </div>
-        <div class="navbar_link">
-            <a href="#">Blog</a>
-        </div>
-        <div class="navbar_link">
-            <div id="phones">
-                <span>(093)170-15-70</span>
-                <span>(093)170-15-70</span>
-            </div>
-        </div>
-    </nav>
-    <div id="account">
-        <div id="user">
-            <div id="user">
-                <a href="#"><strong><i class="fas fa-user"></i></strong></a>
-            </div>
-        </div>
-        <div id="basket">
-            <a asp-controller="Cart">
-                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-                <span id="itemCount"></span>
-            </a>
-        </div>
-        <div id="totalPrice">
-            <span>
-                <strong>0$</strong>
-            </span>
-        </div>
-    </div>
-</div>
 <div id="wrapper">
-    <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
@@ -85,34 +39,7 @@
     <div class="container-fluid">
         @foreach (var meal in Model.Meals)
         {
-            <div class="item-card">
-                
-                    <div class="item-img">
-                        <img src="@meal.ImagePath">
-                    </div>
-                    <div class="item-title">
-                        <h3>@meal.Name</h3>
-                    </div>
-                    <div class="item-description">
-                        <span>@meal.Description</span>
-                    </div>
-                    <div class="item-weight">
-                        <h5 class="weight-1">
-                            <span>@meal.Weight гр.</span>
-                        </h5>
-                    </div>
-                    <div class="item-footer">
-                        <div class="item-price">
-                            <strong>@meal.Price грн.</strong>
-                        </div>
-                        <div class="add-to-cart">
-                            <a href="#" class="add-to-card-btn">
-                                <i class="fas fa-plus-circle"></i>                          
-                            </a>
-                        </div>
-                    </div>
-                
-            </div>
+            <partial name="_Meal" model="@meal"/>
         }
     </div>
 </div>
