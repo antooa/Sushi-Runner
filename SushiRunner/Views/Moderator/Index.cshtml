@@ -1,3 +1,4 @@
+@model dynamic
 @{
     Layout = null;
 }
@@ -22,9 +23,15 @@
             <h1 class="text-center">Select orders type:</h1>
         </div>
         <div id="actions">
-            <a href="#" id="new-order">New</a>
-            <a href="#" id="in-progress">In progress</a>
-            <a href="#" id="delivered">Delivered</a>
+            <form asp-controller="Moderator" asp-action="NewOrders" method="post">
+                <a type="submit" id="new-order">New</a>
+            </form>
+            <form asp-action="InProgressOrders" asp-controller="Moderator" method="post">
+                <a type="submit" id="in-progress">In progress</a>
+            </form>
+            <form asp-action="CompletedOrders" asp-controller="Moderator" method="post">
+                <a type="submit" id="delivered">Delivered</a>
+            </form>
         </div>
         <div class="order-heading">
             <div class="order-heading-type">
@@ -42,35 +49,28 @@
             <div class="order-heading-action">
             </div>
         </div>
-        <div class="order-item" onclick="location.href = 'https://www.youtube.com/';">
+    @foreach (var item in Model )
+    {
+        <div class="order-item" onclick="location.href = '#';">
             <div class="order-type">
-                <select name="select-type" class="type" itemid="1">
-                    <option>
-                        New
-                    </option>
-                    <option>
-                        In progress
-                    </option>
-                    <option selected>
-                        Delivered
-                    </option>
-                </select>
+                <span>@item.PaymentType</span>
             </div>
             <div class="order-phone">
-                <span>+380958869367</span>
+                <span>@item.PhoneNumber</span>
             </div>
             <div class="order-address">
-                <span>Medovoi Pechery 39</span>
+                <span>@item.Address</span>
             </div>
             <div class="order-content">
-                <span>8 rice portions</span>
+                @foreach (var meal in Model.Items)
+                {
+                    <span>@meal.Amount @meal.Meal</span>
+                }
             </div>
-            <div class="order-action">
-                <a href="http://google.com"class="btn btn-success ok-button">Ok</a>
-                <a href="http://google.com" class="btn btn-danger remove-button">Remove</a>
+            <div class="order-action">             
             </div>
         </div>
-
+    }
     </div>
 </div>
 <script src="js/index.js"></script>

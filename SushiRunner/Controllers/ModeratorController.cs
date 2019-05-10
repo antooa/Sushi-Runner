@@ -23,7 +23,7 @@ namespace SushiRunner.Controllers
         
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("NewOrders");
         }
 
         [HttpGet]
