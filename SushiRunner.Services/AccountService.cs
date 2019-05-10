@@ -106,25 +106,23 @@ namespace SushiRunner.Services
                 user.UserName = username;
                 user.Email = email;
                 user.IsAnonymous = false;
-            }
-            else
-            {
-                user = new User
+                user.SecurityStamp = Guid.NewGuid().ToString();
+                await _userManager.UpdateAsync(user);
+                await _userManager.ChangePasswordAsync(user, user.Id, password);
+                SendConfirmationEmail(user, generateEmailConfirmationLink);
+
+                return new SignUpResult
                 {
-                    Email = email,
-                    UserName = username
+                    IsSuccessful = true,
+                    User = user
                 };
             }
 
+            user = new User {Email = email, UserName = username};
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var confirmationLink = generateEmailConfirmationLink(user, code);
-
-                await _emailService.SendEmailAsync(email, "Confirm your account",
-                    $"Confirm the registration by clicking on the link: <a href='{confirmationLink}'>confirmation link</a>");
-
+                SendConfirmationEmail(user, generateEmailConfirmationLink);
                 return new SignUpResult
                 {
                     IsSuccessful = true,
@@ -137,6 +135,16 @@ namespace SushiRunner.Services
                 IsSuccessful = false,
                 Errors = result.Errors.Select(e => new AccountError {Message = e.Description}).ToList()
             };
+        }
+
+        private async void SendConfirmationEmail(User user,
+            Func<User, string, string> generateEmailConfirmationLink)
+        {
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = generateEmailConfirmationLink(user, code);
+
+            await _emailService.SendEmailAsync(user.Email, "Confirm your account",
+                $"Confirm the registration by clicking on the link: <a href='{confirmationLink}'>confirmation link</a>");
         }
 
         public async Task<EmailConfirmationResult> ConfirmEmailAsync(string userId, string code)

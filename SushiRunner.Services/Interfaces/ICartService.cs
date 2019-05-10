@@ -6,7 +6,7 @@ namespace SushiRunner.Services.Interfaces
     {
         Cart GetByUserOrCreateNew(User user);
 
-        void AddItem(User user, Meal meal, int amount);
+        void AddItem(User user, long mealId);
 
         void Clear(User user);
     }

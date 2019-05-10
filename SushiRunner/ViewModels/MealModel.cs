@@ -8,5 +8,6 @@ namespace SushiRunner.ViewModels
         public double Weight { get; set; }
         public string ImagePath { get; set; }
         public int Price { get; set; }
+        public bool IsInCart { get; set; }
     }
 }

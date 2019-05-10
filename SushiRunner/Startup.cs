@@ -50,7 +50,7 @@ namespace SushiRunner
                 .AddScoped<IRepository<Meal, long>, MealRepository>()
                 .AddScoped<IRepository<MealGroup, long>, MealGroupRepository>()
                 .AddScoped<IRepository<Order, long>, OrderRepository>()
-                .AddScoped<IRepository<CartItem, long>, CardItemRepository>()
+                .AddScoped<IRepository<CartItem, long>, CartItemRepository>()
                 .AddScoped<IRepository<Cart, long>, CartRepository>()
                 .AddScoped<IMealService, MealService>()
                 .AddScoped<IMealGroupService, MealGroupService>()

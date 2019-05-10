@@ -19,39 +19,47 @@ namespace SushiRunner.Data.Repositories
 
         public IEnumerable<Cart> Search(Expression<Func<Cart, bool>> predicate)
         {
-            return _context.Cards.Where(predicate).ToList();
+            return _context.Carts
+                .Where(predicate)
+                .Include(cart => cart.Items)
+                .ThenInclude(item => item.Meal)
+                .ThenInclude(meal => meal.MealGroup)
+                .ToList();
         }
 
         public IEnumerable<Cart> GetList()
         {
-            return _context.Cards;
+            return _context.Carts;
         }
 
         public Cart Get(long id)
         {
-            return _context.Cards
+            return _context.Carts
+                .Include(cart => cart.Items)
+                .ThenInclude(item => item.Meal)
+                .ThenInclude(meal => meal.MealGroup)
                 .AsNoTracking()
                 .FirstOrDefault(entity => entity.Id == id);
         }
 
         public void Create(Cart entity)
         {
-            _context.Cards.Add(entity);
+            _context.Carts.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Update(Cart cartItem)
+        public void Update(Cart cart)
         {
-            _context.Cards.Update(cartItem);
+            _context.Carts.Update(cart);
             _context.SaveChanges();
         }
 
         public void Delete(long id)
         {
-            var cardItem = _context.Cards.Find(id);
+            var cardItem = _context.Carts.Find(id);
             if (cardItem != null)
             {
-                _context.Cards.Remove(cardItem);
+                _context.Carts.Remove(cardItem);
             }
 
             _context.SaveChanges();

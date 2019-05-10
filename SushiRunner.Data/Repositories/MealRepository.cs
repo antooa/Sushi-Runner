@@ -30,8 +30,8 @@ namespace SushiRunner.Data.Repositories
         public Meal Get(long id)
         {
             return _context.Meals
-                .AsNoTracking()
                 .Include(item => item.MealGroup)
+                .AsNoTracking()
                 .FirstOrDefault(item => item.Id == id);
         }
 

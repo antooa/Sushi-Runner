@@ -10,8 +10,8 @@ using SushiRunner.Data;
 namespace SushiRunner.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190419132624_Initial")]
-    partial class Initial
+    [Migration("20190510094814_MyMigration")]
+    partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,6 +131,36 @@ namespace SushiRunner.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("SushiRunner.Data.Entities.Cart", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("SushiRunner.Data.Entities.CartItem", b =>
+                {
+                    b.Property<long>("MealId");
+
+                    b.Property<long>("CartId");
+
+                    b.Property<int>("Amount");
+
+                    b.HasKey("MealId", "CartId");
+
+                    b.HasIndex("CartId");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("SushiRunner.Data.Entities.Courier", b =>
                 {
                     b.Property<long>("Id")
@@ -152,13 +182,16 @@ namespace SushiRunner.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<string>("ImagePath");
+                    b.Property<string>("ImagePath")
+                        .IsRequired();
 
-                    b.Property<long?>("MealGroupId");
+                    b.Property<long>("MealGroupId");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<int>("Price");
 
@@ -177,9 +210,11 @@ namespace SushiRunner.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -248,6 +283,8 @@ namespace SushiRunner.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("IsAnonymous");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -330,11 +367,32 @@ namespace SushiRunner.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("SushiRunner.Data.Entities.Cart", b =>
+                {
+                    b.HasOne("SushiRunner.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("SushiRunner.Data.Entities.CartItem", b =>
+                {
+                    b.HasOne("SushiRunner.Data.Entities.Cart", "Cart")
+                        .WithMany("Items")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SushiRunner.Data.Entities.Meal", "Meal")
+                        .WithMany()
+                        .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("SushiRunner.Data.Entities.Meal", b =>
                 {
                     b.HasOne("SushiRunner.Data.Entities.MealGroup", "MealGroup")
-                        .WithMany()
-                        .HasForeignKey("MealGroupId");
+                        .WithMany("Meals")
+                        .HasForeignKey("MealGroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SushiRunner.Data.Entities.Order", b =>

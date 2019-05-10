@@ -7,11 +7,11 @@ using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Data.Repositories
 {
-    public class CardItemRepository : IRepository<CartItem, long>
+    public class CartItemRepository : IRepository<CartItem, long>
     {
         private readonly ApplicationDbContext _context;
 
-        public CardItemRepository(ApplicationDbContext context)
+        public CartItemRepository(ApplicationDbContext context)
         {
             _context = context;
             _disposed = false;
@@ -19,39 +19,37 @@ namespace SushiRunner.Data.Repositories
 
         public IEnumerable<CartItem> Search(Expression<Func<CartItem, bool>> predicate)
         {
-            return _context.CardItems.Where(predicate).ToList();
+            return _context.CartItems.Where(predicate).ToList();
         }
 
         public IEnumerable<CartItem> GetList()
         {
-            return _context.CardItems;
+            return _context.CartItems;
         }
 
         public CartItem Get(long id)
         {
-            return _context.CardItems
-                .AsNoTracking()
-                .FirstOrDefault(entity => entity.Id == id);
+            throw new NotImplementedException();
         }
 
         public void Create(CartItem entity)
         {
-            _context.CardItems.Add(entity);
+            _context.CartItems.Add(entity);
             _context.SaveChanges();
         }
 
         public void Update(CartItem cartItem)
         {
-            _context.CardItems.Update(cartItem);
+            _context.CartItems.Update(cartItem);
             _context.SaveChanges();
         }
 
         public void Delete(long id)
         {
-            var cardItem = _context.CardItems.Find(id);
-            if (cardItem != null)
+            var cartItem = _context.CartItems.Find(id);
+            if (cartItem != null)
             {
-                _context.CardItems.Remove(cardItem);
+                _context.CartItems.Remove(cartItem);
             }
 
             _context.SaveChanges();
