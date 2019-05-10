@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
 using SushiRunner.Models.ViewModels;
 using SushiRunner.Services;
+using SushiRunner.Services.Interfaces;
 
 namespace SushiRunner.Controllers
 {
     [Authorize(Roles = UserRoles.Moderator)]
     public class ModeratorController : Controller
     {
-        private readonly OrderService _orderService;
+        private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
 
-        public ModeratorController(OrderService orderService, IMapper mapper)
+        public ModeratorController(IOrderService orderService, IMapper mapper)
         {
             _orderService = orderService;
             _mapper = mapper;

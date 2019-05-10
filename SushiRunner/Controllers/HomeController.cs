@@ -15,7 +15,6 @@ namespace SushiRunner.Controllers
     public class HomeController : Controller
     {
         private ICrudService<Meal, long> _mealService;
-        private OrderService _orderService;
 
         public HomeController(ICrudService<Meal, long> mealService)
         {
