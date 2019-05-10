@@ -1,6 +1,6 @@
 using SushiRunner.Data.Entities;
 
-namespace SushiRunner.Models.ViewModels
+namespace SushiRunner.ViewModels
 {
     public class OrderItemModel
     {

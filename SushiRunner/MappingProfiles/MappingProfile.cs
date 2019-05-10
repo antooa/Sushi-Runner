@@ -1,7 +1,7 @@
 using AutoMapper;
 using DTO.Models;
 using SushiRunner.Data.Entities;
-using SushiRunner.Models.ViewModels;
+using SushiRunner.ViewModels;
 
 namespace SushiRunner.MappingProfiles
 {
