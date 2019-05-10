@@ -43,11 +43,21 @@ namespace SushiRunner.Controllers
                     IsInCart = m != null
                 };
 
+            var cartItemsPrice = 0;
+            foreach (var cartItem in cart.Items)
+            {
+                cartItemsPrice += cartItem.Meal.Price * cartItem.Amount;
+            }
+
             return View(
                 new HomeModel
                 {
                     Meals = mealss,
-                    CartAmount = cart.Items.Count
+                    HeaderModel = new HeaderModel
+                    {
+                        CartItemsAmount = cart.Items.Count,
+                        CartItemsPrice = cartItemsPrice
+                    }
                 });
         }
 
