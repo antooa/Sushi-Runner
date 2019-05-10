@@ -4,59 +4,52 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using SushiRunner.Data.Entities;
+
 namespace SushiRunner.Data.Repositories
 {
-    public class OrderRepository : IRepository<Order, long>
+    public class CartItemRepository : IRepository<CartItem, long>
     {
         private readonly ApplicationDbContext _context;
 
-        public OrderRepository(ApplicationDbContext context)
+        public CartItemRepository(ApplicationDbContext context)
         {
             _context = context;
             _disposed = false;
         }
 
-        public IEnumerable<Order> GetList()
+        public IEnumerable<CartItem> Search(Expression<Func<CartItem, bool>> predicate)
         {
-            return _context.Orders;
+            return _context.CartItems.Where(predicate).ToList();
         }
 
-        public IEnumerable<Order> Search(Expression<Func<Order, bool>> predicate)
+        public IEnumerable<CartItem> GetList()
         {
-            return _context.Orders.Where(predicate).ToList();
+            return _context.CartItems;
         }
 
-        public Order Get(long id)
+        public CartItem Get(long id)
         {
-            return _context.Orders
-                .AsNoTracking()
-                .Include(entity => entity.Items)
-                .FirstOrDefault(entity => entity.Id == id);
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<Order> GetByStatus(OrderStatus status)
+        public void Create(CartItem entity)
         {
-            return _context.Orders.Where(ord => ord.OrderStatus.Equals(status)).Select(ord => ord);
-        }
-
-        public void Create(Order entity)
-        {
-            _context.Orders.Add(entity);
+            _context.CartItems.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Update(Order entity)
+        public void Update(CartItem cartItem)
         {
-            _context.Orders.Update(entity);
+            _context.CartItems.Update(cartItem);
             _context.SaveChanges();
         }
 
         public void Delete(long id)
         {
-            var book = _context.Orders.Find(id);
-            if (book != null)
+            var cartItem = _context.CartItems.Find(id);
+            if (cartItem != null)
             {
-                _context.Orders.Remove(book);
+                _context.CartItems.Remove(cartItem);
             }
 
             _context.SaveChanges();

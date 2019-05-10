@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sushi Runner Order</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/order/index.css">
+</head>
+<body>
+<div class="order-body">
+    <div class="order-heading">
+        <h1>Order</h1>
+    </div>
+    <form class="form" method="post">
+        <div class="form-group">
+            <div class="fullname">
+                <div class="first-name">
+                <input class="form-control" placeholder="First name" type="text" name="first_name">
+            </div>
+                <div class="last-name">
+            <input class="form-control" placeholder="Last name" type="text" name="last_name">
+        </div>
+        </div>
+
+
+            </div>
+
+        <div class="username">
+            <div class="input-group-prepend">
+                <span class="input-group-text">@@</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Username" id="usr" name="username">
+        </div>
+
+        <div class="email">
+            <input type="text" class="form-control" placeholder="Your Email" id="mail" name="email">
+            <div class="input-group-append">
+                <span class="input-group-text">@@example.com</span>
+            </div>
+        </div>
+        <div class="phone">
+            <div class="input-group-prepend">
+                <span class="input-group-text">+</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Phone" name="phone">
+        </div>
+        <div class="address">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Address</span>
+            </div>
+            <input type="text" class="form-control">
+        </div>
+        <div class="comments">
+            <textarea rows="3" cols="45" placeholder="Comment"></textarea>
+        </div>
+        <div class="order-price">
+            <span>To pay: </span><span class="price">135$</span>
+        </div>
+        <button class="btn btn-outline-success">Order</button>
+    </form>
+        </div>
+</body>
+</html>

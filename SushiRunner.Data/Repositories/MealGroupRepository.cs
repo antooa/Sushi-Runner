@@ -48,10 +48,10 @@ namespace SushiRunner.Data.Repositories
 
         public void Delete(long id)
         {
-            var book = _context.Meals.Find(id);
-            if (book != null)
+            var mealGroup = _context.MealGroups.Find(id);
+            if (mealGroup != null)
             {
-                _context.Meals.Remove(book);
+                _context.MealGroups.Remove(mealGroup);
             }
 
             _context.SaveChanges();

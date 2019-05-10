@@ -17,21 +17,21 @@ namespace SushiRunner.Data.Repositories
             _disposed = false;
         }
 
-        public IEnumerable<Meal> GetList()
-        {
-            return _context.Meals;
-        }
-
         public IEnumerable<Meal> Search(Expression<Func<Meal, bool>> predicate)
         {
             return _context.Meals.Where(predicate).ToList();
         }
 
+        public IEnumerable<Meal> GetList()
+        {
+            return _context.Meals;
+        }
+
         public Meal Get(long id)
         {
             return _context.Meals
-                .AsNoTracking()
                 .Include(item => item.MealGroup)
+                .AsNoTracking()
                 .FirstOrDefault(item => item.Id == id);
         }
 

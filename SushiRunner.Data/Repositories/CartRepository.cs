@@ -4,59 +4,62 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using SushiRunner.Data.Entities;
+
 namespace SushiRunner.Data.Repositories
 {
-    public class OrderRepository : IRepository<Order, long>
+    public class CartRepository : IRepository<Cart, long>
     {
         private readonly ApplicationDbContext _context;
 
-        public OrderRepository(ApplicationDbContext context)
+        public CartRepository(ApplicationDbContext context)
         {
             _context = context;
             _disposed = false;
         }
 
-        public IEnumerable<Order> GetList()
+        public IEnumerable<Cart> Search(Expression<Func<Cart, bool>> predicate)
         {
-            return _context.Orders;
+            return _context.Carts
+                .Where(predicate)
+                .Include(cart => cart.Items)
+                .ThenInclude(item => item.Meal)
+                .ThenInclude(meal => meal.MealGroup)
+                .ToList();
         }
 
-        public IEnumerable<Order> Search(Expression<Func<Order, bool>> predicate)
+        public IEnumerable<Cart> GetList()
         {
-            return _context.Orders.Where(predicate).ToList();
+            return _context.Carts;
         }
 
-        public Order Get(long id)
+        public Cart Get(long id)
         {
-            return _context.Orders
+            return _context.Carts
+                .Include(cart => cart.Items)
+                .ThenInclude(item => item.Meal)
+                .ThenInclude(meal => meal.MealGroup)
                 .AsNoTracking()
-                .Include(entity => entity.Items)
                 .FirstOrDefault(entity => entity.Id == id);
         }
 
-        public IEnumerable<Order> GetByStatus(OrderStatus status)
+        public void Create(Cart entity)
         {
-            return _context.Orders.Where(ord => ord.OrderStatus.Equals(status)).Select(ord => ord);
-        }
-
-        public void Create(Order entity)
-        {
-            _context.Orders.Add(entity);
+            _context.Carts.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Update(Order entity)
+        public void Update(Cart cart)
         {
-            _context.Orders.Update(entity);
+            _context.Carts.Update(cart);
             _context.SaveChanges();
         }
 
         public void Delete(long id)
         {
-            var book = _context.Orders.Find(id);
-            if (book != null)
+            var cardItem = _context.Carts.Find(id);
+            if (cardItem != null)
             {
-                _context.Orders.Remove(book);
+                _context.Carts.Remove(cardItem);
             }
 
             _context.SaveChanges();

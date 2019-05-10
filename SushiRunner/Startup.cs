@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using DTO.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ReturnTrue.AspNetCore.Identity.Anonymous;
 using SushiRunner.Data;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
@@ -52,9 +52,12 @@ namespace SushiRunner
                 .AddScoped<IRepository<Meal, long>, MealRepository>()
                 .AddScoped<IRepository<MealGroup, long>, MealGroupRepository>()
                 .AddScoped<IRepository<Order, long>, OrderRepository>()
-                .AddScoped<ICrudService<Meal, long>, MealService>()
-                .AddScoped<ICrudService<MealGroup, long>, MealGroupService>()
+                .AddScoped<IRepository<CartItem, long>, CartItemRepository>()
+                .AddScoped<IRepository<Cart, long>, CartRepository>()
+                .AddScoped<IMealService, MealService>()
+                .AddScoped<IMealGroupService, MealGroupService>()
                 .AddScoped<IOrderService, OrderService>()
+                .AddScoped<ICartService, CartService>()
                 .AddScoped<IAccountService, AccountService>();
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
@@ -83,6 +86,7 @@ namespace SushiRunner
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseAnonymousId();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

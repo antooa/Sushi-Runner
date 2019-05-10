@@ -1,9 +1,10 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace SushiRunner.ViewModels
 {
     public class HomeModel
     {
-        public Collection<MealModel> Meals;
+        public IEnumerable<MealModel> Meals { get; set; }
+        public HeaderModel HeaderModel { get; set; }
     }
 }

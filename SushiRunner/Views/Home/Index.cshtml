@@ -5,110 +5,26 @@
     Layout = "_HomeLayout";
 }
 
-<div id="menu">
-    <div id="toggle">
-        <a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">
-            Toggle Menu
-        </a>
-    </div>
-    <nav class="navbar_items">
-        <div class="navbar_link">
-            <a href="#">Main</a>
-        </div>
-        <div class="navbar_link">
-            <a href="#">About us</a>
-        </div>
-        <div class="navbar_link">
-            <a href="#">Delivery</a>
-        </div>
-        <div class="navbar_link">
-            <a href="#">Blog</a>
-        </div>
-        <div class="navbar_link">
-            <div id="phones">
-                <span>(093)170-15-70</span>
-                <span>(093)170-15-70</span>
-            </div>
-        </div>
-    </nav>
-    <div id="account">
-        <div id="user">
-            <a href="#">
-                <strong>User</strong>
-            </a>
-        </div>
-        <div id="basket">
-            <a href="#">
-                <span class="fa fa-shopping-basket shopping-basket-icon"></span>
-            </a>
-        </div>
-        <div id="totalPrice">
-            <span>
-                <strong>0$</strong>
-            </span>
-        </div>
-    </div>
-</div>
+<partial name="_Header" model="@Model.HeaderModel"/>
+
 <div id="wrapper">
-    <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
-                    Start Bootstrap
-                </a>
+                <a href="#">Sushi-Runner</a>
             </li>
-            <li>
-                <a href="#">Dashboard</a>
-            </li>
-            <li>
-                <a href="#">Shortcuts</a>
-            </li>
-            <li>
-                <a href="#">Overview</a>
-            </li>
-            <li>
-                <a href="#">Events</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
+            @foreach (var group in @Model.HeaderModel.AvailableGroups)
+            {
+                <li>
+                    <a asp-controller="Home" asp-action="Index">@group.Name</a>
+                </li>
+            }
         </ul>
     </div>
     <div class="container-fluid">
-        <div class="row">
-            @foreach (var meal in Model.Meals)
-            {
-                <div class="col-12 col-lg-4 col-sm-6 col-md-3 col-xl-2 card h-75">
-                    <div class="card-body">
-                        <img class="card-img-top" src="@meal.ImagePath">
-                        <div class="card-title border-top">
-                            <span>@meal.Name</span>
-                        </div>
-                        <div class="card-description">
-                            <span>@meal.Description</span>
-                        </div>
-                        <h5 class="weight-1">
-                            <span>100 гр.</span>
-                        </h5>
-                        <div class="card-footer">
-                            <span id="price">
-                                <strong>100 грн.</strong>
-                            </span>
-                            <a href="#" class="btn btn-success"
-                               id="addToCart">
-                                <strong>+</strong> Add to cart
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
+        @foreach (var meal in Model.Meals)
+        {
+            <partial name="_Meal" model="@meal"/>
+        }
     </div>
 </div>

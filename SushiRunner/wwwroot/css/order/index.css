@@ -1,0 +1,127 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.order-body {
+    display: flex;
+    flex-direction: column;
+}
+.order-heading{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #34495e;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    color: #dedede;
+}
+.form {
+    display: flex;
+    border: 1px solid #ecf0f1;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.first-name input {
+    display: flex;
+    flex-direction: column;
+}
+
+.last-name {
+    margin-left: 20px;
+}
+
+.email {
+    display: flex;
+    width: 424px;
+    margin: 20px 20px 0 20px;
+
+
+}
+
+.username {
+    display: flex;
+    margin-top: 20px;
+    width: 260px;
+
+}
+
+.phone {
+    display: flex;
+    margin-top: 20px;
+    width: 260px;
+}
+
+.phone input {
+
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    font-size: 1rem;
+    font-weight: 400;
+    background-color: #ffffff;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+    height: calc(1.5em + .75rem + 2px);
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    width: 424px;
+    margin: 20px 20px 20px 20px;
+}
+
+.comments textarea {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    font-size: 1rem;
+    font-weight: 400;
+    background-color: #ffffff;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+}
+
+.address {
+    display: flex;
+    margin: 20px 20px 0 20px;
+    width: 424px;
+}
+
+.fullname {
+    display: flex;
+    flex-direction: row;
+}
+.form-group{
+    margin: 20px 20px 0 20px;
+}
+.order-price{
+    width: 424px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.order-price span{
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+}
+.price{
+    font-weight: 800!important;
+    font-size: 32px !important;
+}
+.order-body button{
+    justify-self: flex-end;
+    align-self: flex-end;
+    margin: 0 20px 10px 20px;
+}
+
