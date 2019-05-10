@@ -16,6 +16,8 @@ body {
     align-items: center;
     justify-content: center;
     background: #FAFAFA;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
 }
 
 #toggle {
@@ -42,6 +44,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100px;
+}
+
+.shopping-basket-icon {
+    font-size: 30px;
 }
 
 #user {

@@ -3,13 +3,76 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Moderator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/moderator/index.css">
 </head>
 <body>
-<div>
-    <h1>You signed-in as a moderator</h1>
+<div class="container-fluid">
+    <div class="content">
+        <div>
+            <h1 class="text-center">Select orders type:</h1>
+        </div>
+        <div id="actions">
+            <a href="#" id="new-order">New</a>
+            <a href="#" id="in-progress">In progress</a>
+            <a href="#" id="delivered">Delivered</a>
+        </div>
+        <div class="order-heading">
+            <div class="order-heading-type">
+                <span>Order type</span>
+            </div>
+            <div class="order-heading-phone">
+                <span>Phone</span>
+            </div>
+            <div class="order-heading-address">
+                <span>Address</span>
+            </div>
+            <div class="order-heading-content">
+                <span>Content</span>
+            </div>
+            <div class="order-heading-action">
+            </div>
+        </div>
+        <div class="order-item" onclick="location.href = 'https://www.youtube.com/';">
+            <div class="order-type">
+                <select name="select-type" class="type" itemid="1">
+                    <option>
+                        New
+                    </option>
+                    <option>
+                        In progress
+                    </option>
+                    <option selected>
+                        Delivered
+                    </option>
+                </select>
+            </div>
+            <div class="order-phone">
+                <span>+380958869367</span>
+            </div>
+            <div class="order-address">
+                <span>Medovoi Pechery 39</span>
+            </div>
+            <div class="order-content">
+                <span>8 rice portions</span>
+            </div>
+            <div class="order-action">
+                <a href="http://google.com"class="btn btn-success ok-button">Ok</a>
+                <a href="http://google.com" class="btn btn-danger remove-button">Remove</a>
+            </div>
+        </div>
+
+    </div>
 </div>
+<script src="js/index.js"></script>
 </body>
 </html>
