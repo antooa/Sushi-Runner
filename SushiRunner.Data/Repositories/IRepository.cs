@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Data.Repositories
 {
@@ -8,6 +10,8 @@ namespace SushiRunner.Data.Repositories
         void Create(T entity);
 
         T Get(K id);
+        
+        IEnumerable<T> Search(Expression<Func<T,bool>> predicate);
 
         IEnumerable<T> GetList();
 

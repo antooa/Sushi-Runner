@@ -14,5 +14,7 @@ namespace SushiRunner.Data
         public DbSet<Meal> Meals { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<MealGroup> MealGroups { get; set; }
+        public virtual DbSet<CardItem> CardItems { get; set; }
+        public virtual DbSet<Card> Cards { get; set; }
     }
 }

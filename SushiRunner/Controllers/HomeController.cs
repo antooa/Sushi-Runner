@@ -9,9 +9,9 @@ namespace SushiRunner.Controllers
 {
     public class HomeController : Controller
     {
-        private ICrudService<Meal, long> _mealService;
+        private IMealService _mealService;
 
-        public HomeController(ICrudService<Meal, long> mealService)
+        public HomeController(IMealService mealService)
         {
             _mealService = mealService;
         }

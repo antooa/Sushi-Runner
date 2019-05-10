@@ -7,51 +7,51 @@ using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Data.Repositories
 {
-    public class MealGroupRepository : IRepository<MealGroup, long>
+    public class CardRepository : IRepository<Card, long>
     {
         private readonly ApplicationDbContext _context;
 
-        public MealGroupRepository(ApplicationDbContext context)
+        public CardRepository(ApplicationDbContext context)
         {
             _context = context;
             _disposed = false;
         }
 
-        public IEnumerable<MealGroup> Search(Expression<Func<MealGroup, bool>> predicate)
+        public IEnumerable<Card> Search(Expression<Func<Card, bool>> predicate)
         {
-            return _context.MealGroups.Where(predicate).ToList();
+            return _context.Cards.Where(predicate).ToList();
         }
 
-        public IEnumerable<MealGroup> GetList()
+        public IEnumerable<Card> GetList()
         {
-            return _context.MealGroups;
+            return _context.Cards;
         }
 
-        public MealGroup Get(long id)
+        public Card Get(long id)
         {
-            return _context.MealGroups
+            return _context.Cards
                 .AsNoTracking()
                 .FirstOrDefault(entity => entity.Id == id);
         }
 
-        public void Create(MealGroup entity)
+        public void Create(Card entity)
         {
-            _context.MealGroups.Add(entity);
+            _context.Cards.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Update(MealGroup mealGroup)
+        public void Update(Card cardItem)
         {
-            _context.MealGroups.Update(mealGroup);
+            _context.Cards.Update(cardItem);
             _context.SaveChanges();
         }
 
         public void Delete(long id)
         {
-            var mealGroup = _context.MealGroups.Find(id);
-            if (mealGroup != null)
+            var cardItem = _context.Cards.Find(id);
+            if (cardItem != null)
             {
-                _context.MealGroups.Remove(mealGroup);
+                _context.Cards.Remove(cardItem);
             }
 
             _context.SaveChanges();
