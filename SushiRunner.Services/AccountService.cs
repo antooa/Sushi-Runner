@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using SushiRunner.Data.Entities;
@@ -29,6 +30,18 @@ namespace SushiRunner.Services
             var user = await _userManager.FindByNameAsync(username);
             if (user != null)
             {
+                if (user.IsAnonymous)
+                {
+                    return new SignInResult
+                    {
+                        IsSuccessful = false,
+                        Errors = new List<AccountError>
+                        {
+                            new AccountError {Message = "Couldn't find such user"}
+                        }
+                    };
+                }
+
                 if (!await _userManager.IsEmailConfirmedAsync(user))
                 {
                     return new SignInResult
@@ -84,14 +97,24 @@ namespace SushiRunner.Services
             };
         }
 
-        public async Task<SignUpResult> SignUpAsync(string username, string email, string password,
+        public async Task<SignUpResult> SignUpAsync(string anonymousId, string username, string email, string password,
             Func<User, string, string> generateEmailConfirmationLink)
         {
-            var user = new User
+            var user = await _userManager.FindByIdAsync(anonymousId);
+            if (user != null && user.IsAnonymous)
             {
-                Email = email,
-                UserName = username
-            };
+                user.UserName = username;
+                user.Email = email;
+                user.IsAnonymous = false;
+            }
+            else
+            {
+                user = new User
+                {
+                    Email = email,
+                    UserName = username
+                };
+            }
 
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
@@ -134,6 +157,25 @@ namespace SushiRunner.Services
                 IsSuccessful = result.Succeeded,
                 Errors = result.Errors.Select(e => new AccountError {Message = e.Description}).ToList()
             };
+        }
+
+        public async Task<User> GetLoggedUserOrCreateAnonymous(ClaimsPrincipal principal, string newId)
+        {
+            var user = await _userManager.GetUserAsync(principal);
+            if (user == null)
+            {
+                var anonymousUser = new User
+                {
+                    Id = newId,
+                    UserName = newId,
+                    IsAnonymous = true
+                };
+
+                await _userManager.CreateAsync(anonymousUser, newId);
+                return anonymousUser;
+            }
+
+            return user;
         }
     }
 }

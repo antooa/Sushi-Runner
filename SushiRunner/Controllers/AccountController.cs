@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ReturnTrue.AspNetCore.Identity.Anonymous;
 using SushiRunner.Data.Entities;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
@@ -61,6 +61,7 @@ namespace SushiRunner.Controllers
             if (ModelState.IsValid)
             {
                 var signUpResult = await _accountService.SignUpAsync(
+                    HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId,
                     model.Email,
                     model.Email,
                     model.Password,

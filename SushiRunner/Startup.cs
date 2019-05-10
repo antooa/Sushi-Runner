@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ReturnTrue.AspNetCore.Identity.Anonymous;
 using SushiRunner.Data;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
@@ -79,6 +80,7 @@ namespace SushiRunner
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseAnonymousId();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
