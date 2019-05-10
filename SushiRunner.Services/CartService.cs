@@ -64,6 +64,13 @@ namespace SushiRunner.Services
             _cartRepository.Update(cart);
         }
 
+        public void RemoveItem(User user, long mealId)
+        {
+            var cart = GetByUserOrCreateNew(user);
+            cart.Items.RemoveAll(item => item.MealId == mealId);
+            _cartRepository.Update(cart);
+        }
+
         public void Clear(User user)
         {
             var card = GetByUserOrCreateNew(user);

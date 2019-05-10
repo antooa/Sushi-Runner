@@ -68,5 +68,14 @@ namespace SushiRunner.Controllers
             _cartService.AddItem(user, id);
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> RemoveFromCart(long id)
+        {
+            var user = await _accountService.GetLoggedUserOrCreateAnonymous(
+                HttpContext.User,
+                HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
+            _cartService.RemoveItem(user, id);
+            return RedirectToAction("Index");
+        }
     }
 }
