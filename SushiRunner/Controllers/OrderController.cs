@@ -5,17 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
 using SushiRunner.Models.ViewModels;
 using SushiRunner.Services;
+using SushiRunner.Services.Interfaces;
 
 
 namespace SushiRunner.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly OrderService _orderService;
+        private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
        
 
-        public OrderController(OrderService orderService, IMapper mapper)
+        public OrderController(IOrderService orderService, IMapper mapper)
         {
             _orderService = orderService;
             _mapper = mapper;
