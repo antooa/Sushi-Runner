@@ -14,4 +14,8 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Entities\Courier.cs" />
+    </ItemGroup>
+
 </Project>

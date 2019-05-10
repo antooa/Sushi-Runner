@@ -32,6 +32,29 @@ namespace SushiRunner.Tests.Services
         }
 
         [Theory]
+        [InlineData(OrderStatus.New)]
+        [InlineData(OrderStatus.InProgress)]
+        [InlineData(OrderStatus.Completed)]
+        public void GetByStatusTest(OrderStatus status)
+        {
+            // Arrange
+            var list = GetDtoCollection();
+            var svc = SetupService();
+            var orderDtos = list.ToList();
+            var expected = orderDtos.First(o => o.OrderStatus.Equals(status));
+            
+            // Act
+            var actual = svc.GetByStatus(status);
+            
+            // Assert
+            foreach (var order in actual)
+            {
+                Assert.Equal(expected.OrderStatus, order.OrderStatus);
+            }
+            
+        }
+
+        [Theory]
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(3)]
@@ -249,7 +272,7 @@ namespace SushiRunner.Tests.Services
                             }
                         }
                     },
-                    OrderStatus = OrderStatus.InProgress
+                    OrderStatus = OrderStatus.New
                 },
                 
                 new OrderDTO()
@@ -350,7 +373,7 @@ namespace SushiRunner.Tests.Services
                             }
                         }
                     },
-                    OrderStatus = OrderStatus.InProgress
+                    OrderStatus = OrderStatus.New
                 },
                 new Order()
                 {

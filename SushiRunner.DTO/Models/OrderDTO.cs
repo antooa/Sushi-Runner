@@ -16,7 +16,6 @@ namespace DTO.Models
         public DateTime PlacedAt { get; set; }
         public ICollection<OrderItem> Items { get; set; }
         public OrderStatus OrderStatus { get; set; }
-        public Courier Courier { get; set; }
         public DateTime DeliveredAt { get; set; }
     }
 }
