@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using DTO.Models;
 using SushiRunner.Data.Entities;
+using SushiRunner.Services.Dto;
 
 namespace SushiRunner.Services.Interfaces
 {

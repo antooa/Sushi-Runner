@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DTO.Models;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using SushiRunner.Data;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
 using SushiRunner.Services;
+using SushiRunner.Services.Dto;
 using Xunit;
 
 namespace SushiRunner.Tests.Services

@@ -1,10 +1,8 @@
-using System;
 using AutoMapper;
-using DTO.Models;
 using Microsoft.AspNetCore.Mvc;
+using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
-
 
 namespace SushiRunner.Controllers
 {
@@ -27,7 +25,6 @@ namespace SushiRunner.Controllers
             {
                 var dto = _mapper.Map<OrderModel, OrderDTO>(orderParams);
                 _orderService.Create(dto);
-                
             }
 
             RedirectToAction("Index", "Home");

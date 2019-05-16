@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DTO.Models;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
+using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 
 namespace SushiRunner.Services

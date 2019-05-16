@@ -1,6 +1,6 @@
 using AutoMapper;
-using DTO.Models;
 using SushiRunner.Data.Entities;
+using SushiRunner.Services.Dto;
 using SushiRunner.ViewModels;
 
 namespace SushiRunner.MappingProfiles
