@@ -71,17 +71,6 @@ layer=-2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>826</y>
-      <w>42</w>
-      <h>56</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>1260</x>
       <y>868</y>
       <w>42</w>
@@ -200,7 +189,7 @@ Order Products
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>420</x>
+      <x>364</x>
       <y>336</y>
       <w>448</w>
       <h>98</h>
@@ -281,7 +270,7 @@ Update Delivery Status</panel_attributes>
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>644</x>
+      <x>630</x>
       <y>490</y>
       <w>714</w>
       <h>350</h>
