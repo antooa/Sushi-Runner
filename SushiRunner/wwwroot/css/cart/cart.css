@@ -1,8 +1,6 @@
-
 * {
     box-sizing: border-box;
 }
-
 
 .container {
 
@@ -24,8 +22,6 @@
     border-bottom: 1px solid #dedede;
     border-top: 1px solid #dedede;
     display: flex;
-
-
 }
 
 .table-head span {
@@ -80,24 +76,22 @@
     color: #dc3545;
 }
 
-
 .product-description {
     display: flex;
     flex-direction: column;
     padding-left: 20px;
 }
 
-.table-rows .table-row:last-child
-{
+.table-rows .table-row:last-child {
     border: none;
 }
-
 
 .pre-order {
     display: flex;
     justify-content: flex-end;
     margin-top: 15px;
 }
+
 .total-sum {
     display: flex;
     margin-right: 3%;
@@ -108,10 +102,10 @@
     width: 20%;
 }
 
-input{
+input {
     width: 50px;
-
 }
+
 input[type=number] {
     line-height: 27px;
     font-weight: bold;
@@ -123,14 +117,16 @@ input[type=number]::-webkit-inner-spin-button {
     opacity: 1;
 }
 
-.content{
+.content {
     margin-top: 50px;
 }
-.content h1{
+
+.content h1 {
     font-size: 32px;
     font-weight: 800;
 }
-.table-head span{
+
+.table-head span {
     font-size: 24px;
     font-weight: 800;
 }
