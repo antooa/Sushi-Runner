@@ -21,22 +21,28 @@ namespace SushiRunner.Controllers
         }
         
         [HttpPost]
-        public void Create(long? id, [FromBody] OrderModel orderParams)
+        public void Create([FromBody] OrderModel orderParams)
         {
-            
             if (ModelState.IsValid)
             {
-                try
-                {
-                    var dto = _mapper.Map<OrderModel, OrderDTO>(orderParams);
-                    _orderService.Create(dto);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
+                var dto = _mapper.Map<OrderModel, OrderDTO>(orderParams);
+                _orderService.Create(dto);
+                
             }
+
+            RedirectToAction("Index", "Home");
+        }
+
+        [HttpPut]
+        public void Update([FromBody] OrderModel orderParams)
+        {
+            if (ModelState.IsValid)
+            {
+                var dto = _mapper.Map<OrderModel, OrderDTO>(orderParams);
+                _orderService.Update(dto);
+            }
+
+            RedirectToAction("Index", "Moderator");
         }
     }
 }

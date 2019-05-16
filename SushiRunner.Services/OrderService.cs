@@ -40,6 +40,7 @@ namespace SushiRunner.Services
         public IEnumerable<OrderDTO> GetByStatus(OrderStatus status)
         {
             var orders = _repository.Search(o => o.OrderStatus.Equals(status));
+            
             return orders.Select(order => _mapper.Map<Order, OrderDTO>(order)).ToList();
         }
         

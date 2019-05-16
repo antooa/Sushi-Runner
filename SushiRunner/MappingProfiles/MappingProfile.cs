@@ -9,9 +9,10 @@ namespace SushiRunner.MappingProfiles
     {
         public MappingProfile()
         {
+            CreateMap<OrderDTO, Order>();
             CreateMap<OrderModel, OrderDTO>();
             CreateMap<OrderItemModel, OrderItem>();
-            CreateMap<OrderDTO, Order>();
+            CreateMap<OrderItem, OrderItemModel>();
         }
     }
 }

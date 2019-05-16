@@ -6,6 +6,7 @@ namespace SushiRunner.ViewModels
         public string Description { get; set; }
         public string ImagePath { get; set; }
 
+        public MealModel(){}
         public MealModel(string name, string description, string imagePath)
         {
             Name = name;

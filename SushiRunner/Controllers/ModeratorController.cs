@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using AutoMapper;
 using DTO.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -29,43 +32,22 @@ namespace SushiRunner.Controllers
         [HttpGet]
         public IActionResult NewOrders()
         {
-            var dtos = _orderService.GetByStatus(OrderStatus.New);
-            var orders = new Collection<OrderModel>();
-            foreach (var dto in dtos)
-            {
-                var order = _mapper.Map<OrderDTO, OrderModel>(dto);
-                orders.Add(order);
-                
-            }
-            return View(orders);
+            var orders = _orderService.GetByStatus(OrderStatus.New);
+            return View("Index", orders);
         }
 
         [HttpGet]
         public IActionResult InProgressOrders()
         {
-            var dtos = _orderService.GetByStatus(OrderStatus.InProgress);
-            var orders = new Collection<OrderModel>();
-            foreach (var dto in dtos)
-            {
-                var order = _mapper.Map<OrderDTO, OrderModel>(dto);
-                orders.Add(order);
-                
-            }
-            return View(orders);
+            var orders = _orderService.GetByStatus(OrderStatus.InProgress);
+            return View("Index", orders);
         }
         
         [HttpGet]
         public IActionResult CompletedOrders()
         {
-            var dtos = _orderService.GetByStatus(OrderStatus.Completed);
-            var orders = new Collection<OrderModel>();
-            foreach (var dto in dtos)
-            {
-                var order = _mapper.Map<OrderDTO, OrderModel>(dto);
-                orders.Add(order);
-                
-            }
-            return View(orders);
+            var orders = _orderService.GetByStatus(OrderStatus.Completed);            
+            return View("Index", orders);
         }
         
     }

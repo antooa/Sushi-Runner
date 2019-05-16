@@ -29,6 +29,8 @@ namespace SushiRunner.Data.Entities
                     user = new User {UserName = DefaultUsername};
                     await userManager.CreateAsync(user, DefaultPassword);
                     await userManager.AddToRoleAsync(user, UserRoles.Moderator);
+                    var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var result = await userManager.ConfirmEmailAsync(user, code);
                 }
             }
         }

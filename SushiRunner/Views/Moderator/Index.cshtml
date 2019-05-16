@@ -1,4 +1,4 @@
-@model dynamic
+@model IEnumerable<DTO.Models.OrderDTO>
 @{
     Layout = null;
 }
@@ -23,19 +23,19 @@
             <h1 class="text-center">Select orders type:</h1>
         </div>
         <div id="actions">
-            <form asp-controller="Moderator" asp-action="NewOrders" method="post">
-                <a type="submit" id="new-order">New</a>
+            <form method="get">
+                <button asp-controller="Moderator" asp-action="NewOrders" id="new-order">New</button>
             </form>
-            <form asp-action="InProgressOrders" asp-controller="Moderator" method="post">
-                <a type="submit" id="in-progress">In progress</a>
+            <form  method="get">
+                <button asp-action="InProgressOrders" asp-controller="Moderator" id="in-progress">In progress</button>
             </form>
-            <form asp-action="CompletedOrders" asp-controller="Moderator" method="post">
-                <a type="submit" id="delivered">Delivered</a>
+            <form method="get">
+                <button asp-action="CompletedOrders" asp-controller="Moderator"  id="delivered">Delivered</button>
             </form>
         </div>
         <div class="order-heading">
             <div class="order-heading-type">
-                <span>Order type</span>
+                <span>Payment type</span>
             </div>
             <div class="order-heading-phone">
                 <span>Phone</span>
@@ -44,27 +44,35 @@
                 <span>Address</span>
             </div>
             <div class="order-heading-content">
-                <span>Content</span>
+                <span>Meals</span>
             </div>
             <div class="order-heading-action">
             </div>
         </div>
-    @foreach (var item in Model )
+    @foreach (var order in Model)
     {
         <div class="order-item" onclick="location.href = '#';">
             <div class="order-type">
-                <span>@item.PaymentType</span>
+                <span>@order.PaymentType</span>
             </div>
             <div class="order-phone">
-                <span>@item.PhoneNumber</span>
+                <span>@order.PhoneNumber</span>
             </div>
             <div class="order-address">
-                <span>@item.Address</span>
+                <span>@order.Address</span>
             </div>
-            <div class="order-content">
-                @foreach (var meal in Model.Items)
+            <div class="order-content" white-space="pre">
+                @foreach (var meal in order.Items)
                 {
-                    <span>@meal.Amount @meal.Meal</span>
+                    if (meal.Equals(order.Items.Last()))
+                    {
+                        <span>@meal.Meal.Name: @meal.Amount.</span>
+                    }
+                    else
+                    {
+                        <span >@meal.Meal.Name: @meal.Amount,</span>
+                    }
+                    
                 }
             </div>
             <div class="order-action">             
