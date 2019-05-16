@@ -1,3 +1,4 @@
+@model IEnumerable<DTO.Models.OrderDTO>
 @{
     Layout = null;
 }
@@ -22,13 +23,19 @@
             <h1 class="text-center">Select orders type:</h1>
         </div>
         <div id="actions">
-            <a href="#" id="new-order">New</a>
-            <a href="#" id="in-progress">In progress</a>
-            <a href="#" id="delivered">Delivered</a>
+            <form method="get">
+                <button asp-controller="Moderator" asp-action="NewOrders" id="new-order">New</button>
+            </form>
+            <form  method="get">
+                <button asp-action="InProgressOrders" asp-controller="Moderator" id="in-progress">In progress</button>
+            </form>
+            <form method="get">
+                <button asp-action="CompletedOrders" asp-controller="Moderator"  id="delivered">Delivered</button>
+            </form>
         </div>
         <div class="order-heading">
             <div class="order-heading-type">
-                <span>Order type</span>
+                <span>Payment type</span>
             </div>
             <div class="order-heading-phone">
                 <span>Phone</span>
@@ -37,40 +44,41 @@
                 <span>Address</span>
             </div>
             <div class="order-heading-content">
-                <span>Content</span>
+                <span>Meals</span>
             </div>
             <div class="order-heading-action">
             </div>
         </div>
-        <div class="order-item" onclick="location.href = 'https://www.youtube.com/';">
+    @foreach (var order in Model)
+    {
+        <div class="order-item" onclick="location.href = '#';">
             <div class="order-type">
-                <select name="select-type" class="type" itemid="1">
-                    <option>
-                        New
-                    </option>
-                    <option>
-                        In progress
-                    </option>
-                    <option selected>
-                        Delivered
-                    </option>
-                </select>
+                <span>@order.PaymentType</span>
             </div>
             <div class="order-phone">
-                <span>+380958869367</span>
+                <span>@order.PhoneNumber</span>
             </div>
             <div class="order-address">
-                <span>Medovoi Pechery 39</span>
+                <span>@order.Address</span>
             </div>
-            <div class="order-content">
-                <span>8 rice portions</span>
+            <div class="order-content" white-space="pre">
+                @foreach (var meal in order.Items)
+                {
+                    if (meal.Equals(order.Items.Last()))
+                    {
+                        <span>@meal.Meal.Name: @meal.Amount.</span>
+                    }
+                    else
+                    {
+                        <span >@meal.Meal.Name: @meal.Amount,</span>
+                    }
+                    
+                }
             </div>
-            <div class="order-action">
-                <a href="http://google.com"class="btn btn-success ok-button">Ok</a>
-                <a href="http://google.com" class="btn btn-danger remove-button">Remove</a>
+            <div class="order-action">             
             </div>
         </div>
-
+    }
     </div>
 </div>
 <script src="js/index.js"></script>

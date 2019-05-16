@@ -23,7 +23,9 @@ namespace SushiRunner.Data.Repositories
 
         public IEnumerable<Order> Search(Expression<Func<Order, bool>> predicate)
         {
-            return _context.Orders.Where(predicate).ToList();
+            return _context.Orders
+                .Include(entity => entity.Items).ThenInclude(item => item.Meal)              
+                .Where(predicate).ToList();
         }
 
         public Order Get(long id)
@@ -34,10 +36,6 @@ namespace SushiRunner.Data.Repositories
                 .FirstOrDefault(entity => entity.Id == id);
         }
 
-        public IEnumerable<Order> GetByStatus(OrderStatus status)
-        {
-            return _context.Orders.Where(ord => ord.OrderStatus.Equals(status)).Select(ord => ord);
-        }
 
         public void Create(Order entity)
         {
