@@ -1,6 +1,8 @@
-namespace SushiRunner.ViewModels
+using SushiRunner.Data.Entities;
+
+namespace SushiRunner.Services.Dto
 {
-    public class MealModel
+    public class MealDTO
     {
         public long Id { get; set; }
         public string Name { get; set; }
@@ -8,8 +10,7 @@ namespace SushiRunner.ViewModels
         public double Weight { get; set; }
         public string ImagePath { get; set; }
         public int Price { get; set; }
-        public bool IsInCart { get; set; }
-        
         public long MealGroupId { get; set; }
+        public MealGroup MealGroup { get; set; }
     }
 }

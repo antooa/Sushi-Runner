@@ -18,7 +18,8 @@ namespace SushiRunner.Data.Repositories
 
         public IEnumerable<Order> GetList()
         {
-            return _context.Orders;
+            return _context.Orders.Include(entity => entity.Items).ThenInclude(item => item.Meal)
+                .ToList();
         }
 
         public IEnumerable<Order> Search(Expression<Func<Order, bool>> predicate)
@@ -32,7 +33,7 @@ namespace SushiRunner.Data.Repositories
         {
             return _context.Orders
                 .AsNoTracking()
-                .Include(entity => entity.Items)
+                .Include(entity => entity.Items).ThenInclude(item => item.Meal)
                 .FirstOrDefault(entity => entity.Id == id);
         }
 

@@ -1,8 +1,11 @@
+using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
+using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
+using SushiRunner.ViewModels;
 
 namespace SushiRunner.Controllers
 {
@@ -26,21 +29,32 @@ namespace SushiRunner.Controllers
         [HttpGet]
         public IActionResult NewOrders()
         {
-            var orders = _orderService.GetByStatus(OrderStatus.New);
+            var dtos = _orderService.GetByStatus(OrderStatus.New);
+            var orders = dtos.Select(dto => _mapper.Map<OrderDTO, OrderModel>(dto)).ToList();             
             return View("Index", orders);
         }
 
         [HttpGet]
         public IActionResult InProgressOrders()
         {
-            var orders = _orderService.GetByStatus(OrderStatus.InProgress);
+            var dtos = _orderService.GetByStatus(OrderStatus.InProgress);
+            var orders = dtos.Select(dto => _mapper.Map<OrderDTO, OrderModel>(dto)).ToList();   
             return View("Index", orders);
         }
         
         [HttpGet]
         public IActionResult CompletedOrders()
         {
-            var orders = _orderService.GetByStatus(OrderStatus.Completed);            
+            var dtos = _orderService.GetByStatus(OrderStatus.Completed);
+            var orders = dtos.Select(dto => _mapper.Map<OrderDTO, OrderModel>(dto)).ToList();   
+            return View("Index", orders);
+        }
+
+        [HttpGet]
+        public IActionResult CanceledOrders()
+        {
+            var dtos = _orderService.GetByStatus(OrderStatus.Canceled);
+            var orders = dtos.Select(dto => _mapper.Map<OrderDTO, OrderModel>(dto)).ToList();   
             return View("Index", orders);
         }
         
