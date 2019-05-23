@@ -157,7 +157,7 @@ namespace SushiRunner.Services
 
         public async Task<User> GetLoggedUserOrCreateAnonymous(ClaimsPrincipal principal, string newId)
         {
-            var user = await _userManager.GetUserAsync(principal);
+            var user = await GetLoggedUser(principal);
             if (user == null)
             {
                 user = new User
@@ -173,6 +173,11 @@ namespace SushiRunner.Services
             }
 
             return user;
+        }
+
+        public async Task<User> GetLoggedUser(ClaimsPrincipal principal)
+        {
+            return await _userManager.GetUserAsync(principal);
         }
     }
 }

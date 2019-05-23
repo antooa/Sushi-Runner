@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using System.Threading.Tasks;
 using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Services.Interfaces
@@ -11,5 +13,7 @@ namespace SushiRunner.Services.Interfaces
         void RemoveItem(User user, long mealId);
 
         void Clear(User user);
+        
+        Task<(int, int)> CountAndTotalPrice(ClaimsPrincipal principal);
     }
 }

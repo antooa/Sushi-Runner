@@ -5,15 +5,13 @@
     Layout = "_HomeLayout";
 }
 
-<partial name="_Header" model="@Model.HeaderModel"/>
-
 <div id="wrapper">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#">Sushi-Runner</a>
             </li>
-            @foreach (var group in @Model.HeaderModel.AvailableGroups)
+            @foreach (var group in @Model.AvailableGroups)
             {
                 <li>
                     <a asp-controller="Home" asp-action="Index">@group.Name</a>

@@ -32,7 +32,7 @@ namespace SushiRunner.Controllers
                 HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
             var cart = _cartService.GetByUserOrCreateNew(user);
 
-            var mealss = from meal in meals
+            var mealsWithCartCheckbox = from meal in meals
                 join cartItem in cart.Items on meal.Id equals cartItem.MealId into mealModels
                 from m in mealModels.DefaultIfEmpty()
                 select new MealModel
@@ -46,25 +46,14 @@ namespace SushiRunner.Controllers
                     IsInCart = m != null
                 };
 
-            var cartItemsPrice = 0;
-            foreach (var cartItem in cart.Items)
-            {
-                cartItemsPrice += cartItem.Meal.Price * cartItem.Amount;
-            }
-
             return View(
                 new HomeModel
                 {
-                    Meals = mealss,
-                    HeaderModel = new HeaderModel
+                    Meals = mealsWithCartCheckbox,
+                    AvailableGroups = _mealGroupService.GetList().Select(entity => new MealGroupModel
                     {
-                        CartItemsAmount = cart.Items.Count,
-                        CartItemsPrice = cartItemsPrice,
-                        AvailableGroups = _mealGroupService.GetList().Select(entity => new MealGroupModel
-                        {
-                            Name = entity.Name
-                        })
-                    }
+                        Name = entity.Name
+                    })
                 });
         }
 

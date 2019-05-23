@@ -1,0 +1,82 @@
+@using SushiRunner.Services.Interfaces
+@{
+    ViewData["Title"] = "Sushi-Runner";
+    Layout = null;
+}
+
+@inject ICartService CartService
+
+@{
+    var (cartItemAmount, totalPrice) = await CartService.CountAndTotalPrice(User);
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sushi Runner</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/home/index.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+<div id="menu">
+    <div id="toggle">
+        <a href="#menu-toggle" class="btn btn-outline-dark menu-toggle">
+            Toggle Menu
+        </a>
+    </div>
+    <nav class="navbar_items">
+        <div class="navbar_link">
+            <a href="#">Main</a>
+        </div>
+        <div class="navbar_link">
+            <a href="#">About us</a>
+        </div>
+        <div class="navbar_link">
+            <a href="#">Delivery</a>
+        </div>
+        <div class="navbar_link">
+            <a href="#">Blog</a>
+        </div>
+        <div class="navbar_link">
+            <div id="phones">
+                <span>(093)170-15-70</span>
+                <span>(093)170-15-70</span>
+            </div>
+        </div>
+    </nav>
+    <div id="account">
+        <div id="user">
+            <div id="user">
+                <a href="#">
+                    <strong>
+                        <i class="fas fa-user"></i>
+                    </strong>
+                </a>
+            </div>
+        </div>
+        <div id="basket">
+            <a asp-controller="Cart">
+                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+                <span id="itemCount">@cartItemAmount</span>
+            </a>
+        </div>
+        <div id="totalPrice">
+            <span>
+                <strong>@totalPrice USD</strong>
+            </span>
+        </div>
+    </div>
+</div>
+@RenderBody()
+<script src="/js/home/index.js"></script>
+</body>
