@@ -35,7 +35,7 @@ namespace SushiRunner.Tests.Services
         [InlineData("1")]
         [InlineData("2")]
         [InlineData("3")]
-        public void GetByStatusTest(string groupName)
+        public void GetByGroupTest(string groupName)
         {
             // Arrange
             var list = GetDtoCollection();
@@ -44,7 +44,8 @@ namespace SushiRunner.Tests.Services
             var expected = mealDtos.First(dto => dto.MealGroup.Name.Equals(groupName));
             
             // Act
-            var actual = svc.GetByGroup(groupName);
+            var mealDto = new MealDTO() {MealGroup = new MealGroup() {Name = groupName}};
+            var actual = svc.GetByGroup(mealDto);
             
             // Assert
             foreach (var order in actual)

@@ -53,17 +53,15 @@ namespace SushiRunner.Services
             _repository.Save();
         }
 
-        public IEnumerable<MealDTO> GetByGroup(string groupName)
+        public IEnumerable<MealDTO> GetByGroup(MealDTO mealDto)
         {
-            var meals = _repository.Search(m => m.MealGroup.Name.Equals(groupName));
-            
+            var meals = _repository.Search(m => m.MealGroup.Name.Equals(mealDto.MealGroup.Name));           
             return meals.Select(meal => _mapper.Map<Meal, MealDTO>(meal)).ToList();
         }
 
         public IEnumerable<MealDTO> GetByGroupId(long id)
         {
             var meals = _repository.Search(m => m.MealGroup.Id.Equals(id));
-
             return meals.Select(meal => _mapper.Map<Meal, MealDTO>(meal)).ToList();
         }
 

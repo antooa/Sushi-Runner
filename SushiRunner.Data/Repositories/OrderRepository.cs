@@ -18,14 +18,16 @@ namespace SushiRunner.Data.Repositories
 
         public IEnumerable<Order> GetList()
         {
-            return _context.Orders.Include(entity => entity.Items).ThenInclude(item => item.Meal)
+            return _context.Orders.Include(entity => entity.Items)
+                .ThenInclude(item => item.Meal)
                 .ToList();
         }
 
         public IEnumerable<Order> Search(Expression<Func<Order, bool>> predicate)
         {
             return _context.Orders
-                .Include(entity => entity.Items).ThenInclude(item => item.Meal)              
+                .Include(entity => entity.Items)
+                .ThenInclude(item => item.Meal)              
                 .Where(predicate).ToList();
         }
 
@@ -33,7 +35,8 @@ namespace SushiRunner.Data.Repositories
         {
             return _context.Orders
                 .AsNoTracking()
-                .Include(entity => entity.Items).ThenInclude(item => item.Meal)
+                .Include(entity => entity.Items)
+                .ThenInclude(item => item.Meal)
                 .FirstOrDefault(entity => entity.Id == id);
         }
 

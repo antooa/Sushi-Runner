@@ -92,15 +92,13 @@ namespace SushiRunner.Controllers
         }
         
         [HttpGet]
-        public IActionResult MealsByCategory([Bind("Name")] MealGroupModel model)
+        public IActionResult MealsByCategory(string mealGroupName)
         {
-            var dtos = _mealService.GetByGroup(model.Name);
+            var requested = new MealDTO {MealGroup = new MealGroup() {Name = mealGroupName}};
+            var dtos = _mealService.GetByGroup(requested);
             var meals = dtos.Select(dto => _mapper.Map<MealDTO, MealModel>(dto)).ToList();
             ViewBag.Meals = meals;
             return View();
-        }
-
-        
-        
+        }   
     }
 } 
