@@ -11,7 +11,7 @@
             <li class="sidebar-brand">
                 <a href="#">Sushi-Runner</a>
             </li>
-            @foreach (var group in @Model.AvailableGroups)
+            @foreach (var group in Model.AvailableGroups)
             {
                 <li>
                     <a asp-controller="Home" asp-action="Index">@group.Name</a>

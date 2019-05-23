@@ -1,0 +1,67 @@
+@model SushiRunner.ViewModels.Home.CartModel
+
+@section Scripts
+{
+    <script src="@Url.Content("/js/home/cart.js")"></script>
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="@Url.Content("/css/home/header-with-lines.css")">
+}
+
+
+<div class="cart-page-container">
+    <p class="hwl">
+        <span>Submit Order</span>
+    </p>
+    <div class="cart-container">
+        <div class="cart-column-name-container">
+            <div class="cart-table-head">
+                <span class="description">Description</span>
+                <span class="price">Price</span>
+                <span class="quantity">Quantity</span>
+                <span class="sum">Sum</span>
+                <span class="cart-remove-button" style="display: none"></span>
+            </div>
+            @* TODO: move this to a partial view *@
+            <div class="table-rows">
+                @foreach (var cartItem in Model.Items)
+                {
+                    <div class="cart-table-row">
+                        <div class="description">
+                            <img class="image-block" src="/img/sushi.jpg"/>
+                            <div class="cart-title-and-weight">
+                                <span class="productName">@cartItem.Meal.Name</span>
+                                <span class="productWeight">@cartItem.Meal.Weight gram</span>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span id="item-price">@cartItem.Meal.Price USD</span>
+                        </div>
+                        <div class="quantity">
+                            <div class="cart-amount-changer">
+                                <input value="@cartItem.Amount"
+                                       id="item-qty" type="text" class="text-center" name="quantity"/>
+                                <button class="cart-amount-inc-button">+</button>
+                                <button class="cart-amount-dec-button">-</button>
+                            </div>
+                        </div>
+                        <div class="sum" id="item-sum">
+                            20 USD
+                        </div>
+                        <div class="cart-remove-button">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="total-sum">
+                <span id="total-sum"><strong>Total sum:</strong> 0 $</span>
+            </div>
+            <div class="pre-order">
+                <button class="btn btn-outline-success">Pre order</button>
+            </div>
+        </div>
+    </div>
+</div>

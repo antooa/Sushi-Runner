@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReturnTrue.AspNetCore.Identity.Anonymous;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
+using SushiRunner.ViewModels.Home;
 
 namespace SushiRunner.Controllers
 {
@@ -57,13 +58,33 @@ namespace SushiRunner.Controllers
                 });
         }
 
-        public IActionResult Error()
+        public async Task<IActionResult> Cart()
         {
+            var user = await _accountService.GetLoggedUserOrCreateAnonymous(
+                HttpContext.User,
+                HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
+            var cart = _cartService.GetByUserOrCreateNew(user);
             return View(
-                new ErrorModel
+                new CartModel
                 {
-                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-                });
+                    Items = cart.Items
+                        .Select(item =>
+                            new CartItemModel
+                            {
+                                Meal = new MealModel
+                                {
+                                    Id = item.Meal.Id,
+                                    Name = item.Meal.Name,
+                                    Description = item.Meal.Description,
+                                    Weight = item.Meal.Weight,
+                                    ImagePath = item.Meal.ImagePath,
+                                    Price = item.Meal.Price
+                                },
+                                Amount = item.Amount
+                            }
+                        )
+                }
+            );
         }
 
         public async Task<IActionResult> AddToCart(long id)
@@ -82,6 +103,15 @@ namespace SushiRunner.Controllers
                 HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
             _cartService.RemoveItem(user, id);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Error()
+        {
+            return View(
+                new ErrorModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                });
         }
     }
 }

@@ -20,12 +20,15 @@
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
     <script src="/lib/jquery/dist/jquery.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/home/index.css">
     <link rel="stylesheet" href="/css/sidebar.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/home/cart.css">
+    @RenderSection("Styles", false)
 </head>
 <body>
 <div id="menu">
@@ -58,15 +61,17 @@
         <div id="user">
             <div id="user">
                 <a href="#">
-                    <strong>
-                        <i class="fas fa-user"></i>
-                    </strong>
+                    <svg class="user-profile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M437.02 330.98c-27.883-27.882-61.071-48.523-97.281-61.018C378.521 243.251 404 198.548 404 148 404 66.393 337.607 0 256 0S108 66.393 108 148c0 50.548 25.479 95.251 64.262 121.962-36.21 12.495-69.398 33.136-97.281 61.018C26.629 379.333 0 443.62 0 512h40c0-119.103 96.897-216 216-216s216 96.897 216 216h40c0-68.38-26.629-132.667-74.98-181.02zM256 256c-59.551 0-108-48.448-108-108S196.449 40 256 40s108 48.448 108 108-48.449 108-108 108z"></path>
+                    </svg>
                 </a>
             </div>
         </div>
         <div id="basket">
-            <a asp-controller="Cart">
-                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+            <a asp-controller="Home" asp-action="Cart">
+                <svg class="shopping-cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 459.529 459.529">
+                    <path d="M17 55.231h48.733l69.417 251.033c1.983 7.367 8.783 12.467 16.433 12.467h213.35c6.8 0 12.75-3.967 15.583-10.2l77.633-178.5c2.267-5.383 1.7-11.333-1.417-16.15-3.117-4.817-8.5-7.65-14.167-7.65H206.833c-9.35 0-17 7.65-17 17s7.65 17 17 17H416.5l-62.9 144.5H164.333L94.917 33.698c-1.983-7.367-8.783-12.467-16.433-12.467H17c-9.35 0-17 7.65-17 17s7.65 17 17 17zM135.433 438.298c21.25 0 38.533-17.283 38.533-38.533s-17.283-38.533-38.533-38.533S96.9 378.514 96.9 399.764s17.283 38.534 38.533 38.534zM376.267 438.298h2.833c10.2-.85 19.55-5.383 26.35-13.317 6.8-7.65 9.917-17.567 9.35-28.05-1.417-20.967-19.833-37.117-41.083-35.7-21.25 1.417-37.117 20.117-35.7 41.083 1.416 20.117 18.133 35.984 38.25 35.984z"></path>
+                </svg>
                 <span id="itemCount">@cartItemAmount</span>
             </a>
         </div>
@@ -79,4 +84,5 @@
 </div>
 @RenderBody()
 <script src="/js/home/index.js"></script>
+@RenderSection("Scripts", false)
 </body>
