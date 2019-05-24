@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using ReturnTrue.AspNetCore.Identity.Anonymous;
 using SushiRunner.Services.Interfaces;
@@ -14,12 +12,15 @@ namespace SushiRunner.Controllers
     public class HomeController : Controller
     {
         private IMealService _mealService;
+        private IMealGroupService _mealGroupService;
         private IAccountService _accountService;
         private ICartService _cartService;
 
-        public HomeController(IMealService mealService, IAccountService accountService, ICartService cartService)
+        public HomeController(IMealService mealService, IMealGroupService mealGroupService,
+            IAccountService accountService, ICartService cartService)
         {
             _mealService = mealService;
+            _mealGroupService = mealGroupService;
             _accountService = accountService;
             _cartService = cartService;
         }
@@ -78,6 +79,7 @@ namespace SushiRunner.Controllers
                 new HomeModel
                 {
                     Meals = mealsWithCartCheckbox,
+                    Title = _mealGroupService.Get(mealGroupId).Name
                 });
         }
 

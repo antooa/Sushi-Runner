@@ -5,7 +5,24 @@
     Layout = "_HomeLayout";
 }
 
+@section Styles
+{
+    <link rel="stylesheet" href="@Url.Content("/css/home/header-with-lines.css")">
+}
+
 <div id="wrapper">
+    @if (@Model.Title == null)
+    {
+        <p id="hwl-edit" class="hwl">
+            <span>Всі продукти</span>
+        </p>
+    }
+    else
+    {
+        <p id="hwl-edit" class="hwl">
+            <span>@Model.Title</span>
+        </p>
+    }
     <div class="container-fluid">
         @foreach (var meal in Model.Meals)
         {

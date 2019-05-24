@@ -125,6 +125,12 @@ body {
 }
 
 #wrapper {
+    padding: 45px 10px 10px 10px;
+}
+
+#hwl-edit span:before,
+#hwl-edit span:after {
+    width: 400px;
 }
 
 .navbar_items .navbar_link {
@@ -266,6 +272,7 @@ body {
     justify-content: center;
     align-items: center;
     border-top: 1px solid #dee2e6;
+    text-align: center;
 }
 
 .item-title * {
