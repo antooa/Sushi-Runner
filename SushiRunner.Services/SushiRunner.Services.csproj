@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SushiRunner.Data\SushiRunner.Data.csproj" />
+      <ProjectReference Include="..\SushiRunner.Utilities\SushiRunner.Utilities.csproj" />
     </ItemGroup>
 
     <ItemGroup>

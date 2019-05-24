@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
 using SushiRunner.Services.Dto;
@@ -27,16 +28,17 @@ namespace SushiRunner.Controllers
             var meals = dtos.Select(dto => _mapper.Map<MealDTO, MealModel>(dto)).ToList();
             return View(meals);
         }
-            
+        
+        [HttpPost]
         [Authorize(Roles = UserRoles.Moderator)]
-        public IActionResult Create([Bind("Id, Name, Description, Weight, Price, MealGroupId")] MealModel meal)
+        public IActionResult Create([Bind("Id, Name, Description, Weight, Price, MealGroupId")] MealModel meal, IFormFile pic)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
                     var newMeal = _mapper.Map<MealModel, MealDTO>(meal);
-                    _mealService.Create(newMeal);
+                    _mealService.Create(newMeal, pic);
                 }
                 catch (Exception e)
                 {
@@ -99,6 +101,6 @@ namespace SushiRunner.Controllers
             var meals = dtos.Select(dto => _mapper.Map<MealDTO, MealModel>(dto)).ToList();
             ViewBag.Meals = meals;
             return View();
-        }   
+        }
     }
 } 

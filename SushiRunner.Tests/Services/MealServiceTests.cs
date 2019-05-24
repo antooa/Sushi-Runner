@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using SushiRunner.Data;
@@ -9,13 +10,21 @@ using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
 using SushiRunner.Services;
 using SushiRunner.Services.Dto;
+using SushiRunner.Services.Interfaces;
 using Xunit;
 
 namespace SushiRunner.Tests.Services
 {
     public class MealServiceTests
     {
-        
+        private readonly Mock<IAppConf> _config;
+
+        public MealServiceTests()
+        {
+            _config = new Mock<IAppConf>();
+            _config.Setup(c => c.WebRootPath).Returns(string.Empty);
+        }
+
         [Fact]
         public void GetListTest()
         {
@@ -71,6 +80,7 @@ namespace SushiRunner.Tests.Services
 
             // Assert
             Assert.Equal(expected.Id, actual.Id);
+            Assert.Equal(expected.ImagePath, actual.ImagePath);
         }
 
         [Fact]
@@ -93,7 +103,7 @@ namespace SushiRunner.Tests.Services
             var repository = new Mock<IRepository<Meal, long>>();
 
             var mapper = new Mock<IMapper>();
-            var svc = new MealService(repository.Object, mapper.Object);
+            var svc = new MealService(repository.Object, mapper.Object, _config.Object);
             var expected = new MealDTO()
             {
                 Id = 4,
@@ -132,7 +142,7 @@ namespace SushiRunner.Tests.Services
             });
             var mapper = new Mock<IMapper>();
             mapper.Setup(m => m.Map<Meal, MealDTO>(It.IsAny<Meal>())).Returns(expected);
-            var svc = new MealService(repository.Object, mapper.Object);
+            var svc = new MealService(repository.Object, mapper.Object, _config.Object);
 
 
             // Act
@@ -161,7 +171,7 @@ namespace SushiRunner.Tests.Services
             });
             var mapper = new Mock<IMapper>();
             mapper.Setup(m => m.Map<Meal, MealDTO>(It.IsAny<Meal>())).Returns(expected);
-            var svc = new MealService(repository.Object, mapper.Object);
+            var svc = new MealService(repository.Object, mapper.Object, _config.Object);
 
             // Act
             svc.Delete(expected.Id);
@@ -192,7 +202,7 @@ namespace SushiRunner.Tests.Services
                 cfg.CreateMap<Meal, MealDTO>();
             });
             var mapper = mapperConfig.CreateMapper();
-            var svc = new MealService(repository, mapper);
+            var svc = new MealService(repository, mapper, _config.Object);
             return svc;
         }
         
@@ -210,7 +220,8 @@ namespace SushiRunner.Tests.Services
                         Id = 1,
                         Description = "Desc",
                         Name = "1"
-                    }
+                    },
+                    ImagePath = "MealPics/1.jpg"
                 },
                 
                 new MealDTO()
@@ -222,7 +233,8 @@ namespace SushiRunner.Tests.Services
                         Id = 2,
                         Description = "Desc",
                         Name = "2"
-                    }
+                    },
+                    ImagePath = "MealPics/1.jpg"
                 },
                 
                 new MealDTO()
@@ -234,7 +246,8 @@ namespace SushiRunner.Tests.Services
                         Id = 3,
                         Description = "Desc",
                         Name = "3"
-                    }
+                    },
+                    ImagePath = "MealPics/1.jpg"
                 },
 
             };
@@ -254,7 +267,8 @@ namespace SushiRunner.Tests.Services
                         Id = 1,
                         Description = "Desc",
                         Name = "1"
-                    }
+                    },
+                    ImagePath = "MealPics/1.jpg"
 
                 },
                 new Meal()
@@ -266,7 +280,8 @@ namespace SushiRunner.Tests.Services
                         Id = 1,
                         Description = "Desc",
                         Name = "2"
-                    }
+                    },
+                    ImagePath = "MealPics/1.jpg"
                 },
                 new Meal()
                 {
@@ -277,7 +292,8 @@ namespace SushiRunner.Tests.Services
                         Id = 1,
                         Description = "Desc",
                         Name = "3"
-                    }
+                    },
+                    ImagePath = "MealPics/1.jpg"
                 }
             };
         }

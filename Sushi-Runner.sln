@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.Services", "Sus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.Tests", "SushiRunner.Tests\SushiRunner.Tests.csproj", "{D54D9A19-B4C3-4803-B4AA-859A45780BBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiRunner.Utilities", "SushiRunner.Utilities\SushiRunner.Utilities.csproj", "{B0F18CEB-F7B5-431D-B4F5-0E1B571C06E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{D54D9A19-B4C3-4803-B4AA-859A45780BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D54D9A19-B4C3-4803-B4AA-859A45780BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D54D9A19-B4C3-4803-B4AA-859A45780BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0F18CEB-F7B5-431D-B4F5-0E1B571C06E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0F18CEB-F7B5-431D-B4F5-0E1B571C06E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0F18CEB-F7B5-431D-B4F5-0E1B571C06E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0F18CEB-F7B5-431D-B4F5-0E1B571C06E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
