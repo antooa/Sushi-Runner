@@ -1,4 +1,4 @@
-﻿@model SushiRunner.ViewModels.HomeModel
+﻿@model SushiRunner.ViewModels.Home.HomeModel
 
 @{
     ViewData["Title"] = "Sushi-Runner";
@@ -6,23 +6,10 @@
 }
 
 <div id="wrapper">
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">Sushi-Runner</a>
-            </li>
-            @foreach (var group in Model.AvailableGroups)
-            {
-                <li>
-                    <a asp-controller="Home" asp-action="Index">@group.Name</a>
-                </li>
-            }
-        </ul>
-    </div>
     <div class="container-fluid">
         @foreach (var meal in Model.Meals)
         {
-            <partial name="_Meal" model="@meal"/>
+            <partial name="_Meal" model="@meal"></partial>
         }
     </div>
 </div>

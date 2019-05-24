@@ -23,7 +23,7 @@
         20 USD
     </div>
     <form id="@Model.Meal.Id" asp-controller="Home" asp-action="RemoveFromCart" method="post">
-        <input type="hidden" asp-for="Meal.Id"/>
+        <input type="hidden" name="Id" asp-for="Meal.Id"/>
         <input type="hidden" name="redirectView" value="Cart"/>
         <button type="submit" class="cart-remove-button">
             <i class="fas fa-times"></i>

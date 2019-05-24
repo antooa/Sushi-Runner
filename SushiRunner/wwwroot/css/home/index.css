@@ -13,9 +13,109 @@ body {
     font-size: calc(0.75em + 1vmin);
 }
 
+.home-page-container {
+    position: relative;
+}
+
+.home-page-body-wrapper {
+    margin: 20px 0 0 67px;
+}
+
+#home-side-nav {
+    width: 67px;
+    height: 10000px;
+    background: white;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    box-shadow: 4px 0 24px rgba(1, 1, 1, 0.1);
+}
+
+#home-side-nav > a {
+    position: absolute;
+    transition: 0.4s;
+    width: 67px;
+    height: 50px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    overflow: hidden;
+    padding: 10px 6px;
+}
+
+#home-side-nav a {
+    grid-template-columns: 67px 1fr;
+    display: grid;
+    border-bottom: 1px lightgray solid;
+    color: white;
+    font-weight: 300;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+#home-side-nav a:hover {
+    background: #e32d3c;
+}
+
+#home-side-nav a:hover svg {
+    fill: white;
+}
+
+.side-nav-icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 0 2px 12px;
+    fill: gray;
+}
+
+#side-nav-item1 {
+    top: 0;
+}
+
+#side-nav-item2 {
+    top: 50px;
+}
+
+#side-nav-item3 {
+    top: 100px;
+}
+
+#side-nav-item4 {
+    top: 150px;
+}
+
+#side-nav-item5 {
+    top: 200px;
+}
+
+#side-nav-item6 {
+    top: 250px;
+}
+
+#side-nav-item1:hover {
+    width: 160px;
+}
+
+#side-nav-item2:hover {
+    width: 160px;
+}
+
+#side-nav-item3:hover {
+    width: 200px;
+}
+
+#side-nav-item5:hover {
+    width: 200px;
+}
+
+#side-nav-item4:hover,
+#side-nav-item6:hover {
+    width: 170px;
+}
+
 #menu {
     display: flex;
-    height: 80px;
+    height: 75px;
     align-items: center;
     justify-content: center;
     background: #FAFAFA;
@@ -23,11 +123,6 @@ body {
 }
 
 #wrapper {
-}
-
-#toggle {
-    margin-right: auto;
-    padding-left: 20px;
 }
 
 .navbar_items .navbar_link {
@@ -76,7 +171,7 @@ body {
     align-items: center;
     height: 100%;
     background-color: #e32d3c;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .navbar_items {
@@ -248,7 +343,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
     justify-content: space-between;
     max-width: 1200px;
-    padding: 0 50px;
+    padding: 0 30px;
 }
 
 #itemCount {

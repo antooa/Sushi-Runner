@@ -14,17 +14,14 @@ namespace SushiRunner.Controllers
     public class HomeController : Controller
     {
         private IMealService _mealService;
-        private IMealGroupService _mealGroupService;
         private IAccountService _accountService;
         private ICartService _cartService;
 
-        public HomeController(IMealService mealService, IAccountService accountService, ICartService cartService,
-            IMealGroupService mealGroupService)
+        public HomeController(IMealService mealService, IAccountService accountService, ICartService cartService)
         {
             _mealService = mealService;
             _accountService = accountService;
             _cartService = cartService;
-            _mealGroupService = mealGroupService;
         }
 
         public async Task<IActionResult> Index()
@@ -53,10 +50,6 @@ namespace SushiRunner.Controllers
                 new HomeModel
                 {
                     Meals = mealsWithCartCheckbox,
-                    AvailableGroups = _mealGroupService.GetList().Select(entity => new MealGroupModel
-                    {
-                        Name = entity.Name
-                    })
                 });
         }
 
