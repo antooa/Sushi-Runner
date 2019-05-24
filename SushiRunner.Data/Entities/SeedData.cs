@@ -52,103 +52,22 @@ namespace SushiRunner.Data.Entities
                     return;
                 }
 
-                var group1 = new MealGroup
+                var groups = new[]
                 {
-                    Name = "Group1",
-                    Description = "Description1"
+                    new MealGroup {Name = "Піца"},
+                    new MealGroup {Name = "Роли"},
+                    new MealGroup {Name = "Гарячі роли"},
+                    new MealGroup {Name = "Суші"},
+                    new MealGroup {Name = "Сети"},
+                    new MealGroup {Name = "Десерти"}
                 };
 
-                var group2 = new MealGroup
-                {
-                    Name = "Group2",
-                    Description = "Description2"
-                };
+                context.MealGroups.AddRange(groups);
 
-                context.MealGroups.AddRange(group1, group2);
+                
+                
 
-                context.Meals.AddRange(
-                    new Meal
-                    {
-                        Name = "Kayak",
-                        Description = "A boat for one person",
-                        Price = 275,
-                        ImagePath = "/img/sushi.jpg",
-                        Weight = 121.34,
-                        MealGroup = group1
-                    },
-                    new Meal
-                    {
-                        Name = "Lifejacket",
-                        Description = "Protective and fashionable",
-                        Price = 48,
-                        ImagePath = "/img/sushi.jpg",
-                        Weight = 121.34,
-                        MealGroup = group1
-                    },
-                    new Meal
-                    {
-                        Name = "Soccer Ball",
-                        Description = "FIFA-approved size and weight",
-                        Price = 19,
-                        ImagePath = "/img/sushi.jpg",
-                        Weight = 300.00,
-                        MealGroup = group1
-                    },
-                    new Meal
-                    {
-                        Name = "Corner Flags",
-                        Description = "Give your playing field a professional touch",
-                        Price = 34,
-                        ImagePath = "/img/sushi.jpg",
-                        Weight = 300.00,
-                        MealGroup = group1
-                    },
-                    new Meal
-                    {
-                        Name = "Stadium",
-                        Description = "Flat-packed 35,000-seat stadium",
-                        Price = 7950,
-                        ImagePath = "/img/sushi.jpg",
-                        Weight = 300.00,
-                        MealGroup = group1
-                    },
-                    new Meal
-                    {
-                        Name = "Thinking Cap",
-                        Description = "Improve brain efficiency by 75%",
-                        Price = 16,
-                        ImagePath = "/img/sushi.jpg",
-                        Weight = 232.23,
-                        MealGroup = group2
-                    },
-                    new Meal
-                    {
-                        Name = "Unsteady Chair",
-                        Description = "Secretly give your opponent a disadvantage",
-                        Price = 29,
-                        ImagePath = "/img/sushi.jpg",
-                        Weight = 121.34,
-                        MealGroup = group2
-                    },
-                    new Meal
-                    {
-                        Name = "Human Chess Board",
-                        Description = "A fun game for the family",
-                        Price = 75,
-                        ImagePath = "/img/sushi.jpg",
-                        Weight = 121.34,
-                        MealGroup = group2
-                    },
-                    new Meal
-                    {
-                        Name = "Bling-Bling King",
-                        Description = "Gold-plated, diamond-studded King",
-                        Price = 120,
-                        ImagePath = "/img/sushi.jpg",
-                        Weight = 121.34,
-                        MealGroup = group2
-                    }
-                );
+
                 context.SaveChanges();
             }
         }

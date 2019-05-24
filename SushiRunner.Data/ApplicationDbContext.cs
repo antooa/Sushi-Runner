@@ -39,7 +39,6 @@ namespace SushiRunner.Data
 
             modelBuilder.Entity<MealGroup>().HasKey(group => group.Id);
             modelBuilder.Entity<MealGroup>().Property(group => group.Name).IsRequired();
-            modelBuilder.Entity<MealGroup>().Property(group => group.Description).IsRequired();
 
             modelBuilder.Entity<CartItem>().HasKey(item => new {item.MealId, item.CartId});
             modelBuilder.Entity<CartItem>().Property(item => item.Amount).IsRequired();
