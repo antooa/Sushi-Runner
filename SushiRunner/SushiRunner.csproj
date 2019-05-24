@@ -30,4 +30,9 @@
       <ProjectReference Include="..\SushiRunner.Services\SushiRunner.Services.csproj" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <Folder Include="wwwroot\lib\materialize\dist" />
+    </ItemGroup>
+
 </Project>

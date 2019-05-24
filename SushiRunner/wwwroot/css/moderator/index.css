@@ -12,7 +12,8 @@
     grid-auto-rows: 50px;
     grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
     grid-gap: 1em;
-    background-color: #95a5a6;
+    background-color: #333333;
+    color: #b1b1b1;
 }
 
 .order-heading-type {
@@ -83,16 +84,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #454d55;
+    background-color: #333333;
     cursor: pointer;
     border-radius: 5px;
     margin: 15px;
-    color: #ecf0f1;
+    color: #b1b1b1;
     text-decoration: none;
 }
 
 #in-progress:hover, #new-order:hover, #delivered:hover {
-    background-color: #dc3545;
+    background-color: #e32d3c;
 
 }
 
