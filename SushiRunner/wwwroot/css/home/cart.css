@@ -89,7 +89,7 @@
     color: #777;
     font-size: 18px;
     line-height: 1.94;
-    padding-left: 1px;
+    padding: 0 0 0 1px;
     cursor: pointer;
     transition: 0.4s;
 }

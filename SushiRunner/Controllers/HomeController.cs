@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using ReturnTrue.AspNetCore.Identity.Anonymous;
 using SushiRunner.Services.Interfaces;
@@ -96,13 +98,18 @@ namespace SushiRunner.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> RemoveFromCart(long id)
+        public async Task<IActionResult> RemoveFromCart(long id, string redirectView)
         {
             var user = await _accountService.GetLoggedUserOrCreateAnonymous(
                 HttpContext.User,
                 HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
             _cartService.RemoveItem(user, id);
-            return RedirectToAction("Index");
+            if (redirectView == null)
+            {
+                redirectView = "Index";
+            }
+
+            return RedirectToAction(redirectView);
         }
 
         public IActionResult Error()
