@@ -13,6 +13,10 @@ namespace SushiRunner.MappingProfiles
             CreateMap<OrderModel, OrderDTO>();
             CreateMap<OrderItemModel, OrderItem>();
             CreateMap<OrderItem, OrderItemModel>();
+            CreateMap<Meal, MealDTO>();
+            CreateMap<MealDTO, Meal>();
+            CreateMap<MealDTO, MealModel>();
+            CreateMap<MealModel, MealDTO>();
         }
     }
 }

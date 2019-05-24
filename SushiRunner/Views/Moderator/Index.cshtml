@@ -1,7 +1,4 @@
-@model IEnumerable<SushiRunner.Services.Dto.OrderDTO>
-@{
-    Layout = null;
-}
+@model IEnumerable<SushiRunner.ViewModels.OrderModel>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,37 +46,38 @@
             <div class="order-heading-action">
             </div>
         </div>
-    @foreach (var order in Model)
-    {
-        <div class="order-item" onclick="location.href = '#';">
-            <div class="order-type">
-                <span>@order.PaymentType</span>
-            </div>
-            <div class="order-phone">
-                <span>@order.PhoneNumber</span>
-            </div>
-            <div class="order-address">
-                <span>@order.Address</span>
-            </div>
-            <div class="order-content" white-space="pre">
-                @foreach (var meal in order.Items)
-                {
-                    if (meal.Equals(order.Items.Last()))
+        @foreach (var order in Model)
+        {
+            <div class="order-item" onclick="location.href = '#';">
+                <div class="order-type">
+                    <span>@order.PaymentType</span>
+                </div>
+                <div class="order-phone">
+                    <span>@order.PhoneNumber</span>
+                </div>
+                <div class="order-address">
+                    <span>@order.Address</span>
+                </div>
+                <div class="order-content" white-space="pre">
+                    @foreach (var meal in order.Items)
                     {
-                        <span>@meal.Meal.Name: @meal.Amount.</span>
-                    }
-                    else
-                    {
-                        <span >@meal.Meal.Name: @meal.Amount,</span>
-                    }
+                        if (meal.Equals(order.Items.Last()))
+                        {
+                            <span>@meal.Meal.Name: @meal.Amount.</span>
+                        }
+                        else
+                        {
+                            <span >@meal.Meal.Name: @meal.Amount,</span>
+                        }
                     
-                }
+                    }
+                </div>
+                <div class="order-action">             
+                </div>
             </div>
-            <div class="order-action">             
-            </div>
-        </div>
-    }
+        }
     </div>
+    <div>@ViewBag.Meals</div>
 </div>
 <script src="js/index.js"></script>
 </body>

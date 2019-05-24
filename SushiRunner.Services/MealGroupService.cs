@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
+using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 
 namespace SushiRunner.Services
@@ -9,33 +12,40 @@ namespace SushiRunner.Services
     public class MealGroupService : IMealGroupService
     {
         private readonly IRepository<MealGroup, long> _repository;
+        private readonly IMapper _mapper;
 
         private bool _disposed;
 
-        public MealGroupService(IRepository<MealGroup, long> repository)
+        public MealGroupService(IRepository<MealGroup, long> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public void Create(MealGroup mealGroup)
+        public void Create(MealGroupDTO mealGroup)
         {
-            _repository.Create(mealGroup);
+            var group = _mapper.Map<MealGroupDTO, MealGroup>(mealGroup);
+            _repository.Create(group);
             _repository.Save();
         }
 
-        public IEnumerable<MealGroup> GetList()
+        public IEnumerable<MealGroupDTO> GetList()
         {
-            return _repository.GetList();
+            var groups = _repository.GetList();
+            return groups.Select(group => _mapper.Map<MealGroup, MealGroupDTO>(group)).ToList();
         }
 
-        public MealGroup Get(long id)
+        public MealGroupDTO Get(long id)
         {
-            return _repository.Get(id);
+           
+            var group = _repository.Get(id);
+            return _mapper.Map<MealGroup, MealGroupDTO>(group);
         }
 
-        public void Update(MealGroup mealGroup)
+        public void Update(MealGroupDTO mealGroup)
         {
-            _repository.Update(mealGroup);
+            var group = _mapper.Map<MealGroupDTO, MealGroup>(mealGroup);
+            _repository.Update(group);
             _repository.Save();
         }
 

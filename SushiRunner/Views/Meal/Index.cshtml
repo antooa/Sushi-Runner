@@ -1,0 +1,21 @@
+@model IEnumerable<SushiRunner.ViewModels.MealModel>  
+@{
+    ViewBag.Title = "Meals";
+}
+<!DOCTYPE html>
+@* VALIK TODO *@
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+<div>
+    @foreach (var group in Model)
+    {
+        <li>
+            <a asp-controller="Meal" asp-action="Index">@group.Name</a>
+        </li>
+    }
+</div>
+</body>
+</html>

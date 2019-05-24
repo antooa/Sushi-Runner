@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
+using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 
 namespace SushiRunner.Services
@@ -9,32 +12,37 @@ namespace SushiRunner.Services
     public class MealService : IMealService
     {
         private readonly IRepository<Meal, long> _repository;
-
+        private readonly IMapper _mapper;
         private bool _disposed;
 
-        public MealService(IRepository<Meal, long> repository)
+        public MealService(IRepository<Meal, long> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public void Create(Meal meal)
+        public void Create(MealDTO mealDto)
         {
+            var meal = _mapper.Map<MealDTO, Meal>(mealDto);
             _repository.Create(meal);
             _repository.Save();
         }
 
-        public IEnumerable<Meal> GetList()
+        public IEnumerable<MealDTO> GetList()
         {
-            return _repository.GetList();
+            var meals = _repository.GetList();
+            return meals.Select(meal => _mapper.Map<Meal, MealDTO>(meal)).ToList();
         }
 
-        public Meal Get(long id)
+        public MealDTO Get(long id)
         {
-            return _repository.Get(id);
+            var meal = _repository.Get(id);
+            return _mapper.Map<Meal, MealDTO>(meal);
         }
 
-        public void Update(Meal meal)
+        public void Update(MealDTO mealDto)
         {
+            var meal = _mapper.Map<MealDTO, Meal>(mealDto);
             _repository.Update(meal);
             _repository.Save();
         }
@@ -43,6 +51,18 @@ namespace SushiRunner.Services
         {
             _repository.Delete(id);
             _repository.Save();
+        }
+
+        public IEnumerable<MealDTO> GetByGroup(MealDTO mealDto)
+        {
+            var meals = _repository.Search(m => m.MealGroup.Name.Equals(mealDto.MealGroup.Name));           
+            return meals.Select(meal => _mapper.Map<Meal, MealDTO>(meal)).ToList();
+        }
+
+        public IEnumerable<MealDTO> GetByGroupId(long id)
+        {
+            var meals = _repository.Search(m => m.MealGroup.Id.Equals(id));
+            return meals.Select(meal => _mapper.Map<Meal, MealDTO>(meal)).ToList();
         }
 
         public virtual void Dispose(bool disposing)
