@@ -106,13 +106,13 @@ body {
     width: 225px;
 }
 
+#side-nav-item4:hover,
 #side-nav-item5:hover {
-    width: 200px;
+    width: 150px;
 }
 
-#side-nav-item4:hover,
 #side-nav-item6:hover {
-    width: 165px;
+    width: 190px;
 }
 
 #menu {
