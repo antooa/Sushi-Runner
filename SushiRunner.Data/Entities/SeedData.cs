@@ -54,12 +54,12 @@ namespace SushiRunner.Data.Entities
 
                 var groups = new[]
                 {
-                    new MealGroup {Name = "Піца"},
-                    new MealGroup {Name = "Роли"},
-                    new MealGroup {Name = "Гарячі роли"},
-                    new MealGroup {Name = "Суші"},
-                    new MealGroup {Name = "Сети"},
-                    new MealGroup {Name = "Десерти"}
+                    new MealGroup {Id = 1, Name = "Піца"},
+                    new MealGroup {Id = 2, Name = "Роли"},
+                    new MealGroup {Id = 3, Name = "Гарячі роли"},
+                    new MealGroup {Id = 4, Name = "Суші"},
+                    new MealGroup {Id = 5, Name = "Сети"},
+                    new MealGroup {Id = 6, Name = "Десерти"}
                 };
 
                 context.MealGroups.AddRange(groups);
@@ -152,9 +152,112 @@ namespace SushiRunner.Data.Entities
                         Weight = 430,
                         Price = 190,
                         MealGroup = groups[0]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190408_113533_пеппер.jpg",
+                        Name = "Pepper рол",
+                        Description =
+                            "Рис, Норі, Кунжут білий, Кунжут чорний, Сир вершковий, Перець болгарський темпура",
+                        Weight = 200,
+                        Price = 75,
+                        MealGroup = groups[1]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190408_113639_ізумі тай темпура.jpg",
+                        Name = "Ізумі Тай Темпура",
+                        Description = "Рис, Спайс майонез, Кунжут чорний, Окунь темпура, Перець болгарський темпура",
+                        Weight = 205,
+                        Price = 115,
+                        MealGroup = groups[1]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190408_113723_філад. з ікрою тобіко.jpg",
+                        Name = "Філадельфія De Luxe",
+                        Description = "Рис, Норі, Крем-сир, Огірок, Авокадо, Ікра тобіко червона, Лосось свіжий",
+                        Weight = 240,
+                        Price = 175,
+                        MealGroup = groups[1]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190523_092047_масаго з лосоем.jpg",
+                        Name = "Акційний рол Масаго з лососем",
+                        Description = "Рис, Норі, Крем-сир, Огірок, Ікра масаго, Лосось свіжий",
+                        Weight = 210,
+                        Price = 72,
+                        MealGroup = groups[1]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190517_105056_рінго.jpg",
+                        Name = "Рінго (половинка)",
+                        Description =
+                            "Рис, Норі, соус Унагі, Кунжут білий, Сир фета, Лосось копчений, Сир тостовий, Яблуко",
+                        Weight = 118,
+                        Price = 75,
+                        MealGroup = groups[1]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190408_113809_кранч з копч. лососем.jpg",
+                        Name = "Рол Crunch з копченим лососем",
+                        Description = "Рис, Норі, Крем-сир, Огірок, Лосось копчений, Смажена цибуля",
+                        Weight = 220,
+                        Price = 155,
+                        MealGroup = groups[1]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190408_114007_кранч з масляною р.jpg",
+                        Name = "Рол Crunch з масляною рибою",
+                        Description = "Рис, Норі, Огірок, Майонез, Смажена цибуля, Масляна риба",
+                        Weight = 200,
+                        Price = 115,
+                        MealGroup = groups[1]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190408_114134_весняний.jpg",
+                        Name = "Рол Весняний",
+                        Description = "Рис, Норі, Крем-сир, Огірок, Масляна риба, Кріп",
+                        Weight = 225,
+                        Price = 150,
+                        MealGroup = groups[1]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190409_164218_кінкі.jpg",
+                        Name = "Теплий рол Кінкі",
+                        Description =
+                            "Омлет тамаго, Кляр темпура, Огірок, Горіховий соус, Креветка тигрова, Рис, Норі        ",
+                        Weight = 220,
+                        Price = 135,
+                        MealGroup = groups[2]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190409_164426_окінава.jpg",
+                        Name = "Теплий рол Окінава",
+                        Description =
+                            "Кляр темпура, Гриб шиітаке, Огірок, Крем сир, Морський окунь смажений, Рис, Норі        ",
+                        Weight = 230,
+                        Price = 155,
+                        MealGroup = groups[2]
+                    },
+                    new Meal
+                    {
+                        ImagePath = "20190409_164321_окура.jpg",
+                        Name = "Теплий рол Окура",
+                        Description =
+                            "Сир плавлений, Кляр темпура, Салат айсберг, Соус цезар, Спайсі майонез, Курка смажена, Рис, Норі        ",
+                        Weight = 240,
+                        Price = 110,
+                        MealGroup = groups[2]
                     }
                 );
-
 
                 context.SaveChanges();
             }
