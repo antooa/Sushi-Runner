@@ -53,9 +53,32 @@ namespace SushiRunner.Controllers
                 });
         }
 
+        [Route("/Home/MealGroups/{mealGroupId}")]
         public async Task<IActionResult> MealGroups(long mealGroupId)
         {
-            return null;
+            var meals = _mealService.GetByGroupId(mealGroupId);
+            var user = await _accountService.GetLoggedUserOrCreateAnonymous(
+                HttpContext.User,
+                HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
+            var cart = _cartService.GetByUserOrCreateNew(user);
+            var mealsWithCartCheckbox = from meal in meals
+                join cartItem in cart.Items on meal.Id equals cartItem.MealId into mealModels
+                from m in mealModels.DefaultIfEmpty()
+                select new MealModel
+                {
+                    Id = meal.Id,
+                    Name = meal.Name,
+                    Description = meal.Description,
+                    Price = meal.Price,
+                    ImagePath = meal.ImagePath,
+                    Weight = meal.Weight,
+                    IsInCart = m != null
+                };
+            return View("Index",
+                new HomeModel
+                {
+                    Meals = mealsWithCartCheckbox,
+                });
         }
 
         public async Task<IActionResult> Cart()

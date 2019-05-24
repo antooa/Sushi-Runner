@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
@@ -43,6 +44,11 @@ namespace SushiRunner.Services
         {
             _repository.Delete(id);
             _repository.Save();
+        }
+
+        public IEnumerable<Meal> GetByGroupId(long mealGroupId)
+        {
+            return _repository.Search(meal => meal.MealGroup.Id == mealGroupId);
         }
 
         public virtual void Dispose(bool disposing)
