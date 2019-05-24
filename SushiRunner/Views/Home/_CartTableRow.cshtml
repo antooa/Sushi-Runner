@@ -13,14 +13,13 @@
     </div>
     <div class="quantity">
         <div class="cart-amount-changer">
-            <input value="@Model.Amount"
-                   id="item-qty" type="text" class="text-center" name="quantity"/>
+            <input value="@Model.Amount" type="text" class="text-center" name="quantity"/>
             <button class="cart-amount-inc-button">+</button>
             <button class="cart-amount-dec-button">-</button>
         </div>
     </div>
     <div class="sum" id="item-sum">
-        20 грн.
+        @(Model.Meal.Price * Model.Amount) грн.
     </div>
     <form id="@Model.Meal.Id" asp-controller="Home" asp-action="RemoveFromCart" method="post">
         <input type="hidden" name="Id" asp-for="Meal.Id"/>

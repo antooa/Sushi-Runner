@@ -31,11 +31,14 @@
                 }
             </div>
             <div class="total-sum">
-                <span id="total-sum"><strong>Загальна сума:</strong> 0 $</span>
+                <span id="total-sum">
+                    <strong>Загальна сума:</strong>
+                    @Model.Items.Select(item => item.Meal.Price * item.Amount).Sum() грн.
+                </span>
             </div>
-            <div class="pre-order">
-                <button class="btn btn-outline-success">Оформити</button>
-            </div>
+            <form class="pre-order" asp-controller="Order" asp-action="Create" method="post">
+                <button class="btn btn-outline-success" type="submit">Оформити</button>
+            </form>
         </div>
     </div>
 </div>
