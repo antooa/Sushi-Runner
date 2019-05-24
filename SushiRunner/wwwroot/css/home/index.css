@@ -97,16 +97,13 @@ body {
     top: 250px;
 }
 
-#side-nav-item1:hover {
-    width: 160px;
-}
-
+#side-nav-item1:hover,
 #side-nav-item2:hover {
-    width: 160px;
+    width: 150px;
 }
 
 #side-nav-item3:hover {
-    width: 200px;
+    width: 225px;
 }
 
 #side-nav-item5:hover {
@@ -115,7 +112,7 @@ body {
 
 #side-nav-item4:hover,
 #side-nav-item6:hover {
-    width: 170px;
+    width: 165px;
 }
 
 #menu {

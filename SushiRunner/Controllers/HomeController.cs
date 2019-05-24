@@ -53,6 +53,11 @@ namespace SushiRunner.Controllers
                 });
         }
 
+        public async Task<IActionResult> MealGroups(long mealGroupId)
+        {
+            return null;
+        }
+
         public async Task<IActionResult> Cart()
         {
             var user = await _accountService.GetLoggedUserOrCreateAnonymous(
