@@ -12,6 +12,8 @@ namespace SushiRunner.Services.Interfaces
         
         void RemoveItem(User user, long mealId);
 
+        void ChangeItemAmount(User user, long mealId, int newAmount);
+
         void Clear(User user);
         
         Task<(int, int)> CountAndTotalPrice(ClaimsPrincipal principal);
