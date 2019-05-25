@@ -84,9 +84,13 @@ namespace SushiRunner.Services
                 return;
             }
 
-            if (newAmount < 1 || newAmount > 99)
+            if (newAmount < 1)
             {
                 newAmount = 1;
+            }
+            else if (newAmount > 99)
+            {
+                newAmount = 99;
             }
 
             cartItem.Amount = newAmount;
