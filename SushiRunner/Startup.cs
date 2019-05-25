@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,11 +20,13 @@ namespace SushiRunner
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
+        public IHostingEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -47,7 +50,9 @@ namespace SushiRunner
                 .AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            
+            services.AddSingleton<IAppConf, IAppConf>(_ => new AppConf(Environment.WebRootPath));
+            
             services
                 .AddScoped<IRepository<Meal, long>, MealRepository>()
                 .AddScoped<IRepository<MealGroup, long>, MealGroupRepository>()

@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
 using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
+using SushiRunner.Utilities;
 
 namespace SushiRunner.Services
 {
@@ -15,11 +20,13 @@ namespace SushiRunner.Services
         private readonly IRepository<Meal, long> _repository;
         private readonly IMapper _mapper;
         private bool _disposed;
+        private readonly IAppConf _appConf;
 
-        public MealService(IRepository<Meal, long> repository, IMapper mapper)
+        public MealService(IRepository<Meal, long> repository, IMapper mapper, IAppConf appConf)
         {
             _repository = repository;
             _mapper = mapper;
+            _appConf = appConf;
         }
 
         public void Create(MealDTO mealDto)
@@ -51,6 +58,24 @@ namespace SushiRunner.Services
         public void Delete(long id)
         {
             _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Create(MealDTO mealDto, IFormFile file)
+        {
+            if (file != null && file.Length > 0)
+            {
+                var cropped = ImageTool.CropMaxSquare(Image.FromStream(file.OpenReadStream()));
+                var resized = ImageTool.Resize(cropped, 200, 200);
+                var uploads = Path.Combine(_appConf.WebRootPath, "pics\\MealPics");
+                var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(uploads, fileName);
+                mealDto.ImagePath = fileName;
+                resized.Save(filePath);
+            }
+    
+            var book = _mapper.Map<MealDTO, Meal>(mealDto);
+            _repository.Create(book);
             _repository.Save();
         }
 
