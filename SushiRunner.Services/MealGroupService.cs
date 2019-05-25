@@ -37,7 +37,6 @@ namespace SushiRunner.Services
 
         public MealGroupDTO Get(long id)
         {
-           
             var group = _repository.Get(id);
             return _mapper.Map<MealGroup, MealGroupDTO>(group);
         }
