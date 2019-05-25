@@ -30,7 +30,7 @@ namespace SushiRunner.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(OrderModel orderModel)
         {
             var user = await _accountService.GetLoggedUserOrCreateAnonymous(
                 HttpContext.User,
@@ -43,7 +43,7 @@ namespace SushiRunner.Controllers
                 PaymentType = "CARD",
                 Address = "Lviv, Heroyiv UPA,  77",
                 PlacedAt = DateTime.Now,
-                Items = cart.Items.Select(item => new OrderItem
+                Items = cart.Items.Select(item => new OrderItemDTO()
                 {
                     Meal = item.Meal,
                     Amount = item.Amount

@@ -2,8 +2,10 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
+using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 
 namespace SushiRunner.Services
@@ -14,17 +16,19 @@ namespace SushiRunner.Services
         private readonly IRepository<CartItem, long> _cardItemRepository;
         private readonly IRepository<Meal, long> _mealRepository;
         private readonly IAccountService _accountService;
+        private readonly IMapper _mapper;
 
         public CartService(IRepository<Cart, long> cartRepository, IRepository<CartItem, long> cardItemRepository,
-            IRepository<Meal, long> mealRepository, IAccountService accountService)
+            IRepository<Meal, long> mealRepository, IAccountService accountService, IMapper mapper)
         {
             _cartRepository = cartRepository;
             _cardItemRepository = cardItemRepository;
             _mealRepository = mealRepository;
             _accountService = accountService;
+            _mapper = mapper;
         }
 
-        public Cart GetByUserOrCreateNew(User user)
+        public CartDTO GetByUserOrCreateNew(User user)
         {
             var cart = _cartRepository.Search(c => c.User.Id == user.Id).FirstOrDefault();
             if (cart == null)
@@ -36,7 +40,7 @@ namespace SushiRunner.Services
                 _cartRepository.Create(cart);
             }
 
-            return cart;
+            return _mapper.Map<Cart, CartDTO>(cart);
         }
 
         public void AddItem(User user, long mealId)
@@ -47,7 +51,8 @@ namespace SushiRunner.Services
                 throw new Exception($"Meal with Id={mealId} not found");
             }
 
-            var cart = GetByUserOrCreateNew(user);
+            var cartDto = GetByUserOrCreateNew(user);
+            var cart = _mapper.Map<CartDTO, Cart>(cartDto);
             var cartItem = cart.Items.FirstOrDefault(item => item.Meal.Id == mealId);
             if (cartItem == null)
             {
@@ -70,14 +75,14 @@ namespace SushiRunner.Services
 
         public void RemoveItem(User user, long mealId)
         {
-            var cart = GetByUserOrCreateNew(user);
-            cart.Items.RemoveAll(item => item.MealId == mealId);
+            var cart = _mapper.Map<CartDTO, Cart>(GetByUserOrCreateNew(user));
+            cart.Items = cart.Items.Where(it => it.MealId != mealId).ToList();
             _cartRepository.Update(cart);
         }
 
         public void Clear(User user)
         {
-            var card = GetByUserOrCreateNew(user);
+            var card = _mapper.Map<CartDTO, Cart>(GetByUserOrCreateNew(user));
             card.Items.Clear();
             _cartRepository.Update(card);
         }
@@ -90,7 +95,7 @@ namespace SushiRunner.Services
                 return (0, 0);
             }
 
-            var cart = GetByUserOrCreateNew(user);
+            var cart = _mapper.Map<CartDTO, Cart>(GetByUserOrCreateNew(user));
             var totalPrice = cart.Items
                 .Select(item => item.Amount * item.Meal.Price)
                 .Sum();

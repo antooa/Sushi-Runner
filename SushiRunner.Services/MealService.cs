@@ -21,12 +21,14 @@ namespace SushiRunner.Services
         private readonly IMapper _mapper;
         private bool _disposed;
         private readonly IAppConf _appConf;
+        private readonly ICartService _cartService;
 
-        public MealService(IRepository<Meal, long> repository, IMapper mapper, IAppConf appConf)
+        public MealService(IRepository<Meal, long> repository, IMapper mapper, IAppConf appConf, ICartService cartService)
         {
             _repository = repository;
             _mapper = mapper;
             _appConf = appConf;
+            _cartService = cartService;
         }
 
         public void Create(MealDTO mealDto)
@@ -79,15 +81,22 @@ namespace SushiRunner.Services
             _repository.Save();
         }
 
+        public IEnumerable<MealDTO> GetMealsWithCartCheckbox(User user, IEnumerable<MealDTO> meals)
+        {
+            var dtos = meals.ToList();
+            var cart = _cartService.GetByUserOrCreateNew(user);
+            foreach (var dto in dtos)
+            {
+                dto.IsInCart = cart.Items.Any(c => c.MealId.Equals(dto.Id));
+            }
+
+            return dtos;
+        }
+
         public IEnumerable<MealDTO> GetByGroupId(long id)
         {
             var meals = _repository.Search(m => m.MealGroup.Id.Equals(id));
             return meals.Select(meal => _mapper.Map<Meal, MealDTO>(meal)).ToList();
-        }
-
-        public IEnumerable<MealDTO> GetWithCartCheckbox()
-        {
-            
         }
 
         public virtual void Dispose(bool disposing)
