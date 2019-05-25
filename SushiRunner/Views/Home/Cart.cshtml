@@ -1,0 +1,44 @@
+@model SushiRunner.ViewModels.Home.CartModel
+
+@section Scripts
+{
+    <script src="@Url.Content("/js/home/cart.js")"></script>
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="@Url.Content("/css/home/header-with-lines.css")">
+}
+
+
+<div class="cart-page-container">
+    <p class="hwl">
+        <span>Оформити замовлення</span>
+    </p>
+    <div class="cart-container">
+        <div class="cart-column-name-container">
+            <div class="cart-table-head">
+                <span class="description">Опис</span>
+                <span class="price">Ціна</span>
+                <span class="quantity">Кількість</span>
+                <span class="sum">Сума</span>
+                <span class="cart-remove-button" style="display: none"></span>
+            </div>
+            <div class="table-rows">
+                @foreach (var cartItem in Model.Items)
+                {
+                    <partial name="_CartTableRow" model="@cartItem"></partial>
+                }
+            </div>
+            <div class="total-sum">
+                <span id="total-sum">
+                    <strong>Загальна сума:</strong>
+                    @Model.Items.Select(item => item.Meal.Price * item.Amount).Sum() грн.
+                </span>
+            </div>
+            <form class="pre-order" asp-controller="Order" asp-action="Create" method="post">
+                <button class="btn btn-outline-success" type="submit">Оформити</button>
+            </form>
+        </div>
+    </div>
+</div>

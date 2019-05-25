@@ -1,0 +1,31 @@
+@model CartItemModel
+
+<div class="cart-table-row">
+    <div class="description">
+        <img class="image-block" src="/img/sushi.jpg"/>
+        <div class="cart-title-and-weight">
+            <span class="productName">@Model.Meal.Name</span>
+            <span class="productWeight">@Model.Meal.Weight gram</span>
+        </div>
+    </div>
+    <div class="price">
+        <span id="item-price">@Model.Meal.Price грн.</span>
+    </div>
+    <div class="quantity">
+        <div class="cart-amount-changer">
+            <input value="@Model.Amount" type="text" class="text-center" name="quantity"/>
+            <button class="cart-amount-inc-button">+</button>
+            <button class="cart-amount-dec-button">-</button>
+        </div>
+    </div>
+    <div class="sum" id="item-sum">
+        @(Model.Meal.Price * Model.Amount) грн.
+    </div>
+    <form id="@Model.Meal.Id" asp-controller="Home" asp-action="RemoveFromCart" method="post">
+        <input type="hidden" name="Id" asp-for="Meal.Id"/>
+        <input type="hidden" name="redirectView" value="Cart"/>
+        <button type="submit" class="cart-remove-button">
+            <i class="fas fa-times"></i>
+        </button>
+    </form>
+</div>

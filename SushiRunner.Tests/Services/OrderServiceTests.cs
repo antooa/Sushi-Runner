@@ -233,7 +233,6 @@ namespace SushiRunner.Tests.Services
                                 Price = 100,
                                 MealGroup = new MealGroup()
                                 {
-                                    Description = "best",
                                     Id = 1,
                                     Name = "Ukrainian"
                                 },
@@ -264,7 +263,6 @@ namespace SushiRunner.Tests.Services
                                 Price = 100,
                                 MealGroup = new MealGroup()
                                 {
-                                    Description = "best",
                                     Id = 1,
                                     Name = "Ukrainian"
                                 },
@@ -296,7 +294,6 @@ namespace SushiRunner.Tests.Services
                                 Price = 100,
                                 MealGroup = new MealGroup()
                                 {
-                                    Description = "best",
                                     Id = 1,
                                     Name = "Ukrainian"
                                 },
@@ -335,7 +332,6 @@ namespace SushiRunner.Tests.Services
                                 Price = 100,
                                 MealGroup = new MealGroup()
                                 {
-                                    Description = "best",
                                     Id = 1,
                                     Name = "Ukrainian"
                                 },
@@ -365,7 +361,6 @@ namespace SushiRunner.Tests.Services
                                 Price = 100,
                                 MealGroup = new MealGroup()
                                 {
-                                    Description = "best",
                                     Id = 1,
                                     Name = "Ukrainian"
                                 },
@@ -396,7 +391,6 @@ namespace SushiRunner.Tests.Services
                                 Price = 100,
                                 MealGroup = new MealGroup()
                                 {
-                                    Description = "best",
                                     Id = 1,
                                     Name = "Ukrainian"
                                 },
@@ -408,6 +402,5 @@ namespace SushiRunner.Tests.Services
                 }
             };
         }
-        
     }
 }

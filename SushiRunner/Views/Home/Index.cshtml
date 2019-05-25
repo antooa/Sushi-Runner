@@ -1,30 +1,32 @@
-﻿@model SushiRunner.ViewModels.HomeModel
+﻿@model SushiRunner.ViewModels.Home.HomeModel
 
 @{
     ViewData["Title"] = "Sushi-Runner";
     Layout = "_HomeLayout";
 }
 
-<partial name="_Header" model="@Model.HeaderModel"/>
+@section Styles
+{
+    <link rel="stylesheet" href="@Url.Content("/css/home/header-with-lines.css")">
+}
 
 <div id="wrapper">
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">Sushi-Runner</a>
-            </li>
-            @foreach (var group in @Model.HeaderModel.AvailableGroups)
-            {
-                <li>
-                    <a asp-controller="Home" asp-action="Index">@group.Name</a>
-                </li>
-            }
-        </ul>
-    </div>
+    @if (@Model.Title == null)
+    {
+        <p id="hwl-edit" class="hwl">
+            <span>Всі продукти</span>
+        </p>
+    }
+    else
+    {
+        <p id="hwl-edit" class="hwl">
+            <span>@Model.Title</span>
+        </p>
+    }
     <div class="container-fluid">
         @foreach (var meal in Model.Meals)
         {
-            <partial name="_Meal" model="@meal"/>
+            <partial name="_Meal" model="@meal"></partial>
         }
     </div>
 </div>
