@@ -71,7 +71,7 @@ namespace SushiRunner.Tests.Services
             // Assert
             Assert.Equal(expected.Id, actual.Id);
             Assert.Equal(expected.Address, actual.Address);
-            Assert.Equal(expected.Items.Count, actual.Items.Count);
+            Assert.Equal(expected.Items.Count(), actual.Items.Count());
         }
 
         [Fact]
