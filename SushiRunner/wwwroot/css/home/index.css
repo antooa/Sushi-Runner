@@ -357,7 +357,7 @@ body {
 
 .container-fluid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
     justify-content: space-between;
     max-width: 1200px;
     padding: 0 30px;
