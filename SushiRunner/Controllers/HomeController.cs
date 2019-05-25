@@ -112,27 +112,32 @@ namespace SushiRunner.Controllers
             );
         }
 
-        public async Task<IActionResult> AddToCart(long id)
+        public async Task<IActionResult> AddToCart(long id, string redirectPath)
         {
             var user = await _accountService.GetLoggedUserOrCreateAnonymous(
                 HttpContext.User,
                 HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
             _cartService.AddItem(user, id);
-            return RedirectToAction("Index");
+            if (redirectPath == null)
+            {
+                redirectPath = "/";
+            }
+
+            return Redirect(redirectPath);
         }
 
-        public async Task<IActionResult> RemoveFromCart(long id, string redirectView)
+        public async Task<IActionResult> RemoveFromCart(long id, string redirectPath)
         {
             var user = await _accountService.GetLoggedUserOrCreateAnonymous(
                 HttpContext.User,
                 HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
             _cartService.RemoveItem(user, id);
-            if (redirectView == null)
+            if (redirectPath == null)
             {
-                redirectView = "Index";
+                redirectPath = "/";
             }
 
-            return RedirectToAction(redirectView);
+            return Redirect(redirectPath);
         }
 
         public IActionResult Error()
