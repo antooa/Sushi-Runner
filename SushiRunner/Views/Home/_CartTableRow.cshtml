@@ -2,7 +2,7 @@
 
 <div class="cart-table-row">
     <div class="description">
-        <img class="image-block" src="/img/sushi.jpg"/>
+        <img class="image-block" src="@Model.Meal.ImagePath"/>
         <div class="cart-title-and-weight">
             <span class="productName">@Model.Meal.Name</span>
             <span class="productWeight">@Model.Meal.Weight gram</span>
@@ -13,9 +13,28 @@
     </div>
     <div class="quantity">
         <div class="cart-amount-changer">
-            <input value="@Model.Amount" type="text" class="text-center" name="quantity"/>
-            <button class="cart-amount-inc-button">+</button>
-            <button class="cart-amount-dec-button">-</button>
+            <form id="@Model.Meal.Id" class="cart-amount-input-form"
+                  asp-controller="Home" asp-action="ChangeCartItemAmount" method="post">
+                <input type="hidden" name="Id" asp-for="Meal.Id"/>
+                <input type="hidden" name="redirectPath" value="@Context.Request.Path"/>
+                <input class="text-center" type="text" name="cartItemAmount" value="@Model.Amount"/>
+            </form>
+            <form id="@Model.Meal.Id" asp-controller="Home" asp-action="ChangeCartItemAmount" method="post">
+                <input type="hidden" name="Id" asp-for="Meal.Id"/>
+                <input type="hidden" name="redirectPath" value="@Context.Request.Path"/>
+                <input class="text-center" type="hidden" name="cartItemAmount" value="@(Model.Amount + 1)"/>
+                <span class="card-text p-1">
+                    <button class="cart-amount-inc-button">+</button>
+                </span>
+            </form>
+            <form id="@Model.Meal.Id" asp-controller="Home" asp-action="ChangeCartItemAmount" method="post">
+                <input type="hidden" name="Id" asp-for="Meal.Id"/>
+                <input type="hidden" name="redirectPath" value="@Context.Request.Path"/>
+                <input class="text-center" type="hidden" name="cartItemAmount" value="@(Model.Amount - 1)"/>
+                <span class="card-text p-1">
+                    <button class="cart-amount-dec-button">-</button>
+                </span>
+            </form>
         </div>
     </div>
     <div class="sum" id="item-sum">
