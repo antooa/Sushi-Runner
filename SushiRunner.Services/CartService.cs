@@ -75,6 +75,28 @@ namespace SushiRunner.Services
             _cartRepository.Update(cart);
         }
 
+        public void ChangeItemAmount(User user, long mealId, int newAmount)
+        {
+            var cart = GetByUserOrCreateNew(user);
+            var cartItem = cart.Items.FirstOrDefault(item => item.MealId == mealId);
+            if (cartItem == null)
+            {
+                return;
+            }
+
+            if (newAmount < 1)
+            {
+                newAmount = 1;
+            }
+            else if (newAmount > 99)
+            {
+                newAmount = 99;
+            }
+
+            cartItem.Amount = newAmount;
+            _cartRepository.Update(cart);
+        }
+
         public void Clear(User user)
         {
             var card = GetByUserOrCreateNew(user);
