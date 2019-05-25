@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -51,12 +52,6 @@ namespace SushiRunner.Services
         {
             _repository.Delete(id);
             _repository.Save();
-        }
-
-        public IEnumerable<MealDTO> GetByGroup(MealDTO mealDto)
-        {
-            var meals = _repository.Search(m => m.MealGroup.Name.Equals(mealDto.MealGroup.Name));           
-            return meals.Select(meal => _mapper.Map<Meal, MealDTO>(meal)).ToList();
         }
 
         public IEnumerable<MealDTO> GetByGroupId(long id)

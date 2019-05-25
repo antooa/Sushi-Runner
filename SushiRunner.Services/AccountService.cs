@@ -28,73 +28,61 @@ namespace SushiRunner.Services
         public async Task<SignInResult> SignInAsync(string username, string password)
         {
             var user = await _userManager.FindByNameAsync(username);
-            if (user != null)
+            if (user == null || user.IsAnonymous)
             {
-                if (user.IsAnonymous)
+                return new SignInResult
                 {
-                    return new SignInResult
+                    IsSuccessful = false,
+                    Errors = new List<AccountError>
                     {
-                        IsSuccessful = false,
-                        Errors = new List<AccountError>
-                        {
-                            new AccountError {Message = "Couldn't find such user"}
-                        }
-                    };
-                }
-
-                if (!await _userManager.IsEmailConfirmedAsync(user))
-                {
-                    return new SignInResult
-                    {
-                        IsSuccessful = false,
-                        Errors = new List<AccountError>
-                        {
-                            new AccountError {Message = "User email not confirmed"}
-                        }
-                    };
-                }
-
-                var signIn = await _signInManager.PasswordSignInAsync(user, password, false, false);
-                if (signIn.Succeeded)
-                {
-                    return new SignInResult
-                    {
-                        IsSuccessful = true,
-                        Roles = await _userManager.GetRolesAsync(user)
-                    };
-                }
-
-                var signInResult = new SignInResult {IsSuccessful = false};
-                string errorMessage;
-                if (signIn.IsLockedOut)
-                {
-                    errorMessage = "User is locket out";
-                }
-                else if (signIn.IsNotAllowed)
-                {
-                    errorMessage = "User not allowed to sign-in";
-                }
-                else if (signIn.RequiresTwoFactor)
-                {
-                    errorMessage = "User requires two-factor authentication";
-                }
-                else
-                {
-                    errorMessage = "Wrong password for this user";
-                }
-
-                signInResult.Errors = new List<AccountError> {new AccountError {Message = errorMessage}};
-                return signInResult;
+                        new AccountError {Message = "Couldn't find such user"}
+                    }
+                };
             }
 
-            return new SignInResult
+            if (!await _userManager.IsEmailConfirmedAsync(user))
             {
-                IsSuccessful = false,
-                Errors = new List<AccountError>
+                return new SignInResult
                 {
-                    new AccountError {Message = "Couldn't find such user"}
-                }
-            };
+                    IsSuccessful = false,
+                    Errors = new List<AccountError>
+                    {
+                        new AccountError {Message = "User email not confirmed"}
+                    }
+                };
+            }
+
+            var signIn = await _signInManager.PasswordSignInAsync(user, password, true, false);
+            if (signIn.Succeeded)
+            {
+                return new SignInResult
+                {
+                    IsSuccessful = true,
+                    Roles = await _userManager.GetRolesAsync(user)
+                };
+            }
+
+            var signInResult = new SignInResult {IsSuccessful = false};
+            string errorMessage;
+            if (signIn.IsLockedOut)
+            {
+                errorMessage = "User is locket out";
+            }
+            else if (signIn.IsNotAllowed)
+            {
+                errorMessage = "User not allowed to sign-in";
+            }
+            else if (signIn.RequiresTwoFactor)
+            {
+                errorMessage = "User requires two-factor authentication";
+            }
+            else
+            {
+                errorMessage = "Wrong password for this user";
+            }
+
+            signInResult.Errors = new List<AccountError> {new AccountError {Message = errorMessage}};
+            return signInResult;
         }
 
         public async Task<SignUpResult> SignUpAsync(string anonymousId, string username, string email, string password,
@@ -169,21 +157,27 @@ namespace SushiRunner.Services
 
         public async Task<User> GetLoggedUserOrCreateAnonymous(ClaimsPrincipal principal, string newId)
         {
-            var user = await _userManager.GetUserAsync(principal);
+            var user = await GetLoggedUser(principal);
             if (user == null)
             {
-                var anonymousUser = new User
+                user = new User
                 {
                     Id = newId,
                     UserName = newId,
                     IsAnonymous = true
                 };
 
-                await _userManager.CreateAsync(anonymousUser, newId);
-                return anonymousUser;
+                var password = newId + 'A'; // password validation requires upper-case letter
+                await _userManager.CreateAsync(user, password);
+                await _signInManager.PasswordSignInAsync(newId, password, true, false);
             }
 
             return user;
+        }
+
+        public async Task<User> GetLoggedUser(ClaimsPrincipal principal)
+        {
+            return await _userManager.GetUserAsync(principal);
         }
     }
 }

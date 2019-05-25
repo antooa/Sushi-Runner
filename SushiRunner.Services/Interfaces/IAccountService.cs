@@ -16,5 +16,7 @@ namespace SushiRunner.Services.Interfaces
         Task<EmailConfirmationResult> ConfirmEmailAsync(string userId, string code);
 
         Task<User> GetLoggedUserOrCreateAnonymous(ClaimsPrincipal principal, string newId);
+
+        Task<User> GetLoggedUser(ClaimsPrincipal principal);
     }
 }

@@ -1,0 +1,34 @@
+.hwl {
+    margin: 0 0 2em 0;
+    line-height: 0.5;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #404040;
+}
+
+.hwl span {
+    display: inline-block;
+    position: relative;
+}
+
+.hwl span:before,
+.hwl span:after {
+    content: "";
+    position: absolute;
+    height: 9px;
+    border-bottom: 2px solid lightgray;
+    top: 0;
+    width: 600px;
+}
+
+.hwl span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.hwl span:after {
+    left: 100%;
+    margin-left: 15px;
+}

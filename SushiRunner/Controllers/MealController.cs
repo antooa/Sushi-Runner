@@ -27,9 +27,10 @@ namespace SushiRunner.Controllers
             var meals = dtos.Select(dto => _mapper.Map<MealDTO, MealModel>(dto)).ToList();
             return View(meals);
         }
-            
+
         [Authorize(Roles = UserRoles.Moderator)]
-        public IActionResult Create([Bind("Id, Name, Description, Weight, Price, MealGroupId")] MealModel meal)
+        public IActionResult Create([Bind("Id, Name, Description, Weight, Price, MealGroupId")]
+            MealModel meal)
         {
             if (ModelState.IsValid)
             {
@@ -48,7 +49,7 @@ namespace SushiRunner.Controllers
 
             return View(meal);
         }
-        
+
 
         [Authorize(Roles = UserRoles.Moderator)]
         public IActionResult Update(MealModel meal)
@@ -70,9 +71,9 @@ namespace SushiRunner.Controllers
 
             return View(meal);
         }
-        
+
         [Authorize(Roles = UserRoles.Moderator)]
-        public IActionResult Delete([Bind("Id")]MealModel meal)
+        public IActionResult Delete([Bind("Id")] MealModel meal)
         {
             if (ModelState.IsValid)
             {
@@ -90,15 +91,5 @@ namespace SushiRunner.Controllers
 
             return View(meal);
         }
-        
-        [HttpGet]
-        public IActionResult MealsByCategory(string mealGroupName)
-        {
-            var requested = new MealDTO {MealGroup = new MealGroup() {Name = mealGroupName}};
-            var dtos = _mealService.GetByGroup(requested);
-            var meals = dtos.Select(dto => _mapper.Map<MealDTO, MealModel>(dto)).ToList();
-            ViewBag.Meals = meals;
-            return View();
-        }   
     }
-} 
+}
