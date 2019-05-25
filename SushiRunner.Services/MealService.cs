@@ -85,6 +85,11 @@ namespace SushiRunner.Services
             return meals.Select(meal => _mapper.Map<Meal, MealDTO>(meal)).ToList();
         }
 
+        public IEnumerable<MealDTO> GetWithCartCheckbox()
+        {
+            
+        }
+
         public virtual void Dispose(bool disposing)
         {
             if (!_disposed)
