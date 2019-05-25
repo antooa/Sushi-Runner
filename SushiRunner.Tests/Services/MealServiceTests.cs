@@ -41,25 +41,24 @@ namespace SushiRunner.Tests.Services
         }
 
         [Theory]
-        [InlineData("1")]
-        [InlineData("2")]
-        [InlineData("3")]
-        public void GetByGroupTest(string groupName)
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void GetByGroupTest(long id)
         {
             // Arrange
             var list = GetDtoCollection();
             var svc = SetupService();
             var mealDtos = list.ToList();
-            var expected = mealDtos.First(dto => dto.MealGroup.Name.Equals(groupName));
+            var expected = mealDtos.First(dto => dto.MealGroup.Id.Equals(id));
             
             // Act
-            var mealDto = new MealDTO() {MealGroup = new MealGroup() {Name = groupName}};
-            var actual = svc.GetByGroup(mealDto);
+            var actual = svc.GetByGroupId(id);
             
             // Assert
             foreach (var order in actual)
             {
-                Assert.Equal(expected.MealGroup.Name, order.MealGroup.Name);
+                Assert.Equal(expected.MealGroup.Id, order.MealGroup.Id);
             }
             
         }
@@ -218,7 +217,6 @@ namespace SushiRunner.Tests.Services
                     MealGroup = new MealGroup()
                     {
                         Id = 1,
-                        Description = "Desc",
                         Name = "1"
                     },
                     ImagePath = "MealPics/1.jpg"
@@ -231,7 +229,6 @@ namespace SushiRunner.Tests.Services
                     MealGroup = new MealGroup()
                     {
                         Id = 2,
-                        Description = "Desc",
                         Name = "2"
                     },
                     ImagePath = "MealPics/1.jpg"
@@ -243,8 +240,7 @@ namespace SushiRunner.Tests.Services
                     Name = "Meal3",
                     MealGroup = new MealGroup()
                     {
-                        Id = 3,
-                        Description = "Desc",
+                        Id = 3,         
                         Name = "3"
                     },
                     ImagePath = "MealPics/1.jpg"
@@ -265,7 +261,6 @@ namespace SushiRunner.Tests.Services
                     MealGroup = new MealGroup()
                     {
                         Id = 1,
-                        Description = "Desc",
                         Name = "1"
                     },
                     ImagePath = "MealPics/1.jpg"
@@ -277,8 +272,7 @@ namespace SushiRunner.Tests.Services
                     Name = "Meal2",
                     MealGroup = new MealGroup()
                     {
-                        Id = 1,
-                        Description = "Desc",
+                        Id = 2,
                         Name = "2"
                     },
                     ImagePath = "MealPics/1.jpg"
@@ -289,8 +283,7 @@ namespace SushiRunner.Tests.Services
                     Name = "Meal3",
                     MealGroup = new MealGroup()
                     {
-                        Id = 1,
-                        Description = "Desc",
+                        Id = 3,
                         Name = "3"
                     },
                     ImagePath = "MealPics/1.jpg"
