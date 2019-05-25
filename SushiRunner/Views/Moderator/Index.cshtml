@@ -1,3 +1,4 @@
+@model IEnumerable<SushiRunner.ViewModels.OrderModel>
 @{
     ViewData["Title"] = "Sushi-Runner Moderator";
     Layout = "_Layout";
@@ -35,5 +36,9 @@
             <div class="order-heading-action">
             </div>
         </div>
+        @foreach (var order in Model)
+        {
+            <partial name="_Order" model="@order"></partial>
+        }
     </div>
 </div>
