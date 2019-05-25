@@ -1,0 +1,119 @@
+@{
+    ViewData["Title"] = "Sushi-Runner Moderator";
+    Layout = "_Layout";
+}
+@section Styles
+{
+    <link rel="stylesheet" href="@Url.Content("/css/moderator/details.css")">
+}
+@section Scripts
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, options);
+        });
+    
+        $(document).ready(function(){
+            $('select').formSelect();
+        });
+    </script>
+}
+
+<div class="order-body z-depth-5">
+    <form class="form" method="post">
+        <div class="order-item">
+            <div class="order-type">
+                        <span class="type">Order type </span><span>New</span>
+                    </div>
+            <div class="order-info">
+                    <div style="width: 100%">
+
+                    <div class="order-customer-name">
+                        <label for="first_name">First Name</label>
+                        <input placeholder="Name" id="first_name" type="text" value="Valentyn">
+
+                    </div>
+                    <div class="order-phone">
+                        <label for="phone">Phone</label>
+                        <input type="text" placeholder="Phone" id="phone" name="phone"
+                               value="+380958869367">
+                    </div>
+                    <div class="order-address">
+                    <label for="address">Address</label>
+                        <input type="text" placeholder="Address" id="address" name="address"
+                               value="Medovoi Pechery 39">
+                    </div>
+               </div>
+            </div>
+
+            <div class="order-content">
+                <div class="order-items">
+                    <span class="content">Order content:</span>
+                    <ol class="rounded-list">
+                        <li>
+                            <div class="list-item">
+                                <div class="quantity">
+                                    <input type="number" class="text-center " min="1"
+                                           max="99"
+                                           name="quantity"></div>
+                                <span>rice portions</span>
+                                <button class="waves-effect waves-light btn red remove-button"><span>Delete</span></button>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <span class="add-meal-span">Add meal</span>
+                <div class="label-selector">
+                    <span>
+                        Category
+                    </span>
+                    <span>
+                        Meal
+                    </span>
+                    <span>
+                        Amount
+                    </span>
+                </div>
+
+                <div class="selector">
+                    <div class="select" style="margin-left: 15px">
+                        <select>
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label>Materialize Select</label>
+                    </div>
+                    <div class="select">
+                        <select>
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label>Materialize Select</label>
+                    </div>
+                    <div class="quantity"><input  id="item-qty1" type="number" class="text-center " min="1" max="99"
+                                                 name="quantity"></div>
+                    <div class="order-action">
+                        <button href="http://google.com" class="waves-effect waves-light btn green accent-4 ok-button"><span>Add</span></button>
+                        <button href="http://google.com" class="waves-effect waves-light btn red remove-button"><span>Cancel</span></button>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="order-price">
+                <span class="price">Price:100$</span>
+            </div>
+            <div class="order-action">
+                <button href="http://google.com" type="submit" class="waves-effect waves-light btn green accent-4 ok-button"><span>Confirm</span></button>
+                <button href="http://google.com" type="submit" class="waves-effect waves-light btn green accent-4 ok-button"><span>Make delivered</span>
+                </button>
+                <button href="http://google.com" type="submit" class="waves-effect waves-light btn red remove-button"><span>Reject</span></button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -14,6 +14,17 @@
     grid-gap: 1em;
     background-color: #333333;
     color: #b1b1b1;
+    font-weight: 500;
+    font-size: 18px;
+}
+.order-heading-num {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+.order-heading-name {
+    display: flex;
+    align-items: center;
 }
 
 .order-heading-type {

@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Sushi-Runner Moderator";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sushi-Runner Moderator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/moderator/index.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="lib/materialize/dist/css/materialize.css" media="screen,projection"/>
+    <link rel="stylesheet" href="@Url.Content("/css/home/index.css")">
+    @RenderSection("Styles", false)
+</head>
+<body class="grey lighten-3">
+<header id="menu">
+        <div class="home-image-container">
+            <img src="/img/logo.jpg" alt="Logo - SushiRunner">
+        </div>
+        <nav class="navbar_items">
+            <div class="navbar_link">
+                <a href="/">Головна</a>
+            </div>
+            <div class="navbar_link">
+                <a href="#">Замовлення</a>
+            </div>
+            <div class="navbar_link">
+                <a href="#">Категорії</a>
+            </div>
+            <div class="navbar_link">
+                <a href="#">Продукти</a>
+            </div>
+        </nav>
+        <div id="account">
+            <div id="user">
+                <div id="user">
+                </div>
+            </div>
+            <div id="basket">
+            </div>
+            <div id="totalPrice">
+            </div>
+        </div>
+    </header>
+@RenderBody()
+<script src="js/index.js"></script>
+<script type="text/javascript" src="lib/materialize/dist/js/materialize.js"></script>
+@RenderSection("Scripts", false)
+</body>
+</html>

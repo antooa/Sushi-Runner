@@ -1,0 +1,23 @@
+@model IEnumerable<SushiRunner.ViewModels.OrderModel>
+
+@foreach (var order in Model)
+{
+    <div class="order-item" onclick="location.href = '#';">
+        <div class="order-num">
+            <span>1</span>
+        </div>
+        <div class="order-customer-name">
+            <span>Valentin</span>
+        </div>
+        <div class="order-phone">
+            <span>+380958869367</span>
+        </div>
+        <div class="order-address">
+            <span>Medovoi Pechery 39</span>
+        </div>
+        <div class="order-action">
+            <button class="waves-effect waves-light btn green accent-4 ok-button">Ok</button>
+            <button class="waves-effect waves-light btn red remove-button">Remove</button>
+        </div>
+    </div>
+}
