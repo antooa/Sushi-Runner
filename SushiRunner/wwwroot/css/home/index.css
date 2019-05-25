@@ -5,6 +5,10 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+html, body, .home-page-container {
+    height: 100%;
+}
+
 button:focus {
     outline: 0;
 }
@@ -28,10 +32,11 @@ body {
 
 #home-side-nav {
     width: 67px;
-    height: 200%;
+    /*height: 200%;*/
     background: white;
     position: absolute;
     top: 80px;
+    bottom: 0;
     left: 0;
     box-shadow: 4px 0 24px rgba(1, 1, 1, 0.1);
 }
