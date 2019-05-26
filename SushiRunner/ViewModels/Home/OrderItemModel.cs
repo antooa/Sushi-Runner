@@ -4,7 +4,7 @@ namespace SushiRunner.ViewModels
 {
     public class OrderItemModel
     {
-        public Meal Meal { get; set; }
+        public MealModel Meal { get; set; }
         public int Amount { get; set; }
     }
 }

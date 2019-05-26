@@ -11,5 +11,6 @@ namespace SushiRunner.Services.Dto
         public string ImagePath { get; set; }
         public int Price { get; set; }
         public MealGroup MealGroup { get; set; }
+        public bool IsInCart { get; set; }
     }
 }
