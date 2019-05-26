@@ -4,6 +4,7 @@ namespace SushiRunner.ViewModels
 {
     public class OrderModel
     {
+        public long Id { get; set; }
         public string CustomerName { get; set; }
         public string PaymentType { get; set; }
         public string Address { get; set; }
