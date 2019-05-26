@@ -28,29 +28,24 @@ namespace SushiRunner.Services
             _mapper = mapper;
         }
 
-        private CartDTO _GetByUserOrCreateNew(User user)
+        private Cart _GetByUserOrCreateNew(User user)
         {
             var cart = _cartRepository.Search(c => c.User.Id == user.Id).FirstOrDefault();
-            if (cart != null) return _mapper.Map<Cart, CartDTO>(cart);
-            cart = new Cart
+            if (cart == null)
             {
-                User = user
-            };
-            _cartRepository.Create(cart);
+                cart = new Cart
+                {
+                    User = user
+                };
+                _cartRepository.Create(cart);
+            }
 
-            return _mapper.Map<Cart, CartDTO>(cart);
+            return cart;
         }
-        
+
         public CartDTO GetByUserOrCreateNew(User user)
         {
-            var cart = _cartRepository.Search(c => c.User.Id == user.Id).FirstOrDefault();
-            if (cart != null) return _mapper.Map<Cart, CartDTO>(cart);
-            cart = new Cart
-            {
-                User = user
-            };
-            _cartRepository.Create(cart);
-
+            var cart = _GetByUserOrCreateNew(user);
             return _mapper.Map<Cart, CartDTO>(cart);
         }
 
@@ -62,8 +57,7 @@ namespace SushiRunner.Services
                 throw new Exception($"Meal with Id={mealId} not found");
             }
 
-            var cartDto = _GetByUserOrCreateNew(user);
-            var cart = _mapper.Map<CartDTO, Cart>(cartDto);
+            var cart = _GetByUserOrCreateNew(user);
             var cartItem = cart.Items.FirstOrDefault(item => item.Meal.Id == mealId);
             if (cartItem == null)
             {
@@ -86,15 +80,15 @@ namespace SushiRunner.Services
 
         public void RemoveItem(User user, long mealId)
         {
-            var cart = _mapper.Map<CartDTO, Cart>(_GetByUserOrCreateNew(user));
+            var cart = _GetByUserOrCreateNew(user);
             cart.Items = cart.Items.Where(it => it.MealId != mealId).ToList();
             _cartRepository.Update(cart);
         }
 
         public void ChangeItemAmount(User user, long mealId, int newAmount)
         {
-            var cartDto = _GetByUserOrCreateNew(user);
-            var cartItem = cartDto.Items.FirstOrDefault(item => item.MealId == mealId);
+            var cart = _GetByUserOrCreateNew(user);
+            var cartItem = cart.Items.FirstOrDefault(item => item.MealId == mealId);
             if (cartItem == null)
             {
                 return;
@@ -110,13 +104,12 @@ namespace SushiRunner.Services
             }
 
             cartItem.Amount = newAmount;
-            var cart = _mapper.Map<CartDTO, Cart>(cartDto);
             _cartRepository.Update(cart);
         }
 
         public void Clear(User user)
         {
-            var card = _mapper.Map<CartDTO, Cart>(_GetByUserOrCreateNew(user));
+            var card = _GetByUserOrCreateNew(user);
             card.Items.Clear();
             _cartRepository.Update(card);
         }
@@ -129,7 +122,7 @@ namespace SushiRunner.Services
                 return (0, 0);
             }
 
-            var cart = _mapper.Map<CartDTO, Cart>(_GetByUserOrCreateNew(user));
+            var cart = _GetByUserOrCreateNew(user);
             var totalPrice = cart.Items
                 .Select(item => item.Amount * item.Meal.Price)
                 .Sum();
