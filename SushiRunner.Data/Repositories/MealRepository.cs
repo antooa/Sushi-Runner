@@ -43,7 +43,13 @@ namespace SushiRunner.Data.Repositories
 
         public void Update(Meal item)
         {
-            _context.Meals.Update(item);
+            var oldMeal = Get(item.Id);
+            oldMeal.Name = item.Name;
+            oldMeal.Description = item.Description;
+            oldMeal.Price = item.Price;
+            oldMeal.Weight = item.Weight;
+            oldMeal.ImagePath = item.ImagePath;
+            _context.Meals.Update(oldMeal);
             _context.SaveChanges();
         }
 

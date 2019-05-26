@@ -57,16 +57,10 @@ namespace SushiRunner.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
+               
                     var changedMeal = _mapper.Map<MealModel, MealDTO>(meal);
                     _mealService.Update(changedMeal);
-                }
-                catch (Exception e)
-                {
-                    return View(e.Message);
-                }
-
+                
                 return RedirectToAction("Index");
             }
 
