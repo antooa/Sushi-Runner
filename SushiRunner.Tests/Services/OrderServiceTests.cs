@@ -204,10 +204,9 @@ namespace SushiRunner.Tests.Services
             {
                 cfg.CreateMap<Order, OrderDTO>();
             });
-            var profile = new MappingProfile();
-            var config = new MapperConfiguration(cfg => cfg.AddProfile(profile));
-            var mapper = new Mapper(config);
-            
+            var myProfile = new MappingProfile();
+            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+            var mapper = new Mapper(configuration);
             var svc = new OrderService(repository, mapper);
             return svc;
         }

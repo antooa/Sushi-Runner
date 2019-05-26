@@ -10,6 +10,10 @@ namespace SushiRunner.MappingProfiles
     {
         public MappingProfile()
         {
+            CreateMap<Meal, MealDTO>();
+            CreateMap<MealDTO, Meal>();
+            CreateMap<MealDTO, MealModel>();
+            CreateMap<MealModel, MealDTO>();
             CreateMap<OrderDTO, Order>()
                 .ForMember(dest => dest.Items, opt => opt.MapFrom<OrderItemResolver>());
             CreateMap<Order, OrderDTO>()
@@ -26,10 +30,6 @@ namespace SushiRunner.MappingProfiles
                 .ForMember(dest => dest.Items, opt => opt.MapFrom<CartResolver>());
             CreateMap<Cart, CartDTO>()
                 .ForMember(dest => dest.Items, opt => opt.MapFrom<CartDTOResolver>());
-            CreateMap<Meal, MealDTO>();
-            CreateMap<MealDTO, Meal>();
-            CreateMap<MealDTO, MealModel>();
-            CreateMap<MealModel, MealDTO>();
         }
     }
 }

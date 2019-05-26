@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using SushiRunner.Data.Entities;
 using SushiRunner.Services.Dto;
@@ -9,21 +10,12 @@ namespace SushiRunner.MappingProfiles
     {
         public IEnumerable<CartItemDTO> Resolve(Cart source, CartDTO destination, IEnumerable<CartItemDTO> destMember, ResolutionContext context)
         {
-            var items = new List<CartItemDTO>();
-
-            foreach (var item in source.Items)
+            return source.Items.Select(item => new CartItemDTO()
             {
-                var itemDto = new CartItemDTO()
-                {
-                    Amount = item.Amount,
-                    Meal = Mapper.Map<Meal, MealDTO>(item.Meal),
-                    MealId = item.MealId
-                };
-                
-                items.Add(itemDto);
-            }
-
-            return items;
+                Amount = item.Amount,
+                Meal = context.Mapper.Map<Meal, MealDTO>(item.Meal),
+                MealId = item.MealId
+            }).ToList();
         }
     }
 }
