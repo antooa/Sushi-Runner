@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
-using SushiRunner.Data.Entities;
 using SushiRunner.Services.Dto;
 
 namespace SushiRunner.Services.Interfaces
@@ -10,6 +9,5 @@ namespace SushiRunner.Services.Interfaces
 
         IEnumerable<MealDTO> GetByGroupId(long id);
         void Create(MealDTO mealDto, IFormFile file);
-        IEnumerable<MealDTO> GetMealsWithCartCheckbox(User user, IEnumerable<MealDTO> meals);
     }
 }

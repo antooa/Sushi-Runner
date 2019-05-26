@@ -7,7 +7,6 @@ using Moq;
 using SushiRunner.Data;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
-using SushiRunner.MappingProfiles;
 using SushiRunner.Services;
 using SushiRunner.Services.Dto;
 using Xunit;
@@ -100,13 +99,13 @@ namespace SushiRunner.Tests.Services
             {
                 Id = 4,
                 CustomerName = "Jim",
-                Items = new List<OrderItemDTO>
+                Items = new List<OrderItem>
                 {
-                    new OrderItemDTO()
+                    new OrderItem
                     {
                         Amount = 1,
                         Id = 4,
-                        Meal = new MealDTO()
+                        Meal = new Meal
                         {
                             Id = 2,
                             Price = 50,
@@ -204,9 +203,7 @@ namespace SushiRunner.Tests.Services
             {
                 cfg.CreateMap<Order, OrderDTO>();
             });
-            var myProfile = new MappingProfile();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-            var mapper = new Mapper(configuration);
+            var mapper = mapperConfig.CreateMapper();
             var svc = new OrderService(repository, mapper);
             return svc;
         }
@@ -222,13 +219,13 @@ namespace SushiRunner.Tests.Services
                     CustomerName = "Taras",
                     Address = "77/T77 Heroiv UPA St., Lviv, Ukraine",
                     DeliveredAt = DateTime.Now,
-                    Items = new List<OrderItemDTO>()
+                    Items = new List<OrderItem>()
                     {
-                        new OrderItemDTO()
+                        new OrderItem()
                         {
                             Amount = 3,
                             Id = 1,
-                            Meal = new MealDTO()
+                            Meal = new Meal()
                             {
                                 Id = 1,
                                 Description = "Trapeza",
@@ -252,13 +249,13 @@ namespace SushiRunner.Tests.Services
                     CustomerName = "Arsen",
                     Address = "33 March 8th St., Uzhgorod, Ukraine",
                     DeliveredAt = DateTime.Now,
-                    Items = new List<OrderItemDTO>()
+                    Items = new List<OrderItem>()
                     {
-                        new OrderItemDTO()
+                        new OrderItem()
                         {
                             Amount = 2,
                             Id = 2,
-                            Meal = new MealDTO()
+                            Meal = new Meal()
                             {
                                 Id = 1,
                                 Description = "Trapeza",
@@ -283,13 +280,13 @@ namespace SushiRunner.Tests.Services
                     Address = "347 Fifth Avenue, St. 1009, New York, NY",
                     PlacedAt = DateTime.Now,
                     DeliveredAt = (DateTime.Now).AddHours(1),
-                    Items = new List<OrderItemDTO>()
+                    Items = new List<OrderItem>()
                     {
-                        new OrderItemDTO()
+                        new OrderItem()
                         {
                             Amount = 3,
                             Id = 3,
-                            Meal = new MealDTO()
+                            Meal = new Meal()
                             {
                                 Id = 1,
                                 Description = "Trapeza",
