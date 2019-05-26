@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ReturnTrue.AspNetCore.Identity.Anonymous;
 using SushiRunner.Data.Entities;
-using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
 using SushiRunner.ViewModels.Home;
@@ -15,52 +12,70 @@ namespace SushiRunner.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMealService _mealService;
-        private readonly IMealGroupService _mealGroupService;
-        private readonly IAccountService _accountService;
-        private readonly ICartService _cartService;
-        private readonly IMapper _mapper;
+        private IMealService _mealService;
+        private IMealGroupService _mealGroupService;
+        private IAccountService _accountService;
+        private ICartService _cartService;
 
         public HomeController(IMealService mealService, IMealGroupService mealGroupService,
-            IAccountService accountService, ICartService cartService, IMapper mapper)
+            IAccountService accountService, ICartService cartService)
         {
             _mealService = mealService;
             _mealGroupService = mealGroupService;
             _accountService = accountService;
             _cartService = cartService;
-            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
+            var user = await GetUserAsync();
             var meals = _mealService.GetList();
-            var user = await _accountService.GetLoggedUserOrCreateAnonymous(
-                HttpContext.User,
-                HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
-            var mealsWithCartCheckbox = _mealService.GetMealsWithCartCheckbox(user, meals);
-            var mealModels = mealsWithCartCheckbox.Select(meal => _mapper.Map<MealDTO, MealModel>(meal)).ToList();
-            
+            var cart = _cartService.GetByUserOrCreateNew(user);
+
+            var mealsWithCartCheckbox = from meal in meals
+                join cartItem in cart.Items on meal.Id equals cartItem.MealId into mealModels
+                from m in mealModels.DefaultIfEmpty()
+                select new MealModel
+                {
+                    Id = meal.Id,
+                    Name = meal.Name,
+                    Description = meal.Description,
+                    Price = meal.Price,
+                    ImagePath = meal.ImagePath,
+                    Weight = meal.Weight,
+                    IsInCart = m != null
+                };
+
             return View(
                 new HomeModel
                 {
-                    Meals = mealModels,
+                    Meals = mealsWithCartCheckbox,
                 });
         }
 
         [Route("/Home/MealGroups/{mealGroupId}")]
         public async Task<IActionResult> MealGroups(long mealGroupId)
         {
-            var user = await _accountService.GetLoggedUserOrCreateAnonymous(
-                HttpContext.User,
-                HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
+            var user = await GetUserAsync();
             var meals = _mealService.GetByGroupId(mealGroupId);
-            var mealsWithCartCheckbox = _mealService.GetMealsWithCartCheckbox(user, meals);
-            var mealModels = mealsWithCartCheckbox.Select(meal => _mapper.Map<MealDTO, MealModel>(meal)).ToList();
-            
+            var cart = _cartService.GetByUserOrCreateNew(user);
+            var mealsWithCartCheckbox = from meal in meals
+                join cartItem in cart.Items on meal.Id equals cartItem.MealId into mealModels
+                from m in mealModels.DefaultIfEmpty()
+                select new MealModel
+                {
+                    Id = meal.Id,
+                    Name = meal.Name,
+                    Description = meal.Description,
+                    Price = meal.Price,
+                    ImagePath = meal.ImagePath,
+                    Weight = meal.Weight,
+                    IsInCart = m != null
+                };
             return View("Index",
                 new HomeModel
                 {
-                    Meals = mealModels,
+                    Meals = mealsWithCartCheckbox,
                     Title = _mealGroupService.Get(mealGroupId).Name
                 });
         }
@@ -69,8 +84,27 @@ namespace SushiRunner.Controllers
         {
             var user = await GetUserAsync();
             var cart = _cartService.GetByUserOrCreateNew(user);
-            var cartModel = _mapper.Map<CartDTO, CartModel>(cart);
-            return View(cartModel);
+            return View(
+                new CartModel
+                {
+                    Items = cart.Items
+                        .Select(item =>
+                            new CartItemModel
+                            {
+                                Meal = new MealModel
+                                {
+                                    Id = item.Meal.Id,
+                                    Name = item.Meal.Name,
+                                    Description = item.Meal.Description,
+                                    Weight = item.Meal.Weight,
+                                    ImagePath = item.Meal.ImagePath,
+                                    Price = item.Meal.Price
+                                },
+                                Amount = item.Amount
+                            }
+                        )
+                }
+            );
         }
 
         public async Task<IActionResult> AddToCart(long id, string redirectPath)
