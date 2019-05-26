@@ -6,7 +6,7 @@ namespace SushiRunner.Data.Entities
     public class Cart
     {
         public long Id { get; set; }
-        public List<CartItem> Items { get; set; } = new List<CartItem>();
+        public ICollection<CartItem> Items { get; set; }
         public User User { get; set; }
     }
 }
