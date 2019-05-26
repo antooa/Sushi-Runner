@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ReturnTrue.AspNetCore.Identity.Anonymous;
+using SushiRunner.Data.Entities;
 using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
@@ -32,7 +33,6 @@ namespace SushiRunner.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var user = await GetUserAsync();
             var meals = _mealService.GetList();
             var user = await _accountService.GetLoggedUserOrCreateAnonymous(
                 HttpContext.User,

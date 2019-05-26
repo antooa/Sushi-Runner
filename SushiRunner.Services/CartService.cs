@@ -82,8 +82,8 @@ namespace SushiRunner.Services
 
         public void ChangeItemAmount(User user, long mealId, int newAmount)
         {
-            var cart = GetByUserOrCreateNew(user);
-            var cartItem = cart.Items.FirstOrDefault(item => item.MealId == mealId);
+            var cartDto = GetByUserOrCreateNew(user);
+            var cartItem = cartDto.Items.FirstOrDefault(item => item.MealId == mealId);
             if (cartItem == null)
             {
                 return;
@@ -99,6 +99,7 @@ namespace SushiRunner.Services
             }
 
             cartItem.Amount = newAmount;
+            var cart = _mapper.Map<CartDTO, Cart>(cartDto);
             _cartRepository.Update(cart);
         }
 
