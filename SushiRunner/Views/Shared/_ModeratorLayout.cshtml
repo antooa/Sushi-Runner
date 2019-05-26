@@ -14,10 +14,10 @@
     <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/moderator/index.css">
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="lib/materialize/dist/css/materialize.css" media="screen,projection"/>
-    <link rel="stylesheet" href="@Url.Content("/css/home/index.css")">
+    
+    <link rel="stylesheet" href="@Url.Content("/css/moderator/index.css")">
     @RenderSection("Styles", false)
 </head>
 <body class="grey lighten-3">
@@ -30,10 +30,11 @@
                 <a href="/">Головна</a>
             </div>
             <div class="navbar_link">
-                <a href="#">Замовлення</a>
+                @Html.ActionLink("Замовлення","Index", "Moderator")
             </div>
             <div class="navbar_link">
-                <a href="#">Продукти</a>
+                @Html.ActionLink("Продукти","Index", "Meal")
+                @* <a href="">Продукти</a> *@
             </div>
         </nav>
         <div id="account">

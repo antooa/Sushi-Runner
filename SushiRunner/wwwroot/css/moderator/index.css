@@ -331,3 +331,89 @@ select::-ms-expand {
 .order-action button{
     margin-left: 15px;
 }
+#menu {
+    display: flex;
+    height: 75px;
+    align-items: center;
+    justify-content: center;
+    background: #FAFAFA;
+    font-size: 18px;
+}
+
+.navbar_items .navbar_link {
+    padding-left: 30px;
+}
+
+#account {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: max-content;
+    margin-left: auto;
+}
+
+#user {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #ececec;
+}
+
+#user i {
+    font-size: 35px;
+}
+
+#basket {
+    background-color: #212121;
+    width: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+#basket i {
+    font-size: 30px;
+}
+
+
+#totalPrice {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #e32d3c;
+    font-size: 14px;
+}
+
+.navbar_items {
+    display: flex;
+    align-items: center;
+}
+
+#menu .navbar_items a {
+    text-decoration: none;
+    color: #454d55;
+}
+
+#account a {
+    text-decoration: none;
+    color: #F1F8E9;
+}
+
+#totalPrice span {
+    color: #F1F8E9;
+}
+
+#phones {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+.home-image-container > img {
+    height: 75px;
+    object-fit: contain;
+}
