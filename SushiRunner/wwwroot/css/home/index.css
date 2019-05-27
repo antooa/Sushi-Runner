@@ -33,9 +33,14 @@ button:focus {
     margin: 20px 0 0 67px;
 }
 
-.home-image-container > img {
+.home-image-container > a {
+    display: block;
     height: 75px;
     object-fit: contain;
+}
+
+.home-image-container img {
+    height: 100%;
 }
 
 #home-side-nav {

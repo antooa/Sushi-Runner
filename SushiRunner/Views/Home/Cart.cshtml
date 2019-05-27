@@ -35,7 +35,7 @@
                 <div id="total-sum">
                     <span>
                         <strong>Загальна сума:</strong>
-                        @Model.Items.Select(item => item.Meal.Price * item.Amount).Sum() грн.
+                        @Model.OrderModel.TotalPrice грн.
                     </span>
                     <button id="order-button-start">Оформити</button>
                 </div>

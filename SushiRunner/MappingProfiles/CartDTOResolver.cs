@@ -10,7 +10,7 @@ namespace SushiRunner.MappingProfiles
     {
         public IEnumerable<CartItemDTO> Resolve(Cart source, CartDTO destination, IEnumerable<CartItemDTO> destMember, ResolutionContext context)
         {
-            return source.Items.Select(item => new CartItemDTO()
+            return source?.Items?.Select(item => new CartItemDTO()
             {
                 Amount = item.Amount,
                 Meal = context.Mapper.Map<Meal, MealDTO>(item.Meal),

@@ -88,6 +88,13 @@ namespace SushiRunner.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> SignOut()
+        {
+            _accountService.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail([Required] string userId, [Required] string code)
@@ -104,6 +111,21 @@ namespace SushiRunner.Controllers
             }
 
             return Redirect("/Home/Error");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Info()
+        {
+            var user = await _accountService.GetLoggedUserOrCreateAnonymous(
+                HttpContext.User,
+                HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
+            if (user.IsAnonymous)
+            {
+                return RedirectToAction("SignIn");
+            }
+
+            return View();
         }
     }
 }

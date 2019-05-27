@@ -123,10 +123,11 @@ namespace SushiRunner.Services
             }
 
             var cart = _GetByUserOrCreateNew(user);
-            var totalPrice = cart.Items
-                .Select(item => item.Amount * item.Meal.Price)
-                .Sum();
-            return (cart.Items.Count, totalPrice);
+            var totalPrice = cart.Items?
+                                 .Select(item => item.Amount * item.Meal.Price)
+                                 .Sum() ?? 0;
+            var count = cart.Items?.Count ?? 0;
+            return (count, totalPrice);
         }
     }
 }

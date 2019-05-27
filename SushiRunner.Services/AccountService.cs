@@ -125,6 +125,11 @@ namespace SushiRunner.Services
             };
         }
 
+        public async void SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
         private async void SendConfirmationEmail(User user,
             Func<User, string, string> generateEmailConfirmationLink)
         {

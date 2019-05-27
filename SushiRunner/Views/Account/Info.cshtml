@@ -1,0 +1,76 @@
+@model AccountInfoModel
+
+@{
+    Layout = "_HomeLayout";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="/css/account/info.css">
+    <link rel="stylesheet" href="@Url.Content("/css/home/header-with-lines.css")">
+}
+
+
+<div class="account-info-container">
+    <p id="hwl-edit" class="hwl">
+        <span>Особистий кабінет</span>
+    </p>
+    <div id="account-info-nav">
+        <form asp-controller="Account" asp-action="SignOut" method="post">
+            <button id="sign-out-button" type="submit">Оформити</button>
+        </form>
+    </div>
+    <div id="account-info-change">
+        @* <p class="order-form-title">Оформити замовлення</p> *@
+        @* <form id="make-order-form" asp-controller="Home" asp-action="MakeOrder" method="post"> *@
+        @*     <div id="make-order-form-content"> *@
+        @*         <div class="make-order-form-group"> *@
+        @*             <label asp-for="@Model.CustomerName">Ім'я <b>*</b>:</label> *@
+        @*             <input asp-for="@Model.CustomerName" type="text"> *@
+        @*         </div> *@
+        @*         <div class="make-order-form-group"> *@
+        @*             <label asp-for="@Model.PhoneNumber">Телефон <b>*</b>:</label> *@
+        @*             <input asp-for="@Model.PhoneNumber" type="text"> *@
+        @*         </div> *@
+        @*         <div class="make-order-form-group"> *@
+        @*             <label asp-for="@Model.PaymentType">Форма оплати <b>*</b>:</label> *@
+        @*             <input asp-for="@Model.PaymentType" type="text"> *@
+        @*         </div> *@
+        @*         <div class="make-order-form-group"> *@
+        @*             <label asp-for="@Model.Address">Адреса <b>*</b>:</label> *@
+        @*             <input asp-for="@Model.Address" type="text"> *@
+        @*         </div> *@
+        @*         <div class="form-group-comment"> *@
+        @*             <label asp-for="@Model.Comment">Коментар до замовлення:</label> *@
+        @*             <textarea asp-for="@Model.Comment" type="text"></textarea> *@
+        @*         </div> *@
+        @*     </div> *@
+        @*     <div id="make-order-form-total"> *@
+        @*         <div id="order-form-total-price"> *@
+        @*             <span>До оплати:</span> *@
+        @*             <span id="total-price">@Model.TotalPrice грн.</span> *@
+        @*         </div> *@
+        @*         <button id="order-button" type="submit">Оформити</button> *@
+        @*     </div> *@
+        @* </form> *@
+    </div>
+    <div id="account-password-change">
+    </div>
+</div>
+@* <form asp-action="SignIn" asp-controller="Account" method="post" class="login-form"> *@
+@*     <h2 class="text-center">Sign in</h2> *@
+@*     <div asp-validation-summary="All" class="error-box text-danger"></div> *@
+@*     <div class="form-group"> *@
+@*         <div class="input-group"> *@
+@*             <input asp-for="Username" type="text" class="form-control" placeholder="Username" required="required"> *@
+@*         </div> *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <div class="input-group"> *@
+@*             <input asp-for="Password" type="password" class="form-control" placeholder="Password" required="required"> *@
+@*         </div> *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <button type="submit" class="btn btn-dark login-btn btn-block">Sign in</button> *@
+@*     </div> *@
+@* </form> *@
