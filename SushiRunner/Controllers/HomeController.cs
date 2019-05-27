@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -39,7 +38,7 @@ namespace SushiRunner.Controllers
                 HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
             var mealsWithCartCheckbox = _mealService.GetMealsWithCartCheckbox(user, meals);
             var mealModels = mealsWithCartCheckbox.Select(meal => _mapper.Map<MealDTO, MealModel>(meal)).ToList();
-            
+
             return View(
                 new HomeModel
                 {
@@ -56,7 +55,7 @@ namespace SushiRunner.Controllers
             var meals = _mealService.GetByGroupId(mealGroupId);
             var mealsWithCartCheckbox = _mealService.GetMealsWithCartCheckbox(user, meals);
             var mealModels = mealsWithCartCheckbox.Select(meal => _mapper.Map<MealDTO, MealModel>(meal)).ToList();
-            
+
             return View("Index",
                 new HomeModel
                 {
@@ -70,6 +69,11 @@ namespace SushiRunner.Controllers
             var user = await GetUserAsync();
             var cart = _cartService.GetByUserOrCreateNew(user);
             var cartModel = _mapper.Map<CartDTO, CartModel>(cart);
+            var (_, totalPrice) = await _cartService.CountAndTotalPrice(User);
+            cartModel.OrderModel = new OrderModel
+            {
+                TotalPrice = totalPrice
+            };
             return View(cartModel);
         }
 
