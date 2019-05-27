@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SushiRunner.ViewModels
+namespace SushiRunner.ViewModels.Home
 {
     public class OrderModel
     {
