@@ -103,6 +103,11 @@ namespace SushiRunner.Controllers
                 });
         }
 
+        public async Task<IAccountService> MakeOrder(OrderModel orderModel)
+        {
+            return null;
+        }
+
         private async Task<User> GetUserAsync()
         {
             return await _accountService.GetLoggedUserOrCreateAnonymous(

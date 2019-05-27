@@ -3,8 +3,13 @@
 @section Styles
 {
     <link rel="stylesheet" href="@Url.Content("/css/home/header-with-lines.css")">
+    <link rel="stylesheet" href="@Url.Content("/css/home/order-form.css")">
 }
 
+@section Scripts
+{
+    <script src="@Url.Content("/js/home/order-form.js")"></script>
+}
 
 <div class="cart-page-container">
     <p class="hwl">
@@ -25,15 +30,16 @@
                     <partial name="_CartTableRow" model="@cartItem"></partial>
                 }
             </div>
-            <div class="total-sum">
-                <span id="total-sum">
+            <div id="total-sum">
+                <span>
                     <strong>Загальна сума:</strong>
                     @Model.Items.Select(item => item.Meal.Price * item.Amount).Sum() грн.
                 </span>
+                <button id="order-button-start">Оформити</button>
             </div>
-            <form class="pre-order" asp-controller="Order" asp-action="Create" method="post">
-                <button class="btn btn-outline-success" type="submit">Оформити</button>
-            </form>
+            <div id="make-order-form-wrapper">
+                <partial name="_MakeOrderForm" model="@Model.OrderModel"></partial>
+            </div>
         </div>
     </div>
 </div>

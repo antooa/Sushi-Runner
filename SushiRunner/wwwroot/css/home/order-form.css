@@ -1,0 +1,108 @@
+.order-form-title {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 20px;
+    width: 100%;
+    display: block;
+    padding-bottom: 5px;
+    border-bottom: 1px lightgray solid;
+}
+
+#make-order-form {
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.42857143;
+}
+
+#make-order-form-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.make-order-form-group {
+    width: 47%;
+    margin-bottom: 20px;
+}
+
+.make-order-form-group > label {
+    cursor: pointer;
+    transition: color ease 0.25s;
+}
+
+.make-order-form-group > label:hover {
+    color: #e32d3c;
+}
+
+.make-order-form-group > input {
+    width: 100%;
+    box-shadow: none;
+    height: auto;
+    border: 1px solid #e6e6e6;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 14px;
+    color: #777;
+    padding: 8px 15px;
+    min-height: 39px;
+}
+
+.make-order-form-group b {
+    color: red;
+}
+
+.form-group-comment {
+    width: 100%;
+}
+
+.form-group-comment > textarea {
+    width: 100%;
+    line-height: 1.2;
+    min-height: 60px;
+    border: 1px solid #e6e6e6;
+    padding: 8px 15px;
+}
+
+#make-order-form-total {
+    width: 40%;
+    margin-top: 50px;
+    border-top: 1px lightgray solid;
+    float: right;
+}
+
+#order-form-total-price {
+    margin: 10px 0 6px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#total-price {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#order-button {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background-color: #4caf50;
+    margin-top: 10px;
+    transition: background-color ease 0.25s;
+    cursor: pointer;
+    float: right;
+}
+
+#order-button:hover {
+    background-color: #e32d3c;
+}
+
