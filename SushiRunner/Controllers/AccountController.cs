@@ -105,5 +105,20 @@ namespace SushiRunner.Controllers
 
             return Redirect("/Home/Error");
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Info()
+        {
+            var user = await _accountService.GetLoggedUserOrCreateAnonymous(
+                HttpContext.User,
+                HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
+            if (user.IsAnonymous)
+            {
+                return RedirectToAction("SignIn");
+            }
+
+            return View();
+        }
     }
 }
