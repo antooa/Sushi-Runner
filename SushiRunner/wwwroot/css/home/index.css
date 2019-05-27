@@ -5,8 +5,14 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-html, body  {
+html  {
     height: 100%;
+}
+
+body {
+    min-height: 100%;
+    position: relative;
+    font-size: calc(0.75em + 1vmin);
 }
 
 .home-page-container {
@@ -15,10 +21,6 @@ html, body  {
 
 button:focus {
     outline: 0;
-}
-
-body {
-    font-size: calc(0.75em + 1vmin);
 }
 
 .home-page-container {
@@ -39,7 +41,7 @@ body {
     background: white;
     position: absolute;
     top: 82px;
-    bottom: 0;
+    bottom: 80px;
     left: 0;
     box-shadow: 4px 0 24px rgba(1, 1, 1, 0.1);
 }
@@ -397,4 +399,17 @@ body {
 .user-profile-icon {
     fill: gray;
     width: 28px;
+}
+
+.page-footer {
+    background: #202020;
+    height: 80px;
+    line-height: 80px;
+    margin-top: 75px;
+}
+
+.page-footer-copyright {
+    color: white;
+    margin-left: 35px;
+    font-size: 14px;
 }
