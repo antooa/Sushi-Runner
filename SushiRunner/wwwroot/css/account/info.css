@@ -1,2 +1,45 @@
-.account-info-container{
+.account-info-container {
+    max-width: 950px;
+    margin: 50px auto;
+}
+
+#hwl-edit::before,
+#hwl-edit::after {
+    width: 300px;
+}
+
+#account-info-nav {
+    width: 180px;
+    padding-right: 20px;
+    border-right: 1px solid lightgray;
+}
+
+#sign-out-button {
+    width: 90%;
+    height: 40px;
+    text-align: center;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background-color: #4caf50;
+    transition: background-color ease 0.25s;
+    cursor: pointer;
+    float: right;
+    margin: 10px auto;
+}
+
+#sign-out-button:hover {
+    background-color: #e32d3c;
+}
+
+#account-info-change {
+    width: 340px;
+}
+
+#account-password-change {
+    width: 340px;
 }

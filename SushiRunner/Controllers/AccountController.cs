@@ -88,6 +88,13 @@ namespace SushiRunner.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> SignOut()
+        {
+            _accountService.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail([Required] string userId, [Required] string code)
