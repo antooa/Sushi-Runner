@@ -1,0 +1,34 @@
+@model OrderModel
+
+<p class="order-form-title">Оформити замовлення</p>
+<form id="make-order-form" asp-controller="Home" asp-action="MakeOrder" method="post">
+    <div id="make-order-form-content">
+        <div class="make-order-form-group">
+            <label asp-for="@Model.CustomerName">Ім'я <b>*</b>:</label>
+            <input asp-for="@Model.CustomerName" type="text">
+        </div>
+        <div class="make-order-form-group">
+            <label asp-for="@Model.PhoneNumber">Телефон <b>*</b>:</label>
+            <input asp-for="@Model.PhoneNumber" type="text">
+        </div>
+        <div class="make-order-form-group">
+            <label asp-for="@Model.PaymentType">Форма оплати <b>*</b>:</label>
+            <input asp-for="@Model.PaymentType" type="text">
+        </div>
+        <div class="make-order-form-group">
+            <label asp-for="@Model.Address">Адреса <b>*</b>:</label>
+            <input asp-for="@Model.Address" type="text">
+        </div>
+        <div class="form-group-comment">
+            <label asp-for="@Model.Comment">Коментар до замовлення:</label>
+            <textarea asp-for="@Model.Comment" type="text"></textarea>
+        </div>
+    </div>
+    <div id="make-order-form-total">
+        <div id="order-form-total-price">
+            <span>До оплати:</span>
+            <span id="total-price">123 грн.</span>
+        </div>
+        <button id="order-button" type="submit">Оформити</button>
+    </div>
+</form>
