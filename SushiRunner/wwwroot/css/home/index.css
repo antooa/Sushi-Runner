@@ -13,6 +13,8 @@ body {
     min-height: 100%;
     position: relative;
     font-size: calc(0.75em + 1vmin);
+    display: flex;
+    flex-direction: column;
 }
 
 .home-page-container {
@@ -405,7 +407,7 @@ button:focus {
     background: #202020;
     height: 80px;
     line-height: 80px;
-    margin-top: 75px;
+    margin-top: auto;
 }
 
 .page-footer-copyright {

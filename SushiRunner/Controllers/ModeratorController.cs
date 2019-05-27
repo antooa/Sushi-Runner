@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
 using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
-using SushiRunner.ViewModels;
+using SushiRunner.ViewModels.Home;
 
 namespace SushiRunner.Controllers
 {

@@ -30,16 +30,19 @@
                     <partial name="_CartTableRow" model="@cartItem"></partial>
                 }
             </div>
-            <div id="total-sum">
-                <span>
-                    <strong>Загальна сума:</strong>
-                    @Model.Items.Select(item => item.Meal.Price * item.Amount).Sum() грн.
-                </span>
-                <button id="order-button-start">Оформити</button>
-            </div>
-            <div id="make-order-form-wrapper">
-                <partial name="_MakeOrderForm" model="@Model.OrderModel"></partial>
-            </div>
+            @if (Model.Items.Any())
+            {
+                <div id="total-sum">
+                    <span>
+                        <strong>Загальна сума:</strong>
+                        @Model.Items.Select(item => item.Meal.Price * item.Amount).Sum() грн.
+                    </span>
+                    <button id="order-button-start">Оформити</button>
+                </div>
+                <div id="make-order-form-wrapper">
+                    <partial name="_MakeOrderForm" model="@Model.OrderModel"></partial>
+                </div>
+            }
         </div>
     </div>
 </div>

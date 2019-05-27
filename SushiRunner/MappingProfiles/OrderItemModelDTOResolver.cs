@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using SushiRunner.Services.Dto;
 using SushiRunner.ViewModels;
+using SushiRunner.ViewModels.Home;
 
 namespace SushiRunner.MappingProfiles
 {
