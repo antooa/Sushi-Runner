@@ -18,9 +18,17 @@
 
 <div id="wrapper">
     <div class="container-fluid">
+        <div class="new-product"  data-toggle="modal" data-target="#exampleModal">
+            <i class="fas fa-plus"></i>
+        </div>
+        
         @foreach (var meal in Model)
-                {
-                    <partial name="_Meal" model="@meal"></partial>
-                }
+        {
+            <partial name="_Meal" model="@meal"></partial>
+        }
     </div>
 </div>
+
+
+
+

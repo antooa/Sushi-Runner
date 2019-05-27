@@ -37,12 +37,13 @@ namespace SushiRunner.Controllers
                 HttpContext.User,
                 HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
             var cart = _cartService.GetByUserOrCreateNew(user);
+            
             var orderDto = new OrderDTO
             {
-                CustomerName = "New User",
-                PhoneNumber = "+380981823859",
-                PaymentType = "CARD",
-                Address = "Lviv, Heroyiv UPA,  77",
+                CustomerName = orderModel.CustomerName,
+                PhoneNumber = orderModel.PhoneNumber,
+                PaymentType = orderModel.PaymentType,
+                Address = orderModel.Address,
                 PlacedAt = DateTime.Now,
                 Items = cart.Items.Select(item => new OrderItemDTO()
                 {

@@ -738,3 +738,12 @@ body {
     fill: gray;
     width: 28px;
 }
+.new-product{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fa-plus{
+    color: #0f9d58;
+    font-size: 72px;
+}

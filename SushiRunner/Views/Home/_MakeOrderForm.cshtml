@@ -1,7 +1,7 @@
 @model SushiRunner.ViewModels.Home.OrderModel
 
 <p class="order-form-title">Оформити замовлення</p>
-<form id="make-order-form" asp-controller="Home" asp-action="MakeOrder" method="post">
+<form id="make-order-form" asp-controller="Order" asp-action="Create" method="post">
     <div id="make-order-form-content">
         <div class="make-order-form-group">
             <label asp-for="@Model.CustomerName">Ім'я <b>*</b>:</label>

@@ -31,7 +31,7 @@ namespace SushiRunner.Controllers
         
         [HttpPost]
         [Authorize(Roles = UserRoles.Moderator)]
-        public IActionResult Create([Bind("Id, Name, Description, Weight, Price, MealGroupId")] MealModel meal, IFormFile pic)
+        public IActionResult Create([Bind("Name, Description, Weight, Price, MealGroupId")] MealModel meal, IFormFile pic)
         {
             if (ModelState.IsValid)
             {
