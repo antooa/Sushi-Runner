@@ -1,21 +1,26 @@
-@model IEnumerable<SushiRunner.ViewModels.MealModel>  
+@model IEnumerable<SushiRunner.ViewModels.MealModel>
 @{
     ViewBag.Title = "Meals";
 }
-<!DOCTYPE html>
-@* VALIK TODO *@
-<html>
-<head>
-    <title>@ViewBag.Title</title>
-</head>
-<body>
-<div>
-    @foreach (var group in Model)
-    {
-        <li>
-            <a asp-controller="Meal" asp-action="Index">@group.Name</a>
-        </li>
-    }
+@{
+    ViewData["Title"] = "Sushi-Runner Moderator";
+    Layout = "_ModeratorLayout";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="@Url.Content("/css/meal/Index.css")">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+}
+
+<div id="wrapper">
+    <div class="container-fluid">
+        @foreach (var meal in Model)
+                {
+                    <partial name="_Meal" model="@meal"></partial>
+                }
+    </div>
 </div>
-</body>
-</html>

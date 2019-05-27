@@ -1,0 +1,147 @@
+@model SushiRunner.ViewModels.Home.OrderModel
+
+
+<div class="order-item">
+    <div class="order-num">
+        <span>@Model.Id</span>
+    </div>
+    <div class="order-customer-name">
+        <span>@Model.CustomerName</span>
+    </div>
+    <div class="order-phone">
+        <span>@Model.PhoneNumber</span>
+    </div>
+    <div class="order-address">
+        <span>@Model.Address</span>
+    </div>
+    <div class="order-action">
+        <button data-toggle="modal" data-target="#exampleModal-@Model.Id" class="btn btn-dark ok-button">Деталі</button>
+        <button class="btn btn-danger remove-button">Видалити</button>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 883px">
+        <form class="form" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Деталі замовлення</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="first_name">Ім'я</label>
+                        <input class="form-control" placeholder="Name" id="first_name" type="text" value="@Model.CustomerName">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input class="form-control" type="text" placeholder="Phone" id="phone" name="phone"
+                               value="@Model.PhoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Адреса</label>
+                        <input class="form-control" type="text" placeholder="Address" id="address" name="address"
+                               value="@Model.Address">
+                    </div>
+
+                    <div class="m-order-content">
+                        <div class="m-order-items">
+                            <span class="m-content">Склад замовлення:</span>
+                            <ol class="m-rounded-list">
+                                @foreach (var meal in Model.Items)
+                                {
+                                    <li>
+                                        <div class="m-list-item">
+                                            <div class="m-quantity">
+                                                <input type="number" class="text-center " min="1"
+                                                       max="99"
+                                                       name="quantity" value="@meal.Amount"/>
+                                            </div>
+                                            <span>@meal.Meal.Name</span>
+                                            <button type="submit" class="btn btn-danger remove-button">
+                                                <span>Видалити</span>
+                                            </button>
+                                        </div>
+                                    </li>
+                                }
+                            </ol>
+                        </div>
+                        <span class="add-meal-span">Додати продукт</span>
+                        <div class="m-label-selector">
+                            <span>
+                                Категорія
+                            </span>
+                            <span style="margin-left: 10px">
+                                Продукт
+                            </span>
+                            <span >
+                                Кількість
+                            </span>
+                            <span></span>
+                        </div>
+
+                        <div class="m-selector">
+                            <div class="m-select" style="margin-left: 15px">
+                                <select>
+                                    <option value="" disabled selected>Виберіть категорію</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+
+                            </div>
+                            <div class="m-select">
+                                <select>
+                                    <option value="" disabled selected>Виберіть продукт</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+
+                            </div>
+                            <div class="m-quantity">
+                                <input id="item-qty1" type="number" class="text-center " min="1" max="99"
+                                       name="quantity">
+                            </div>
+                            <div class="m-order-action">
+                                <button href="http://google.com" class="btn btn-success ok-button">
+                                    <span>Додати</span>
+                                </button>
+                                <button href="http://google.com" class="btn btn-danger remove-button">
+                                    <span>Скасувати</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="m-order-action">
+                        <button href="http://google.com" type="submit" class="btn btn-success ok-button">
+                            <span>Підтвердити</span>
+                        </button>
+                        <button href="http://google.com" type="submit" class="btn btn-success ok-button">
+                            <span>Доставити</span>
+                        </button>
+                        <button href="http://google.com" type="submit" class="btn btn-success remove-button">
+                            <span>Відхилити</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, options);
+        });
+    
+        $(document).ready(function(){
+            $('select').formSelect();
+        });
+    </script>

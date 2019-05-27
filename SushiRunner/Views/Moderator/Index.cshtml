@@ -1,91 +1,44 @@
-@model IEnumerable<SushiRunner.ViewModels.OrderModel>
+@model IEnumerable<SushiRunner.ViewModels.Home.OrderModel>
+@{
+    ViewData["Title"] = "Sushi-Runner Moderator";
+    Layout = "_ModeratorLayout";
+}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Moderator</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
-    <script src="/lib/jquery/dist/jquery.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/moderator/index.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="lib/materialize/dist/css/materialize.css" media="screen,projection"/>
-</head>
-<body>
 <div class="container-fluid">
     <div class="content">
         <div>
-            <h1 class="text-center">Select orders type:</h1>
+            <h1 class="text-center">Виберіть статус замовлення:</h1>
         </div>
         <div id="actions">
             <form method="get">
-                <button asp-controller="Moderator" asp-action="NewOrders" id="new-order">New</button>
-            </form>
-            <form  method="get">
-                <button asp-action="InProgressOrders" asp-controller="Moderator" id="in-progress">In progress</button>
+                <button asp-controller="Moderator" asp-action="NewOrders" id="new-order">Новий</button>
             </form>
             <form method="get">
-                <button asp-action="CompletedOrders" asp-controller="Moderator"  id="delivered">Delivered</button>
+                <button asp-action="InProgressOrders" asp-controller="Moderator" id="in-progress">В процесі</button>
+            </form>
+            <form method="get">
+                <button asp-action="CompletedOrders" asp-controller="Moderator" id="delivered">Доставлений</button>
             </form>
         </div>
         <div class="order-heading">
-            <div class="order-heading-type">
-                <span>Payment type</span>
+            <div class="order-heading-num">
+                <span>#</span>
+            </div>
+            <div class="order-heading-name">
+                <span>Ім'я</span>
             </div>
             <div class="order-heading-phone">
-                <span>Phone</span>
+                <span>Телефон</span>
             </div>
             <div class="order-heading-address">
-                <span>Address</span>
-            </div>
-            <div class="order-heading-content">
-                <span>Meals</span>
+                <span>Адреса</span>
             </div>
             <div class="order-heading-action">
             </div>
         </div>
         @foreach (var order in Model)
         {
-            <div class="order-item" onclick="location.href = '#';">
-                <div class="order-type">
-                    <span>@order.Id</span>
-                </div>
-                <div class="order-type">
-                    <span>@order.PaymentType</span>
-                </div>
-                <div class="order-phone">
-                    <span>@order.PhoneNumber</span>
-                </div>
-                <div class="order-address">
-                    <span>@order.Address</span>
-                </div>
-                <div class="order-content" white-space="pre">
-                    @foreach (var meal in order.Items)
-                    {
-                        if (meal.Equals(order.Items.Last()))
-                        {
-                            <span>@meal.Meal.Name: @meal.Amount.</span>
-                        }
-                        else
-                        {
-                            <span >@meal.Meal.Name: @meal.Amount,</span>
-                        }
-                    
-                    }
-                </div>
-                <div class="order-action">             
-                </div>
-            </div>
+            <partial name="_Order" model="@order"></partial>
         }
     </div>
-    <div>@ViewBag.Meals</div>
 </div>
-<script src="js/index.js"></script>
-<script type="text/javascript" src="lib/materialize/dist/js/materialize.js"></script>
-</body>
-</html>

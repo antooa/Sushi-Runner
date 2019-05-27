@@ -51,28 +51,23 @@ namespace SushiRunner.Controllers
             return View(meal);
         }
 
-
+        [HttpPost]
         [Authorize(Roles = UserRoles.Moderator)]
         public IActionResult Update(MealModel meal)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
+               
                     var changedMeal = _mapper.Map<MealModel, MealDTO>(meal);
                     _mealService.Update(changedMeal);
-                }
-                catch (Exception e)
-                {
-                    return View(e.Message);
-                }
-
-                return RedirectToAction(nameof(Index));
+                
+                return RedirectToAction("Index");
             }
 
             return View(meal);
         }
-
+        
+       
         [Authorize(Roles = UserRoles.Moderator)]
         public IActionResult Delete([Bind("Id")] MealModel meal)
         {

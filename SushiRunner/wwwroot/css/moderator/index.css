@@ -14,6 +14,17 @@
     grid-gap: 1em;
     background-color: #333333;
     color: #b1b1b1;
+    font-weight: 500;
+    font-size: 18px;
+}
+.order-heading-num {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+.order-heading-name {
+    display: flex;
+    align-items: center;
 }
 
 .order-heading-type {
@@ -42,7 +53,7 @@
     align-items: center;
 }
 
-.order-type {
+.order-num {
     display: flex;
     align-items: center;
     padding-left: 15px;
@@ -59,14 +70,13 @@
 }
 
 .order-action {
-    display: grid;
+    display: flex;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 15px;
-    grid-template-areas: "Ok Remove"
+    padding-right: 15px;
+    justify-content: flex-end;
 }
 
-.order-content {
+.order-customer-name {
     display: flex;
     align-items: center;
 }
@@ -104,7 +114,6 @@
 }
 
 .ok-button {
-    display: none;
     grid-area: Ok;
     align-items: center;
     justify-content: center;
@@ -117,4 +126,294 @@
 .order-item:hover {
     background-color: #bdc3c7;
     cursor: pointer;
+}
+.m-order-type {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.m-order-type span:last-child {
+    margin: 0 15px 0 15px;
+    font-style: italic;
+    color: #0f9d58;
+}
+
+.m-order-content {
+    margin-top: 30px;
+}
+
+.m-order-content li {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.m-order-content li span {
+    display: flex;
+    align-items: center;
+}
+.list-items {
+    padding: 0;
+    margin: 0;
+}
+
+.list-items li {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+ol {
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+    font: 15px 'trebuchet MS', 'lucida sans';
+    padding: 0;
+    margin-bottom: 3em;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+ol ol {
+    margin: 0 0 0 2em;
+    /* Add some left margin for inner lists */
+}
+
+.m-rounded-list li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.m-rounded-list .m-list-item {
+    font-weight: 500;
+    font-size: 18px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 7.6px;
+    background: #333;
+    color: #b1b1b1;
+    text-decoration: none;
+    border-radius: .3em;
+    transition: all .3s ease-out;
+    align-items: center;
+    width: 100%;
+}
+
+.m-rounded-list .m-list-item:hover {
+    background: #b1b1b1;
+    color: #333;
+    align-items: center;
+}
+
+.m-rounded-list .m-list-item:hover:before {
+    transform: rotate(360deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.m-rounded-list .m-list-item:before {
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -1.3em;
+    top: 50%;
+    margin-top: -1.3em;
+    background: #ed3544;
+    height: 2.5em;
+    width: 2.5em;
+    line-height: 2em;
+    border: .3em solid #fff;
+    color: #333333;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2em;
+    transition: all .3s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.m-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333333;
+    border-radius: 5px;
+
+}
+
+.m-selector .m-order-action {
+    
+    display: flex;
+}
+
+.add-meal-span {
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.m-label-selector {
+    display: flex;
+    justify-content: space-between;
+}
+
+.m-label-selector span {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    
+}
+.m-order-item > .m-order-action {
+    display: flex;
+    align-self: flex-end;
+   
+}
+
+.m-selector .m-order-action {
+    
+    display: flex;
+}
+
+
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #ecf0f1;
+    background-image: none;
+    color: #333333;
+}
+select input{
+    color: #b1b1b1;
+}
+
+/* Remove IE arrow */
+select::-ms-expand {
+    display: none;
+    color: #b1b1b1;
+}
+
+
+.m-quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
+.m-order-action button{
+    margin-right: 7.6px;
+}
+.modal-body > .m-order-action {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-body > .m-order-action > button {
+    margin-left: 15px;
+    margin-right: 0;
+}
+.m-order-price {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+}
+.order-action button{
+    margin-left: 15px;
+}
+#menu {
+    display: flex;
+    height: 75px;
+    align-items: center;
+    justify-content: center;
+    background: #FAFAFA;
+    font-size: 18px;
+}
+
+.navbar_items .navbar_link {
+    padding-left: 30px;
+}
+
+#account {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: max-content;
+    margin-left: auto;
+}
+
+#user {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #ececec;
+}
+
+#user i {
+    font-size: 35px;
+}
+
+#basket {
+    background-color: #212121;
+    width: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+#basket i {
+    font-size: 30px;
+}
+
+
+#totalPrice {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #e32d3c;
+    font-size: 14px;
+}
+
+.navbar_items {
+    display: flex;
+    align-items: center;
+}
+
+#menu .navbar_items a {
+    text-decoration: none;
+    color: #454d55;
+}
+
+#account a {
+    text-decoration: none;
+    color: #F1F8E9;
+}
+
+#totalPrice span {
+    color: #F1F8E9;
+}
+
+#phones {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+.home-image-container > img {
+    height: 75px;
+    object-fit: contain;
 }
