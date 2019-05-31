@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using AutoMapper;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using SushiRunner.Data.Entities;
 using SushiRunner.Data.Repositories;
@@ -23,7 +21,8 @@ namespace SushiRunner.Services
         private readonly IAppConf _appConf;
         private readonly ICartService _cartService;
 
-        public MealService(IRepository<Meal, long> repository, IMapper mapper, IAppConf appConf, ICartService cartService)
+        public MealService(IRepository<Meal, long> repository, IMapper mapper, IAppConf appConf,
+            ICartService cartService)
         {
             _repository = repository;
             _mapper = mapper;
@@ -75,22 +74,32 @@ namespace SushiRunner.Services
                 mealDto.ImagePath = fileName;
                 resized.Save(filePath);
             }
-    
+
             var book = _mapper.Map<MealDTO, Meal>(mealDto);
             _repository.Create(book);
             _repository.Save();
         }
 
-        public IEnumerable<MealDTO> GetMealsWithCartCheckbox(User user, IEnumerable<MealDTO> meals)
+        public IEnumerable<MealDTO> GetMealsWithCartCheckbox(User user)
         {
-            var dtos = meals.ToList();
             var cart = _cartService.GetByUserOrCreateNew(user);
-            foreach (var dto in dtos)
-            {
-                dto.IsInCart = cart.Items.Any(c => c.MealId.Equals(dto.Id));
-            }
+            return GetList()
+                .Select(meal =>
+                {
+                    meal.IsInCart = cart.Items.Any(c => c.MealId.Equals(meal.Id));
+                    return meal;
+                });
+        }
 
-            return dtos;
+        public IEnumerable<MealDTO> GetMealsWithCartCheckbox(User user, long mealGroupId)
+        {
+            var cart = _cartService.GetByUserOrCreateNew(user);
+            return GetByGroupId(mealGroupId)
+                .Select(meal =>
+                {
+                    meal.IsInCart = cart.Items.Any(c => c.MealId.Equals(meal.Id));
+                    return meal;
+                });
         }
 
         public IEnumerable<MealDTO> GetByGroupId(long id)

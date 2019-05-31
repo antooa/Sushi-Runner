@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
@@ -28,10 +29,10 @@ namespace SushiRunner.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var meals = _mealService.GetList();
             var user = await GetLoggedUserOrCreateAnonymous();
-            var mealsWithCartCheckbox = _mealService.GetMealsWithCartCheckbox(user, meals);
-            var mealModels = mealsWithCartCheckbox.Select(meal => _mapper.Map<MealDTO, MealModel>(meal)).ToList();
+            var mealModels = _mealService.GetMealsWithCartCheckbox(user)
+                .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
+                .ToList();
 
             return View(
                 new HomeModel
@@ -44,9 +45,9 @@ namespace SushiRunner.Controllers
         public async Task<IActionResult> MealGroups(long mealGroupId)
         {
             var user = await GetLoggedUserOrCreateAnonymous();
-            var meals = _mealService.GetByGroupId(mealGroupId);
-            var mealsWithCartCheckbox = _mealService.GetMealsWithCartCheckbox(user, meals);
-            var mealModels = mealsWithCartCheckbox.Select(meal => _mapper.Map<MealDTO, MealModel>(meal)).ToList();
+            var mealModels = _mealService.GetMealsWithCartCheckbox(user, mealGroupId)
+                .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
+                .ToList();
 
             return View("Index",
                 new HomeModel
@@ -61,10 +62,9 @@ namespace SushiRunner.Controllers
             var user = await GetLoggedUserOrCreateAnonymous();
             var cart = _cartService.GetByUserOrCreateNew(user);
             var cartModel = _mapper.Map<CartDTO, CartModel>(cart);
-            var (_, totalPrice) = await _cartService.CountAndTotalPrice(User);
-            cartModel.OrderModel = new OrderModel
+            cartModel.OrderModel = new MakeOrderFormModel
             {
-                TotalPrice = totalPrice
+                TotalPrice = (await _cartService.CountAndTotalPrice(User)).Item2
             };
             return View(cartModel);
         }
@@ -99,9 +99,10 @@ namespace SushiRunner.Controllers
                 });
         }
 
-        public async Task<IAccountService> MakeOrder(OrderModel orderModel)
+        public async Task<IActionResult> MakeOrder(MakeOrderFormModel orderModel)
         {
-            return null;
+            return Content(
+                "Order created!\nTODO: add order list page\nIf user is anonymous then just return 'thank-you' page, if not then return to order list");
         }
 
         private IActionResult HandleRedirect(string redirectPath)

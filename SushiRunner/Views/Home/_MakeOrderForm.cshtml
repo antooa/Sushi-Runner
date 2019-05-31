@@ -1,23 +1,23 @@
-@model SushiRunner.ViewModels.Home.OrderModel
+@model SushiRunner.ViewModels.Home.MakeOrderFormModel
 
 <p class="order-form-title">Оформити замовлення</p>
-<form id="make-order-form" asp-controller="Order" asp-action="Create" method="post">
+<form id="make-order-form" asp-controller="Home" asp-action="MakeOrder" method="post">
     <div id="make-order-form-content">
         <div class="make-order-form-group">
             <label asp-for="@Model.CustomerName">Ім'я <b>*</b>:</label>
-            <input asp-for="@Model.CustomerName" type="text">
+            <input asp-for="@Model.CustomerName" type="text" required>
         </div>
         <div class="make-order-form-group">
             <label asp-for="@Model.PhoneNumber">Телефон <b>*</b>:</label>
-            <input asp-for="@Model.PhoneNumber" type="text">
+            <input asp-for="@Model.PhoneNumber" type="text" required>
         </div>
         <div class="make-order-form-group">
             <label asp-for="@Model.PaymentType">Форма оплати <b>*</b>:</label>
-            <input asp-for="@Model.PaymentType" type="text">
+            <input asp-for="@Model.PaymentType" type="text" required>
         </div>
         <div class="make-order-form-group">
             <label asp-for="@Model.Address">Адреса <b>*</b>:</label>
-            <input asp-for="@Model.Address" type="text">
+            <input asp-for="@Model.Address" type="text" required>
         </div>
         <div class="form-group-comment">
             <label asp-for="@Model.Comment">Коментар до замовлення:</label>
