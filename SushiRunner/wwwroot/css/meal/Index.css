@@ -313,9 +313,6 @@ select::-ms-expand {
 .action-button button{
     margin-left: 15px;
     border: 0;
-    padding: 0;
-    background: 0;
-
 }
 #file{
     width: 0.1px;
@@ -746,4 +743,8 @@ body {
 .fa-plus{
     color: #0f9d58;
     font-size: 72px;
+}
+.rem-btn{
+    background: 0;
+    padding: 0;
 }
