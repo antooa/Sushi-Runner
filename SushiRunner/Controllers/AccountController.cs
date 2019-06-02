@@ -14,7 +14,6 @@ namespace SushiRunner.Controllers
         {
         }
 
-        [HttpGet]
         public IActionResult SignIn()
         {
             return View();
@@ -45,7 +44,6 @@ namespace SushiRunner.Controllers
             return View(model);
         }
 
-        [HttpGet]
         public IActionResult SignUp()
         {
             return View();
@@ -92,7 +90,6 @@ namespace SushiRunner.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
         // TODO: add notification after confirm
         public async Task<IActionResult> ConfirmEmail([Required] string userId, [Required] string code)
         {
@@ -111,7 +108,6 @@ namespace SushiRunner.Controllers
         }
 
         // TODO: remove and replace with /Home/PersonalInformation
-        [HttpGet]
         [Authorize]
         public async Task<IActionResult> Info()
         {
@@ -122,6 +118,20 @@ namespace SushiRunner.Controllers
             }
 
             return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword()
+        {
+            return RedirectToAction("Info");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdatePersonalInfo()
+        {
+            return RedirectToAction("Info");
         }
     }
 }

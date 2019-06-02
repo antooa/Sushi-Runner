@@ -1,6 +1,12 @@
 .account-info-container {
-    max-width: 950px;
+    max-width: 1100px;
     margin: 50px auto;
+}
+
+.account-info-columns-container {
+    display: grid;
+    grid-template-columns: 180px minmax(200px, 340px) minmax(200px, 340px);
+    justify-content: space-between;
 }
 
 #hwl-edit::before,
@@ -9,7 +15,6 @@
 }
 
 #account-info-nav {
-    width: 180px;
     padding-right: 20px;
     border-right: 1px solid lightgray;
 }
@@ -34,12 +39,4 @@
 
 #sign-out-button:hover {
     background-color: #e32d3c;
-}
-
-#account-info-change {
-    width: 340px;
-}
-
-#account-password-change {
-    width: 340px;
 }

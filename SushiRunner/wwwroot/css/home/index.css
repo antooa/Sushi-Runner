@@ -51,6 +51,7 @@ button:focus {
     bottom: 80px;
     left: 0;
     box-shadow: 4px 0 24px rgba(1, 1, 1, 0.1);
+    z-index: 999;
 }
 
 #home-side-nav > a {
