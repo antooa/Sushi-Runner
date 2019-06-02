@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
@@ -101,8 +100,7 @@ namespace SushiRunner.Controllers
 
         public async Task<IActionResult> MakeOrder(MakeOrderFormModel orderModel)
         {
-            return Content(
-                "Order created!\nTODO: add order list page\nIf user is anonymous then just return 'thank-you' page, if not then return to order list");
+            return View("ThankYou");
         }
 
         private IActionResult HandleRedirect(string redirectPath)
