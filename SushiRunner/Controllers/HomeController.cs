@@ -15,14 +15,17 @@ namespace SushiRunner.Controllers
         private readonly IMealService _mealService;
         private readonly IMealGroupService _mealGroupService;
         private readonly ICartService _cartService;
+        private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
 
         public HomeController(IMealService mealService, IMealGroupService mealGroupService,
-            IAccountService accountService, ICartService cartService, IMapper mapper) : base(accountService)
+            IAccountService accountService, ICartService cartService, IOrderService orderService,
+            IMapper mapper) : base(accountService)
         {
             _mealService = mealService;
             _mealGroupService = mealGroupService;
             _cartService = cartService;
+            _orderService = orderService;
             _mapper = mapper;
         }
 
@@ -68,6 +71,7 @@ namespace SushiRunner.Controllers
             return View(cartModel);
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddToCart(long id, string redirectPath)
         {
             var user = await GetLoggedUserOrCreateAnonymous();
@@ -75,6 +79,7 @@ namespace SushiRunner.Controllers
             return HandleRedirect(redirectPath);
         }
 
+        [HttpPost]
         public async Task<IActionResult> RemoveFromCart(long id, string redirectPath)
         {
             var user = await GetLoggedUserOrCreateAnonymous();
@@ -82,6 +87,7 @@ namespace SushiRunner.Controllers
             return HandleRedirect(redirectPath);
         }
 
+        [HttpPost]
         public async Task<IActionResult> ChangeCartItemAmount(long id, int cartItemAmount, string redirectPath)
         {
             var user = await GetLoggedUserOrCreateAnonymous();
@@ -98,9 +104,23 @@ namespace SushiRunner.Controllers
                 });
         }
 
+        [HttpPost]
         public async Task<IActionResult> MakeOrder(MakeOrderFormModel orderModel)
         {
-            return View("ThankYou");
+            var user = await GetLoggedUserOrCreateAnonymous();
+            var cart = _cartService.GetByUserOrCreateNew(user);
+            _orderService.Create(
+                user,
+                orderModel.CustomerName,
+                orderModel.PhoneNumber,
+                orderModel.PaymentType,
+                orderModel.Address,
+                cart);
+            _cartService.Clear(user);
+
+            return user.IsAnonymous
+                ? (IActionResult) View("ThankYou")
+                : Content("You are not anonymous but personal cabinet not yet created");
         }
 
         private IActionResult HandleRedirect(string redirectPath)

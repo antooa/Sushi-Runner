@@ -8,6 +8,7 @@ namespace SushiRunner.Data.Entities
     public class Order
     {
         public long Id { get; set; }
+        public User User { get; set; }
         public ICollection<OrderItem> Items { get; set; }
         public string CustomerName { get; set; }
         public string PhoneNumber { get; set; }

@@ -8,6 +8,7 @@ namespace SushiRunner.Services.Dto
     public class OrderDTO
     {
         public long Id { get; set; }
+        public User User { get; set; }
         public string CustomerName { get; set; }
         public string PhoneNumber { get; set; }
         public string PaymentType { get; set; }

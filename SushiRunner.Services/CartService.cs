@@ -109,9 +109,9 @@ namespace SushiRunner.Services
 
         public void Clear(User user)
         {
-            var card = _GetByUserOrCreateNew(user);
-            card.Items.Clear();
-            _cartRepository.Update(card);
+            var cart = _GetByUserOrCreateNew(user);
+            cart.Items.Clear();
+            _cartRepository.Update(cart);
         }
 
         public async Task<(int, int)> CountAndTotalPrice(ClaimsPrincipal principal)
