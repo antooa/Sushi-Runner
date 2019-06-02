@@ -2,23 +2,24 @@
 
 @{
     Layout = "_AccountLayout";
+    ViewData["Title"] = "Sign in";
 }
 
 
 <form asp-action="SignIn" asp-controller="Account" method="post" class="login-form">
-    <h2 class="text-center">Sign in</h2>
+    <h2 class="text-center">Вхід</h2>
     <div asp-validation-summary="All" class="error-box text-danger"></div>
     <div class="form-group">
         <div class="input-group">
-            <input asp-for="Username" type="text" class="form-control" placeholder="Username" required="required">
+            <input asp-for="Username" type="text" class="form-control" placeholder="Логін" required="required">
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
-            <input asp-for="Password" type="password" class="form-control" placeholder="Password" required="required">
+            <input asp-for="Password" type="password" class="form-control" placeholder="Пароль" required="required">
         </div>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-dark login-btn btn-block">Sign in</button>
+        <button type="submit" class="btn btn-dark login-btn btn-block">Увійти</button>
     </div>
 </form>

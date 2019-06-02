@@ -4,10 +4,20 @@ namespace SushiRunner.ViewModels.Account
 {
     public class SignUpModel
     {
+        [Required(ErrorMessage = "Full name is required")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long",
+            MinimumLength = 5)]
+        public string FullName { get; set; }
+        
         [Required(ErrorMessage = "Email address is required")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long",
             MinimumLength = 5)]
         public string Email { get; set; }
+        
+        [Required(ErrorMessage = "Phone number is required")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long",
+            MinimumLength = 5)]
+        public string PhoneNumber { get; set; }
 
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Please enter some password")]
