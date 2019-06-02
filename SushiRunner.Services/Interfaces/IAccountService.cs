@@ -13,12 +13,16 @@ namespace SushiRunner.Services.Interfaces
         Task<SignUpResult> SignUpCustomerAsync(string anonymousId, string username, string email, string password,
             Func<User, string, string> generateEmailConfirmationLink);
 
-        void SignOutAsync();
+        Task SignOutAsync();
 
         Task<EmailConfirmationResult> ConfirmEmailAsync(string userId, string code);
 
         Task<User> GetLoggedUserOrCreateAnonymous(ClaimsPrincipal principal, string newId);
 
         Task<User> GetLoggedUser(ClaimsPrincipal principal);
+
+        Task UpdateInfo(User user, string fullName, string phoneNumber);
+
+        Task ChangePassword(User user, string oldPassword, string newPassword);
     }
 }

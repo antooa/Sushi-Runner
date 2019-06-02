@@ -1,15 +1,18 @@
-namespace SushiRunner.ViewModels
+namespace SushiRunner.ViewModels.Account
 {
+    
+    // TODO: add validation
     public class AccountInfoModel
     {
-        public AccountInfoChangeModel InfoChange { get; set; }
+        public AccountInfoChangeModel AccountInfoChange { get; set; }
         public PasswordChangeModel PasswordChange { get; set; }
     }
 
     public class AccountInfoChangeModel
     {
         public string FullName { get; set; }
-        public string DefaultAddress { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
     }
 
     public class PasswordChangeModel

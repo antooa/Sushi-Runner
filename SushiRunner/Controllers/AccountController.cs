@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
 using SushiRunner.Services.Interfaces;
-using SushiRunner.ViewModels;
+using SushiRunner.ViewModels.Account;
 
 namespace SushiRunner.Controllers
 {
@@ -86,7 +86,7 @@ namespace SushiRunner.Controllers
         [Authorize]
         public async Task<ActionResult> SignOut()
         {
-            accountService.SignOutAsync();
+            await accountService.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 
@@ -117,20 +117,51 @@ namespace SushiRunner.Controllers
                 return RedirectToAction("SignIn");
             }
 
-            return View();
+            var accountInfoModel = new AccountInfoModel
+            {
+                AccountInfoChange = new AccountInfoChangeModel
+                {
+                    FullName = user.FullName,
+                    PhoneNumber = user.PhoneNumber,
+                    Email = user.Email
+                },
+                PasswordChange = new PasswordChangeModel()
+            };
+
+            return View(accountInfoModel);
         }
 
+        // TODO: add validation !!!
+        // TODO: pull whole account info and return errors
+        // TODO: send notification when changed info
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> ChangePassword()
+        public async Task<IActionResult> UpdatePersonalInfo(AccountInfoModel accountInfoModel)
         {
+            var model = accountInfoModel.AccountInfoChange;
+            var user = await GetLoggedUserOrCreateAnonymous();
+            user.FullName = model.FullName;
+            user.PhoneNumber = model.PhoneNumber;
+            await accountService.UpdateInfo(user, model.FullName, model.PhoneNumber);
             return RedirectToAction("Info");
         }
 
+        // TODO: add validation !!!
+        // TODO: pull whole account info and return errors
+        // TODO: send notification when changed info
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> UpdatePersonalInfo()
+        public async Task<IActionResult> ChangePassword(AccountInfoModel accountInfoModel)
         {
+            var model = accountInfoModel.PasswordChange;
+            if (model.NewPassword != model.NewPasswordRepeat)
+            {
+//                ModelState.AddModelError("", result.Errors.FirstOrDefault());
+                // TODO: add error and return
+            }
+
+            var user = await GetLoggedUserOrCreateAnonymous();
+            await accountService.ChangePassword(user, model.OldPassword, model.NewPassword);
             return RedirectToAction("Info");
         }
     }

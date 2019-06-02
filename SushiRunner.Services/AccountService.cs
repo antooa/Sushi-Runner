@@ -134,7 +134,7 @@ namespace SushiRunner.Services
             };
         }
 
-        public async void SignOutAsync()
+        public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
         }
@@ -192,6 +192,18 @@ namespace SushiRunner.Services
         public async Task<User> GetLoggedUser(ClaimsPrincipal principal)
         {
             return await _userManager.GetUserAsync(principal);
+        }
+
+        public async Task UpdateInfo(User user, string fullName, string phoneNumber)
+        {
+            user.FullName = fullName.Trim();
+            user.PhoneNumber = phoneNumber.Trim();
+            await _userManager.UpdateAsync(user);
+        }
+
+        public async Task ChangePassword(User user, string oldPassword, string newPassword)
+        {
+            await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
         }
     }
 }
