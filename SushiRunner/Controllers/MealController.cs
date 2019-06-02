@@ -53,14 +53,20 @@ namespace SushiRunner.Controllers
 
         [HttpPost]
         [Authorize(Roles = UserRoles.Moderator)]
-        public IActionResult Update(MealModel meal)
+        public IActionResult Update(MealModel meal, IFormFile pic)
         {
             if (ModelState.IsValid)
             {
-               
+                try
+                {
                     var changedMeal = _mapper.Map<MealModel, MealDTO>(meal);
-                    _mealService.Update(changedMeal);
-                
+                    _mealService.Update(changedMeal, pic);
+                }
+                catch (Exception e)
+                {
+                    return View(e.Message);
+                }
+
                 return RedirectToAction("Index");
             }
 

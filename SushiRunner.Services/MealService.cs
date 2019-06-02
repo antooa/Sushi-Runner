@@ -50,8 +50,42 @@ namespace SushiRunner.Services
             return _mapper.Map<Meal, MealDTO>(meal);
         }
 
-        public void Update(MealDTO mealDto)
+        public void Update(MealDTO entity)
         {
+            var meal = _mapper.Map<MealDTO, Meal>(entity);
+            _repository.Update(meal);
+            _repository.Save();
+        }
+
+        public void Update(MealDTO mealDto, IFormFile file)
+        {
+            var oldImageName = Get(mealDto.Id).ImagePath;
+
+            if (file != null && file.Length > 0)
+            {
+                var image = Image.FromStream(file.OpenReadStream());
+                
+
+                var uploads = Path.Combine(_appConf.WebRootPath, "img");
+                if (!string.IsNullOrEmpty(oldImageName))
+                {
+                    var oldPath = Path.Combine(uploads, oldImageName);
+                    if (File.Exists(oldPath))
+                    {
+                        File.Delete(oldPath);
+                    }
+                }
+
+                var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(uploads, fileName);
+                image.Save(filePath);
+                mealDto.ImagePath = @"/img/" + fileName;
+            }
+            else
+            {
+                mealDto.ImagePath = oldImageName;
+            }
+            
             var meal = _mapper.Map<MealDTO, Meal>(mealDto);
             _repository.Update(meal);
             _repository.Save();
@@ -67,17 +101,16 @@ namespace SushiRunner.Services
         {
             if (file != null && file.Length > 0)
             {
-                var cropped = ImageTool.CropMaxSquare(Image.FromStream(file.OpenReadStream()));
-                var resized = ImageTool.Resize(cropped, 200, 200);
-                var uploads = Path.Combine(_appConf.WebRootPath, "pics\\MealPics");
+                var image = Image.FromStream(file.OpenReadStream());
+                var uploads = Path.Combine(_appConf.WebRootPath, "img");
                 var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
                 var filePath = Path.Combine(uploads, fileName);
-                mealDto.ImagePath = fileName;
-                resized.Save(filePath);
+                mealDto.ImagePath = @"/img/" + fileName;
+                image.Save(filePath);
             }
     
-            var book = _mapper.Map<MealDTO, Meal>(mealDto);
-            _repository.Create(book);
+            var meal = _mapper.Map<MealDTO, Meal>(mealDto);
+            _repository.Create(meal);
             _repository.Save();
         }
 
