@@ -35,4 +35,12 @@
       <Folder Include="wwwroot\lib\materialize\dist" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <Content Update="Views\Meal\_Meal.cshtml">
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
