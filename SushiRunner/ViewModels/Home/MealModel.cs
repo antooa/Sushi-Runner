@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace SushiRunner.ViewModels
 {
     public class MealModel
@@ -9,7 +11,7 @@ namespace SushiRunner.ViewModels
         public string ImagePath { get; set; }
         public int Price { get; set; }
         public bool IsInCart { get; set; }
-        
-        public long MealGroupId { get; set; }
+
+        public long GroupId { get; set; }
     }
 }

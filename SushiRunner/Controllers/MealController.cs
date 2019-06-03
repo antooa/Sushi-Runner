@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -15,10 +16,12 @@ namespace SushiRunner.Controllers
     {
         private readonly IMealService _mealService;
         private readonly IMapper _mapper;
+        private readonly IMealGroupService _mealGroupService;
 
-        public MealController(IMealService service, IMapper mapper)
+        public MealController(IMealService service, IMapper mapper, IMealGroupService mealGroupService)
         {
             _mapper = mapper;
+            _mealGroupService = mealGroupService;
             _mealService = service;
         }
 
@@ -28,16 +31,30 @@ namespace SushiRunner.Controllers
             var meals = dtos.Select(dto => _mapper.Map<MealDTO, MealModel>(dto)).ToList();
             return View(meals);
         }
-        
+
+        [Authorize(Roles = UserRoles.Moderator)]
+        public IActionResult Moderate()
+        {
+
+            var mealDtos = _mealService.GetList();
+            var groupDtos = _mealGroupService.GetList();
+            var meals = mealDtos.Select(mealDto => _mapper.Map<MealDTO, MealModel>(mealDto));
+            var groups = groupDtos.Select(groupDto => _mapper.Map<MealGroupDTO, MealGroupModel>(groupDto));
+            var tuple = new Tuple<IEnumerable<MealModel>, IEnumerable<MealGroupModel>>(meals, groups);
+            return View(tuple);
+        }
+
         [HttpPost]
         [Authorize(Roles = UserRoles.Moderator)]
-        public IActionResult Create([Bind("Name, Description, Weight, Price, MealGroupId")] MealModel meal, IFormFile pic)
+        public IActionResult Create([Bind("Name, Description, Weight, Price, GroupId")]
+            MealModel meal, IFormFile pic)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
                     var newMeal = _mapper.Map<MealModel, MealDTO>(meal);
+                    newMeal.MealGroupId = meal.GroupId;
                     _mealService.Create(newMeal, pic);
                 }
                 catch (Exception e)
@@ -45,7 +62,7 @@ namespace SushiRunner.Controllers
                     return View(e.Message);
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Moderate", "Meal");
             }
 
             return View(meal);
@@ -72,8 +89,8 @@ namespace SushiRunner.Controllers
 
             return View(meal);
         }
-        
-       
+
+
         [Authorize(Roles = UserRoles.Moderator)]
         public IActionResult Delete([Bind("Id")] MealModel meal)
         {
@@ -88,7 +105,7 @@ namespace SushiRunner.Controllers
                     return View(e.Message);
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Moderate", "Meal");
             }
 
             return View(meal);

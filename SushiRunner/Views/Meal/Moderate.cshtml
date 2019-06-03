@@ -1,0 +1,98 @@
+@using SushiRunner.ViewModels
+@model Tuple<IEnumerable<MealModel>, IEnumerable<MealGroupModel>>
+@{
+    ViewBag.Title = "Meals";
+}
+@{
+    ViewData["Title"] = "Sushi-Runner Moderator";
+    Layout = "_ModeratorLayout";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="@Url.Content("/css/meal/Index.css")">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+}
+
+<div id="wrapper">
+    <div class="container-fluid">
+
+        <div class="item-cart add" >
+            <div class="new-product" data-toggle="modal" data-target="#exampleModal">
+                <i class="fas fa-plus"></i>
+            </div>
+        </div>
+        @foreach (var meal in Model.Item1)
+        {
+            <partial name="_Meal" model="@meal"></partial>
+        }
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 883px">
+        <form class="form" method="post" enctype="multipart/form-data" asp-controller="Meal" asp-action="Create">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Продукт</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="product">
+                        <div class="product-img">
+                            <div class="selector">
+                                <img src="/img/sushi.jpg" class="img-thumbnail" id="selectedCreateImg" alt="Product Image"/>
+                                <div class="form-group">
+                                    <input type="file" class="custom-file-input" id="pic-input-create" name="pic"
+                                           onchange="readURL(this, 'selectedCreateImg')">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="form-group name">
+                                <label for="name">Назва продукту</label>
+                                <input class="form-control" type="text" placeholder="Назва" id="name" name="Name">
+                            </div>
+                            <select name="GroupId">
+                                @foreach(var group in Model.Item2)
+                                {
+                                    <option value="@group.Id">@group.Name</option>
+                                }
+                            </select>
+                            <div class="form-group">
+                                <label for="name">Ціна</label>
+                                <input class="form-control" placeholder="Price" id="price" type="number" name="Price">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Вага</label>
+                                <input class="form-control" id="weight" type="number" name="Weight">
+                            </div>
+                            <div class="comments">
+                                <textarea class="form-control" rows="3" cols="5" placeholder="Склад" name="Description" ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="action-button">
+                        <button type="submit"
+                                class="btn btn-success ok-button">
+                            <span>Додати</span>
+                        </button>
+                        <button type="reset"
+                                class="btn btn-danger remove-button">
+                            <span>Відмінити</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

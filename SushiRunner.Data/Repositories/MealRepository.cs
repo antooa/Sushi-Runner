@@ -24,7 +24,7 @@ namespace SushiRunner.Data.Repositories
 
         public IEnumerable<Meal> GetList()
         {
-            return _context.Meals;
+            return _context.Meals.Include(meal=>meal.MealGroup).ToList();
         }
 
         public Meal Get(long id)
