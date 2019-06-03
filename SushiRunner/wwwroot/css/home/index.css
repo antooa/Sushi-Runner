@@ -421,3 +421,11 @@ button:focus {
     margin-left: 35px;
     font-size: 14px;
 }
+.about{
+    min-width: 500px;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

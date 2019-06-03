@@ -43,7 +43,7 @@ namespace SushiRunner.Controllers
             return View(
                 new HomeModel
                 {
-                    Meals = mealModels.ToPagedList(pageNumber,pageSize),
+                    Meals = mealModels.ToPagedList(pageNumber, pageSize),
                 });
         }
 
@@ -60,7 +60,7 @@ namespace SushiRunner.Controllers
             return View("Index",
                 new HomeModel
                 {
-                    Meals = mealModels.ToPagedList(pageNumber,pageSize),
+                    Meals = mealModels.ToPagedList(pageNumber, pageSize),
                     Title = _mealGroupService.Get(mealGroupId).Name
                 });
         }
@@ -137,6 +137,16 @@ namespace SushiRunner.Controllers
             }
 
             return Redirect(redirectPath);
+        }
+
+        public async Task<IActionResult> About()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Delivery()
+        {
+            return View();
         }
     }
 }
