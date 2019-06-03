@@ -102,8 +102,7 @@ namespace SushiRunner.Tests.Services
             var repository = new Mock<IRepository<Meal, long>>();
             var cart = new Mock<ICartService>();
             var mapper = new Mock<IMapper>();
-            var groupService = new Mock<IMealGroupService>();
-            var svc = new MealService(repository.Object, mapper.Object, _config.Object, cart.Object, groupService.Object);
+            var svc = new MealService(repository.Object, mapper.Object, _config.Object, cart.Object);
             var expected = new MealDTO()
             {
                 Id = 4,
@@ -143,8 +142,7 @@ namespace SushiRunner.Tests.Services
             });
             var mapper = new Mock<IMapper>();
             mapper.Setup(m => m.Map<Meal, MealDTO>(It.IsAny<Meal>())).Returns(expected);
-            var groupService = new Mock<IMealGroupService>();
-            var svc = new MealService(repository.Object, mapper.Object, _config.Object, cart.Object, groupService.Object);
+            var svc = new MealService(repository.Object, mapper.Object, _config.Object, cart.Object);
 
 
             // Act
@@ -174,8 +172,7 @@ namespace SushiRunner.Tests.Services
             });
             var mapper = new Mock<IMapper>();
             mapper.Setup(m => m.Map<Meal, MealDTO>(It.IsAny<Meal>())).Returns(expected);
-            var groupService = new Mock<IMealGroupService>();
-            var svc = new MealService(repository.Object, mapper.Object, _config.Object, cart.Object, groupService.Object);
+            var svc = new MealService(repository.Object, mapper.Object, _config.Object, cart.Object);
 
             // Act
             svc.Delete(expected.Id);
@@ -207,8 +204,7 @@ namespace SushiRunner.Tests.Services
             });
             var mapper = mapperConfig.CreateMapper();
             var cart = new Mock<ICartService>();
-            var groupService = new Mock<IMealGroupService>();
-            var svc = new MealService(repository, mapper, _config.Object, cart.Object, groupService.Object);
+            var svc = new MealService(repository, mapper, _config.Object, cart.Object);
             return svc;
         }
         

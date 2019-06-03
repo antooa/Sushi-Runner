@@ -20,18 +20,14 @@ namespace SushiRunner.Services
         private bool _disposed;
         private readonly IAppConf _appConf;
         private readonly ICartService _cartService;
-        private readonly IMealGroupService _mealGroupService;
-        private readonly IRepository<MealGroup, long> _groupRepository;
 
         public MealService(IRepository<Meal, long> repository, IMapper mapper, IAppConf appConf,
-            ICartService cartService, IMealGroupService mealGroupService, IRepository<MealGroup, long> groupRepository)
+            ICartService cartService)
         {
             _repository = repository;
             _mapper = mapper;
             _appConf = appConf;
             _cartService = cartService;
-            _mealGroupService = mealGroupService;
-            _groupRepository = groupRepository;
         }
 
         public void Create(MealDTO mealDto)
