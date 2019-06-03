@@ -7,6 +7,8 @@ using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
 using SushiRunner.ViewModels.Home;
+using PagedList.Mvc;
+using PagedList;
 
 namespace SushiRunner.Controllers
 {
@@ -29,34 +31,29 @@ namespace SushiRunner.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
             var user = await GetLoggedUserOrCreateAnonymous();
             var mealModels = _mealService.GetMealsWithCartCheckbox(user)
                 .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
                 .ToList();
 
-            return View(
-                new HomeModel
-                {
-                    Meals = mealModels,
-                });
+            return View(mealModels.ToPagedList(pageNumber, pageSize));
         }
 
         [Route("/Home/MealGroups/{mealGroupId}")]
-        public async Task<IActionResult> MealGroups(long mealGroupId)
+        public async Task<IActionResult> MealGroups(long mealGroupId, int? page)
         {
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
             var user = await GetLoggedUserOrCreateAnonymous();
             var mealModels = _mealService.GetMealsWithCartCheckbox(user, mealGroupId)
                 .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
                 .ToList();
 
-            return View("Index",
-                new HomeModel
-                {
-                    Meals = mealModels,
-                    Title = _mealGroupService.Get(mealGroupId).Name
-                });
+            return View("Index",mealModels.ToPagedList(pageNumber,pageSize));
         }
 
         public async Task<IActionResult> Cart()
