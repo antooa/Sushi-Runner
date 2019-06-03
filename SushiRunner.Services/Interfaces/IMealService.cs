@@ -15,5 +15,7 @@ namespace SushiRunner.Services.Interfaces
         IEnumerable<MealDTO> GetMealsWithCartCheckbox(User user);
 
         IEnumerable<MealDTO> GetMealsWithCartCheckbox(User user, long mealGroupId);
+
+        void Update(MealDTO mealDto, IFormFile file);
     }
 }

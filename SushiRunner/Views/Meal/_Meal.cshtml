@@ -1,39 +1,5 @@
 @model MealModel
 
-@* <div class="item-card"> *@
-@*     <div class="item-body"> *@
-@*         <div class="item-img"> *@
-@*             <img src="@Model.ImagePath" alt="@Model.Name"> *@
-@*         </div> *@
-@*         <div class="item-title"> *@
-@*             <h3>@Model.Name</h3> *@
-@*         </div> *@
-@*         <div class="item-description"> *@
-@*             <span>@Model.Description</span> *@
-@*         </div> *@
-@*         <div class="item-weight"> *@
-@*             <h5 class="weight-1"> *@
-@*                 <span>@Model.Weight гр.</span> *@
-@*             </h5> *@
-@*         </div> *@
-@*         <div class="item-footer"> *@
-@*             <div class="item-price"> *@
-@*                 <strong>@Model.Price грн.</strong> *@
-@*             </div> *@
-@*             <div class="item-actions"> *@
-@*                 <a href="#" data-toggle="modal" data-target="#exampleModal-@Model.Id" class="edit-btn"> *@
-@*                     <i class="fas fa-edit"></i> *@
-@*                 </a> *@
-@*                 <a href="#" class="remove-btn"> *@
-@*                     <i class="fas fa-window-close"></i> *@
-@*                 </a> *@
-@* *@
-@*             </div> *@
-@*         </div> *@
-@*     </div> *@
-@* </div> *@
-
-
 <div class="item-cart" data-meal-id="@Model.Id">
     <div class="item-img">
         <img src="@Model.ImagePath" alt="@Model.Name">
@@ -57,12 +23,9 @@
             <a href="#" data-toggle="modal" data-target="#exampleModal-@Model.Id" class="edit-btn">
                 <i class="fas fa-edit"></i>
             </a>
-            @* <a href="#" class="remove-btn"> *@
-            @*     <i class="fas fa-window-close"></i> *@
-            @* </a> *@
             <form asp-controller="Meal" asp-action="Delete">
                 <input type="hidden" value="@Model.Id" asp-for="Id"/>
-                <button>
+                <button class="rm-btn">
                     <i class="fas fa-window-close"></i>
                 </button>
             </form>
@@ -72,7 +35,7 @@
 <div class="modal fade" id="exampleModal-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document" style="max-width: 883px">
-        <form class="form" method="post" asp-controller="Meal" asp-action="Update">
+        <form class="form" method="post" enctype="multipart/form-data" asp-controller="Meal" asp-action="Update">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Продукт</h5>
@@ -83,14 +46,12 @@
                 <div class="modal-body">
                     <div class="product">
                         <div class="product-img">
-                            <div class="box">
-                                <input type="file" name="file" id="file" asp-for="ImagePath"/>
-                                <label for="file">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
-                                        <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path>
-                                    </svg>
-                                    <span>Виберіть файл</span>
-                                </label>
+                            <div class="selector">
+                                <img src="@Model.ImagePath" class="img-thumbnail" id="selectedImg" alt="Product Image"/>
+                                <div class="form-group">
+                                    <input type="file" class="custom-file-input" id="pic-input" name="pic"
+                                           onchange="readURL(this, 'selectedImg')">
+                                </div>
                             </div>
                         </div>
                         <div class="product-info">
@@ -116,80 +77,6 @@
                             </div>
                             <input type="hidden" asp-for="MealGroupId" value="@Model.MealGroupId"/>
                             <input type="hidden" asp-for="Id" value="@Model.Id"/>
-                            <input type="hidden" asp-for="ImagePath" value="@Model.ImagePath"/>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <div class="action-button">
-                        <button type="submit"
-                                class="btn btn-success ok-button">
-                            <span>Додати</span>
-                        </button>
-                        <button type="reset"
-                                class="btn btn-danger remove-button">
-                            <span>Відмінити</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document" style="max-width: 883px">
-        <form class="form" method="post" asp-controller="Meal" asp-action="Create">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Продукт</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="product">
-                        <div class="product-img">
-                            <div class="box">
-                                <input type="file" name="file" id="file" asp-for="ImagePath"/>
-                                <label for="file">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
-                                        <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path>
-                                    </svg>
-                                    <span>Виберіть файл</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="form-group name">
-                                <label for="name">Назва продукту</label>
-                                <input class="form-control" type="text" placeholder="Назва" id="name" name="name" asp-for="Name">
-                            </div>
-                            <select asp-for="MealGroupId">
-                                <option value="" disabled selected>Виберіть *категорію*</option>
-                                <option value="1">Піца</option>
-                                <option value="2">Роли</option>
-                                <option value="3">Гарячі роли</option>
-                                <option value="4">Суші</option>
-                                <option value="5">Сети</option>
-                                <option value="6">Десерти</option>
-                            </select>
-                            <div class="form-group">
-                                <label for="name">Ціна</label>
-                                <input class="form-control" placeholder="Price" id="price" type="number" asp-for="Price">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Вага</label>
-                                <input class="form-control" id="weight" type="number" asp-for="Weight">
-                            </div>
-
-                            <div class="comments">
-                                <textarea class="form-control" rows="3" cols="5" placeholder="Склад" asp-for="Description" ></textarea>
-                            </div>
-
                         </div>
                     </div>
 
