@@ -118,9 +118,7 @@ namespace SushiRunner.Controllers
                 cart);
             _cartService.Clear(user);
 
-            return user.IsAnonymous
-                ? (IActionResult) View("ThankYou")
-                : Content("You are not anonymous but personal cabinet not yet created");
+            return View("ThankYou");
         }
 
         private IActionResult HandleRedirect(string redirectPath)

@@ -55,12 +55,8 @@ namespace SushiRunner.Data.Repositories
 
         public void Delete(long id)
         {
-            var book = _context.Orders.Find(id);
-            if (book != null)
-            {
-                _context.Orders.Remove(book);
-            }
-
+            var order = Get(id);
+            _context.Orders.Remove(order);
             _context.SaveChanges();
         }
 

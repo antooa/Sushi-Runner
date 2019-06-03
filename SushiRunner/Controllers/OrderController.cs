@@ -19,8 +19,8 @@ namespace SushiRunner.Controllers
             _mapper = mapper;
         }
 
-        [HttpPut]
-        public void Update([FromBody] OrderModel orderParams)
+        [HttpPost]
+        public IActionResult Update(OrderModel orderParams)
         {
             if (ModelState.IsValid)
             {
@@ -28,7 +28,15 @@ namespace SushiRunner.Controllers
                 _orderService.Update(dto);
             }
 
-            RedirectToAction("Index", "Moderator");
+            return RedirectToAction("Index", "Moderator");
         }
+        [HttpPost]
+        public IActionResult Delete(long id)
+        {
+            _orderService.Delete(id);
+            return RedirectToAction("Index", "Moderator");
+        }
+        
+        
     }
 }
