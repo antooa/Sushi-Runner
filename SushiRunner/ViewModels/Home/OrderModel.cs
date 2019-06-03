@@ -12,7 +12,7 @@ namespace SushiRunner.ViewModels.Home
         [Required] public string PhoneNumber { get; set; }
         [Required] public string PaymentType { get; set; }
         [Required] public string Address { get; set; }
-        public OrderStatus Status { get; set; }
+        public OrderStatus OrderStatus { get; set; }
         public string Comment { get; set; }
         public ICollection<OrderItemModel> Items { get; set; }
     }

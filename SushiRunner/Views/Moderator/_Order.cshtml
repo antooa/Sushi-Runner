@@ -1,3 +1,4 @@
+@using SushiRunner.Data.Entities
 @model SushiRunner.ViewModels.Home.OrderModel
 
 
@@ -26,7 +27,7 @@
 
 <div class="modal fade" id="exampleModal-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document" style="max-width: 883px">
-        <form class="form" method="post">
+        <form class="form" method="post" asp-controller="Order" asp-action="Update">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Деталі замовлення</h5>
@@ -37,19 +38,23 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="first_name">Ім'я</label>
-                        <input class="form-control" placeholder="Name" id="first_name" type="text" value="@Model.CustomerName">
+                        <input class="form-control" placeholder="Name" name="CustomerName" id="first_name" type="text" value="@Model.CustomerName">
                     </div>
                     <div class="form-group">
                         <label for="phone">Телефон</label>
-                        <input class="form-control" type="text" placeholder="Phone" id="phone" name="phone"
+                        <input class="form-control" type="text" placeholder="Phone" id="phone" name="PhoneNumber"
                                value="@Model.PhoneNumber">
                     </div>
                     <div class="form-group">
                         <label for="address">Адреса</label>
-                        <input class="form-control" type="text" placeholder="Address" id="address" name="address"
+                        <input class="form-control" type="text" placeholder="Address" id="address" name="Address"
                                value="@Model.Address">
                     </div>
-
+                    <input type="hidden" name="Comment" value="@Model.Comment"/>
+                    <input type="hidden" name="Id" value="@Model.Id"/>
+                    <input type="hidden" name="Items" value="@Model.Items"/>
+                    <input type="hidden" name="TotalPrice" value="@Model.TotalPrice"/>
+                    <input type="hidden" name="PaymentType" value="@Model.PaymentType"/>
                     <div class="m-order-content">
                         <div class="m-order-items">
                             <span class="m-content">Склад замовлення:</span>
@@ -73,20 +78,30 @@
                             </ol>
                         </div>
                         
+                        
 
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="m-order-action">
-                        <button href="http://google.com" type="submit" class="btn btn-success ok-button">
-                            <span>Підтвердити</span>
-                        </button>
-                        <button href="http://google.com" type="submit" class="btn btn-success ok-button">
-                            <span>Доставити</span>
-                        </button>
-                        <button href="http://google.com" type="submit" class="btn btn-success remove-button">
-                            <span>Відхилити</span>
-                        </button>
+                        @if(Model.OrderStatus == OrderStatus.Completed){
+                        }
+                        else{
+                            @if (Model.OrderStatus == OrderStatus.New)
+                             {
+                                 <button href="http://google.com" type="submit" name="OrderStatus" value="InProgress" class="btn btn-success ok-button">
+                                     <span>Підтвердити</span>
+                                 </button>
+                             }
+                            @if(Model.OrderStatus == OrderStatus.InProgress){
+                                 <button href="http://google.com" type="submit" name="OrderStatus" value="Completed" class="btn btn-success ok-button">
+                                     <span>Доставити</span>
+                                 </button>
+                             }
+                            <button href="http://google.com" type="submit" name="OrderStatus" value="Canceled" class="btn btn-success remove-button">
+                                <span>Відхилити</span>
+                            </button>
+                        }
                     </div>
                 </div>
             </div>
