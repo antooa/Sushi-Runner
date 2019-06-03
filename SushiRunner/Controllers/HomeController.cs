@@ -40,7 +40,11 @@ namespace SushiRunner.Controllers
                 .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
                 .ToList();
 
-            return View(mealModels.ToPagedList(pageNumber, pageSize));
+            return View(
+                new HomeModel
+                {
+                    Meals = mealModels.ToPagedList(pageNumber,pageSize),
+                });
         }
 
         [Route("/Home/MealGroups/{mealGroupId}")]
@@ -53,7 +57,12 @@ namespace SushiRunner.Controllers
                 .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
                 .ToList();
 
-            return View("Index",mealModels.ToPagedList(pageNumber,pageSize));
+            return View("Index",
+                new HomeModel
+                {
+                    Meals = mealModels.ToPagedList(pageNumber,pageSize),
+                    Title = _mealGroupService.Get(mealGroupId).Name
+                });
         }
 
         public async Task<IActionResult> Cart()

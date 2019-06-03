@@ -1,4 +1,6 @@
-﻿@model PagedList.IPagedList<SushiRunner.ViewModels.MealModel>
+﻿@model SushiRunner.ViewModels.Home.HomeModel
+
+@using PagedList; 
 @using PagedList.Mvc;
 @{
     ViewData["Title"] = "Sushi-Runner";
@@ -20,17 +22,17 @@
     else
     {
         <p id="hwl-edit" class="hwl">
-            
+            <span>@Model.Title</span>
         </p>
     }
     <div class="container-fluid">
-        @foreach (var meal in Model)
+        @foreach (var meal in Model.Meals)
         {
             <partial name="_Meal" model="@meal"></partial>
         }
     </div>
     <br />
-    Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+    Сторінка @(Model.Meals.PageCount < Model.Meals.PageNumber ? 0 : Model.Meals.PageNumber) з @Model.Meals.PageCount
      
     
 </div>
