@@ -1,7 +1,8 @@
 namespace SushiRunner.Data.Entities
 {
-    public class UserRoles
+    public static class UserRoles
     {
-        public const string Moderator = "MODERATOR";
+        public const string Customer = "Customer";
+        public const string Moderator = "Moderator";
     }
 }

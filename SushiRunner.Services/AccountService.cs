@@ -15,13 +15,18 @@ namespace SushiRunner.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailService _emailService;
 
-        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager,
+        public AccountService(
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager,
             IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _emailService = emailService;
         }
 
@@ -85,7 +90,11 @@ namespace SushiRunner.Services
             return signInResult;
         }
 
-        public async Task<SignUpResult> SignUpAsync(string anonymousId, string username, string email, string password,
+        public async Task<SignUpResult> SignUpCustomerAsync(
+            string anonymousId,
+            string username,
+            string email,
+            string password,
             Func<User, string, string> generateEmailConfirmationLink)
         {
             var user = await _userManager.FindByIdAsync(anonymousId);
@@ -125,7 +134,7 @@ namespace SushiRunner.Services
             };
         }
 
-        public async void SignOutAsync()
+        public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
         }
@@ -183,6 +192,18 @@ namespace SushiRunner.Services
         public async Task<User> GetLoggedUser(ClaimsPrincipal principal)
         {
             return await _userManager.GetUserAsync(principal);
+        }
+
+        public async Task UpdateInfo(User user, string fullName, string phoneNumber)
+        {
+            user.FullName = fullName.Trim();
+            user.PhoneNumber = phoneNumber.Trim();
+            await _userManager.UpdateAsync(user);
+        }
+
+        public async Task ChangePassword(User user, string oldPassword, string newPassword)
+        {
+            await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
         }
     }
 }

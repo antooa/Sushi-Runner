@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SushiRunner.ViewModels
+namespace SushiRunner.ViewModels.Account
 {
     public class SignInModel
     {

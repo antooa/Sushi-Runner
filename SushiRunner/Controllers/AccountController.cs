@@ -2,23 +2,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ReturnTrue.AspNetCore.Identity.Anonymous;
 using SushiRunner.Data.Entities;
 using SushiRunner.Services.Interfaces;
-using SushiRunner.ViewModels;
+using SushiRunner.ViewModels.Account;
 
 namespace SushiRunner.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : SushiRunnerBaseController
     {
-        private readonly IAccountService _accountService;
-
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService) : base(accountService)
         {
-            _accountService = accountService;
         }
 
-        [HttpGet]
         public IActionResult SignIn()
         {
             return View();
@@ -29,7 +24,7 @@ namespace SushiRunner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var signInResult = await _accountService.SignInAsync(model.Username, model.Password);
+                var signInResult = await accountService.SignInAsync(model.Username, model.Password);
                 if (signInResult.IsSuccessful)
                 {
                     if (signInResult.Roles.Contains(UserRoles.Moderator))
@@ -49,7 +44,6 @@ namespace SushiRunner.Controllers
             return View(model);
         }
 
-        [HttpGet]
         public IActionResult SignUp()
         {
             return View();
@@ -60,8 +54,8 @@ namespace SushiRunner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var signUpResult = await _accountService.SignUpAsync(
-                    HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId,
+                var signUpResult = await accountService.SignUpCustomerAsync(
+                    GetAnonymousId(),
                     model.Email,
                     model.Email,
                     model.Password,
@@ -89,17 +83,17 @@ namespace SushiRunner.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> SignOut()
         {
-            _accountService.SignOutAsync();
+            await accountService.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
-        [AllowAnonymous]
+        // TODO: add notification after confirm
         public async Task<IActionResult> ConfirmEmail([Required] string userId, [Required] string code)
         {
-            var emailConfirmationResult = await _accountService.ConfirmEmailAsync(userId, code);
+            var emailConfirmationResult = await accountService.ConfirmEmailAsync(userId, code);
             if (emailConfirmationResult.IsSuccessful)
             {
                 return RedirectToAction("Index", "Home");
@@ -113,19 +107,62 @@ namespace SushiRunner.Controllers
             return Redirect("/Home/Error");
         }
 
-        [HttpGet]
+        // TODO: remove and replace with /Home/PersonalInformation
         [Authorize]
         public async Task<IActionResult> Info()
         {
-            var user = await _accountService.GetLoggedUserOrCreateAnonymous(
-                HttpContext.User,
-                HttpContext.Features.Get<IAnonymousIdFeature>()?.AnonymousId);
+            var user = await GetLoggedUserOrCreateAnonymous();
             if (user.IsAnonymous)
             {
                 return RedirectToAction("SignIn");
             }
 
-            return View();
+            var accountInfoModel = new AccountInfoModel
+            {
+                AccountInfoChange = new AccountInfoChangeModel
+                {
+                    FullName = user.FullName,
+                    PhoneNumber = user.PhoneNumber,
+                    Email = user.Email
+                },
+                PasswordChange = new PasswordChangeModel()
+            };
+
+            return View(accountInfoModel);
+        }
+
+        // TODO: add validation !!!
+        // TODO: pull whole account info and return errors
+        // TODO: send notification when changed info
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdatePersonalInfo(AccountInfoModel accountInfoModel)
+        {
+            var model = accountInfoModel.AccountInfoChange;
+            var user = await GetLoggedUserOrCreateAnonymous();
+            user.FullName = model.FullName;
+            user.PhoneNumber = model.PhoneNumber;
+            await accountService.UpdateInfo(user, model.FullName, model.PhoneNumber);
+            return RedirectToAction("Info");
+        }
+
+        // TODO: add validation !!!
+        // TODO: pull whole account info and return errors
+        // TODO: send notification when changed info
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword(AccountInfoModel accountInfoModel)
+        {
+            var model = accountInfoModel.PasswordChange;
+            if (model.NewPassword != model.NewPasswordRepeat)
+            {
+//                ModelState.AddModelError("", result.Errors.FirstOrDefault());
+                // TODO: add error and return
+            }
+
+            var user = await GetLoggedUserOrCreateAnonymous();
+            await accountService.ChangePassword(user, model.OldPassword, model.NewPassword);
+            return RedirectToAction("Info");
         }
     }
 }

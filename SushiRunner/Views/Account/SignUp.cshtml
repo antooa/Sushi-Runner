@@ -1,33 +1,44 @@
-@model SushiRunner.ViewModels.SignUpModel
+@model SushiRunner.ViewModels.Account.SignUpModel
 
 @{
     Layout = "_AccountLayout";
+    ViewData["Title"] = "Sign up";
 }
 
 <div class="login-form">
     <form asp-action="SignUp" asp-controller="Account" method="post">
-        <h2 class="text-center">Sign up</h2>
+        <h2 class="text-center">Реєстрація</h2>
         <div asp-validation-summary="All" class="error-box text-danger"></div>
+         <div class="form-group">
+                    <div class="input-group">
+                        <input asp-for="FullName" type="text" class="form-control" placeholder="Повне ім'я" required>
+                    </div>
+                </div>
         <div class="form-group">
             <div class="input-group">
-                <input asp-for="Email" type="email" class="form-control" placeholder="Email" required>
+                <input asp-for="Email" type="email" class="form-control" placeholder="Пошта" required>
             </div>
         </div>
+        <div class="form-group">
+                            <div class="input-group">
+                                <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Телефон" required>
+                            </div>
+                        </div>
         <div class="form-row">
             <div class="col form-group">
                 <div class="input-group">
-                    <input asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Пароль" required>
                 </div>
             </div>
             <div class="col form-group">
                 <div class="input-group">
                     <input asp-for="ConfirmPassword" type="password" class="form-control"
-                           placeholder="Confirm Password" required>
+                           placeholder="Підтвердіть пароль" required>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-dark login-btn btn-block">Sign up</button>
+            <button type="submit" class="btn btn-dark login-btn btn-block">Зареєструватися</button>
         </div>
     </form>
 </div>
