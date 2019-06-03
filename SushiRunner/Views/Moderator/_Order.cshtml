@@ -16,7 +16,10 @@
     </div>
     <div class="order-action">
         <button data-toggle="modal" data-target="#exampleModal-@Model.Id" class="btn btn-dark ok-button">Деталі</button>
-        <button class="btn btn-danger remove-button">Видалити</button>
+        <form asp-controller="Order" asp-action="Delete" method="post">
+            <input type="hidden" name="id" value="@Model.Id"/>
+            <button type="submit" class="btn btn-danger remove-button">Видалити</button>
+        </form>
     </div>
 </div>
 

@@ -30,5 +30,13 @@ namespace SushiRunner.Controllers
 
             RedirectToAction("Index", "Moderator");
         }
+        [HttpPost]
+        public IActionResult Delete(long id)
+        {
+            _orderService.Delete(id);
+            return RedirectToAction("Index", "Moderator");
+        }
+        
+        
     }
 }
