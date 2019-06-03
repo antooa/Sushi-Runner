@@ -19,17 +19,18 @@ namespace SushiRunner.Data.Repositories
 
         public IEnumerable<MealGroup> GetList()
         {
-            return _context.MealGroups;
+            return _context.MealGroups.Include(group => group.Meals);
         }
 
         public IEnumerable<MealGroup> Search(Expression<Func<MealGroup, bool>> predicate)
         {
-            return _context.MealGroups.Where(predicate).ToList();
+            return _context.MealGroups.Include(group=>group.Meals).Where(predicate).ToList();
         }
 
         public MealGroup Get(long id)
         {
             return _context.MealGroups
+                .Include(group => group.Meals)
                 .AsNoTracking()
                 .FirstOrDefault(entity => entity.Id == id);
         }

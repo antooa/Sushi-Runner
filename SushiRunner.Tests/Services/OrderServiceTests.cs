@@ -234,7 +234,7 @@ namespace SushiRunner.Tests.Services
                                 Description = "Trapeza",
                                 Name = "Salo",
                                 Price = 100,
-                                MealGroup = new MealGroup()
+                                MealGroup = new MealGroupDTO()
                                 {
                                     Id = 1,
                                     Name = "Ukrainian"
@@ -264,7 +264,7 @@ namespace SushiRunner.Tests.Services
                                 Description = "Trapeza",
                                 Name = "Salo",
                                 Price = 100,
-                                MealGroup = new MealGroup()
+                                MealGroup = new MealGroupDTO()
                                 {
                                     Id = 1,
                                     Name = "Ukrainian"
@@ -295,7 +295,7 @@ namespace SushiRunner.Tests.Services
                                 Description = "Trapeza",
                                 Name = "Salo",
                                 Price = 100,
-                                MealGroup = new MealGroup()
+                                MealGroup = new MealGroupDTO()
                                 {
                                     Id = 1,
                                     Name = "Ukrainian"

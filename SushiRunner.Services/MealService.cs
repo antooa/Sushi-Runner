@@ -20,14 +20,18 @@ namespace SushiRunner.Services
         private bool _disposed;
         private readonly IAppConf _appConf;
         private readonly ICartService _cartService;
+        private readonly IMealGroupService _mealGroupService;
+        private readonly IRepository<MealGroup, long> _groupRepository;
 
         public MealService(IRepository<Meal, long> repository, IMapper mapper, IAppConf appConf,
-            ICartService cartService)
+            ICartService cartService, IMealGroupService mealGroupService, IRepository<MealGroup, long> groupRepository)
         {
             _repository = repository;
             _mapper = mapper;
             _appConf = appConf;
             _cartService = cartService;
+            _mealGroupService = mealGroupService;
+            _groupRepository = groupRepository;
         }
 
         public void Create(MealDTO mealDto)
@@ -107,7 +111,8 @@ namespace SushiRunner.Services
                 mealDto.ImagePath = @"/img/" + fileName;
                 image.Save(filePath);
             }
-    
+            
+            
             var meal = _mapper.Map<MealDTO, Meal>(mealDto);
             _repository.Create(meal);
             _repository.Save();
