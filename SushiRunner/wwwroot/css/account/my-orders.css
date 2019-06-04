@@ -1,0 +1,59 @@
+.my-orders-container {
+    padding: 5px 20px;
+}
+
+.my-orders-title {
+    font-size: 17px;
+    color: #363330;
+}
+
+.my-orders-count {
+    background: #eaeaea;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+.my-orders-items-container {
+    display: grid;
+    grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
+    grid-gap: 15px;
+    margin-top: 20px;
+}
+
+.my-orders-item {
+    border: 1px solid gray;
+    padding: 8px 8px 10px 12px;
+    border-radius: 5px;
+}
+
+.my-orders-item b {
+    color: #3e3e3e;
+}
+
+.moi-item-title {
+    color: #363330;
+    margin-bottom: 4px;
+}
+
+.moi-item-order-time,
+.moi-item-status {
+    font-size: 13px;
+    color: gray;
+    margin: 0;
+}
+
+.moi-status-new {
+    color: blue;
+}
+
+.moi-status-in-progress {
+    color: orange;
+}
+
+.moi-status-completed {
+    color: green;
+}
+
+.moi-status-canceled {
+    color: red;
+}

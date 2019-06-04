@@ -1,11 +1,9 @@
 @model SushiRunner.ViewModels.Account.SignInModel
 
 @{
-    Layout = "_AccountLayout";
+    Layout = "_SignInSignUpLayout";
     ViewData["Title"] = "Sign in";
 }
-
-
 
 <form asp-action="SignIn" asp-controller="Account" method="post" class="login-form">
     <h2 class="text-center">Вхід</h2>
@@ -22,6 +20,6 @@
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-dark login-btn btn-block">Увійти</button>
-        <span class="psw">Ще не зареєстровані?  <a href="/Account/SignUp">Зареєструйтесь</a></span>
+        <span class="psw">Ще не зареєстровані? <a href="/Account/SignUp">Зареєструйтесь</a></span>
     </div>
 </form>

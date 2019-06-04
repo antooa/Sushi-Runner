@@ -1,0 +1,66 @@
+@model SushiRunner.ViewModels.Account.AccountInfoModel
+
+@{
+    Layout = "_PersonalInfoLayout";
+}
+
+<div class="personal-info-container">
+    <div id="account-info-change">
+        <h1 class="sr-form-title">Персональні дані</h1>
+        <form class="sr-form" asp-action="UpdatePersonalInfo" method="post">
+            <div class="sr-form-content">
+                <div class="sr-form-group">
+                    <label class="sr-form-group-label" asp-for="@Model.AccountInfoChange.FullName">
+                        Ім'я <b class="sr-form-group-required">*</b>:
+                    </label>
+                    <input class="sr-form-group-input"
+                           asp-for="@Model.AccountInfoChange.FullName" type="text" required>
+                </div>
+                <div class="sr-form-group">
+                    <label class="sr-form-group-label" asp-for="@Model.AccountInfoChange.PhoneNumber">
+                        Телефон <b class="sr-form-group-required">*</b>:
+                    </label>
+                    <input class="sr-form-group-input"
+                           asp-for="@Model.AccountInfoChange.PhoneNumber" type="text" required>
+                </div>
+                <div class="sr-form-group">
+                    <label class="sr-form-group-label" asp-for="@Model.AccountInfoChange.Email">
+                        Email <b class="sr-form-group-required">*</b>:
+                    </label>
+                    <input class="sr-form-group-input"
+                           asp-for="@Model.AccountInfoChange.Email" type="text" readonly>
+                </div>
+            </div>
+            <button class="sr-button" type="submit">Зберегти</button>
+        </form>
+    </div>
+    <div id="account-password-change">
+        <h1 class="sr-form-title">Зміна паролю</h1>
+        <form class="sr-form" asp-action="ChangePassword" method="post">
+            <div class="sr-form-content">
+                <div class="sr-form-group">
+                    <label class="sr-form-group-label" asp-for="@Model.PasswordChange.OldPassword">
+                        Старий пароль <b class="sr-form-group-required">*</b>:
+                    </label>
+                    <input class="sr-form-group-input"
+                           asp-for="@Model.PasswordChange.OldPassword" type="password" required>
+                </div>
+                <div class="sr-form-group">
+                    <label class="sr-form-group-label" asp-for="@Model.PasswordChange.NewPassword">
+                        Новий пароль <b class="sr-form-group-required">*</b>:
+                    </label>
+                    <input class="sr-form-group-input"
+                           asp-for="@Model.PasswordChange.NewPassword" type="password" required>
+                </div>
+                <div class="sr-form-group">
+                    <label class="sr-form-group-label" asp-for="@Model.PasswordChange.NewPasswordRepeat">
+                        Повторіть новий пароль <b class="sr-form-group-required">*</b>:
+                    </label>
+                    <input class="sr-form-group-input"
+                           asp-for="@Model.PasswordChange.NewPasswordRepeat" type="password" required>
+                </div>
+            </div>
+            <button class="sr-button" type="submit">Зберегти</button>
+        </form>
+    </div>
+</div>

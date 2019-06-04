@@ -1,0 +1,53 @@
+@using SushiRunner.Data.Entities
+@model SushiRunner.ViewModels.Account.MyOrdersModel
+
+@{
+    Layout = "_PersonalInfoLayout";
+}
+
+<div class="my-orders-container">
+    <h1 class="my-orders-title">
+        Мої замовлення <span class="my-orders-count">@Model.Orders.Count</span>
+    </h1>
+    <div class="my-orders-items-container">
+        @foreach (var item in @Model.Orders)
+        {
+            <div class="my-orders-item">
+                <p class="moi-item-title">Замовлення № @item.Id</p>
+                <p class="moi-item-status">
+                    Статус:
+                    <i>
+                        @if (item.Status == OrderStatus.New)
+                        {
+                            <b style="color: blue">Створено</b>
+                        }
+                        else if (item.Status == OrderStatus.InProgress)
+                        {
+                            <b style="color: orange">Обробляється</b>
+                        }
+                        else if (item.Status == OrderStatus.Completed)
+                        {
+                            <b style="color: green">Завершено</b>
+                        }
+                        else
+                        {
+                            <b style="color: red">Відмінено</b>
+                        }
+                    </i>
+                </p>
+                <p class="moi-item-order-time">
+                    Час замовлення:
+                    <i>
+                        <b>@item.PlacedAt</b>
+                    </i>
+                </p>
+                <p class="moi-item-order-time">
+                    Адреса:
+                    <i>
+                        <b>@item.Address</b>
+                    </i>
+                </p>
+            </div>
+        }
+    </div>
+</div>

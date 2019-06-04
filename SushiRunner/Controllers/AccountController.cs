@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SushiRunner.Data.Entities;
+using SushiRunner.Services;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels.Account;
 
@@ -10,8 +12,12 @@ namespace SushiRunner.Controllers
 {
     public class AccountController : SushiRunnerBaseController
     {
-        public AccountController(IAccountService accountService) : base(accountService)
+        private readonly IOrderService _orderService;
+
+        public AccountController(IAccountService accountService, IOrderService orderService)
+            : base(accountService)
         {
+            _orderService = orderService;
         }
 
         public IActionResult SignIn()
@@ -107,9 +113,8 @@ namespace SushiRunner.Controllers
             return Redirect("/Home/Error");
         }
 
-        // TODO: remove and replace with /Home/PersonalInformation
         [Authorize]
-        public async Task<IActionResult> Info()
+        public async Task<IActionResult> PersonalInfo()
         {
             var user = await GetLoggedUserOrCreateAnonymous();
             if (user.IsAnonymous)
@@ -132,7 +137,6 @@ namespace SushiRunner.Controllers
         }
 
         // TODO: add validation !!!
-        // TODO: pull whole account info and return errors
         // TODO: send notification when changed info
         [HttpPost]
         [Authorize]
@@ -143,11 +147,10 @@ namespace SushiRunner.Controllers
             user.FullName = model.FullName;
             user.PhoneNumber = model.PhoneNumber;
             await accountService.UpdateInfo(user, model.FullName, model.PhoneNumber);
-            return RedirectToAction("Info");
+            return RedirectToAction("PersonalInfo");
         }
 
         // TODO: add validation !!!
-        // TODO: pull whole account info and return errors
         // TODO: send notification when changed info
         [HttpPost]
         [Authorize]
@@ -162,7 +165,23 @@ namespace SushiRunner.Controllers
 
             var user = await GetLoggedUserOrCreateAnonymous();
             await accountService.ChangePassword(user, model.OldPassword, model.NewPassword);
-            return RedirectToAction("Info");
+            return RedirectToAction("PersonalInfo");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyOrders()
+        {
+            var orders = _orderService.GetList();
+            var model = new MyOrdersModel();
+            model.Orders = orders.Select(order => new OrderItemModel
+                {
+                    Id = order.Id,
+                    Status = order.OrderStatus,
+                    PlacedAt = order.PlacedAt,
+                    Address = order.Address
+                })
+                .ToList();
+            return View(model);
         }
     }
 }

@@ -1,0 +1,33 @@
+@{
+    Layout = "_HomeLayout";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="/css/account/info.css">
+    <link rel="stylesheet" href="/css/account/personal-info.css">
+    <link rel="stylesheet" href="/css/account/my-orders.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/button.css">
+    <link rel="stylesheet" href="@Url.Content("/css/home/header-with-lines.css")">
+}
+
+<div class="account-info-container">
+    <p id="hwl-edit" class="hwl">
+        <span>Особистий кабінет</span>
+    </p>
+    <div class="account-info-columns-container">
+        <div id="account-info-nav">
+            <a class="sr-button" asp-controller="Account" asp-action="PersonalInfo">
+                Персональні дані
+            </a>
+            <a class="sr-button" asp-controller="Account" asp-action="MyOrders">
+                Мої замовлення
+            </a>
+            <form asp-controller="Account" asp-action="SignOut" method="post">
+                <button class="sr-button" id="account-sign-out-button" type="submit">Вийти</button>
+            </form>
+        </div>
+        @RenderBody()
+    </div>
+</div>

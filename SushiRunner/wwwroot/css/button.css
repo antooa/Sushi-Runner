@@ -1,4 +1,5 @@
 .sr-button {
+    display: block;
     min-height: 25px;
     text-align: center;
     padding: 10px 15px;
@@ -16,4 +17,6 @@
 
 .sr-button:hover {
     background-color: #e32d3c;
+    color: white;
+    text-decoration: none;
 }

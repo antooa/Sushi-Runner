@@ -1,0 +1,9 @@
+.personal-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.personal-info-container > * {
+    max-width: 345px;
+}
