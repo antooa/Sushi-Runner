@@ -19,6 +19,17 @@
         <div class="item-price">
             <strong>@Model.Price грн.</strong>
         </div>
+        <div>
+            <form method="post" asp-controller="DisabledMeal" asp-action="Create">
+                <input type="hidden" name="Name" value="@Model.Name"/>
+                <input type="hidden" name="Description" value="@Model.Description"/>
+                <input type="hidden" name="Weight" value="@Model.Weight"/>
+                <input type="hidden" name="Price" value="@Model.Price"/>
+                <input type="hidden" name="MealGroupId" value="@Model.MealGroupId"/>
+                <input type="hidden" name="ImagePath" value="@Model.ImagePath"/>
+                <button type="submit">Disable</button>
+            </form>
+        </div>
         @if (!Model.IsInCart)
         {
             <form id="@Model.Id" asp-action="AddToCart" asp-controller="Home" method="post">

@@ -1,0 +1,32 @@
+@model IEnumerable<SushiRunner.ViewModels.Home.DisabledMealModel>
+
+@foreach (var dmeal in Model)
+{
+    <div class="item-cart" data-meal-id="@dmeal.Id" style="width: 400px">
+        <div class="item-img">
+            <img src="@dmeal.ImagePath" alt="@dmeal.Name"/>
+        </div>
+        <div class="item-title">
+            <h4>@dmeal.Name</h4>
+        </div>
+        <div class="item-description">
+            <span>@dmeal.Description</span>
+        </div>
+        <div class="item-weight">
+            <h5>
+                <span>@dmeal.Weight грам</span>
+            </h5>
+        </div>
+        <div class="item-footer">
+            <div class="item-price">
+                <strong>@dmeal.Price грн.</strong>
+            </div>
+            <div>
+                <form method="post" asp-controller="DisabledMeal" asp-action="Delete">
+                    <input type="hidden" name="Id" value="@dmeal.Id"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
