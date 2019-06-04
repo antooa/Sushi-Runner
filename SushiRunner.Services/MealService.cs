@@ -154,6 +154,13 @@ namespace SushiRunner.Services
             _disposed = true;
         }
 
+        public void AddComment(CommentDTO commentDto, long mealId)
+        {
+            var mealDto = Get(mealId);
+            mealDto.Comments.Add(commentDto);
+            var meal = _mapper.Map<MealDTO, Meal>(mealDto);
+            _repository.Update(meal);
+        }
         public void Dispose()
         {
             Dispose(true);

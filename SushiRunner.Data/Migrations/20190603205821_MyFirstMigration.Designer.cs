@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SushiRunner.Data;
 
 namespace SushiRunner.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190603205821_MyFirstMigration")]
+    partial class MyFirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,25 +159,6 @@ namespace SushiRunner.Data.Migrations
                     b.HasIndex("CartId");
 
                     b.ToTable("CartItems");
-                });
-
-            modelBuilder.Entity("SushiRunner.Data.Entities.Comment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Message");
-
-                    b.Property<long>("UserID");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("SushiRunner.Data.Entities.Meal", b =>
@@ -390,13 +373,6 @@ namespace SushiRunner.Data.Migrations
                         .WithMany()
                         .HasForeignKey("MealId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SushiRunner.Data.Entities.Comment", b =>
-                {
-                    b.HasOne("SushiRunner.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("SushiRunner.Data.Entities.Meal", b =>

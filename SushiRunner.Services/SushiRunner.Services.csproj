@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="EntityFramework" Version="6.3.0-preview5-19254-05" />
       <PackageReference Include="MailKit" Version="2.1.4" />
     </ItemGroup>
 

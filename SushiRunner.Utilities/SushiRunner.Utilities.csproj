@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="EntityFramework" Version="6.3.0-preview5-19254-05" />
       <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
     </ItemGroup>
 

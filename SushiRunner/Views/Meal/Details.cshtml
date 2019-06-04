@@ -1,0 +1,20 @@
+@model MealModelWithComments
+
+@{
+    ViewData["Title"] = "Sushi-Runner";
+    Layout = "_HomeLayout";
+}
+<span>@Model.Meal.Name </span>
+<span>@Model.Meal.Id</span>
+@foreach (var comment in Model.Comments)
+{
+    <div>
+        <span>@comment.Id</span>
+        <span>@comment.Message</span>
+    </div>
+}
+<form method="post" asp-controller="Meal" asp-action="AddComment">
+    <input type="hidden" name="ProductId" value="@Model.Meal.Id"/>
+    <textarea rows="3" cols="45" name="Message" placeholder="Comment"></textarea>
+    <button type="submit">Комментувати</button>
+</form>

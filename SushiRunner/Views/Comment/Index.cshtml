@@ -1,0 +1,11 @@
+@model IEnumerable<SushiRunner.ViewModels.Home.CommentModel> 
+
+@foreach (var comment in Model)
+{
+    
+    <div>
+        <span>@comment.Id</span>
+            <span>@comment.Message</span>
+            <span>@comment.ProductId</span>
+    </div>
+}

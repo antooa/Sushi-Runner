@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="EntityFramework" Version="6.3.0-preview5-19254-05" />
       <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.4" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.2-preview-20190502-01" />
       <PackageReference Include="Moq" Version="4.11.0-rc1" />

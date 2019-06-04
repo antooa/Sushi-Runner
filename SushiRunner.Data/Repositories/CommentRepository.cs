@@ -7,60 +7,53 @@ using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Data.Repositories
 {
-    public class MealRepository : IRepository<Meal, long>
+    public class CommentRepository:IRepository<Comment,long>
     {
         private readonly ApplicationDbContext _context;
 
-        public MealRepository(ApplicationDbContext context)
+        public CommentRepository(ApplicationDbContext context)
         {
             _context = context;
             _disposed = false;
         }
 
-        public IEnumerable<Meal> Search(Expression<Func<Meal, bool>> predicate)
+        public IEnumerable<Comment> Search(Expression<Func<Comment, bool>> predicate)
         {
-            return _context.Meals.Where(predicate).ToList();
+            return _context.Comments.Where(predicate).ToList();
         }
 
-        public IEnumerable<Meal> GetList()
+        public IEnumerable<Comment> GetList()
         {
-            return _context.Meals;
+            return _context.Comments;
         }
 
-        public Meal Get(long id)
+        public Comment Get(long id)
         {
-            return _context.Meals
-                .Include(item => item.MealGroup)
-                .Include(item => item.Comments)
+            return _context.Comments
                 .AsNoTracking()
                 .FirstOrDefault(item => item.Id == id);
         }
 
-        public void Create(Meal item)
+        public void Create(Comment item)
         {
-            _context.Meals.Add(item);
+            _context.Comments.Add(item);
             _context.SaveChanges();
         }
 
-        public void Update(Meal item)
+        public void Update(Comment item)
         {
-            var oldMeal = Get(item.Id);
-            oldMeal.Name = item.Name;
-            oldMeal.Description = item.Description;
-            oldMeal.Price = item.Price;
-            oldMeal.Weight = item.Weight;
-            oldMeal.ImagePath = item.ImagePath;
-            oldMeal.Comments = item.Comments;
-            _context.Meals.Update(oldMeal);
+            var oldComment = Get(item.Id);
+            oldComment.Message = item.Message;
+            _context.Comments.Update(oldComment);
             _context.SaveChanges();
         }
 
         public void Delete(long id)
         {
-            var book = _context.Meals.Find(id);
-            if (book != null)
+            var comment = _context.Comments.Find(id);
+            if (comment != null)
             {
-                _context.Meals.Remove(book);
+                _context.Comments.Remove(comment);
             }
 
             _context.SaveChanges();

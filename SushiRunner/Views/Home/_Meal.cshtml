@@ -5,7 +5,10 @@
         <img src="@Model.ImagePath" alt="@Model.Name">
     </div>
     <div class="item-title">
-        <h4>@Model.Name</h4>
+        
+            <a asp-controller="Meal" asp-action="Details" asp-route-mealId="@Model.Id"><h4>@Model.Name</h4></a>
+        
+        
     </div>
     <div class="item-description">
         <span>@Model.Description</span>

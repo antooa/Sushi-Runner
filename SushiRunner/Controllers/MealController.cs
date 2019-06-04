@@ -8,6 +8,7 @@ using SushiRunner.Data.Entities;
 using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
+using SushiRunner.ViewModels.Home;
 
 namespace SushiRunner.Controllers
 {
@@ -92,6 +93,44 @@ namespace SushiRunner.Controllers
             }
 
             return View(meal);
+        }
+
+        [HttpPost]
+        public IActionResult AddComment([Bind("Message", "ProductId")] CommentModel commentModel)
+        {
+            if (ModelState.IsValid)
+            {
+//                var comment = new Comment();
+//                comment.Message = commentModel.Message;
+                var commentDTO = _mapper.Map<CommentModel, CommentDTO>(commentModel);
+                
+//                var meal = _mealService.Get(commentModel.ProductId);
+//                
+//                meal.Comments.Add(commentDTO);
+                _mealService.AddComment(commentDTO, commentModel.ProductId);
+                
+                return RedirectToAction("Details","Meal", new {mealId = commentModel.ProductId});
+            }
+            return RedirectToAction("Details","Meal");
+        }
+        
+        [Route("/Meal/Details/{mealId}")]
+        public IActionResult Details(long mealId)
+        {
+            if (ModelState.IsValid)
+            {
+                var mealDTO = _mealService.Get(mealId);
+                var meal = _mapper.Map<MealDTO, MealModel>(mealDTO);
+                
+                MealModelWithComments mealWithComments = new MealModelWithComments();
+                mealWithComments.Meal = meal;
+                
+               
+                
+                
+                return View(meal);    
+            }
+            return RedirectToAction("Index","Home");
         }
     }
 }

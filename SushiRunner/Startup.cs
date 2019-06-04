@@ -52,18 +52,20 @@ namespace SushiRunner
                 .AddDefaultTokenProviders();
             
             services.AddSingleton<IAppConf, IAppConf>(_ => new AppConf(Environment.WebRootPath));
-            
+
             services
                 .AddScoped<IRepository<Meal, long>, MealRepository>()
                 .AddScoped<IRepository<MealGroup, long>, MealGroupRepository>()
                 .AddScoped<IRepository<Order, long>, OrderRepository>()
                 .AddScoped<IRepository<CartItem, long>, CartItemRepository>()
                 .AddScoped<IRepository<Cart, long>, CartRepository>()
+                .AddScoped<IRepository<Comment,long>,CommentRepository>()
                 .AddScoped<IMealService, MealService>()
                 .AddScoped<IMealGroupService, MealGroupService>()
                 .AddScoped<IOrderService, OrderService>()
                 .AddScoped<ICartService, CartService>()
-                .AddScoped<IAccountService, AccountService>();
+                .AddScoped<IAccountService, AccountService>()
+                .AddScoped<ICommentService, CommentService>();
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.AddSingleton<IEmailService, EmailService>();

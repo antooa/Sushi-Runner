@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SushiRunner.Data.Entities
 {
@@ -13,5 +14,6 @@ namespace SushiRunner.Data.Entities
         public int Price { get; set; }
         public long MealGroupId { get; set; }
         public MealGroup MealGroup { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }
