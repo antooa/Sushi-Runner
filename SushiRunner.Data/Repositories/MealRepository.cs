@@ -19,7 +19,7 @@ namespace SushiRunner.Data.Repositories
 
         public IEnumerable<Meal> Search(Expression<Func<Meal, bool>> predicate)
         {
-            return _context.Meals.Where(predicate).ToList();
+            return _context.Meals.Include(meal => meal.MealGroup).Where(predicate).ToList();
         }
 
         public IEnumerable<Meal> GetList()

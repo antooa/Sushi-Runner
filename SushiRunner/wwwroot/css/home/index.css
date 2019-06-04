@@ -52,6 +52,8 @@ button:focus {
     left: 0;
     box-shadow: 4px 0 24px rgba(1, 1, 1, 0.1);
     z-index: 999;
+    display: flex;
+    flex-direction: column;
 }
 
 #home-side-nav > a {
@@ -113,6 +115,15 @@ button:focus {
 
 #side-nav-item6 {
     top: 250px;
+}
+#side-nav-item7 {
+    top: 300px;
+}
+#side-nav-item8{
+    top: 350px;
+}
+#side-nav-item9 {
+    top: 400px;
 }
 
 #side-nav-item1:hover,

@@ -54,12 +54,12 @@ namespace SushiRunner.Data.Entities
 
                 var groups = new[]
                 {
-                    new MealGroup {Name = "Піца"},
-                    new MealGroup {Name = "Роли"},
-                    new MealGroup {Name = "Гарячі роли"},
-                    new MealGroup {Name = "Суші"},
-                    new MealGroup {Name = "Сети"},
-                    new MealGroup {Name = "Десерти"}
+                    new MealGroup {Name = "Піца", ImagePath = "/img/pizza.svg"},
+                    new MealGroup {Name = "Роли", ImagePath = "/img/rolls.svg"},
+                    new MealGroup {Name = "Гарячі роли", ImagePath = "/img/hot.svg"},
+                    new MealGroup {Name = "Суші", ImagePath = "/img/sushi.svg"},
+                    new MealGroup {Name = "Сети", ImagePath = "/img/set.svg"},
+                    new MealGroup {Name = "Десерти", ImagePath = "/img/cupcake.svg"}
                 };
 
                 context.MealGroups.AddRange(groups);

@@ -35,11 +35,14 @@ namespace SushiRunner.Controllers
             var mealModels = _mealService.GetMealsWithCartCheckbox(user)
                 .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
                 .ToList();
-
+            var groupModels = _mealGroupService.GetList()
+                .Select(group => _mapper.Map<MealGroupDTO, MealGroupModel>(group))
+                .ToList();
             return View(
                 new HomeModel
                 {
                     Meals = mealModels,
+                    Groups = groupModels
                 });
         }
 

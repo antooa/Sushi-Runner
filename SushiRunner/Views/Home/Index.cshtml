@@ -10,6 +10,21 @@
     <link rel="stylesheet" href="@Url.Content("/css/home/header-with-lines.css")">
 }
 
+<div id="home-side-nav">
+    @foreach (var group in Model.Groups)
+    {
+        
+        var name = "side-nav-item" + group.Id;
+        
+        <a href="/Home/MealGroups/@group.Id" id="@name">
+                <div class="side-nav-icon">
+                    <img style="width: inherit;" class="group-pic" src="@group.ImagePath" alt="group"/>
+                </div>
+                <span>@group.Name</span>
+            </a>
+    }
+</div>
+
 <div id="wrapper">
     @if (@Model.Title == null)
     {

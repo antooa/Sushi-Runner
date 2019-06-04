@@ -1,0 +1,81 @@
+@model MealGroupModel
+
+<div class="item-cart" data-meal-id="@Model.Id">
+    <div class="item-img">
+        <img src="@Model.ImagePath" alt="@Model.Name">
+    </div>
+    <div class="item-title">
+        <h4>@Model.Name</h4>
+    </div>
+    <div class="item-description">
+        <span>@Model.Description</span>
+    </div>
+    <div class="item-footer">
+        <div class="action-button">
+            <a href="#" data-toggle="modal" data-target="#exampleModal-@Model.Id" class="edit-btn">
+                <i class="fas fa-edit"></i>
+            </a>
+            <form asp-controller="MealGroup" asp-action="Delete">
+                <input type="hidden" value="@Model.Id" asp-for="Id"/>
+                <button class="rm-btn">
+                    <i class="fas fa-window-close"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 883px">
+        <form class="form" method="post" enctype="multipart/form-data" asp-controller="MealGroup" asp-action="Update">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Продукт</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="product">
+                        <div class="product-img">
+                            <div class="selector">
+                                <img src="@Model.ImagePath" class="img-thumbnail" id="selectedImg" alt="Product Image"/>
+                                <div class="form-group">
+                                    <input type="file" class="custom-file-input" id="pic-input" name="pic"
+                                           onchange="readURL(this, 'selectedImg')">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="form-group name">
+                                <label for="name">Назва групи</label>
+                                <input class="form-control" type="text" placeholder="Назва" id="name" name="name" asp-for="Name"
+                                       value="@Model.Name">
+                            </div>
+                            
+                            <div class="comments">
+                                <textarea class="form-control" rows="3" cols="5" placeholder="Опис" asp-for="Description" value="@Model.Description"></textarea>
+                            </div>
+                            
+                            <input type="hidden" asp-for="Id" value="@Model.Id"/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="action-button">
+                        <button type="submit"
+                                class="btn btn-success ok-button">
+                            <span>Додати</span>
+                        </button>
+                        <button type="reset"
+                                class="btn btn-danger remove-button">
+                            <span>Відмінити</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
