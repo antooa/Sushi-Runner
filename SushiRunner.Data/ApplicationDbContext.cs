@@ -54,6 +54,14 @@ namespace SushiRunner.Data
                 .HasMany(cart => cart.Items)
                 .WithOne(item => item.Cart)
                 .IsRequired();
+
+            modelBuilder.Entity<Comment>().HasKey(comment => comment.Id);
+            modelBuilder.Entity<Comment>().Property(comment => comment.Text).IsRequired();
+            modelBuilder.Entity<Comment>()
+                .HasOne(comment => comment.Meal)
+                .WithMany(meal => meal.Comments)
+                .HasForeignKey(comment => comment.MealId)
+                .IsRequired();
         }
     }
 }
