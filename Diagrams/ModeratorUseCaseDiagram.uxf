@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>15</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>210</x>
-      <y>390</y>
-      <w>150</w>
-      <h>165</h>
+      <x>130</x>
+      <y>210</y>
+      <w>100</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>Moderator</panel_attributes>
     <additional_attributes/>
@@ -15,10 +15,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>495</x>
-      <y>105</y>
-      <w>660</w>
-      <h>765</h>
+      <x>290</x>
+      <y>20</y>
+      <w>490</w>
+      <h>570</h>
     </coordinates>
     <panel_attributes>Sushi-Ordering</panel_attributes>
     <additional_attributes/>
@@ -26,101 +26,123 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>675</x>
-      <y>660</y>
-      <w>300</w>
-      <h>90</h>
+      <x>440</x>
+      <y>340</y>
+      <w>200</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Submit delivered orders</panel_attributes>
+    <panel_attributes>Submit delivered order</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>675</x>
-      <y>330</y>
-      <w>300</w>
-      <h>90</h>
+      <x>440</x>
+      <y>150</y>
+      <w>200</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Verify Orders</panel_attributes>
+    <panel_attributes>Confirm/Reject Order</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>675</x>
-      <y>495</y>
-      <w>300</w>
-      <h>90</h>
+      <x>440</x>
+      <y>250</y>
+      <w>200</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Edit Orders</panel_attributes>
+    <panel_attributes>Edit Order</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>795</x>
-      <y>405</y>
-      <w>150</w>
-      <h>120</h>
+      <x>520</x>
+      <y>200</y>
+      <w>100</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;extends&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>675</x>
-      <y>180</y>
-      <w>300</w>
-      <h>90</h>
+      <x>440</x>
+      <y>70</y>
+      <w>200</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>See Order statuses</panel_attributes>
+    <panel_attributes>Get Orders list</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>315</x>
-      <y>435</y>
-      <w>390</w>
-      <h>135</h>
+      <x>200</x>
+      <y>240</y>
+      <w>260</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;240.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;240.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>315</x>
-      <y>360</y>
-      <w>390</w>
-      <h>120</h>
+      <x>200</x>
+      <y>170</y>
+      <w>260</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;60.0;240.0;10.0</additional_attributes>
+    <additional_attributes>10.0;80.0;240.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>315</x>
-      <y>435</y>
-      <w>390</w>
-      <h>300</h>
+      <x>200</x>
+      <y>240</y>
+      <w>260</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;240.0;180.0</additional_attributes>
+    <additional_attributes>10.0;10.0;240.0;130.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>315</x>
-      <y>210</y>
-      <w>390</w>
-      <h>270</h>
+      <x>200</x>
+      <y>90</y>
+      <w>260</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;160.0;240.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>440</x>
+      <y>430</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Create/Edit/Delete Meal</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>200</x>
+      <y>240</y>
+      <w>260</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;240.0;220.0</additional_attributes>
   </element>
 </diagram>

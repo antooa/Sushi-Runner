@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>12</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>84</x>
-      <y>72</y>
-      <w>252</w>
-      <h>168</h>
+      <x>364</x>
+      <y>175</y>
+      <w>147</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>Meal
 --
--string: Name
--string: Description
--double: WeightInGrams
--string: ImagePath
--int: Price
+-Name: string
+-Description: string
+-Weight: double
+-ImagePath: string
+-Price: int
 -MealGroup: MealGroup
 --</panel_attributes>
     <additional_attributes/>
@@ -23,21 +23,23 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>720</x>
-      <y>72</y>
-      <w>252</w>
-      <h>228</h>
+      <x>735</x>
+      <y>175</y>
+      <w>147</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>Order
 --
--List&lt;OrderItem&gt;: Items
--string: CustomerName
--string: PaymentType
--string: Address
--OrderStatus: status
--DateTime: PlacedAt
--string: PhoneNumber
--DateTime: DeliveredAt
+-Items: List&lt;OrderItem&gt;
+-User: User
+-CustomerName: string
+-PaymentType: string
+-Address: string
+-OrderStatus: OrderStatus
+-PlacedAt: DateTime
+-PhoneNumber: string
+-DeliveredAt: DateTime
+-Comment: string
 --
 +int: CalculatePrice()</panel_attributes>
     <additional_attributes/>
@@ -45,41 +47,40 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>84</x>
-      <y>312</y>
-      <w>252</w>
-      <h>96</h>
+      <x>364</x>
+      <y>315</y>
+      <w>147</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>MealGroup
 --
--string: Name
--string: Description
+-Name: string
+-Description: string
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>408</x>
-      <y>72</y>
-      <w>252</w>
-      <h>108</h>
+      <x>553</x>
+      <y>175</y>
+      <w>147</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>OrderItem
 --
 -Meal: Meal
 -int: Amount
---
-+int: CalculatePrice()</panel_attributes>
+--</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>648</x>
-      <y>72</y>
-      <w>96</w>
-      <h>36</h>
+      <x>693</x>
+      <y>175</y>
+      <w>56</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
@@ -87,10 +88,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>204</x>
-      <y>228</y>
-      <w>36</w>
-      <h>108</h>
+      <x>434</x>
+      <y>266</y>
+      <w>21</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
@@ -98,10 +99,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>324</x>
-      <y>72</y>
-      <w>108</w>
-      <h>36</h>
+      <x>504</x>
+      <y>175</y>
+      <w>63</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -109,28 +110,117 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1152</x>
-      <y>72</y>
-      <w>204</w>
-      <h>144</h>
+      <x>742</x>
+      <y>357</y>
+      <w>119</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enum&gt;&gt;
 OrderStatus
 --
 New
 InProgress
-Completed</panel_attributes>
+Completed
+Canceled</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>72</y>
-      <w>216</w>
-      <h>36</h>
+      <x>798</x>
+      <y>301</y>
+      <w>21</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>119</x>
+      <y>189</y>
+      <w>189</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Cart
+--
+-Items: ICollection&lt;CartItem&gt;
+-User: User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>147</x>
+      <y>301</y>
+      <w>126</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>CartItem
+--
+-Meal: Meal
+-Amount: int
+-Cart: Cart</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>203</x>
+      <y>238</y>
+      <w>21</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>301</x>
+      <y>217</y>
+      <w>77</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>343</x>
+      <y>490</y>
+      <w>147</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>User
+--
+-FullName: string
+-PhoneNumber: string
+-IsAnonymous: bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>427</x>
+      <y>273</y>
+      <w>322</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>440.0;10.0;10.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>273</x>
+      <y>238</y>
+      <w>154</w>
+      <h>266</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;200.0;360.0</additional_attributes>
   </element>
 </diagram>
