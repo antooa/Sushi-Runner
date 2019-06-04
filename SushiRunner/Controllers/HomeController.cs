@@ -31,13 +31,15 @@ namespace SushiRunner.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var user = await GetLoggedUserOrCreateAnonymous();
-            var mealModels = _mealService.GetMealsWithCartCheckbox(user)
-                .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
-                .ToList();
+            
             var groupModels = _mealGroupService.GetList()
                 .Select(group => _mapper.Map<MealGroupDTO, MealGroupModel>(group))
                 .ToList();
+            var user = await GetLoggedUserOrCreateAnonymous();
+            var mealModels =  _mealService.GetMealsWithCartCheckbox(user)
+                .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
+                .ToList();
+            
             return View(
                 new HomeModel
                 {
@@ -53,12 +55,16 @@ namespace SushiRunner.Controllers
             var mealModels = _mealService.GetMealsWithCartCheckbox(user, mealGroupId)
                 .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
                 .ToList();
+            var groupModels = _mealGroupService.GetList()
+                .Select(group => _mapper.Map<MealGroupDTO, MealGroupModel>(group))
+                .ToList();
 
             return View("Index",
                 new HomeModel
                 {
                     Meals = mealModels,
-                    Title = _mealGroupService.Get(mealGroupId).Name
+                    Title = _mealGroupService.Get(mealGroupId).Name,
+                    Groups = groupModels
                 });
         }
 
