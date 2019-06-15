@@ -130,5 +130,12 @@ namespace SushiRunner.Controllers
 
             return Redirect(redirectPath);
         }
+        
+        
+        public ViewResult ViewMealDescription()
+        {
+            ViewBag.Res = 1;
+            return View("MealDescription");
+        }
     }
 }
