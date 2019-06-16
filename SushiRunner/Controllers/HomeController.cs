@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SushiRunner.Services;
 using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
@@ -131,11 +132,23 @@ namespace SushiRunner.Controllers
             return Redirect(redirectPath);
         }
         
-        
-        public ViewResult ViewMealDescription()
+        [Route("/Home/Meals/{mealId}")]
+        public async Task<IActionResult> ViewMealDescription(long mealId)
         {
             ViewBag.Res = 1;
-            return View("MealDescription");
+            //var meal = _mealService.GetMealsWithCartCheckbox();
+            return View("MealDescription", 
+                new MealModel{
+                    Id = _mealService.Get(mealId).Id,
+                    Name = _mealService.Get(mealId).Name,
+                    Description = _mealService.Get(mealId).Description,
+                    ImagePath = _mealService.Get(mealId).ImagePath,
+                    Weight = _mealService.Get(mealId).Weight,
+                    Price = _mealService.Get(mealId).Price,
+                    IsInCart = _mealService.Get(mealId).IsInCart,
+                    GroupId = _mealService.Get(mealId).GroupId
+                }
+                );
         }
     }
 }

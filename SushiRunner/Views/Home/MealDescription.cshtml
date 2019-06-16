@@ -1,19 +1,26 @@
 @model SushiRunner.ViewModels.MealModel
 
-@* @{ *@
-@*     Layout = "_HomeLayout"; *@
-@* } *@
+@{
+    ViewData["Title"] = "Sushi Runner";
+     Layout = "_HomeLayout";
+}
 
 
+<div class="item-img">
+    <img src="@Model.ImagePath" alt="@Model.Name">
+</div>
+<div class="item-title">
+    <h4>@Model.Name</h4>
+</div>
 
-
-<div>
-    <p>Hey ho!</p>
-    <div class="item-img">
-        @ViewBag.Res
-        @*<img src="@Model.ImagePath" alt="@Model.Name">*@
-    </div>
-    <div class="item-title">
-        @*<h4>@Model.Description</h4>*@
-    </div>
+<div class="item-description">
+    <span>@Model.Description</span>
+</div>
+<div class="item-weight">
+    <h5>
+        <span>@Model.Weight грам</span>
+    </h5>
+</div>
+<div class="item-price">
+    <strong>@Model.Price грн.</strong>
 </div>
