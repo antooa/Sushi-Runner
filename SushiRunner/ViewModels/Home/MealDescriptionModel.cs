@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using SushiRunner.Data.Entities;
 
-namespace SushiRunner.Services.Dto
+namespace SushiRunner.ViewModels.Home
 {
-    public class MealDTO
+    public class MealDescriptionModel
     {
         public long Id { get; set; }
         public string Name { get; set; }
@@ -11,12 +10,11 @@ namespace SushiRunner.Services.Dto
         public double Weight { get; set; }
         public string ImagePath { get; set; }
         public int Price { get; set; }
+
+        //is GroupId required?
         public long GroupId { get; set; }
-        public MealGroupDTO MealGroup { get; set; }
         
-        public long MealGroupId { get; set; }
-        public bool IsInCart { get; set; }
-        
-        public IEnumerable<Comment> Comments { get; set; }
+        //all above is from MealModel
+        public IEnumerable<CommentModel> Comments { get; set; }
     }
 }
