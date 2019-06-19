@@ -135,18 +135,17 @@ namespace SushiRunner.Controllers
         [Route("/Home/Meals/{mealId}")]
         public async Task<IActionResult> ViewMealDescription(long mealId)
         {
-            ViewBag.Res = 1;
-            //var meal = _mealService.GetMealsWithCartCheckbox();
+            var meal = _mealService.Get(mealId);
             return View("MealDescription", 
                 new MealModel{
-                    Id = _mealService.Get(mealId).Id,
-                    Name = _mealService.Get(mealId).Name,
-                    Description = _mealService.Get(mealId).Description,
-                    ImagePath = _mealService.Get(mealId).ImagePath,
-                    Weight = _mealService.Get(mealId).Weight,
-                    Price = _mealService.Get(mealId).Price,
-                    IsInCart = _mealService.Get(mealId).IsInCart,
-                    GroupId = _mealService.Get(mealId).GroupId
+                    Id = meal.Id,
+                    Name = meal.Name,
+                    Description = meal.Description,
+                    ImagePath = meal.ImagePath,
+                    Weight = meal.Weight,
+                    Price = meal.Price,
+                    IsInCart = meal.IsInCart,
+                    GroupId = meal.GroupId
                 }
                 );
         }

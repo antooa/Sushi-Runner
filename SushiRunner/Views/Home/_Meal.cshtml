@@ -1,7 +1,7 @@
 @model MealModel
 
 <div class="item-cart" data-meal-id="@Model.Id">
-    <a id="@Model.Id" href="/Home/Meals/@Model.Id">
+    <a asp-action="ViewMealDescription" asp-route-mealId="@Model.Id" >
         <div class="item-img">
             <img src="@Model.ImagePath" alt="@Model.Name">
         </div>
