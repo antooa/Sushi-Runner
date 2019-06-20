@@ -71,11 +71,11 @@ namespace SushiRunner.Services
             string errorMessage;
             if (signIn.IsLockedOut)
             {
-                errorMessage = "User is locket out";
+                errorMessage = "User is locked out";
             }
             else if (signIn.IsNotAllowed)
             {
-                errorMessage = "User not allowed to sign-in";
+                errorMessage = "User is not allowed to sign-in";
             }
             else if (signIn.RequiresTwoFactor)
             {

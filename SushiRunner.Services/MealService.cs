@@ -16,6 +16,7 @@ namespace SushiRunner.Services
     public class MealService : IMealService
     {
         private readonly IRepository<Meal, long> _repository;
+        private readonly IRepository<Comment, long> _commentRepository;
         private readonly IMapper _mapper;
         private bool _disposed;
         private readonly IAppConf _appConf;
@@ -47,6 +48,12 @@ namespace SushiRunner.Services
         {
             var meal = _repository.Get(id);
             return _mapper.Map<Meal, MealDTO>(meal);
+        }
+
+        public CommentDTO GetComment(long id)
+        {
+            var comment = _commentRepository.Get(id);
+            return _mapper.Map<Comment, CommentDTO>(comment);
         }
 
         public void Update(MealDTO entity)

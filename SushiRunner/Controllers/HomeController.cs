@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SushiRunner.Services;
 using SushiRunner.Services.Dto;
 using SushiRunner.Services.Interfaces;
 using SushiRunner.ViewModels;
@@ -129,6 +130,29 @@ namespace SushiRunner.Controllers
             }
 
             return Redirect(redirectPath);
+        }
+        
+        [Route("/Home/Meals/{mealId}")]
+        public async Task<IActionResult> ViewMealDescription(long mealId)
+        {
+            var mealDescription = _mealService.Get(mealId);
+            //var comment = _mealService.GetComment(mealId);
+            return View("MealDescription", 
+                new MealDescriptionModel{
+                    Id = mealDescription.Id,
+                    Name = mealDescription.Name,
+                    Description = mealDescription.Description,
+                    ImagePath = mealDescription.ImagePath,
+                    Weight = mealDescription.Weight,
+                    Price = mealDescription.Price,
+                    GroupId = mealDescription.GroupId,
+                    /*Comments = new CommentModel
+                    {
+                        Message = 
+                        
+                    }*/
+                }
+                );
         }
     }
 }

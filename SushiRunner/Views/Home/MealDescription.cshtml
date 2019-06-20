@@ -1,0 +1,30 @@
+@model SushiRunner.ViewModels.Home.MealDescriptionModel
+
+@{
+    ViewData["Title"] = "Sushi Runner";
+     Layout = "_HomeLayout";
+}
+
+<div>
+    <a asp-action="Index"> Back</a>
+</div>
+<div class="item-img">
+    <img src="@Model.ImagePath" alt="@Model.Name">
+</div>
+<div style="margin: auto; width: 80%;">
+    <div class="item-title">
+        <h4>@Model.Name</h4>
+    </div>
+
+    <div class="item-description">
+        <span>@Model.Description</span>
+    </div>
+    <div class="item-weight">
+        <h5>
+            <span>@Model.Weight грам</span>
+        </h5>
+    </div>
+</div>
+<div class="item-price">
+    <strong>@Model.Price грн.</strong>
+</div>
