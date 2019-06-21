@@ -16,15 +16,17 @@ namespace SushiRunner.Services
     public class MealService : IMealService
     {
         private readonly IRepository<Meal, long> _repository;
+        private readonly IRepository<Comment, long> _commentRepository;
         private readonly IMapper _mapper;
         private bool _disposed;
         private readonly IAppConf _appConf;
         private readonly ICartService _cartService;
 
-        public MealService(IRepository<Meal, long> repository, IMapper mapper, IAppConf appConf,
+        public MealService(IRepository<Meal, long> repository, IRepository<Comment, long> commentRepository, IMapper mapper, IAppConf appConf,
             ICartService cartService)
         {
             _repository = repository;
+            _commentRepository = commentRepository;
             _mapper = mapper;
             _appConf = appConf;
             _cartService = cartService;
@@ -57,6 +59,8 @@ namespace SushiRunner.Services
                 Message = message,
                 CreationDate = DateTime.Now
             };
+            _commentRepository.Create(comment);
+            _commentRepository.Update(comment);
             var meal = _repository.Get(mealId);
             if (meal.Comments == null)
             {
