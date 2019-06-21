@@ -135,24 +135,31 @@ namespace SushiRunner.Controllers
         [Route("/Home/Meals/{mealId}")]
         public async Task<IActionResult> ViewMealDescription(long mealId)
         {
-            var mealDescription = _mealService.Get(mealId);
-            //var comment = _mealService.GetComment(mealId);
+            var meal = _mealService.Get(mealId);
+            //meal.Comments.Add
             return View("MealDescription", 
                 new MealDescriptionModel{
-                    Id = mealDescription.Id,
-                    Name = mealDescription.Name,
-                    Description = mealDescription.Description,
-                    ImagePath = mealDescription.ImagePath,
-                    Weight = mealDescription.Weight,
-                    Price = mealDescription.Price,
-                    GroupId = mealDescription.GroupId,
-                    /*Comments = new CommentModel
+                    Id = meal.Id,
+                    Name = meal.Name,
+                    Description = meal.Description,
+                    ImagePath = meal.ImagePath,
+                    Weight = meal.Weight,
+                    Price = meal.Price,
+                    Comments = meal.Comments.Select(comment => new CommentModel
                     {
-                        Message = 
-                        
-                    }*/
+                        Message = comment.Message,
+                        CreationDate = comment.CreationDate
+                    })
+                    
                 }
                 );
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> AddComment(long mealId, string message, string redirectPath)
+        {
+            _mealService.AddComment(mealId, message);
+            return HandleRedirect(redirectPath);
         }
     }
 }

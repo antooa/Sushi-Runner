@@ -11,8 +11,7 @@ namespace SushiRunner.ViewModels.Home
         public string ImagePath { get; set; }
         public int Price { get; set; }
 
-        //is GroupId required?
-        public long GroupId { get; set; }
+        
         
         //all above is from MealModel
         public IEnumerable<CommentModel> Comments { get; set; }

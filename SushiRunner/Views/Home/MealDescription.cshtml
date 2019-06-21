@@ -1,17 +1,20 @@
+@using SushiRunner.Data.Entities
+@using SushiRunner.ViewModels.Home
 @model SushiRunner.ViewModels.Home.MealDescriptionModel
 
 @{
     ViewData["Title"] = "Sushi Runner";
-     Layout = "_HomeLayout";
+    Layout = "_HomeLayout";
 }
 
 <div>
     <a asp-action="Index"> Back</a>
 </div>
-<div class="item-img">
-    <img src="@Model.ImagePath" alt="@Model.Name">
-</div>
-<div style="margin: auto; width: 80%;">
+
+<div class="item-page">
+    <div class="item-img">
+        <img src="@Model.ImagePath" alt="@Model.Name">
+    </div>
     <div class="item-title">
         <h4>@Model.Name</h4>
     </div>
@@ -24,7 +27,24 @@
             <span>@Model.Weight грам</span>
         </h5>
     </div>
-</div>
-<div class="item-price">
-    <strong>@Model.Price грн.</strong>
+    
+    <div class="item-price">
+        <strong>@Model.Price грн.</strong>
+    </div>
+    <div>
+        <span><strong>Comments</strong></span>
+        @foreach(var comment in @Model.Comments)
+        {
+            <div>
+                <span>@comment.CreationDate</span>
+                <span>@comment.Message</span>
+            </div>
+        }
+        <form method="post" asp-action="AddComment" asp-controller="Home">
+            <input type="hidden" name="mealId" asp-for="Id"/>
+            <input type="text" name="message"/>
+            <input type="hidden" name="redirectPath" value="@Context.Request.Path"/>
+            <button type="submit">Submit</button>
+        </form>
+     </div>
 </div>

@@ -273,6 +273,11 @@ button:focus {
     border: 1px lightgray solid;
 }
 
+.item-page {
+    width: 80%;
+    margin: auto;
+}
+
 .item-img {
     height: 185px;
 }

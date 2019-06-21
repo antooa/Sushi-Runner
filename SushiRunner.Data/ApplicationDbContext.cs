@@ -20,7 +20,6 @@ namespace SushiRunner.Data
         public virtual DbSet<MealGroup> MealGroups { get; set; }
         public virtual DbSet<CartItem> CartItems { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
-        
         public virtual DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

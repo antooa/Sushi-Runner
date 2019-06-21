@@ -15,6 +15,6 @@ namespace SushiRunner.Data.Entities
         public long MealGroupId { get; set; }
         public MealGroup MealGroup { get; set; }
 
-        public IEnumerable<Comment> comments { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }

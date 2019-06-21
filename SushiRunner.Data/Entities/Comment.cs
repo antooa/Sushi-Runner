@@ -3,7 +3,7 @@ using System;
 
 namespace SushiRunner.Data.Entities
 {
-    [Table( "Comment")]
+    [Table("Comment")]
     public class Comment
     {
         public long Id { get; set; }
