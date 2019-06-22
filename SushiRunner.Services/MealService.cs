@@ -53,21 +53,14 @@ namespace SushiRunner.Services
 
         public void AddComment(long mealId, string message)
         {
-            
+            var meal = _repository.Get(mealId);
             var comment = new Comment
             {
                 Message = message,
-                CreationDate = DateTime.Now
+                CreationDate = DateTime.Now,
+                Meal = meal
             };
             _commentRepository.Create(comment);
-            _commentRepository.Update(comment);
-            var meal = _repository.Get(mealId);
-            if (meal.Comments == null)
-            {
-                meal.Comments = new List<Comment>();
-            }
-            meal.Comments.Append(comment);
-            _repository.Update(meal);
         }
 
         public void Update(MealDTO entity)

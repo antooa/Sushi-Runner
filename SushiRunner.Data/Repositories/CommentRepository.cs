@@ -38,8 +38,6 @@ namespace SushiRunner.Data.Repositories
         public void Update(Comment item)
         {
             var oldComment = Get(item.Id);
-            //As I understand, not required
-            //oldComment.Id = item.Id;
             oldComment.Message = item.Message;
             oldComment.CreationDate = item.CreationDate;
             _context.Comments.Update(oldComment);
