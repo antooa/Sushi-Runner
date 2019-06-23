@@ -30,21 +30,56 @@
     
     <div class="item-price">
         <strong>@Model.Price грн.</strong>
+
+        
+        <form id="@Model.Id" asp-action="AddToCart" asp-controller="Home" method="post">
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" name="redirectPath" value="@Context.Request.Path"/>
+            <span class="card-text p-1">
+                <button type="submit" class="add-to-cart-button">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                </button>
+            </span>
+        </form>
+        
+        <form id="@Model.Id" asp-action="RemoveFromCart" asp-controller="Home" method="post">
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" name="redirectPath" value="@Context.Request.Path"/>
+            <span class="card-text p-1">
+                <button type="submit" class="add-to-cart-button">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </button>
+            </span>
+        </form>
+        
+       
+
     </div>
+    <hr>
     <div>
         <span><strong>Comments</strong></span>
-        @foreach(var comment in @Model.Comments)
-        {
-            <div>
-                <span>@comment.CreationDate</span>
-                <span>@comment.Message</span>
-            </div>
-        }
+        <br><br>
         <form method="post" asp-action="AddComment" asp-controller="Home">
             <input type="hidden" name="mealId" asp-for="Id"/>
-            <input type="text" name="message"/>
+            <!--<input type="text" name="message" style="width:300px; height: 100px;"/>-->
+            <textarea name="message" style="width:300px; height: 100px;"></textarea>
             <input type="hidden" name="redirectPath" value="@Context.Request.Path"/>
             <button type="submit">Submit</button>
         </form>
+        <br><br>
+        @foreach(var comment in @Model.Comments.Reverse())
+        {
+            <div>
+                <span>@comment.CreationDate</span>
+                <br>
+                <span>@comment.Message</span>
+            </div>
+            <hr>
+        }
+        
      </div>
 </div>

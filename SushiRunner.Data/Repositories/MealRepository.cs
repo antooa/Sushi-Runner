@@ -32,7 +32,7 @@ namespace SushiRunner.Data.Repositories
             return _context.Meals
                 .Include(item => item.MealGroup)
                 .Include(x => x.Comments)
-                .AsNoTracking()
+                //.AsNoTracking()
                 .FirstOrDefault(item => item.Id == id);
         }
 
