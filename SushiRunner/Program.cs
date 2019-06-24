@@ -14,5 +14,6 @@ namespace SushiRunner
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
+         //"DefaultConnection": "Server=DESKTOP-765A09T;Database=testapp;Trusted_Connection=True;"
     }
 }
