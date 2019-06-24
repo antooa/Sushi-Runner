@@ -26,7 +26,6 @@ namespace SushiRunner.Data.Repositories
         public Comment Get(long id)
         {
             return _context.Comments
-                //.Include(item => item.Id)
                 .AsNoTracking()
                 .FirstOrDefault(item => item.Id == id);
         }
