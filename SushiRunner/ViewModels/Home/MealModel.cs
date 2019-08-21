@@ -13,5 +13,7 @@ namespace SushiRunner.ViewModels
         public bool IsInCart { get; set; }
 
         public long GroupId { get; set; }
+        
+        public  bool IsShown { get; set; }
     }
 }

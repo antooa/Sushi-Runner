@@ -8,7 +8,8 @@ namespace SushiRunner.Services.Interfaces
     {
         IEnumerable<OrderDTO> GetByStatus(OrderStatus status);
 
-        void Create(User user, string customerName, string phoneNumber, string paymentType, string address,
-            CartDTO cart);
+        void Create(OrderDTO orderDto);
+
+        void UpdateOrderItem(long orderItemId, int amount);
     }
 }

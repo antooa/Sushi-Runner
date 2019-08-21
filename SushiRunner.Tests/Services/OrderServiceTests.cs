@@ -93,9 +93,9 @@ namespace SushiRunner.Tests.Services
         {
             // Arrange
             var repository = new Mock<IRepository<Order, long>>();
-
+            var orderItemRepository = new Mock<IRepository<OrderItem, long>>();
             var mapper = new Mock<IMapper>();
-            var svc = new OrderService(repository.Object, mapper.Object);
+            var svc = new OrderService(repository.Object, orderItemRepository.Object, mapper.Object);
             var expected = new OrderDTO
             {
                 Id = 4,
@@ -123,8 +123,10 @@ namespace SushiRunner.Tests.Services
             svc.Create(expected);
 
             // Assert
-            mapper.Verify(m => m.Map<OrderDTO, Order>(It.IsAny<OrderDTO>()), Times.Once());
-            repository.Verify(r => r.Create(It.IsAny<Order>()), Times.Once());
+            mapper.Verify(m => 
+                m.Map<OrderDTO, Order>(It.IsAny<OrderDTO>()), Times.Once());
+            repository.Verify(r => 
+                r.Create(It.IsAny<Order>()), Times.Once());
             repository.Verify(r => r.Save(), Times.Once());
         }
         
@@ -132,28 +134,33 @@ namespace SushiRunner.Tests.Services
         public void UpdateTest()
         {
             // Arrange
-            var expected = new OrderDTO()
+            var expected = new OrderDTO
             {
                 Id = 1,
                 CustomerName = "Ivanko"
             };
             var repository = new Mock<IRepository<Order, long>>();
+            var orderItemRepository = new Mock<IRepository<OrderItem, long>>();
             repository.Setup(r => r.Get(expected.Id)).Returns(new Order
             {
                 Id = 1,
                 CustomerName = "Ivanko"
             });
             var mapper = new Mock<IMapper>();
-            mapper.Setup(m => m.Map<Order, OrderDTO>(It.IsAny<Order>())).Returns(expected);
-            var svc = new OrderService(repository.Object, mapper.Object);
+            mapper.Setup(m => m.Map<Order, OrderDTO>
+                (It.IsAny<Order>())).Returns(expected);
+            
+            var svc = new OrderService(repository.Object, orderItemRepository.Object, mapper.Object);
 
 
             // Act
             svc.Update(expected);
 
             // Assert
-            mapper.Verify(m => m.Map<OrderDTO, Order>(It.IsAny<OrderDTO>()), Times.Once());
-            repository.Verify(r => r.Update(It.IsAny<Order>()), Times.Once());
+            mapper.Verify(m => m.Map<OrderDTO, Order>
+                (It.IsAny<OrderDTO>()), Times.Once());
+            repository.Verify(r => r.Update
+                (It.IsAny<Order>()), Times.Once());
             repository.Verify(r => r.Save(), Times.Once());
         }
         
@@ -172,15 +179,18 @@ namespace SushiRunner.Tests.Services
                 Id = 1,
                 CustomerName = "Ivanko"
             });
+            var orderItemRepository = new Mock<IRepository<OrderItem, long>>();
             var mapper = new Mock<IMapper>();
-            mapper.Setup(m => m.Map<Order, OrderDTO>(It.IsAny<Order>())).Returns(expected);
-            var svc = new OrderService(repository.Object, mapper.Object);
+            mapper.Setup(m => m.Map<Order, OrderDTO>
+                (It.IsAny<Order>())).Returns(expected);
+            var svc = new OrderService(repository.Object, orderItemRepository.Object, mapper.Object);
 
             // Act
             svc.Delete(expected.Id);
 
             // Assert
-            repository.Verify(r => r.Delete(It.IsAny<long>()), Times.Once());
+            repository.Verify(r => r.Delete(It.IsAny<long>()),
+                Times.Once());
             repository.Verify(r => r.Save(), Times.Once());
         }
         
@@ -189,10 +199,14 @@ namespace SushiRunner.Tests.Services
             var collection = GetOrderCollection();
             var list = collection.AsQueryable();
             var mockSet = new Mock<DbSet<Order>>();
-            mockSet.As<IQueryable<Order>>().Setup(p => p.Provider).Returns(list.Provider);
-            mockSet.As<IQueryable<Order>>().Setup(p => p.Expression).Returns(list.Expression);
-            mockSet.As<IQueryable<Order>>().Setup(p => p.ElementType).Returns(list.ElementType);
-            mockSet.As<IQueryable<Order>>().Setup(p => p.GetEnumerator()).Returns(list.GetEnumerator);
+            mockSet.As<IQueryable<Order>>().Setup
+                (p => p.Provider).Returns(list.Provider);
+            mockSet.As<IQueryable<Order>>().Setup
+                (p => p.Expression).Returns(list.Expression);
+            mockSet.As<IQueryable<Order>>().Setup
+                (p => p.ElementType).Returns(list.ElementType);
+            mockSet.As<IQueryable<Order>>().Setup
+                (p => p.GetEnumerator()).Returns(list.GetEnumerator);
 
             var mockCtx = new Mock<ApplicationDbContext>();
             
@@ -204,10 +218,12 @@ namespace SushiRunner.Tests.Services
             {
                 cfg.CreateMap<Order, OrderDTO>();
             });
+            var orderItemRepository = new OrderItemRepository(mockCtx.Object);
             var myProfile = new MappingProfile();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+            var configuration = new MapperConfiguration(cfg => 
+                cfg.AddProfile(myProfile));
             var mapper = new Mapper(configuration);
-            var svc = new OrderService(repository, mapper);
+            var svc = new OrderService(repository, orderItemRepository, mapper);
             return svc;
         }
         
@@ -216,7 +232,7 @@ namespace SushiRunner.Tests.Services
         {
             return new[]
             {
-                new OrderDTO()
+                new OrderDTO
                 {
                     Id = 1,
                     CustomerName = "Taras",

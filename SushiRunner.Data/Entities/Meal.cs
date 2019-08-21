@@ -16,5 +16,9 @@ namespace SushiRunner.Data.Entities
         public MealGroup MealGroup { get; set; }
 
         public IEnumerable<Comment> Comments { get; set; }
+
+        public bool IsShown { get; set; } = true;
+
+
     }
 }

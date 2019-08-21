@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -68,7 +69,7 @@ namespace SushiRunner.Services
                     Amount = 1
                 };
                 _cardItemRepository.Create(cartItem);
-                cart.Items.Add(cartItem);
+                //cart.Items.
             }
             else
             {
@@ -110,7 +111,8 @@ namespace SushiRunner.Services
         public void Clear(User user)
         {
             var cart = _GetByUserOrCreateNew(user);
-            cart.Items.Clear();
+            cart.Items = new List<CartItem>();
+            //cart.Items.Clear();
             _cartRepository.Update(cart);
         }
 
@@ -126,7 +128,7 @@ namespace SushiRunner.Services
             var totalPrice = cart.Items?
                                  .Select(item => item.Amount * item.Meal.Price)
                                  .Sum() ?? 0;
-            var count = cart.Items?.Count ?? 0;
+            var count = cart.Items?.Count() ?? 0;
             return (count, totalPrice);
         }
     }

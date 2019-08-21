@@ -35,6 +35,7 @@ namespace SushiRunner.Controllers
         }
 
         [HttpGet]
+        [HttpPost]
         public IActionResult InProgressOrders()
         {
             var dtos = _orderService.GetByStatus(OrderStatus.InProgress);

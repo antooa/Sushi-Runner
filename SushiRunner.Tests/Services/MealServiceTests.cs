@@ -15,7 +15,7 @@ using Xunit;
 
 namespace SushiRunner.Tests.Services
 {
-    public class MealServiceTests
+    public class   MealServiceTests
     {
         private readonly Mock<IAppConf> _config;
 
@@ -58,7 +58,8 @@ namespace SushiRunner.Tests.Services
             // Assert
             foreach (var order in actual)
             {
-                Assert.Equal(expected.MealGroup.Id, order.MealGroup.Id);
+                Assert.Equal(expected.MealGroup.Id, 
+                    order.MealGroup.Id);
             }
             
         }
@@ -103,7 +104,9 @@ namespace SushiRunner.Tests.Services
             var commentRepository = new Mock<IRepository<Comment, long>>();
             var cart = new Mock<ICartService>();
             var mapper = new Mock<IMapper>();
-            var svc = new MealService(repository.Object, commentRepository.Object, mapper.Object, _config.Object, cart.Object);
+            var svc = new MealService(repository.Object, 
+                commentRepository.Object, mapper.Object, _config.Object, 
+                cart.Object);
             var expected = new MealDTO()
             {
                 Id = 4,
@@ -120,8 +123,10 @@ namespace SushiRunner.Tests.Services
             svc.Create(expected);
 
             // Assert
-            mapper.Verify(m => m.Map<MealDTO, Meal>(It.IsAny<MealDTO>()), Times.Once());
-            repository.Verify(r => r.Create(It.IsAny<Meal>()), Times.Once());
+            mapper.Verify(m => m.Map<MealDTO, Meal>
+                (It.IsAny<MealDTO>()), Times.Once());
+            repository.Verify(r => r.Create
+                (It.IsAny<Meal>()), Times.Once());
             repository.Verify(r => r.Save(), Times.Once());
         }
         
@@ -137,22 +142,28 @@ namespace SushiRunner.Tests.Services
             var repository = new Mock<IRepository<Meal, long>>();
             var commentRepository = new Mock<IRepository<Comment, long>>();
             var cart = new Mock<ICartService>();
-            repository.Setup(r => r.Get(expected.Id)).Returns(new Meal()
+            repository.Setup(r => 
+                r.Get(expected.Id)).Returns(new Meal()
             {
                 Id = 1,
                 Name = "Anton"
             });
             var mapper = new Mock<IMapper>();
-            mapper.Setup(m => m.Map<Meal, MealDTO>(It.IsAny<Meal>())).Returns(expected);
-            var svc = new MealService(repository.Object, commentRepository.Object, mapper.Object, _config.Object, cart.Object);
+            mapper.Setup(m => m.Map<Meal, MealDTO>
+                (It.IsAny<Meal>())).Returns(expected);
+            var svc = new MealService(repository.Object, 
+                commentRepository.Object, mapper.Object, _config.Object, 
+                cart.Object);
 
 
             // Act
             svc.Update(expected);
 
             // Assert
-            mapper.Verify(m => m.Map<MealDTO, Meal>(It.IsAny<MealDTO>()), Times.Once());
-            repository.Verify(r => r.Update(It.IsAny<Meal>()), Times.Once());
+            mapper.Verify(m => m.Map<MealDTO, Meal>
+                (It.IsAny<MealDTO>()), Times.Once());
+            repository.Verify(r => r.Update
+                (It.IsAny<Meal>()), Times.Once());
             repository.Verify(r => r.Save(), Times.Once());
         }
         
@@ -167,33 +178,81 @@ namespace SushiRunner.Tests.Services
             };
             var repository = new Mock<IRepository<Meal, long>>();
             var cart = new Mock<ICartService>();
-            repository.Setup(r => r.Get(expected.Id)).Returns(new Meal()
+            repository.Setup(r => r.Get(expected.Id)).Returns
+            (new Meal()
             {
                 Id = 1,
                 Name = "Ivanko"
             });
             var commentRepository = new Mock<IRepository<Comment, long>>();
             var mapper = new Mock<IMapper>();
-            mapper.Setup(m => m.Map<Meal, MealDTO>(It.IsAny<Meal>())).Returns(expected);
-            var svc = new MealService(repository.Object, commentRepository.Object, mapper.Object, _config.Object, cart.Object);
+            mapper.Setup(m => m.Map<Meal, MealDTO>
+                (It.IsAny<Meal>())).Returns(expected);
+            var svc = new MealService(repository.Object, 
+                commentRepository.Object, mapper.Object, _config.Object, 
+                cart.Object);
 
             // Act
             svc.Delete(expected.Id);
 
             // Assert
-            repository.Verify(r => r.Delete(It.IsAny<long>()), Times.Once());
+            repository.Verify(r => r.Delete(It.IsAny<long>()), 
+                Times.Once());
             repository.Verify(r => r.Save(), Times.Once());
         }
-        
+
+        [Fact]
+        public void AddCommentTest()
+        {
+            //Arrange
+            var repository = new Mock<IRepository<Meal, long>>();
+            var commentRepository = new Mock<IRepository<Comment, long>>();
+            var cart = new Mock<ICartService>();
+            var mapper = new Mock<IMapper>();
+            var svc = new MealService(repository.Object, commentRepository.Object, 
+                mapper.Object, _config.Object, cart.Object);
+            var meal = new MealDTO
+            {
+                Id = 4,
+                Description = "desc",
+                Name = "testMeal",
+                MealGroup = new MealGroupDTO
+                {
+                    Id = 5,
+                    Name = "group5",
+                }
+            };
+            var expected = new CommentDTO
+            {
+                Message = "test",
+                Meal = meal,
+                Rating = 9
+            };
+            //Act
+            svc.Create(meal);
+            svc.AddComment(meal.Id, expected.Message, expected.Rating);
+            //Assert
+            mapper.Verify(m => m.Map<MealDTO, Meal>
+                (It.IsAny<MealDTO>()), Times.Once());
+            mapper.Verify(m => m.Map<CommentDTO, Comment>(It.IsAny<CommentDTO>()), Times.Never());
+            commentRepository.Verify(r => r.Create(It.IsAny<Comment>()), Times.Once());
+            repository.Verify(r => r.Save(), Times.Once());
+            commentRepository.Verify(r => r.Save(), Times.Never());
+        }
+
         private MealService SetupService()
         {
             var collection = GetMealCollection();
             var list = collection.AsQueryable();
             var mockSet = new Mock<DbSet<Meal>>();
-            mockSet.As<IQueryable<Meal>>().Setup(p => p.Provider).Returns(list.Provider);
-            mockSet.As<IQueryable<Meal>>().Setup(p => p.Expression).Returns(list.Expression);
-            mockSet.As<IQueryable<Meal>>().Setup(p => p.ElementType).Returns(list.ElementType);
-            mockSet.As<IQueryable<Meal>>().Setup(p => p.GetEnumerator()).Returns(list.GetEnumerator);
+            mockSet.As<IQueryable<Meal>>().Setup
+                (p => p.Provider).Returns(list.Provider);
+            mockSet.As<IQueryable<Meal>>().Setup
+                (p => p.Expression).Returns(list.Expression);
+            mockSet.As<IQueryable<Meal>>().Setup
+                (p => p.ElementType).Returns(list.ElementType);
+            mockSet.As<IQueryable<Meal>>().Setup
+                (p => p.GetEnumerator()).Returns(list.GetEnumerator);
 
             var mockCtx = new Mock<ApplicationDbContext>();
             
@@ -208,7 +267,8 @@ namespace SushiRunner.Tests.Services
             });
             var mapper = mapperConfig.CreateMapper();
             var cart = new Mock<ICartService>();
-            var svc = new MealService(repository, commentRepository, mapper, _config.Object, cart.Object);
+            var svc = new MealService(repository, commentRepository, 
+                mapper, _config.Object, cart.Object);
             return svc;
         }
         

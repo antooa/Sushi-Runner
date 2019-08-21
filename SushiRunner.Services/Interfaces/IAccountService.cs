@@ -21,8 +21,8 @@ namespace SushiRunner.Services.Interfaces
 
         Task<User> GetLoggedUser(ClaimsPrincipal principal);
 
-        Task UpdateInfo(User user, string fullName, string phoneNumber);
+        Task UpdateInfo(User user, string fullName, string phoneNumber, string email);
 
-        Task ChangePassword(User user, string oldPassword, string newPassword);
+        Task<ChangePasswordResult> ChangePassword(User user, string oldPassword, string newPassword, string newPasswordRepeat);
     }
 }

@@ -122,6 +122,11 @@ namespace SushiRunner.Controllers
                 return RedirectToAction("SignIn");
             }
 
+            if (user.Role == UserRoles.Moderator)
+            {
+                ViewBag.IsM = true;
+            }
+
             var accountInfoModel = new AccountInfoModel
             {
                 AccountInfoChange = new AccountInfoChangeModel
@@ -146,7 +151,8 @@ namespace SushiRunner.Controllers
             var user = await GetLoggedUserOrCreateAnonymous();
             user.FullName = model.FullName;
             user.PhoneNumber = model.PhoneNumber;
-            await accountService.UpdateInfo(user, model.FullName, model.PhoneNumber);
+            user.Email = model.Email;
+            await accountService.UpdateInfo(user, model.FullName, model.PhoneNumber, model.Email);
             return RedirectToAction("PersonalInfo");
         }
 
@@ -156,21 +162,49 @@ namespace SushiRunner.Controllers
         [Authorize]
         public async Task<IActionResult> ChangePassword(AccountInfoModel accountInfoModel)
         {
-            var model = accountInfoModel.PasswordChange;
-            if (model.NewPassword != model.NewPasswordRepeat)
+            if (ModelState.IsValid)
             {
-//                ModelState.AddModelError("", result.Errors.FirstOrDefault());
-                // TODO: add error and return
+                var model = accountInfoModel.PasswordChange;
+                var user = await GetLoggedUserOrCreateAnonymous();
+            
+                if (user.Role == UserRoles.Moderator)
+                {
+                    ViewBag.IsM = true;
+                }
+
+                var changePasswordResult =
+                    await accountService.ChangePassword(user, model.OldPassword, model.NewPassword,
+                        model.NewPasswordRepeat);
+            
+                if (changePasswordResult.IsSuccessful)
+                {
+                    return RedirectToAction("PersonalInfo");
+                }
+
+                foreach (var error in changePasswordResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Message);
+                }
             }
 
-            var user = await GetLoggedUserOrCreateAnonymous();
-            await accountService.ChangePassword(user, model.OldPassword, model.NewPassword);
-            return RedirectToAction("PersonalInfo");
+            return View("PersonalInfo", accountInfoModel);
+            //return Redirect("/Home/Error");
         }
 
         [Authorize]
         public async Task<IActionResult> MyOrders()
         {
+        
+            var user = await GetLoggedUserOrCreateAnonymous();
+            if (user.IsAnonymous)
+            {
+                return RedirectToAction("SignIn");
+            }
+
+            if (user.Role == UserRoles.Moderator)
+            {
+                ViewBag.IsM = true;
+            }
             var orders = _orderService.GetList();
             var model = new MyOrdersModel();
             model.Orders = orders.Select(order => new OrderItemModel

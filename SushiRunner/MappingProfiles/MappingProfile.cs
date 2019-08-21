@@ -18,6 +18,14 @@ namespace SushiRunner.MappingProfiles
             CreateMap<MealGroupDTO, MealGroup>();
             CreateMap<MealGroupModel, MealGroupDTO>();
             CreateMap<MealGroupDTO, MealGroupModel>();
+            CreateMap<Comment, CommentDTO>();
+            CreateMap<CommentDTO, Comment>();
+            CreateMap<CommentDTO, CommentModel>();
+            CreateMap<CommentModel, CommentDTO>();
+            CreateMap<OrderItem, OrderItemDTO>();
+            CreateMap<OrderItemDTO, OrderItem>();
+            CreateMap<OrderItemDTO, OrderItemModel>();
+            CreateMap<OrderItemModel, OrderItemDTO>();
             CreateMap<OrderDTO, Order>()
                 .ForMember(dest => dest.Items, opt => opt.MapFrom<OrderItemResolver>());
             CreateMap<Order, OrderDTO>()

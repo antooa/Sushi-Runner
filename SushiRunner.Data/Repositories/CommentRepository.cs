@@ -26,6 +26,7 @@ namespace SushiRunner.Data.Repositories
         public Comment Get(long id)
         {
             return _context.Comments
+                //.Include(x => x.Meal)
                 .AsNoTracking()
                 .FirstOrDefault(item => item.Id == id);
         }
@@ -39,6 +40,8 @@ namespace SushiRunner.Data.Repositories
             var oldComment = Get(item.Id);
             oldComment.Message = item.Message;
             oldComment.CreationDate = item.CreationDate;
+            oldComment.Rating = item.Rating;
+            oldComment.Rating2 = item.Rating2;
             _context.Comments.Update(oldComment);
             _context.SaveChanges();
         }

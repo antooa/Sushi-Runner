@@ -194,16 +194,48 @@ namespace SushiRunner.Services
             return await _userManager.GetUserAsync(principal);
         }
 
-        public async Task UpdateInfo(User user, string fullName, string phoneNumber)
+        public async Task UpdateInfo(User user, string fullName, string phoneNumber, string email)
         {
             user.FullName = fullName.Trim();
             user.PhoneNumber = phoneNumber.Trim();
+            user.Email = email.Trim();
             await _userManager.UpdateAsync(user);
         }
 
-        public async Task ChangePassword(User user, string oldPassword, string newPassword)
+        public async Task<ChangePasswordResult> ChangePassword(User user, string oldPassword, string newPassword, string newPasswordRepeat)
         {
-            await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+            var signInResult = await _signInManager.PasswordSignInAsync(user, oldPassword, true, false);
+            if (!signInResult.Succeeded)
+            {
+                
+                return new ChangePasswordResult
+                {
+                    IsSuccessful = false,
+                    User = user,
+                    Errors = new List<AccountError>
+                        {new AccountError {Message = "Old password is incorrect!"}}
+                };
+            }
+            
+            if (newPassword != newPasswordRepeat)
+            {
+                return new ChangePasswordResult
+                {
+                    IsSuccessful = false,
+                    User = user,
+                    Errors = new List<AccountError>
+                        {new AccountError {Message = "Confirmation password does not match new password!"}}
+                };
+            }
+            var result = await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+            
+            
+            return new ChangePasswordResult
+            {
+                IsSuccessful = true,
+                User = user,
+                Errors = result.Errors.Select(e => new AccountError {Message = e.Description}).ToList()
+            };
         }
     }
 }

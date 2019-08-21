@@ -4,6 +4,8 @@
     Layout = "_PersonalInfoLayout";
 }
 
+
+
 <div class="personal-info-container">
     <div id="account-info-change">
         <h1 class="sr-form-title">Персональні дані</h1>
@@ -28,7 +30,7 @@
                         Email <b class="sr-form-group-required">*</b>:
                     </label>
                     <input class="sr-form-group-input"
-                           asp-for="@Model.AccountInfoChange.Email" type="text" readonly>
+                           asp-for="@Model.AccountInfoChange.Email" type="text" required>
                 </div>
             </div>
             <button class="sr-button" type="submit">Зберегти</button>
@@ -37,7 +39,11 @@
     <div id="account-password-change">
         <h1 class="sr-form-title">Зміна паролю</h1>
         <form class="sr-form" asp-action="ChangePassword" method="post">
+        <div asp-validation-summary="All" class="error-box text-danger"></div>
             <div class="sr-form-content">
+                <input asp-for="@Model.AccountInfoChange.Email" type="hidden">
+                <input asp-for="@Model.AccountInfoChange.PhoneNumber" type="hidden">
+                <input asp-for="@Model.AccountInfoChange.FullName" type="hidden">
                 <div class="sr-form-group">
                     <label class="sr-form-group-label" asp-for="@Model.PasswordChange.OldPassword">
                         Старий пароль <b class="sr-form-group-required">*</b>:
@@ -63,4 +69,11 @@
             <button class="sr-button" type="submit">Зберегти</button>
         </form>
     </div>
+</div>
+
+<div>
+    @if (@ViewBag.isM)
+    {
+        <a asp-controller="Moderator" asp-action="NewOrders">Moderator mode</a>
+    }
 </div>

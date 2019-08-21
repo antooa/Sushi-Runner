@@ -18,6 +18,10 @@ namespace SushiRunner.Services.Interfaces
 
         IEnumerable<MealDTO> GetMealsWithCartCheckbox(User user, long mealGroupId);
 
-        void AddComment(long mealId, string message);
+        void AddComment(long mealId, string message, int rating);
+
+        void Show(long mealId);
+
+        void Hide(long mealId);
     }
 }

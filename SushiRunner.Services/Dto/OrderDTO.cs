@@ -14,8 +14,10 @@ namespace SushiRunner.Services.Dto
         public string PaymentType { get; set; }
         public string Address { get; set; }
         public DateTime PlacedAt { get; set; }
-        public IEnumerable<OrderItemDTO> Items { get; set; }
+        public ICollection<OrderItemDTO> Items { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public DateTime DeliveredAt { get; set; }
+        
+        public int TotalPrice { get; set; }
     }
 }

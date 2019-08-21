@@ -1,4 +1,4 @@
-namespace SushiRunner.ViewModels
+namespace SushiRunner.ViewModels.Home
 {
     public class ErrorModel
     {

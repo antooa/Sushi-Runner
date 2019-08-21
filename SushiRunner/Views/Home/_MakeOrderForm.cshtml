@@ -2,6 +2,7 @@
 
 <p class="order-form-title">Оформити замовлення</p>
 <form id="make-order-form" asp-controller="Home" asp-action="MakeOrder" method="post">
+    <input type="hidden" asp-for="TotalPrice">
     <div id="make-order-form-content">
         <div class="make-order-form-group">
             <label asp-for="@Model.CustomerName">Ім'я <b>*</b>:</label>
@@ -27,7 +28,7 @@
     <div id="make-order-form-total">
         <div id="order-form-total-price">
             <span>До оплати:</span>
-            <span id="total-price">@Model.TotalPrice грн.</span>
+            <span asp-validation-for="TotalPrice" id="total-price">@Model.TotalPrice грн.</span>
         </div>
         <button id="order-button" class="sr-button" type="submit">Оформити</button>
     </div>

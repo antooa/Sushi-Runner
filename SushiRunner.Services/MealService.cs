@@ -51,16 +51,31 @@ namespace SushiRunner.Services
             return _mapper.Map<Meal, MealDTO>(meal);
         }
 
-        public void AddComment(long mealId, string message)
+        public void AddComment(long mealId, string message, int rating)
         {
             var meal = _repository.Get(mealId);
             var comment = new Comment
             {
                 Message = message,
                 CreationDate = DateTime.Now,
+                Rating = rating,
                 Meal = meal
             };
             _commentRepository.Create(comment);
+        }
+
+        public void Hide(long mealId)
+        {
+            var meal = _repository.Get(mealId);
+            meal.IsShown = false;
+            _repository.Update(meal);
+        }
+        
+        public void Show(long mealId)
+        {
+            var meal = _repository.Get(mealId);
+            meal.IsShown = true;
+            _repository.Update(meal);
         }
 
         public void Update(MealDTO entity)
@@ -106,6 +121,11 @@ namespace SushiRunner.Services
 
         public void Delete(long id)
         {
+            var meal = Get(id);
+            foreach (var comment in meal.Comments)
+            {
+                _commentRepository.Delete(comment.Id);
+            }
             _repository.Delete(id);
             _repository.Save();
         }

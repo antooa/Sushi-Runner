@@ -6,9 +6,9 @@ using SushiRunner.Services.Dto;
 
 namespace SushiRunner.MappingProfiles
 {
-    public class OrderItemDTOResolver : IValueResolver<Order, OrderDTO, IEnumerable<OrderItemDTO>>
+    public class OrderItemDTOResolver : IValueResolver<Order, OrderDTO, ICollection<OrderItemDTO>>
     {
-        public IEnumerable<OrderItemDTO> Resolve(Order source, OrderDTO destination, IEnumerable<OrderItemDTO> destMember, ResolutionContext context)
+        public ICollection<OrderItemDTO> Resolve(Order source, OrderDTO destination, ICollection<OrderItemDTO> destMember, ResolutionContext context)
         {
             return source.Items.Select(item => new OrderItemDTO()
             {

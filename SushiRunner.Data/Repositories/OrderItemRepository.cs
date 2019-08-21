@@ -7,73 +7,61 @@ using SushiRunner.Data.Entities;
 
 namespace SushiRunner.Data.Repositories
 {
-    public class MealRepository : IRepository<Meal, long>
+    public class OrderItemRepository : IRepository<OrderItem, long>
     {
         private readonly ApplicationDbContext _context;
-
-        public MealRepository(ApplicationDbContext context)
+        public OrderItemRepository(ApplicationDbContext context)
         {
             _context = context;
             _disposed = false;
         }
-
-        public IEnumerable<Meal> Search(Expression<Func<Meal, bool>> predicate)
+        public IEnumerable<OrderItem> Search(Expression<Func<OrderItem, bool>> predicate)
         {
-            return _context.Meals.Where(predicate).ToList();
+            return _context.OrderItems.Where(predicate).ToList();
         }
 
-        public IEnumerable<Meal> GetList()
+        public IEnumerable<OrderItem> GetList()
         {
-            return _context.Meals.Include(meal=>meal.MealGroup).ToList();
+            return _context.OrderItems.ToList();
         }
-
-        public Meal Get(long id)
+        public OrderItem Get(long id)
         {
-            return _context.Meals
-                .Include(item => item.MealGroup)
-                .Include(x => x.Comments)
+            return _context.OrderItems
+                //.Include(x => x.Meal)
                 //.AsNoTracking()
                 .FirstOrDefault(item => item.Id == id);
         }
-
-        public void Create(Meal item)
+        public void Create(OrderItem item)
         {
-            _context.Meals.Add(item);
+            _context.OrderItems.Add(item);
             _context.SaveChanges();
         }
-
-        public void Update(Meal item)
+        public void Update(OrderItem item)
         {
-            var oldMeal = Get(item.Id);
-            oldMeal.Name = item.Name;
-            oldMeal.Description = item.Description;
-            oldMeal.Price = item.Price;
-            oldMeal.Weight = item.Weight;
-            oldMeal.ImagePath = item.ImagePath;
-            //oldMeal.Comments = item.Comments;
-            oldMeal.IsShown = item.IsShown;
-            _context.Meals.Update(oldMeal);
+            var oldOrderItem = Get(item.Id);
+            oldOrderItem.Amount = item.Amount;
+            //oldOrderItem.Meal = item.Meal;
+            _context.OrderItems.Update(oldOrderItem);
             _context.SaveChanges();
         }
-
         public void Delete(long id)
         {
-            var meal = _context.Meals.Find(id);
-            if (meal != null)
+            var orderItem = _context.OrderItems.Find(id);
+            if (orderItem != null)
             {
-                _context.Meals.Remove(meal);
+                _context.OrderItems.Remove(orderItem);
             }
-
+            else
+            {
+                Console.WriteLine("LOL NULL LOL NULL LOL NULL LOL NULL LOL NULL LOL NULL LOL NULL ");
+            }
             _context.SaveChanges();
         }
-
         public void Save()
         {
             _context.SaveChanges();
         }
-
         private bool _disposed;
-
         public virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -83,10 +71,8 @@ namespace SushiRunner.Data.Repositories
                     _context.Dispose();
                 }
             }
-
             _disposed = true;
         }
-
         public void Dispose()
         {
             Dispose(true);

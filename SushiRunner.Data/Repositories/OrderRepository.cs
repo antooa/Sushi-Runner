@@ -34,7 +34,7 @@ namespace SushiRunner.Data.Repositories
         public Order Get(long id)
         {
             return _context.Orders
-                .AsNoTracking()
+                //.AsNoTracking()
                 .Include(entity => entity.Items)
                 .ThenInclude(item => item.Meal)
                 .FirstOrDefault(entity => entity.Id == id);
@@ -49,14 +49,43 @@ namespace SushiRunner.Data.Repositories
 
         public void Update(Order entity)
         {
-            _context.Orders.Update(entity);
+            var oldOrder = Get(entity.Id);
+            //oldOrder.TotalPrice = entity.TotalPrice;
+            oldOrder.CustomerName = entity.CustomerName;
+            oldOrder.PhoneNumber = entity.PhoneNumber;
+            //oldOrder.PaymentType = entity.PaymentType;
+            oldOrder.Address = entity.Address;
+            oldOrder.OrderStatus = entity.OrderStatus;
+            /*oldOrder.Items = entity.Items.Select(meal => new OrderItem
+            {
+                Amount = meal.Amount
+                //Id = meal.Id
+                //Meal = meal.Meal
+            }).ToList();*/
+            /*int sum = 0;
+            foreach (var orderItem in entity.Items)
+            {
+                sum += orderItem.Amount * orderItem.Meal.Price;
+            }
+
+            oldOrder.TotalPrice = sum;*/
+            Console.WriteLine(oldOrder.CustomerName);
+            Console.WriteLine(oldOrder.PhoneNumber);
+            Console.WriteLine(oldOrder.Address);
+            _context.Orders.Update(oldOrder);
             _context.SaveChanges();
         }
 
+        
+
         public void Delete(long id)
         {
-            var order = Get(id);
-            _context.Orders.Remove(order);
+            var order = _context.Orders.Find(id);
+            if (order != null)
+            {
+                _context.Orders.Remove(order);
+            }
+            
             _context.SaveChanges();
         }
 

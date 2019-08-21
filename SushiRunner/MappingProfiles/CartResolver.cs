@@ -6,9 +6,10 @@ using SushiRunner.Services.Dto;
 
 namespace SushiRunner.MappingProfiles
 {
-    public class CartResolver : IValueResolver<CartDTO, Cart, ICollection<CartItem>>
+    public class CartResolver : IValueResolver<CartDTO, Cart, IEnumerable<CartItem>>
     {
-        public ICollection<CartItem> Resolve(CartDTO source, Cart destination, ICollection<CartItem> destMember, ResolutionContext context)
+        public IEnumerable<CartItem> Resolve(CartDTO source, Cart destination, IEnumerable<CartItem> destMember, 
+            ResolutionContext context)
         {
             return source.Items.Select(itemDto => new CartItem()
             {

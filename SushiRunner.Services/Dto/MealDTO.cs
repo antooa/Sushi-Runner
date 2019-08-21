@@ -18,5 +18,7 @@ namespace SushiRunner.Services.Dto
         public bool IsInCart { get; set; }
         
         public IEnumerable<Comment> Comments { get; set; }
+        
+        public  bool isShown { get; set; }
     }
 }

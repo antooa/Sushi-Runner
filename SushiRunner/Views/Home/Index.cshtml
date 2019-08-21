@@ -23,10 +23,29 @@
             <span>@Model.Title</span>
         </p>
     }
+    <form asp-action="ShowAll">
+        <input type="hidden" name="redirectPath"/>
+        <button type="submit">
+            <a>
+                Show all
+            </a>
+        </button>
+    </form>
+    <form asp-action="HideAll">
+            <input type="hidden" name="redirectPath"/>
+            <button type="submit">
+                <a>
+                    Hide all
+                </a>
+            </button>
+        </form>
     <div class="container-fluid">
         @foreach (var meal in Model.Meals)
         {
-            <partial name="_Meal" model="@meal"></partial>
+            if (meal.IsShown)
+            {
+                <partial name="_Meal" model="@meal"></partial>
+            }
         }
     </div>
 </div>

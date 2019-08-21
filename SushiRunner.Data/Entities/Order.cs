@@ -18,5 +18,7 @@ namespace SushiRunner.Data.Entities
         public OrderStatus OrderStatus { get; set; }
         public DateTime PlacedAt { get; set; }
         public DateTime DeliveredAt { get; set; }
+        
+        public int TotalPrice { get; set; }
     }
 }

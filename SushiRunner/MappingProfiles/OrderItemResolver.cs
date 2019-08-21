@@ -8,9 +8,10 @@ namespace SushiRunner.MappingProfiles
 {
     public class OrderItemResolver : IValueResolver<OrderDTO, Order, ICollection<OrderItem>>
     {
-        public ICollection<OrderItem> Resolve(OrderDTO source, Order destination, ICollection<OrderItem> destMember, ResolutionContext context)
+        public ICollection<OrderItem> Resolve(OrderDTO source, Order destination, ICollection<OrderItem> destMember, 
+            ResolutionContext context)
         {
-            return source.Items.Select(itemDTO => new OrderItem()
+            return source.Items.Select(itemDTO => new OrderItem
             {
                 Id = itemDTO.Id,
                 Amount = itemDTO.Amount,

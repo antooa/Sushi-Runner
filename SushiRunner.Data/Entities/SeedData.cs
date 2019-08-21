@@ -9,6 +9,11 @@ namespace SushiRunner.Data.Entities
     {
         private const string DefaultUsername = "ojles";
         private const string DefaultPassword = "Pa$$w0rd";
+        private const string DefaultEmail = "admin@admin.com";
+        private const string DefaulFullName = "Admin Admin";
+        private const string DefaultPhoneNumber = "111-111-111;";
+        private const bool DefaultIsAnonymous = false;
+        private const string DefaultRole = UserRoles.Moderator;
 
         public static void EnsurePopulated(IApplicationBuilder app)
         {
@@ -33,7 +38,15 @@ namespace SushiRunner.Data.Entities
                 var user = await userManager.FindByIdAsync(DefaultUsername);
                 if (user == null)
                 {
-                    user = new User {UserName = DefaultUsername};
+                    user = new User
+                    {
+                        UserName = DefaultUsername,
+                        Email = DefaultEmail,
+                        FullName = DefaulFullName,
+                        PhoneNumber = DefaultPhoneNumber,
+                        IsAnonymous = DefaultIsAnonymous,
+                        Role = DefaultRole
+                    };
                     await userManager.CreateAsync(user, DefaultPassword);
                     await userManager.AddToRoleAsync(user, UserRoles.Moderator);
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);

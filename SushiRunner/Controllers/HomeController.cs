@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -35,13 +36,52 @@ namespace SushiRunner.Controllers
             var user = await GetLoggedUserOrCreateAnonymous();
             var mealModels = _mealService.GetMealsWithCartCheckbox(user)
                 .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
+                //.Where(meal => meal.isShown)
                 .ToList();
 
             return View(
                 new HomeModel
                 {
-                    Meals = mealModels,
+                    Meals = mealModels
                 });
+        }
+
+        public async Task<IActionResult> ShowAll(string redirectPath)
+        {
+            var user = await GetLoggedUserOrCreateAnonymous();
+            var mealIds = _mealService.GetMealsWithCartCheckbox(user)
+                .Select(meal => meal.Id)
+                .ToList();
+            foreach (var meal in mealIds)
+            {
+                _mealService.Show(meal);
+            }
+            return HandleRedirect(redirectPath);
+        }
+        
+        public async Task<IActionResult> HideAll(string redirectPath)
+        {
+            var user = await GetLoggedUserOrCreateAnonymous();
+            var mealIds = _mealService.GetMealsWithCartCheckbox(user)
+                .Select(meal => meal.Id)
+                .ToList();
+
+            foreach (var meal in mealIds)
+            {
+                _mealService.Hide(meal);
+            }
+            return HandleRedirect(redirectPath);
+        }
+
+        public async Task<IActionResult> Hide(long mealId, string redirectPath)
+        {
+            var user = await GetLoggedUserOrCreateAnonymous();
+            _mealService.Hide(mealId);
+            var mealModels = _mealService.GetMealsWithCartCheckbox(user)
+            .Select(meal => _mapper.Map<MealDTO, MealModel>(meal))
+            .ToList();
+            
+            return HandleRedirect(redirectPath);
         }
 
         [Route("/Home/MealGroups/{mealGroupId}")]
@@ -110,13 +150,21 @@ namespace SushiRunner.Controllers
         {
             var user = await GetLoggedUserOrCreateAnonymous();
             var cart = _cartService.GetByUserOrCreateNew(user);
-            _orderService.Create(
-                user,
-                orderModel.CustomerName,
-                orderModel.PhoneNumber,
-                orderModel.PaymentType,
-                orderModel.Address,
-                cart);
+;
+            _orderService.Create( new OrderDTO
+                {
+                    Address = orderModel.Address,
+                    User = user,
+                    CustomerName = orderModel.CustomerName,
+                    PhoneNumber = orderModel.PhoneNumber,
+                    PaymentType = orderModel.PaymentType,
+                    TotalPrice = orderModel.TotalPrice,
+                    Items = cart.Items.Select(i => new OrderItemDTO
+                    {
+                        Meal = i.Meal,
+                        Amount = i.Amount
+                    }).ToList()
+                });
             _cartService.Clear(user);
 
             return View("ThankYou");
@@ -147,18 +195,22 @@ namespace SushiRunner.Controllers
                     Price = meal.Price,
                     Comments = meal.Comments.Select(comment => new CommentModel
                     {
+                        Id = comment.Id,
                         Message = comment.Message,
-                        CreationDate = comment.CreationDate
+                        CreationDate = comment.CreationDate,
+                        Rating = comment.Rating
                     })
+                    
                     
                 }
                 );
         }
         
         [HttpPost]
-        public async Task<IActionResult> AddComment(long mealId, string message, string redirectPath)
+        public async Task<IActionResult> AddComment(long mealId, string message, int rating, string redirectPath)
         {
-            _mealService.AddComment(mealId, message);
+            
+            _mealService.AddComment(mealId, message, rating);
             return HandleRedirect(redirectPath);
         }
     }

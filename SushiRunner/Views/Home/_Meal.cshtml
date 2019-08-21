@@ -21,6 +21,14 @@
     <div class="item-footer">
         <div class="item-price">
             <strong>@Model.Price грн.</strong>
+            <form id="@Model.Id" asp-action="Hide" asp-controller="Home" method="post">
+                <input type="hidden" asp-for="Id" name="mealId">
+                <input type="hidden" name="redirectPath" value="@Context.Request.Path">
+                <button style="width: 60px; height: 45px;" type="submit">
+                    Hide
+                </button>
+            </form>
+            
         </div>
         @if (!Model.IsInCart)
         {

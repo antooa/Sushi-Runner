@@ -60,6 +60,7 @@ namespace SushiRunner
                 .AddScoped<IRepository<CartItem, long>, CartItemRepository>()
                 .AddScoped<IRepository<Cart, long>, CartRepository>()
                 .AddScoped<IRepository<Comment, long>, CommentRepository>()
+                .AddScoped<IRepository<OrderItem, long>, OrderItemRepository>()
                 .AddScoped<IMealService, MealService>()
                 .AddScoped<IMealGroupService, MealGroupService>()
                 .AddScoped<IOrderService, OrderService>()

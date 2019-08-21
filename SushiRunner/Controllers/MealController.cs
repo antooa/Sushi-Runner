@@ -84,10 +84,11 @@ namespace SushiRunner.Controllers
                     return View(e.Message);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Moderate");
             }
 
-            return View(meal);
+            return RedirectToAction("Moderate");
+            //return View(meal);
         }
 
 
@@ -102,7 +103,7 @@ namespace SushiRunner.Controllers
                 }
                 catch (Exception e)
                 {
-                    return View(e.Message);
+                    //return View(e.Message);
                 }
 
                 return RedirectToAction("Moderate", "Meal");

@@ -7,11 +7,11 @@ using SushiRunner.ViewModels.Home;
 
 namespace SushiRunner.MappingProfiles
 {
-    public class OrderItemModelDTOResolver : IValueResolver<OrderModel, OrderDTO, IEnumerable<OrderItemDTO>>
+    public class OrderItemModelDTOResolver : IValueResolver<OrderModel, OrderDTO, ICollection<OrderItemDTO>>
     {
-        public IEnumerable<OrderItemDTO> Resolve(OrderModel source, OrderDTO destination, IEnumerable<OrderItemDTO> destMember, ResolutionContext context)
+        public ICollection<OrderItemDTO> Resolve(OrderModel source, OrderDTO destination, ICollection<OrderItemDTO> destMember, ResolutionContext context)
         {
-            return source.Items.Select(item => new OrderItemDTO()
+            return source.Items.Select(item => new OrderItemDTO
             {
                 Meal = context.Mapper.Map<MealModel, MealDTO>(item.Meal),
                 Amount = item.Amount

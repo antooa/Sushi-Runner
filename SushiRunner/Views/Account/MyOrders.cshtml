@@ -51,3 +51,10 @@
         }
     </div>
 </div>
+
+<div>
+    @if (@ViewBag.isM)
+    {
+        <a asp-controller="Moderator" asp-action="NewOrders">Moderator mode</a>
+    }
+</div>

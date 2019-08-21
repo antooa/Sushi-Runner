@@ -65,8 +65,8 @@
         <br><br>
         <form method="post" asp-action="AddComment" asp-controller="Home">
             <input type="hidden" name="mealId" asp-for="Id"/>
-            <!--<input type="text" name="message" style="width:300px; height: 100px;"/>-->
             <textarea name="message" style="width:300px; height: 100px;"></textarea>
+            <input type="number" name="rating" min="0" max="10"/>
             <input type="hidden" name="redirectPath" value="@Context.Request.Path"/>
             <button type="submit">Submit</button>
         </form>
@@ -74,9 +74,16 @@
         @foreach(var comment in @Model.Comments.Reverse())
         {
             <div>
-                <span>@comment.CreationDate</span>
-                <br>
-                <span>@comment.Message</span>
+                <p>
+                    <span>@comment.CreationDate</span>
+                </p>
+                <p>
+                    <span>@comment.Message</span>
+                </p>
+                <p>
+                    <span>@comment.Rating / 10</span>
+                </p>
+
             </div>
             <hr>
         }

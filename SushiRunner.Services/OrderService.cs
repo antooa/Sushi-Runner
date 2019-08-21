@@ -12,13 +12,15 @@ namespace SushiRunner.Services
     public class OrderService : IOrderService
     {
         private readonly IRepository<Order, long> _repository;
+        private readonly IRepository<OrderItem, long> _orderItemRepository;
         private readonly IMapper _mapper;
 
         private bool _disposed;
 
-        public OrderService(IRepository<Order, long> repository, IMapper mapper)
+        public OrderService(IRepository<Order, long> repository, IRepository<OrderItem, long> orderItemRepository, IMapper mapper)
         {
             _repository = repository;
+            _orderItemRepository = orderItemRepository;
             _mapper = mapper;
         }
 
@@ -44,7 +46,7 @@ namespace SushiRunner.Services
             return orders.Select(order => _mapper.Map<Order, OrderDTO>(order)).ToList();
         }
 
-        public void Create(User user, string customerName, string phoneNumber, string paymentType, string address,
+        /*public void Create(User user, string customerName, string phoneNumber, string paymentType, string address,
             CartDTO cart)
         {
             var orderDto = new OrderDTO
@@ -54,14 +56,14 @@ namespace SushiRunner.Services
                 PhoneNumber = phoneNumber,
                 PaymentType = paymentType,
                 Address = address,
-                Items = cart.Items.Select(item => new OrderItemDTO
+                Items = cart.Items.Select(item => new OrderItem
                 {
                     Meal = item.Meal,
                     Amount = item.Amount
                 })
             };
             Create(orderDto);
-        }
+        }*/
 
         public OrderDTO Get(long id)
         {
@@ -70,16 +72,47 @@ namespace SushiRunner.Services
             return dto;
         }
 
+        public void UpdateOrderItem(long orderItemId, int amount)
+        {
+            var orderItem = _orderItemRepository.Get(orderItemId);
+            //if (orderItem != null)
+            //{
+            orderItem.Amount = amount;
+                _orderItemRepository.Update(orderItem);
+            //}
+            _orderItemRepository.Save();
+        }
 
         public void Update(OrderDTO orderDto)
         {
             var order = _mapper.Map<OrderDTO, Order>(orderDto);
+            if (order == null)
+            {
+                Console.WriteLine("ORDER IS NULL");
+            }
+            
+            /*foreach (var orderItem in order.Items)
+            {
+                _orderItemRepository.Update(orderItem);
+            }*/
+            Console.WriteLine("ORDER BEFORE REPOSITORY");
+            Console.WriteLine(order.Id);
+            Console.WriteLine(order.CustomerName);
+            Console.WriteLine(order.Address);
+            Console.WriteLine(order.PhoneNumber);
+            Console.WriteLine("ORDER BEFORE REPOSITORY");
             _repository.Update(order);
             _repository.Save();
         }
 
         public void Delete(long id)
         {
+            var order = Get(id);
+            foreach (var item in order.Items)
+            {
+                var orderItem = _mapper.Map<OrderItemDTO, OrderItem>(item);
+                _orderItemRepository.Delete(orderItem.Id);
+            }
             _repository.Delete(id);
             _repository.Save();
         }
