@@ -62,7 +62,7 @@ namespace SushiRunner.Controllers
             Console.WriteLine(orderParams.PhoneNumber);
             Console.WriteLine(orderParams.Address);
             Console.WriteLine(orderParams.OrderStatus);
-            Console.WriteLine(orderParams.Items);
+            /*Console.WriteLine(orderParams.Items);
             Console.WriteLine("ORDER ITEM INFO");
             foreach (var item in orderParams.Items)
             {
@@ -71,7 +71,7 @@ namespace SushiRunner.Controllers
                 Console.WriteLine(item.Meal.Name);
                 Console.WriteLine(item.Amount);
                 
-            }
+            }*/
             Console.WriteLine("ORDER ITEM INFO");
             Console.WriteLine("ORDER MODEL INFO");
             //if (ModelState.IsValid)

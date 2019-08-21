@@ -100,6 +100,7 @@ namespace SushiRunner.Services
             Console.WriteLine(order.CustomerName);
             Console.WriteLine(order.Address);
             Console.WriteLine(order.PhoneNumber);
+            Console.WriteLine(order.OrderStatus);
             Console.WriteLine("ORDER BEFORE REPOSITORY");
             _repository.Update(order);
             _repository.Save();

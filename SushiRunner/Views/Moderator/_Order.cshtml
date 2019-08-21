@@ -32,7 +32,8 @@
 <div class="modal fade" id="exampleModal-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
      aria-hidden="true">
     <div class="modal-dialog" role="document" style="max-width: 883px">
-        
+        <form class="form" method="post" asp-controller="Order" asp-action="Update">
+        <input type="hidden" id="id" name="id" asp-for="Id" value="@Model.Id">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Деталі замовлення</h5>
@@ -59,6 +60,7 @@
                     </div>
                     <div class="m-order-content">
                         <div class="m-order-items">
+                        <input type="hidden" id="items" name="items" asp-for="Items" value="@Model.Items">
                             <span class="m-content">Склад замовлення:</span>
                             <ol class="m-rounded-list">
                                 @foreach (var meal in Model.Items)
@@ -82,13 +84,13 @@
 
                     </div>
                 </div>
-                <form class="form" method="post" asp-controller="Order" asp-action="Update">
-                    <input type="hidden" id="items" name="items" asp-for="Items" value="@Model.Items">
-                    <input type="hidden" id="id" name="id" asp-for="Id" value="@Model.Id">
-                    <input type="hidden" id="address" name="address" asp-for="Address" value="@Model.Address">
-                    <input type="hidden" id="customerName" name="customerName" asp-for="CustomerName" value="@Model.CustomerName">
-                    <input type="hidden" id="phone" name="phoneNumber" asp-for="PhoneNumber" value="@Model.PhoneNumber">
-                    <input type="hidden" id="items" name="items" asp-for="Items" value="@Model.Items">
+                
+                <!--<input type="hidden" id="items" name="items" asp-for="Items" value="@Model.Items">
+                
+                <input type="hidden" id="address" name="address" asp-for="Address" value="@Model.Address">
+                <input type="hidden" id="customerName" name="customerName" asp-for="CustomerName" value="@Model.CustomerName">
+                <input type="hidden" id="phone" name="phoneNumber" asp-for="PhoneNumber" value="@Model.PhoneNumber">
+                -->
                     <div class="modal-footer">
                         <div class="m-order-action">
                             @if (Model.OrderStatus == OrderStatus.Completed)
@@ -98,9 +100,7 @@
                             {
                                 @if (Model.OrderStatus == OrderStatus.New)
                                  {
-                                     <script>
-                                    console.log("MESSAGE");
-                                 </script>
+                                   
                                      <button href="http://google.com/" type="submit" name="OrderStatus" value="InProgress"
                                              class="btn btn-success ok-button">
                                          <span>Підтвердити</span>
@@ -120,9 +120,9 @@
                             }
                         </div>
                     </div>
-                </form>
-            </div>
                 
+            </div>
+           </form>     
     </div>
 </div>
 <script>
