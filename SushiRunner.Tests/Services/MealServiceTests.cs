@@ -104,8 +104,7 @@ namespace SushiRunner.Tests.Services
             var commentRepository = new Mock<IRepository<Comment, long>>();
             var cart = new Mock<ICartService>();
             var mapper = new Mock<IMapper>();
-            var svc = new MealService(repository.Object, 
-                commentRepository.Object, mapper.Object, _config.Object, 
+            var svc = new MealService(repository.Object, commentRepository.Object, mapper.Object, _config.Object, 
                 cart.Object);
             var expected = new MealDTO()
             {
@@ -151,8 +150,7 @@ namespace SushiRunner.Tests.Services
             var mapper = new Mock<IMapper>();
             mapper.Setup(m => m.Map<Meal, MealDTO>
                 (It.IsAny<Meal>())).Returns(expected);
-            var svc = new MealService(repository.Object, 
-                commentRepository.Object, mapper.Object, _config.Object, 
+            var svc = new MealService(repository.Object, commentRepository.Object, mapper.Object, _config.Object, 
                 cart.Object);
 
 
@@ -179,7 +177,7 @@ namespace SushiRunner.Tests.Services
             var repository = new Mock<IRepository<Meal, long>>();
             var cart = new Mock<ICartService>();
             repository.Setup(r => r.Get(expected.Id)).Returns
-            (new Meal()
+            (new Meal
             {
                 Id = 1,
                 Name = "Ivanko"
@@ -188,8 +186,7 @@ namespace SushiRunner.Tests.Services
             var mapper = new Mock<IMapper>();
             mapper.Setup(m => m.Map<Meal, MealDTO>
                 (It.IsAny<Meal>())).Returns(expected);
-            var svc = new MealService(repository.Object, 
-                commentRepository.Object, mapper.Object, _config.Object, 
+            var svc = new MealService(repository.Object, commentRepository.Object, mapper.Object, _config.Object, 
                 cart.Object);
 
             // Act
@@ -209,8 +206,7 @@ namespace SushiRunner.Tests.Services
             var commentRepository = new Mock<IRepository<Comment, long>>();
             var cart = new Mock<ICartService>();
             var mapper = new Mock<IMapper>();
-            var svc = new MealService(repository.Object, commentRepository.Object, 
-                mapper.Object, _config.Object, cart.Object);
+            var svc = new MealService(repository.Object, commentRepository.Object, mapper.Object, _config.Object, cart.Object);
             var meal = new MealDTO
             {
                 Id = 4,
@@ -267,7 +263,7 @@ namespace SushiRunner.Tests.Services
             });
             var mapper = mapperConfig.CreateMapper();
             var cart = new Mock<ICartService>();
-            var svc = new MealService(repository, commentRepository, 
+            var svc = new MealService(repository, commentRepository,
                 mapper, _config.Object, cart.Object);
             return svc;
         }
